@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima Ecosystem Flywheel — The Endgame</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;--bg-2:#1b1611;--bg-3:#221c16;
+    --line:#332a22;--line-2:#463a2e;
+    --ink:#f3ece2;--ink-2:#c6b8a6;--ink-3:#8a7b68;
+    --ochre:#e0a54e;--ochre-deep:#c07f2c;--blueprint:#6fb0c9;--clay:#c76b4a;--green:#7fa66a;--violet:#a98fd0;
+    --maxw:1120px;
+    --serif:"Fraunces","Georgia",serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:4px}
+
+  .topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:14px;padding:14px 26px;background:rgba(20,16,13,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logomark{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));color:#1a130a;font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:-.5px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:15px}.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .topbar nav{margin-left:auto;display:flex;gap:18px;font-size:13px;color:var(--ink-2)}
+  .topbar nav a:hover{color:var(--ochre)}
+  @media(max-width:820px){.topbar nav{display:none}}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin:0 0 18px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.12;margin:0}
+  h2{font-size:clamp(25px,3.8vw,38px);margin-bottom:18px}
+  h3{font-size:21px;margin-bottom:10px}
+  p{margin:0 0 15px;color:var(--ink-2)}
+  p strong{color:var(--ink);font-weight:600}
+  .lead{font-size:18px;color:var(--ink);max-width:72ch}
+  .muted{color:var(--ink-3);font-size:13px}
+
+  /* HERO */
+  .hero{position:relative;padding:92px 0 74px;border-bottom:1px solid var(--line);overflow:hidden;
+    background:radial-gradient(1000px 480px at 82% -10%,rgba(224,165,78,.16),transparent 60%),radial-gradient(760px 420px at 4% 112%,rgba(111,176,201,.08),transparent 55%)}
+  .hero .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:22px}
+  .hero h1{font-size:clamp(34px,6vw,64px);max-width:17ch;margin-bottom:24px}
+  .hero h1 em{font-style:normal;color:var(--ochre)}
+  .hero .sub{font-size:20px;color:var(--ink-2);max-width:60ch;margin-bottom:34px}
+  .hero .runline{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+  .hero .runline b{color:var(--ink-2);font-weight:500}
+  .hero .runline .arrow{color:var(--ochre)}
+
+  /* FLYWHEEL */
+  .fly-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
+  @media(max-width:900px){.fly-layout{grid-template-columns:1fr;gap:24px}}
+  .wheel{position:relative;width:100%;max-width:480px;margin:0 auto;aspect-ratio:1/1}
+  .wheel svg.spokes{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+  .wheel .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;width:30%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%,rgba(111,176,201,.32),rgba(20,16,13,.9));border:1px solid var(--line-2);
+    display:grid;place-items:center;text-align:center;box-shadow:inset 0 0 30px rgba(0,0,0,.5)}
+  .wheel .core .cl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blueprint)}
+  .wheel .core .ct{font-family:var(--serif);font-size:clamp(13px,3.4vw,17px);color:var(--ink);line-height:1.05;margin-top:2px}
+  .node{position:absolute;transform:translate(-50%,-50%);z-index:4;width:96px;height:96px;border-radius:50%;
+    background:var(--bg-3);border:1px solid var(--line-2);cursor:pointer;display:grid;place-items:center;text-align:center;
+    padding:8px;transition:transform .25s,border-color .25s,box-shadow .25s;color:var(--ink-2)}
+  .node:hover,.node:focus-visible,.node.active{transform:translate(-50%,-50%) scale(1.08);border-color:var(--ochre);box-shadow:0 0 0 4px rgba(224,165,78,.12),0 8px 24px rgba(0,0,0,.4);color:var(--ink)}
+  .node .ni{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--ochre);margin-bottom:2px}
+  .node .nt{font-family:var(--serif);font-size:12.5px;line-height:1.05}
+  .node.active{background:linear-gradient(160deg,rgba(224,165,78,.14),var(--bg-3))}
+  @media(max-width:900px){
+    .wheel{display:none}
+    .node-list{display:flex;flex-direction:column;gap:8px}
+  }
+  @media(min-width:901px){.node-list{display:none}}
+  .node-list button{display:flex;gap:12px;align-items:center;text-align:left;background:var(--bg-3);border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--ink-2);cursor:pointer;font-family:inherit;font-size:14px}
+  .node-list button.active{border-color:var(--ochre);color:var(--ink);background:linear-gradient(160deg,rgba(224,165,78,.1),var(--bg-3))}
+  .node-list .li{font-family:var(--mono);font-size:11px;color:var(--ochre);flex:none;width:20px}
+  .node-list .lt{font-family:var(--serif);font-size:15px}
+
+  .detail{background:var(--bg-3);border:1px solid var(--line);border-radius:16px;padding:26px;min-height:300px}
+  .detail .dk{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+  .detail h3{font-size:24px;margin-bottom:14px}
+  .detail .drow{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:14.5px}
+  .detail .drow:first-of-type{border-top:none}
+  .detail .dk2{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+  .detail .dv{color:var(--ink-2)}
+  .detail .earn{color:var(--green);font-weight:600}
+  .detail .disc{color:var(--clay)}
+
+  /* STAT COUNTERS */
+  .counters{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:6px}
+  .counters .c{background:var(--bg-3);padding:24px 20px}
+  .counters .cn{font-family:var(--serif);font-size:clamp(26px,3.4vw,34px);color:var(--ochre);line-height:1}
+  .counters .cl{font-size:12.5px;color:var(--ink-2);margin-top:10px;line-height:1.4}
+  .counters .cs{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:8px}
+  @media(max-width:860px){.counters{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:460px){.counters{grid-template-columns:1fr}}
+
+  /* CHART (bars) */
+  .chart{border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:26px}
+  .bar-row{display:grid;grid-template-columns:180px 1fr 66px;align-items:center;gap:14px;margin-bottom:14px}
+  .bar-row:last-child{margin-bottom:0}
+  .bar-row .bl{font-size:14px;color:var(--ink)}
+  .bar-row .bl small{display:block;color:var(--ink-3);font-size:11.5px;margin-top:1px}
+  .bar-track{height:12px;background:var(--bg);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  .bar-fill{height:100%;width:0;border-radius:20px;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+  .bar-row .bv{font-family:var(--mono);font-size:13px;text-align:right}
+  @media(max-width:560px){.bar-row{grid-template-columns:120px 1fr 52px;gap:10px}.bar-row .bl small{display:none}}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:820px){.two{grid-template-columns:1fr}}
+
+  /* CONTENT ENGINE */
+  .streams{display:grid;grid-template-columns:1fr 44px 1fr;align-items:center;gap:12px}
+  @media(max-width:760px){.streams{grid-template-columns:1fr}}
+  .stream{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--bg-3)}
+  .stream.brand{border-color:rgba(111,176,201,.35);background:linear-gradient(160deg,rgba(111,176,201,.07),var(--bg-3))}
+  .stream.deal{border-color:rgba(224,165,78,.4);background:linear-gradient(160deg,rgba(224,165,78,.08),var(--bg-3))}
+  .stream .sk{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .stream.brand .sk{color:var(--blueprint)}.stream.deal .sk{color:var(--ochre)}
+  .stream ul{margin:10px 0 0;padding-left:18px}.stream li{font-size:13.5px;color:var(--ink-2);margin-bottom:6px}
+  .xchg{display:grid;place-items:center;font-family:var(--mono);font-size:22px;color:var(--ochre)}
+  @media(max-width:760px){.xchg{transform:rotate(90deg);padding:6px 0}}
+
+  /* RAILS */
+  .rail{border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:24px;margin-bottom:14px;position:relative;overflow:hidden}
+  .rail::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+  .rail.r1::before{background:var(--ochre)}.rail.r2::before{background:var(--blueprint)}.rail.r3::before{background:var(--clay)}.rail.r4::before{background:var(--green)}.rail.r5::before{background:var(--violet)}
+  .rail .rhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+  .rail .rnum{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+  .rail h3{font-size:20px}
+  .rail .rtag{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid var(--line-2);color:var(--ink-2)}
+  .rgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  @media(max-width:640px){.rgrid{grid-template-columns:1fr}}
+  .rcell .rk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+  .rcell .rv{font-size:14px;color:var(--ink-2)}
+  .rcell .rv.earn{color:var(--green)}
+  .rcell .rv.disc{color:var(--clay)}
+
+  /* FINANCE */
+  .flow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px}
+  @media(max-width:760px){.flow{grid-template-columns:1fr}}
+  .fstep{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--bg-3)}
+  .fstep .fn{font-family:var(--mono);font-size:11px;color:var(--violet);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .fstep .ft{font-family:var(--serif);font-size:16px;color:var(--ink);margin-bottom:6px}
+  .fstep p{font-size:13.5px;margin:0}
+
+  /* DISCOUNT MECHANIC */
+  .mech{border:1px solid var(--line-2);border-radius:16px;padding:26px;background:linear-gradient(150deg,rgba(127,166,106,.08),var(--bg-3))}
+  .mech .badlbl,.mech .goodlbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+  .mech .badlbl{color:var(--clay)}.mech .goodlbl{color:var(--green)}
+  .mech .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+  @media(max-width:640px){.mech .vs{grid-template-columns:1fr}}
+  .mech .box{border-radius:12px;padding:18px;border:1px solid var(--line)}
+  .mech .box.bad{background:rgba(199,107,74,.06)}
+  .mech .box.good{background:rgba(127,166,106,.06)}
+
+  /* ROADMAP */
+  .phase{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border-bottom:none}
+  @media(max-width:640px){.phase{grid-template-columns:1fr;gap:8px}}
+  .phase .pw{font-family:var(--mono);font-size:12px;color:var(--ochre);letter-spacing:.08em;text-transform:uppercase}
+  .phase .pm{font-family:var(--serif);font-size:18px;color:var(--ink);margin-top:3px}
+  .phase .pr{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+  .chip{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--line-2);color:var(--ink-3)}
+  .chip.on{color:var(--ink);border-color:var(--ochre);background:rgba(224,165,78,.08)}
+  .phase p{margin:2px 0 0;font-size:14px}
+
+  .callout{border:1px solid var(--line-2);border-radius:14px;padding:24px 26px;background:linear-gradient(150deg,rgba(224,165,78,.08),var(--bg-3));margin-top:8px}
+  .callout .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:10px}
+  .callout p:last-child{margin-bottom:0}
+  .thesis{font-family:var(--serif);font-size:21px;color:var(--ink);font-style:italic;line-height:1.4}
+
+  footer{padding:44px 0 64px;color:var(--ink-3)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+  .fdisc{font-size:12px;color:var(--ink-3);max-width:76ch;margin-top:12px;line-height:1.5}
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" title="Back to the hub" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit"><div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>Ecosystem Flywheel · The Endgame</span></div></a>
+  <nav>
+    <a href="#wheel">Flywheel</a><a href="#market">Market</a><a href="#content">Content</a>
+    <a href="#rails">Revenue</a><a href="#finance">Finance</a><a href="#roadmap">Roadmap</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Document 10 · The Capstone · How every layer compounds</div>
+    <h1>Build the audience once. <em>Monetize the whole journey</em> — five times over.</h1>
+    <p class="sub">Media earns trust. Trust earns the audience. The audience unlocks materials, competitive tendering, live deals, vetted execution and financing — each a separate income line, none possible without the one before it. This is the machine, running.</p>
+    <div class="runline">
+      <b>Content</b><span class="arrow">→</span><b>Deal Hub</b><span class="arrow">→</span><b>Tendering</b><span class="arrow">→</span><b>Live deals</b><span class="arrow">→</span><b>Execution</b><span class="arrow">→</span><b>Finance</b><span class="arrow">→</span><b style="color:var(--blueprint)">Data</b><span class="arrow">↺</span>
+    </div>
+  </div>
+</header>
+
+<!-- FLYWHEEL -->
+<section id="wheel">
+  <div class="wrap">
+    <p class="eyebrow">The Flywheel · Tap any node</p>
+    <h2>Six parts, one turning wheel — data at the hub</h2>
+    <p class="lead" style="margin-bottom:30px">Each rail feeds the next and returns behavioural data to the centre, which sharpens pricing, targeting and lead quality — then flows back into content. The more it turns, the harder it is to stop.</p>
+    <div class="fly-layout">
+      <div>
+        <div class="wheel" id="wheelWrap">
+          <svg class="spokes" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#463a2e" stroke-width="0.4" stroke-dasharray="1.5 2"></circle>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#e0a54e" stroke-width="0.5" stroke-dasharray="120 200" stroke-linecap="round" opacity="0.5" transform="rotate(-90 50 50)"></circle>
+          </svg>
+          <div class="core"><div><div class="cl">The hub</div><div class="ct">Data</div></div></div>
+          <!-- nodes positioned by JS-friendly inline styles -->
+          <button class="node" data-key="content" style="left:50%;top:12%"><span><span class="ni">01</span><span class="nt">Content &amp;<br>Community</span></span></button>
+          <button class="node" data-key="dealhub" style="left:82.9%;top:31%"><span><span class="ni">02</span><span class="nt">Deal Hub</span></span></button>
+          <button class="node" data-key="tender" style="left:82.9%;top:69%"><span><span class="ni">03</span><span class="nt">Tendering</span></span></button>
+          <button class="node" data-key="live" style="left:50%;top:88%"><span><span class="ni">04</span><span class="nt">Live<br>Commerce</span></span></button>
+          <button class="node" data-key="exec" style="left:17.1%;top:69%"><span><span class="ni">05</span><span class="nt">Vetted<br>Execution</span></span></button>
+          <button class="node" data-key="finance" style="left:17.1%;top:31%"><span><span class="ni">06</span><span class="nt">Bank<br>Finance</span></span></button>
+        </div>
+        <div class="node-list" id="nodeList">
+          <button data-key="content" class="active"><span class="li">01</span><span class="lt">Content &amp; Community</span></button>
+          <button data-key="dealhub"><span class="li">02</span><span class="lt">Deal Hub — Aggregation</span></button>
+          <button data-key="tender"><span class="li">03</span><span class="lt">Tendering — Competition</span></button>
+          <button data-key="live"><span class="li">04</span><span class="lt">Live Commerce — Deal Drops</span></button>
+          <button data-key="exec"><span class="li">05</span><span class="lt">Vetted Execution</span></button>
+          <button data-key="finance"><span class="li">06</span><span class="lt">Bank Finance</span></button>
+        </div>
+      </div>
+      <div class="detail" id="detail" aria-live="polite"><!-- filled by JS --></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Why The Machine Works · The Evidence</p>
+    <h2>The demand is structural; the channels are open; the timing is now</h2>
+    <div class="counters" id="counters">
+      <div class="c"><div class="cn" data-to="1.8" data-suffix="M">0</div><div class="cl">unit housing deficit — permanent demand floor</div><div class="cs">Min. Works &amp; Housing '26</div></div>
+      <div class="c"><div class="cn" data-prefix="$" data-to="6.65" data-suffix="B">0</div><div class="cl">diaspora remittances, much flowing into building</div><div class="cs">2024 · NewsGhana</div></div>
+      <div class="c"><div class="cn" data-to="0.8" data-suffix="%">0</div><div class="cl">of households use a mortgage — the finance gap</div><div class="cs">Eden Heights Q3 '25</div></div>
+      <div class="c"><div class="cn" data-to="91.8" data-suffix="%">0</div><div class="cl">of internet users on WhatsApp — the community rail</div><div class="cs">DataReportal</div></div>
+    </div>
+
+    <div class="two" style="margin-top:26px">
+      <div class="chart">
+        <h3 style="font-size:16px;margin-bottom:6px">Live selling converts where static pages don't</h3>
+        <p class="muted" style="margin-bottom:18px">Conversion rate — why the live "deal drop" rail is worth building</p>
+        <div class="bar-row"><div class="bl">Live shopping<small>real-time, urgency, trust</small></div><div class="bar-track"><div class="bar-fill" data-w="100" style="background:linear-gradient(90deg,var(--clay),#e08a68)"></div></div><div class="bv" style="color:var(--clay)">~30%</div></div>
+        <div class="bar-row"><div class="bl">TikTok feed<small>shoppable video</small></div><div class="bar-track"><div class="bar-fill" data-w="34" style="background:var(--ink-3)"></div></div><div class="bv">3.4%</div></div>
+        <div class="bar-row"><div class="bl">Traditional ecommerce<small>static store</small></div><div class="bar-track"><div class="bar-fill" data-w="25" style="background:var(--ink-3)"></div></div><div class="bv">2–3%</div></div>
+        <p class="muted" style="margin:16px 0 0">Live events convert up to ~10× a static store — but sell the <em>deal</em>, not the commodity. Source: GetStream / eMarketer 2026.</p>
+      </div>
+      <div class="chart">
+        <h3 style="font-size:16px;margin-bottom:6px">Where Ghana is reachable</h3>
+        <p class="muted" style="margin-bottom:18px">Share of internet users — the channel mix the incumbents neglect</p>
+        <div class="bar-row"><div class="bl">WhatsApp</div><div class="bar-track"><div class="bar-fill" data-w="92" style="background:linear-gradient(90deg,var(--ochre-deep),var(--ochre))"></div></div><div class="bv" style="color:var(--ochre)">91.8%</div></div>
+        <div class="bar-row"><div class="bl">Facebook</div><div class="bar-track"><div class="bar-fill" data-w="77" style="background:linear-gradient(90deg,var(--ochre-deep),var(--ochre))"></div></div><div class="bv" style="color:var(--ochre)">77.4%</div></div>
+        <div class="bar-row"><div class="bl">TikTok</div><div class="bar-track"><div class="bar-fill" data-w="70" style="background:linear-gradient(90deg,var(--ochre-deep),var(--ochre))"></div></div><div class="bv" style="color:var(--ochre)">~70%</div></div>
+        <p class="muted" style="margin:16px 0 0">~15M social users total. Global live commerce passed $1T in 2026 and is arriving in Africa. Source: DataReportal / Statista.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT ENGINE -->
+<section id="content">
+  <div class="wrap">
+    <p class="eyebrow">The Content Engine · Two Streams, One Audience</p>
+    <h2>Social content and launch content are different jobs — and they feed each other</h2>
+    <p class="lead" style="margin-bottom:28px">You were right that these aren't the same. One builds the audience; the other converts it. Kept distinct and looped together, each makes the other stronger.</p>
+    <div class="streams">
+      <div class="stream brand">
+        <div class="sk">Stream A · Brand &amp; education</div>
+        <h3 style="font-size:17px">Builds the audience</h3>
+        <ul>
+          <li>Build-education, how-to, mistakes, land verification, diaspora guidance</li>
+          <li>Evergreen &amp; SEO — compounds for years</li>
+          <li>Broad, top-of-funnel; TikTok, WhatsApp, the blog</li>
+          <li>Slow-burn trust. Sells nothing directly.</li>
+        </ul>
+      </div>
+      <div class="xchg" aria-hidden="true">⇄</div>
+      <div class="stream deal">
+        <div class="sk">Stream B · Deal Hub &amp; launch</div>
+        <h3 style="font-size:17px">Converts the audience</h3>
+        <ul>
+          <li>Product launches — Dry Wall with Jamal, then Kabinart, then Aquarium</li>
+          <li>Deal drops, campaigns, time-bound urgency</li>
+          <li>Bottom-of-funnel; transactional</li>
+          <li>Turns attention into orders.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:20px">
+      <div class="lbl">How they enrich each other</div>
+      <p>Education content brings the crowd that launches convert. Launches throw off <strong>real stories, prices and project data</strong> that become the next round of education content — with proof no competitor can fake. The audience is shared; the jobs are separate. That loop is why neither stream should be watered down into the other.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE RAILS -->
+<section id="rails" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Five Revenue Rails</p>
+    <h2>One customer, one trust brand, five ways to earn</h2>
+    <p class="lead" style="margin-bottom:28px">Each rail serves a different buyer situation with a different Wima role. Together they cover the entire build journey — and every rail is gated by the audience the content built.</p>
+
+    <div class="rail r1">
+      <div class="rhead"><span class="rnum">Rail 01</span><h3>Deal Hub — Aggregation</h3><span class="rtag">Principal · ops-heavy</span></div>
+      <p style="font-size:14.5px">Pool many buyers who need the same commodity so collective volume forces the price down. Works because materials are fungible and demand is simultaneous.</p>
+      <div class="rgrid">
+        <div class="rcell"><div class="rk">Buyer situation</div><div class="rv">Anyone needing cement, rods, blocks, roofing at a better price</div></div>
+        <div class="rcell"><div class="rk">How Wima earns</div><div class="rv earn">Materials margin on pooled volume</div></div>
+        <div class="rcell"><div class="rk">Leverage</div><div class="rv">The crowd — power comes from the pool</div></div>
+        <div class="rcell"><div class="rk">Discipline</div><div class="rv disc">Fulfilment weight; but it builds the supplier relationships that seed Rail 02</div></div>
+      </div>
+    </div>
+
+    <div class="rail r2">
+      <div class="rhead"><span class="rnum">Rail 02</span><h3>Tendering — Competition</h3><span class="rtag">Platform · asset-light</span></div>
+      <p style="font-size:14.5px">One buyer with a project big or specified enough that suppliers fight over it. Suppliers bid; the buyer picks. Wima holds no inventory — it owns the rails, the trust layer and the escrow.</p>
+      <div class="rgrid">
+        <div class="rcell"><div class="rk">Buyer situation</div><div class="rv">A full BOQ or bulk custom order worth competing for</div></div>
+        <div class="rcell"><div class="rk">How Wima earns</div><div class="rv earn">Platform take-rate / escrow — the true toll road</div></div>
+        <div class="rcell"><div class="rk">Leverage</div><div class="rv">Suppliers competing — power comes from the bid</div></div>
+        <div class="rcell"><div class="rk">Discipline</div><div class="rv disc">Trusted-bid, not cheapest-bid. Vetting + escrow prevent a race to the bottom and leakage</div></div>
+      </div>
+    </div>
+
+    <div class="rail r3">
+      <div class="rhead"><span class="rnum">Rail 03</span><h3>Live Commerce — Deal Drops</h3><span class="rtag">Phase 3–4 · ops-heavy</span></div>
+      <p style="font-size:14.5px">The QVC of building — but you sell the <em>deal and the decision</em>, not the raw commodity. Group-buy drops with a countdown, install demos that end in an order, "bring your BOQ" live sessions. Community pros host and vouch.</p>
+      <div class="rgrid">
+        <div class="rcell"><div class="rk">Buyer situation</div><div class="rv">An engaged follower ready to act on urgency + trust</div></div>
+        <div class="rcell"><div class="rk">How Wima earns</div><div class="rv earn">Volume on live-sold deals; pros sell on commission</div></div>
+        <div class="rcell"><div class="rk">Leverage</div><div class="rv">Entertainment + urgency + real-time objection handling</div></div>
+        <div class="rcell"><div class="rk">Discipline</div><div class="rv disc">82% of live sellers lose money — needs the audience AND mature fulfilment first</div></div>
+      </div>
+    </div>
+
+    <div class="rail r4">
+      <div class="rhead"><span class="rnum">Rail 04</span><h3>Vetted Execution — Extra Discount</h3><span class="rtag">Managed-build · you own the outcome</span></div>
+      <p style="font-size:14.5px">Get a further discount on Deal Hub or a tender <strong>if a Wima-vetted professional executes the project.</strong> The key is where the discount comes from — see the mechanic below. Wima crosses into turnkey-lite: oversight, guarantee, disputes.</p>
+      <div class="rgrid">
+        <div class="rcell"><div class="rk">Buyer situation</div><div class="rv">Wants materials <em>and</em> a trusted pro to build — one relationship</div></div>
+        <div class="rcell"><div class="rk">How Wima earns</div><div class="rv earn">Materials pull-through the pro brings + light "verified" membership — NOT a labour tax</div></div>
+        <div class="rcell"><div class="rk">Leverage</div><div class="rv">The audience brings jobs good pros can't get alone</div></div>
+        <div class="rcell"><div class="rk">Discipline</div><div class="rv disc">Real vetting + completion guarantee are mandatory — the pro's failure is your brand's failure</div></div>
+      </div>
+    </div>
+
+    <div class="rail r5">
+      <div class="rhead"><span class="rnum">Rail 05</span><h3>Bank Finance — Loans &amp; Facilities</h3><span class="rtag">Referral · regulated</span></div>
+      <p style="font-size:14.5px">Partner with banks for construction and home-improvement loans. Wima refers pre-qualified borrowers — its own data has already profiled them — and earns origination commission. This is the accelerant that pulls demand through every other rail.</p>
+      <div class="rgrid">
+        <div class="rcell"><div class="rk">Buyer situation</div><div class="rv">Wants to build in 18 months, not 10 years of cash-flow stops</div></div>
+        <div class="rcell"><div class="rk">How Wima earns</div><div class="rv earn">Referral / origination commission per funded facility</div></div>
+        <div class="rcell"><div class="rk">Leverage</div><div class="rv">Behavioural data = high-quality leads banks pay more for</div></div>
+        <div class="rcell"><div class="rk">Discipline</div><div class="rv disc">Refer, don't lend. Responsible lending only — pushing bad debt burns the trust brand</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCE DEEP -->
+<section id="finance">
+  <div class="wrap">
+    <p class="eyebrow">The Finance Accelerant</p>
+    <h2>Financing doesn't just add a rail — it speeds every other one</h2>
+    <p class="lead" style="margin-bottom:24px">In a market where only 0.8% use a mortgage and building happens in slow cash-funded stages, a facility changes the physics: it collapses a decade-long build into an 18-month one — and every month saved is materials, tenders, execution and live deals pulled forward.</p>
+    <div class="flow">
+      <div class="fstep"><div class="fn">Without finance</div><div class="ft">The 10-year build</div><p>Buy land. Build to lintel when cash allows. Stop. Roof two years later. Materials bought in dribs at retail. Most builds stall half-done.</p></div>
+      <div class="fstep"><div class="fn">Wima plugs in a facility</div><div class="ft">The 18-month build</div><p>A construction or home-improvement facility funds the whole run. Materials bought in bulk through Deal Hub &amp; tenders. A vetted pro executes on a schedule.</p></div>
+      <div class="fstep" style="border-color:rgba(169,143,208,.4);background:linear-gradient(160deg,rgba(169,143,208,.08),var(--bg-3))"><div class="fn" style="color:var(--violet)">What Wima captures</div><div class="ft">Every rail, pulled forward</div><p>Origination commission from the bank — plus the materials, tender, execution and live-deal revenue the finance unlocked, years earlier.</p></div>
+    </div>
+    <div class="callout" style="margin-top:22px">
+      <div class="lbl">The rate environment is turning in your favour</div>
+      <p>Ghana's policy rate has fallen sharply from its ~30% peak and cedi mortgage rates have eased toward the low 20s, with dedicated diaspora USD products from banks such as Republic (Seso Global), FNB, Stanbic and Absa in the ~10–12.5% range. As financing gets cheaper, more builds become viable — and Wima sits at the exact moment the borrower decides. <span class="muted">(Recent market figures, 2026; verify live terms with each bank partner.)</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- DISCOUNT MECHANIC -->
+<section id="mechanic" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">The Vetted-Execution Discount · Where the money comes from</p>
+    <h2>Make the discount real, or the trust brand pays for it</h2>
+    <p class="lead" style="margin-bottom:24px">An "extra discount if our pro executes" only works if you know its source. Tax the pro's labour and the discount becomes an illusion the customer eventually spots. Fund it from materials volume and everyone's incentives align.</p>
+    <div class="mech">
+      <div class="vs">
+        <div class="box bad">
+          <div class="badlbl">✕ The trap — labour tax</div>
+          <p style="font-size:14px;margin:0">Wima takes a cut of the pro's fee. The pro quotes higher to cover it. The customer saves on materials but overpays on labour — funding your commission themselves. The "discount" is theatre, and the moment they do the math, the trust is gone.</p>
+        </div>
+        <div class="box good">
+          <div class="goodlbl">✓ The fix — materials pull-through</div>
+          <p style="font-size:14px;margin:0">The pro pulls all project materials through Deal Hub / Tendering. Wima earns on that <strong>volume</strong>, not on labour. The discount is <strong>real</strong> — funded by the extra materials the job brings. The pro gets steady work and simpler buying. No incentive to inflate labour.</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:18px">
+      <div class="lbl">The bonus this unlocks</div>
+      <p>The completion guarantee you must offer to stand behind a vetted pro is the <strong>same mechanism</strong> that stops both sides leaving the platform to transact off-book. One build solves quality liability and marketplace leakage at once. Layer a light "verified" membership on top for the badge — but keep volume, not a labour toll, as the engine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="wrap">
+    <p class="eyebrow">Activation Sequence</p>
+    <h2>Rails switch on only when the audience can carry them</h2>
+    <div class="phase">
+      <div><div class="pw">Phase 0–1</div><div class="pm">Mo 0–9</div></div>
+      <div>
+        <div class="pr"><span class="chip on">Content</span><span class="chip on">Deal Hub</span><span class="chip">Tendering</span><span class="chip">Live</span><span class="chip">Execution</span><span class="chip">Finance</span></div>
+        <p>Build trust and audience. Deal Hub launches (Dry Wall with Jamal first). Both content streams running. Nothing else yet — earn the right.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div><div class="pw">Phase 2</div><div class="pm">Mo 9–18</div></div>
+      <div>
+        <div class="pr"><span class="chip on">Content</span><span class="chip on">Deal Hub</span><span class="chip on">Tendering</span><span class="chip">Live</span><span class="chip on">Execution</span><span class="chip">Finance</span></div>
+        <p>Supplier relationships from Deal Hub seed the tendering platform's two-sided liquidity. Vetted execution attaches. Data asset (price tracker) live.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div><div class="pw">Phase 3</div><div class="pm">Mo 18–24</div></div>
+      <div>
+        <div class="pr"><span class="chip on">Content</span><span class="chip on">Deal Hub</span><span class="chip on">Tendering</span><span class="chip on">Live</span><span class="chip on">Execution</span><span class="chip on">Finance</span></div>
+        <p>Live deal-drops switch on once fulfilment is mature. Bank partnerships go live — the accelerant. All five rails turning; data compounding at the hub.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div><div class="pw">Phase 4+</div><div class="pm">The toll road</div></div>
+      <div>
+        <div class="pr"><span class="chip on">Full flywheel</span><span class="chip on">Genesis</span><span class="chip on">CORE</span><span class="chip on">Crowdfunding</span></div>
+        <p>Wima is infrastructure: it takes a position on every build in its network without holding the inventory or doing the work. The audience made it inevitable.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="lbl">The one line to hold</div>
+      <p class="thesis">Ownkey tells Ghanaians what to buy. Wima walks the whole build with them — supplies it, tenders it, sells it live, executes it, and finances it — and earns at every step. That's not a claim a content machine can copy. It's an ecosystem, and the audience is the key that starts the engine.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">Wima Builders — Ecosystem Flywheel</div>
+      <div class="fdisc">Capstone to Documents 07 (Media Strategy), 08 (SEO Target Map) and 09 (Competitive Brief). Market, live-commerce and lending figures drawn from public 2024–2026 sources (Ministry of Works &amp; Housing, GSS, Bank of Ghana, DataReportal/Statista, eMarketer/GetStream, and Ghanaian market reporting) and are directional for planning; verify live bank terms and financial-services licensing before activating the finance rail. Not investment advice.</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Document 10 · Wima Ecosystem Hub</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var DATA = {
+    content:{k:"Rail 01 · The engine",c:"var(--ochre)",h:"Content &amp; Community",serves:"Everyone — the whole market of builders and the diaspora",earn:"Nothing directly — it is the moat and the audience that gates every other rail",role:"Two streams: broad education builds trust; launch content converts it",disc:"Slow-burn. Never water the education stream down into ads — trust is the asset"},
+    dealhub:{k:"Rail 02 · Aggregation",c:"var(--ochre)",h:"Deal Hub",serves:"Anyone needing the same commodity — cement, rods, blocks, roofing",earn:"Materials margin on pooled volume",role:"Principal — you organise the pool and carry some fulfilment weight",disc:"Ops-heavy, but it builds the supplier relationships that seed Tendering"},
+    tender:{k:"Rail 03 · Competition",c:"var(--blueprint)",h:"Tendering",serves:"One buyer with a project big enough that suppliers compete for it",earn:"Platform take-rate + escrow — asset-light, the true toll road",role:"Platform — you hold no inventory, you own the trust layer",disc:"Trusted-bid not cheapest-bid; vetting + escrow stop the race to the bottom"},
+    live:{k:"Rail 04 · Deal drops",c:"var(--clay)",h:"Live Commerce",serves:"Engaged followers ready to act on urgency and trust",earn:"Volume on live-sold deals; community pros sell on commission",role:"Sell the deal and the decision — not the raw commodity",disc:"Phase 3–4 only. 82% of live sellers lose money without audience + fulfilment"},
+    exec:{k:"Rail 05 · Execution",c:"var(--green)",h:"Vetted Execution",serves:"Buyers who want materials AND a trusted pro to build — one relationship",earn:"Materials pull-through the pro brings + light membership — never a labour tax",role:"Turnkey-lite: oversight, completion guarantee, dispute resolution",disc:"You own the outcome — real vetting and a guarantee are mandatory"},
+    finance:{k:"Rail 06 · The accelerant",c:"var(--violet)",h:"Bank Finance",serves:"Builders who want 18 months, not a decade of cash-flow stops",earn:"Referral / origination commission per funded facility",role:"Referrer, not lender — data-qualified leads banks pay more for",disc:"Responsible lending only; refer, don't lend — bad debt burns the brand"}
+  };
+  var order=["content","dealhub","tender","live","exec","finance"];
+  var detail=document.getElementById("detail");
+  function render(key){
+    var d=DATA[key];
+    detail.innerHTML=
+      '<div class="dk" style="color:'+d.c+'">'+d.k+'</div>'+
+      '<h3>'+d.h+'</h3>'+
+      '<div class="drow"><div class="dk2">Serves</div><div class="dv">'+d.serves+'</div></div>'+
+      '<div class="drow"><div class="dk2">Wima earns</div><div class="dv earn">'+d.earn+'</div></div>'+
+      '<div class="drow"><div class="dk2">Wima role</div><div class="dv">'+d.role+'</div></div>'+
+      '<div class="drow"><div class="dk2">Discipline</div><div class="dv disc">'+d.disc+'</div></div>';
+    document.querySelectorAll('.node,.node-list button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-key')===key);
+    });
+  }
+  document.querySelectorAll('.node,.node-list button').forEach(function(b){
+    var key=b.getAttribute('data-key');
+    b.addEventListener('click',function(){render(key);});
+    b.addEventListener('mouseenter',function(){render(key);});
+  });
+  render('content');
+
+  // Scroll-triggered animations
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function animCounter(el){
+    var to=parseFloat(el.getAttribute('data-to'))||0;
+    var pre=el.getAttribute('data-prefix')||'';
+    var suf=el.getAttribute('data-suffix')||'';
+    var dec=(to%1!==0)?(to<10?2:1):0;
+    if(reduce){el.textContent=pre+to.toFixed(dec)+suf;return;}
+    var start=null,dur=1300;
+    function step(ts){
+      if(!start)start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      var e=1-Math.pow(1-p,3);
+      el.textContent=pre+(to*e).toFixed(dec)+suf;
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var seen=new WeakSet();
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting&&!seen.has(en.target)){
+        seen.add(en.target);
+        if(en.target.hasAttribute('data-to'))animCounter(en.target);
+        if(en.target.classList.contains('bar-fill'))en.target.style.width=en.target.getAttribute('data-w')+'%';
+      }
+    });
+  },{threshold:0.4});
+  document.querySelectorAll('[data-to],.bar-fill').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

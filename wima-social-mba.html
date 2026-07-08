@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wima MBA — Social Media Marketing for the Building Industry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;--bg-2:#1b1611;--bg-3:#221c16;--line:#332a22;--line-2:#463a2e;
+    --ink:#f3ece2;--ink-2:#c6b8a6;--ink-3:#8a7b68;
+    --ochre:#e0a54e;--ochre-deep:#c07f2c;--blueprint:#6fb0c9;--clay:#c76b4a;--green:#7fa66a;--violet:#a98fd0;--rose:#d08fa8;
+    --maxw:1080px;--serif:"Fraunces","Georgia",serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:5px}
+  .topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:14px;padding:14px 26px;background:rgba(20,16,13,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logomark{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));color:#1a130a;font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:-.5px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:15px}.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .topbar nav{margin-left:auto;display:flex;gap:16px;font-size:13px;color:var(--ink-2)}
+  .topbar nav a:hover{color:var(--ochre)}
+  @media(max-width:860px){.topbar nav{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.13;margin:0}
+  h2{font-size:clamp(25px,3.6vw,36px);margin-bottom:16px}
+  h3{font-size:20px;margin-bottom:10px}
+  p{margin:0 0 14px;color:var(--ink-2)}
+  p strong{color:var(--ink);font-weight:600}
+  .lead{font-size:18px;color:var(--ink);max-width:74ch}
+  .muted{color:var(--ink-3);font-size:12.5px}
+  ul{margin:0 0 12px;padding-left:20px}li{color:var(--ink-2);margin-bottom:6px}li strong{color:var(--ink)}
+
+  /* HERO with seal */
+  .hero{position:relative;padding:84px 0 60px;border-bottom:1px solid var(--line);overflow:hidden;background:radial-gradient(1000px 480px at 84% -12%,rgba(224,165,78,.17),transparent 60%),radial-gradient(700px 400px at 0% 116%,rgba(111,176,201,.08),transparent 55%)}
+  .hero-grid{display:grid;grid-template-columns:1fr 150px;gap:28px;align-items:center}
+  @media(max-width:720px){.hero-grid{grid-template-columns:1fr}.seal{display:none}}
+  .hero .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:20px}
+  .hero h1{font-size:clamp(31px,5.4vw,52px);max-width:18ch;margin-bottom:22px}
+  .hero h1 em{font-style:normal;color:var(--ochre)}
+  .hero .sub{font-size:19px;color:var(--ink-2);max-width:60ch}
+  .seal{width:150px;height:150px;justify-self:center}
+  .seal .ring{fill:none;stroke:var(--ochre);stroke-width:1.2;opacity:.8}
+  .seal .ring2{fill:none;stroke:var(--line-2);stroke-width:.6}
+  .seal text{fill:var(--ochre);font-family:var(--mono);font-size:6.4px;letter-spacing:2.5px}
+  .seal .mono{fill:var(--ink);font-family:var(--serif);font-weight:700}
+
+  .purpose{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:34px}
+  @media(max-width:640px){.purpose{grid-template-columns:1fr}}
+  .pcard{border:1px solid var(--line-2);border-radius:14px;padding:20px 22px;background:var(--bg-3)}
+  .pcard .pn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-bottom:8px}
+  .pcard h4{font-family:var(--serif);font-size:18px;margin-bottom:6px}
+  .pcard p{font-size:14px;margin:0}
+
+  .statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .sb{background:var(--bg-3);padding:20px 18px}
+  .sb .n{font-family:var(--serif);font-size:clamp(22px,3vw,28px);color:var(--ochre);line-height:1}
+  .sb .l{font-size:12px;color:var(--ink-2);margin-top:8px;line-height:1.4}
+  .sb .s{font-family:var(--mono);font-size:9.5px;color:var(--ink-3);margin-top:6px}
+  @media(max-width:820px){.statbar{grid-template-columns:1fr 1fr}}
+
+  /* faculty */
+  .fac{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:760px){.fac{grid-template-columns:1fr}}
+  .fcard{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:18px 20px;display:flex;gap:14px;align-items:flex-start;transition:border-color .2s,transform .2s}
+  .fcard:hover{border-color:var(--ochre);transform:translateY(-2px)}
+  .fcard .av{width:44px;height:44px;border-radius:10px;flex:none;display:grid;place-items:center;font-family:var(--serif);font-size:15px;font-weight:600;color:#1a130a;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep))}
+  .fcard.blueprint .av{background:linear-gradient(150deg,var(--blueprint),#4d8ba3)}
+  .fcard.green .av{background:linear-gradient(150deg,var(--green),#5c8049)}
+  .fcard.violet .av{background:linear-gradient(150deg,var(--violet),#8368ab)}
+  .fcard.clay .av{background:linear-gradient(150deg,var(--clay),#a5502f)}
+  .fcard .role{font-family:var(--serif);font-size:16px;color:var(--ink)}
+  .fcard .disc{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ochre);margin:3px 0 6px}
+  .fcard p{font-size:13px;margin:0}
+
+  /* curriculum */
+  .termtabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .termtabs button{border:1px solid var(--line-2);background:var(--bg-3);color:var(--ink-2);padding:9px 15px;border-radius:20px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;cursor:pointer;transition:.2s}
+  .termtabs button:hover{color:var(--ink)}
+  .termtabs button.active{background:var(--ochre);color:#1a130a;border-color:var(--ochre)}
+  .course{border:1px solid var(--line);border-radius:12px;background:var(--bg-3);margin-bottom:10px;overflow:hidden}
+  .course summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;gap:14px;align-items:center}
+  .course summary::-webkit-details-marker{display:none}
+  .course .code{font-family:var(--mono);font-size:12px;color:var(--ochre);flex:none}
+  .course .ctitle{font-family:var(--serif);font-size:17px;color:var(--ink)}
+  .course .chair{margin-left:auto;font-size:11.5px;color:var(--ink-3);text-align:right;padding-left:12px}
+  .course .plus{flex:none;color:var(--ink-3);font-family:var(--mono);transition:transform .2s}
+  .course[open] .plus{transform:rotate(45deg);color:var(--ochre)}
+  .course .body{padding:0 20px 20px;border-top:1px solid var(--line);margin-top:2px;padding-top:16px}
+  .course .body h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+  .course .body .apply{border-left:3px solid var(--ochre);padding:4px 0 4px 16px;margin:12px 0;font-size:14px}
+  .course .body .apply b{color:var(--ochre);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px}
+  .course .body .deliv{border-left:3px solid var(--green);padding:4px 0 4px 16px;margin:12px 0 0;font-size:14px}
+  .course .body .deliv b{color:var(--green);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px}
+  .chip{display:inline-block;font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:20px;border:1px solid var(--line-2);color:var(--ink-3);margin:0 4px 4px 0;text-transform:uppercase;letter-spacing:.05em}
+  .chip.elective{color:var(--rose);border-color:rgba(208,143,168,.4)}
+  .chip.capstone{color:var(--green);border-color:rgba(127,166,106,.4)}
+
+  /* AI toolkit */
+  .filterbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .filterbar button{border:1px solid var(--line-2);background:var(--bg-3);color:var(--ink-2);padding:8px 13px;border-radius:20px;font-family:var(--mono);font-size:11.5px;cursor:pointer;transition:.2s}
+  .filterbar button:hover{color:var(--ink)}
+  .filterbar button.active{background:var(--blueprint);color:#0c1518;border-color:var(--blueprint)}
+  .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:820px){.tools{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.tools{grid-template-columns:1fr}}
+  .tool{border:1px solid var(--line);border-radius:12px;background:var(--bg-3);padding:16px 18px}
+  .tool .tn{font-family:var(--serif);font-size:16px;color:var(--ink)}
+  .tool .tcat{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--blueprint);margin:3px 0 8px}
+  .tool p{font-size:13px;margin:0}
+  .tool .bestfor{font-size:12px;color:var(--ink-3);margin-top:8px}
+  .tool .bestfor b{color:var(--ink-2)}
+
+  .callout{border:1px solid var(--line-2);border-radius:14px;padding:22px 24px;background:linear-gradient(150deg,rgba(224,165,78,.08),var(--bg-3));margin-top:6px}
+  .callout.blue{background:linear-gradient(150deg,rgba(111,176,201,.08),var(--bg-3))}
+  .callout.clay{background:linear-gradient(150deg,rgba(199,107,74,.08),var(--bg-3))}
+  .callout .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:9px}
+  .callout.blue .lbl{color:var(--blueprint)}.callout.clay .lbl{color:var(--clay)}
+  .callout p:last-child{margin-bottom:0}
+  .thesis{font-family:var(--serif);font-size:20px;color:var(--ink);font-style:italic;line-height:1.4}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.two{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:22px}
+  .card h4{font-family:var(--serif);font-size:16px;margin-bottom:8px}
+
+  /* path */
+  .path .step{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .path .step:last-child{border-bottom:none}
+  @media(max-width:600px){.path .step{grid-template-columns:1fr;gap:4px}}
+  .path .sl{font-family:var(--mono);font-size:12px;color:var(--ochre);text-transform:uppercase;letter-spacing:.05em}
+  .path .st{font-family:var(--serif);font-size:16px;color:var(--ink);margin-bottom:4px}
+
+  footer{padding:40px 0 60px;color:var(--ink-3)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .fdisc{font-size:12px;color:var(--ink-3);max-width:80ch;margin-top:12px;line-height:1.5}
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" title="Back to the hub" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit"><div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>MBA · Social Media Marketing</span></div></a>
+  <nav><a href="#faculty">Faculty</a><a href="#curriculum">Curriculum</a><a href="#toolkit">AI Toolkit</a><a href="#linkedin">LinkedIn</a><a href="#capstone">Capstone</a><a href="#path">The Path</a></nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker">Document 13 · A Practitioner MBA · Case Method · AI-Native</div>
+        <h1>An MBA in social media marketing — <em>taught through Wima</em>.</h1>
+        <p class="sub">A full graduate-level program in the marketing discipline your whole strategy depends on. You don't just study it — every course is taught on the live Wima case, so what you learn on Monday, you ship on Friday.</p>
+      </div>
+      <svg class="seal" viewBox="0 0 100 100" aria-label="Wima MBA seal">
+        <circle class="ring" cx="50" cy="50" r="47"/>
+        <circle class="ring2" cx="50" cy="50" r="42"/>
+        <circle class="ring2" cx="50" cy="50" r="30"/>
+        <path id="sealtop" d="M 50 8 A 42 42 0 0 1 92 50" fill="none"/>
+        <path id="sealbot" d="M 8 50 A 42 42 0 0 0 50 92" fill="none"/>
+        <text><textPath href="#sealtop" startOffset="6%">SOCIAL · MARKETING</textPath></text>
+        <text><textPath href="#sealbot" startOffset="8%">BUILD · INDUSTRY</textPath></text>
+        <text class="mono" x="50" y="44" text-anchor="middle" style="font-size:15px;letter-spacing:0">WB</text>
+        <text class="mono" x="50" y="58" text-anchor="middle" style="font-size:8px;fill:var(--ochre);letter-spacing:2px">MBA</text>
+      </svg>
+    </div>
+    <div class="purpose">
+      <div class="pcard"><div class="pn">Purpose 01 · You learn</div><h4>Become genuinely expert</h4><p>Graduate-level command of strategy, content, growth, paid media, LinkedIn, AI, and ethics — not a tips list, a discipline.</p></div>
+      <div class="pcard"><div class="pn">Purpose 02 · You apply</div><h4>Grow Wima while you study</h4><p>Every course output is a real Wima asset. By graduation you've built the marketing engine, not just learned about it.</p></div>
+    </div>
+  </div>
+</header>
+
+<!-- DEAN'S NOTE -->
+<section id="dean">
+  <div class="wrap">
+    <p class="eyebrow">The Dean's Note · How This Program Works</p>
+    <h2>Four principles borrowed from the best business schools</h2>
+    <div class="two" style="margin-bottom:24px">
+      <div class="card"><h4>1 · The case method</h4><p>Harvard teaches through cases, not lectures. Here, <strong>Wima is the living case</strong>. Every concept is applied to a real decision — the Dry Wall launch, the diaspora funnel, the bank pitch — so theory never floats free of practice.</p></div>
+      <div class="card"><h4>2 · Learn by shipping</h4><p>You don't pass a course by reading it. You pass by <strong>producing the asset</strong> — a content calendar, a live campaign, a LinkedIn thought-leadership series. The deliverable is the exam.</p></div>
+      <div class="card"><h4>3 · AI-native, human-led</h4><p>AI does 70–80% of the production; <strong>your judgment does the 20–30% that matters</strong> — strategy, taste, ethics, and the relationship. You'll master the tools without outsourcing the thinking.</p></div>
+      <div class="card"><h4>4 · Ethics as foundation</h4><p>Wima's entire moat is trust. Every growth tactic in this program is pressure-tested against one question: <strong>does it build trust or spend it?</strong> Nothing that burns the brand is worth the reach.</p></div>
+    </div>
+    <div class="statbar">
+      <div class="sb"><div class="n">89.7%</div><div class="l">of social marketers now use AI tools daily or weekly</div><div class="s">Sociality.io 2026</div></div>
+      <div class="sb"><div class="n">60–80%</div><div class="l">less editing time with AI video tools</div><div class="s">Industry testing 2026</div></div>
+      <div class="sb"><div class="n">~11 hrs</div><div class="l">saved per week via AI content repurposing</div><div class="s">Social Media Examiner</div></div>
+      <div class="sb"><div class="n">$70B</div><div class="l">projected AI-in-social market by 2034 (37% CAGR)</div><div class="s">Fortune Business Insights</div></div>
+    </div>
+    <div class="callout clay" style="margin-top:20px">
+      <div class="lbl">The one warning the whole program rests on</div>
+      <p><strong>AI is not a shortcut for weak strategy.</strong> If the offer is unclear, the hook is boring, or the audience doesn't care, automation just produces bad content faster. AI multiplies what you bring — so this MBA teaches the thinking first and the tools second, always in that order.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FACULTY -->
+<section id="faculty" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">The Faculty · Your Assembled Team</p>
+    <h2>Ten chairs, each owning a discipline</h2>
+    <p class="lead" style="margin-bottom:22px">A world-class program needs a world-class faculty. Here's the team assembled to teach you — each chair a specialist, each course theirs to run.</p>
+    <div class="fac">
+      <div class="fcard"><div class="av">PS</div><div><div class="role">Chair of Platform Strategy &amp; Algorithms</div><div class="disc">How the machines really work</div><p>Teaches what each platform rewards and why reach is earned, never demanded.</p></div></div>
+      <div class="fcard blueprint"><div class="av">CC</div><div><div class="role">Chair of Content &amp; Creative Craft</div><div class="disc">The scroll-stopping arts</div><p>Hooks, formats, story, and the first three seconds that decide everything.</p></div></div>
+      <div class="fcard green"><div class="av">PM</div><div><div class="role">Chair of Paid Media &amp; Performance</div><div class="disc">Spend that returns</div><p>Meta, TikTok, click-to-WhatsApp, budgets, and reading your own numbers.</p></div></div>
+      <div class="fcard violet"><div class="av">CV</div><div><div class="role">Chair of Community &amp; Conversational Commerce</div><div class="disc">WhatsApp as a rail</div><p>Turning attention into relationships and relationships into orders.</p></div></div>
+      <div class="fcard blueprint"><div class="av">LI</div><div><div class="role">Chair of B2B &amp; LinkedIn Growth</div><div class="disc">Reaching decision-makers</div><p>Professionals, suppliers, banks, and diaspora — the high-value B2B rail.</p></div></div>
+      <div class="fcard"><div class="av">AI</div><div><div class="role">Chair of AI-Augmented Marketing</div><div class="disc">The 10× toolkit</div><p>The current AI stack for writing, design, video, repurposing, and analysis.</p></div></div>
+      <div class="fcard clay"><div class="av">ET</div><div><div class="role">Chair of Marketing Ethics &amp; Brand Trust</div><div class="disc">The line you don't cross</div><p>Ethical ambush, responsible claims, and protecting the trust that is the moat.</p></div></div>
+      <div class="fcard green"><div class="av">GS</div><div><div class="role">Chair of Analytics &amp; Growth Science</div><div class="disc">Measure what matters</div><p>The metrics that map to money, testing discipline, and the weekly review loop.</p></div></div>
+      <div class="fcard violet"><div class="av">PR</div><div><div class="role">Practitioner-in-Residence · Construction &amp; PropTech</div><div class="disc">The industry edge</div><p>What actually converts a builder, a renovator, and a diaspora client.</p></div></div>
+      <div class="fcard"><div class="av">DN</div><div><div class="role">The Dean · Integration &amp; Application</div><div class="disc">Wima go-to-market</div><p>Ties every course into one working engine and runs the capstone.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section id="curriculum">
+  <div class="wrap">
+    <p class="eyebrow">The Curriculum · 3 Terms · Electives · Capstone</p>
+    <h2>The full course catalogue</h2>
+    <p class="lead" style="margin-bottom:20px">Tap a term, then open any course to see what you'll master, how it applies to Wima, and the real asset you'll ship to pass it.</p>
+    <div class="termtabs" id="termtabs">
+      <button data-term="1" class="active">Term 1 · Foundations</button>
+      <button data-term="2">Term 2 · Growth &amp; Performance</button>
+      <button data-term="3">Term 3 · Advanced &amp; AI</button>
+      <button data-term="E">Electives</button>
+      <button data-term="C">Capstone</button>
+    </div>
+    <div id="courses"></div>
+  </div>
+</section>
+
+<!-- AI TOOLKIT -->
+<section id="toolkit" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">The AI Toolkit · Filter By Job</p>
+    <h2>The 2026 stack — the right tool for each job</h2>
+    <p class="lead" style="margin-bottom:20px">Don't buy everything. Match the tool to the bottleneck. Filter by the job you need done. All verified current as of mid-2026 — pricing and features change, so confirm on each site before you subscribe.</p>
+    <div class="filterbar" id="filterbar">
+      <button data-cat="all" class="active">All</button>
+      <button data-cat="write">Write</button>
+      <button data-cat="design">Design</button>
+      <button data-cat="video">Video</button>
+      <button data-cat="repurpose">Repurpose</button>
+      <button data-cat="voice">Voice &amp; Avatar</button>
+      <button data-cat="schedule">Schedule</button>
+      <button data-cat="analyze">Analyse</button>
+      <button data-cat="linkedin">LinkedIn</button>
+      <button data-cat="ads">Ads</button>
+    </div>
+    <div class="tools" id="tools"></div>
+    <div class="callout blue" style="margin-top:20px">
+      <div class="lbl">The Wima starter stack (lean &amp; cheap)</div>
+      <p>You don't need the enterprise tools. Start with: <strong>ChatGPT or Claude</strong> (strategy + scripts) → <strong>Canva</strong> (visuals) → <strong>CapCut</strong> (video editing, free) → <strong>OpusClip or Vizard</strong> (turn one long video into a week of clips) → <strong>Submagic</strong> (captions that hold attention) → <strong>Buffer or Metricool</strong> (schedule + analytics) → <strong>Supergrow</strong> (LinkedIn). That whole stack runs cheap and covers 95% of what Wima needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LINKEDIN -->
+<section id="linkedin">
+  <div class="wrap">
+    <p class="eyebrow">Special Focus · LinkedIn &amp; B2B Growth</p>
+    <h2>The rail that reaches the people who write cheques</h2>
+    <p class="lead" style="margin-bottom:22px">TikTok and WhatsApp reach the builder. LinkedIn reaches everyone who makes Wima's <em>ecosystem</em> work — and almost no Ghanaian building brand is using it seriously. That's the opening.</p>
+    <div class="two" style="margin-bottom:20px">
+      <div class="card"><h4>Who's actually on LinkedIn for Wima</h4>
+        <ul>
+          <li><strong>Bank decision-makers</strong> — the partnerships and mortgage leads for your finance rail live here. Warm them before you pitch.</li>
+          <li><strong>Professionals</strong> — architects, QSs, engineers, contractors for the vetted-execution network and tendering supply side.</li>
+          <li><strong>Suppliers &amp; manufacturers</strong> — Deal Hub and tender partners.</li>
+          <li><strong>Diaspora professionals</strong> — high-income Ghanaians abroad who build — the premium client, reachable by their job, not just their nationality.</li>
+        </ul>
+      </div>
+      <div class="card"><h4>What to do there</h4>
+        <ul>
+          <li><strong>Found-led thought leadership.</strong> Gershon posts the building-industry insights from these very documents. The founder's voice builds B2B trust faster than a brand page.</li>
+          <li><strong>Document the journey.</strong> Ecosystem thinking, market data, launch lessons — the strategy work becomes content.</li>
+          <li><strong>Warm outreach, not cold.</strong> Comment on and engage bank/industry leaders for weeks before any ask. Relationship first.</li>
+          <li><strong>Carousels &amp; data posts.</strong> LinkedIn rewards useful, native carousels — perfect for your price data and market insights.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="lbl">The B2B rhythm</div>
+      <p>LinkedIn is a <strong>slow, compounding trust channel</strong> — post 2–3× a week, engage daily, and think in months not days. Its payoff isn't viral reach; it's that when you finally message a bank's partnership lead, they already know your name and respect your thinking. That's worth more than a thousand cold impressions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CASE METHOD -->
+<section id="cases" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">The Case Method · Learn On Real Decisions</p>
+    <h2>Every module runs on a live Wima case</h2>
+    <div class="two">
+      <div class="card"><h4>Case A · The Dry Wall launch</h4><p>Plan the organic warm-up, the ethical-ambush layer, and the click-to-WhatsApp paid push for Wima's first product launch. Runs through Terms 1–3.</p></div>
+      <div class="card"><h4>Case B · The diaspora funnel</h4><p>Reach Ghanaians in the UK/US/Canada as <em>builders</em>, warm them, and route them to the Procurement Desk. Content + LinkedIn + paid combined.</p></div>
+      <div class="card"><h4>Case C · The bank pitch runway</h4><p>Use LinkedIn thought leadership to warm bank decision-makers for months, so the finance-rail pitch lands with someone who already trusts you.</p></div>
+      <div class="card"><h4>Case D · The live deal drop</h4><p>Design a WhatsApp/live group-buy drop — urgency, community pros as hosts, and the funnel from attention to order.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPSTONE -->
+<section id="capstone">
+  <div class="wrap">
+    <p class="eyebrow">The Capstone</p>
+    <h2>Build Wima's marketing engine — for real</h2>
+    <p class="lead" style="margin-bottom:20px">The program culminates in one integrated project: a complete, running go-to-market for Wima that puts every course to work at once.</p>
+    <div class="card">
+      <h4>Capstone brief</h4>
+      <p style="margin-bottom:10px">Over the final stretch, assemble and launch:</p>
+      <ul>
+        <li>A <strong>90-day content calendar</strong> across TikTok, Facebook, Instagram, WhatsApp and LinkedIn (Content + Platform courses)</li>
+        <li>A <strong>live paid campaign</strong> — click-to-WhatsApp to Accra/Tema/Kumasi + a diaspora audience — measured against your own baseline (Paid + Analytics)</li>
+        <li>An <strong>ethical-ambush plan</strong> tied to Ghana's seasonal &amp; news calendar (Ethics + Creative)</li>
+        <li>A <strong>LinkedIn thought-leadership series</strong> warming bank &amp; professional decision-makers (B2B course)</li>
+        <li>An <strong>AI production workflow</strong> that lets one person output like a team (AI course)</li>
+      </ul>
+      <div class="callout" style="margin-top:14px">
+        <div class="lbl">Pass condition</div>
+        <p>Not a slide deck — <strong>a running engine with real numbers</strong>. You graduate when Wima's social channels are live, growing, and measurably feeding the funnel. The business is the diploma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATH -->
+<section id="path" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">The Path · A Realistic Completion Plan</p>
+    <h2>Six months, part-time, while running Wima</h2>
+    <div class="path">
+      <div class="step"><div class="sl">Month 1</div><div><div class="st">Term 1 — Foundations</div><p>Platform strategy, content craft, ethics, consumer behaviour. Ship your first 20 pieces of Wima content. Badly is fine — reps first.</p></div></div>
+      <div class="step"><div class="sl">Month 2–3</div><div><div class="st">Term 2 — Growth &amp; Performance</div><p>Organic growth, paid media, LinkedIn, community. Launch the WhatsApp group; run your first small click-to-WhatsApp test; start the founder LinkedIn.</p></div></div>
+      <div class="step"><div class="sl">Month 4</div><div><div class="st">Term 3 — Advanced &amp; AI</div><p>Build your AI production workflow, master analytics, and design the ethical-ambush calendar. Your output per hour multiplies here.</p></div></div>
+      <div class="step"><div class="sl">Month 5</div><div><div class="st">Electives</div><p>Construction/PropTech marketing, diaspora marketing, thought leadership — the industry-specific edge.</p></div></div>
+      <div class="step"><div class="sl">Month 6</div><div><div class="st">Capstone — the live engine</div><p>Run the full Dry Wall go-to-market. Measure, scale the winners. Graduate with a working marketing machine, not a certificate.</p></div></div>
+    </div>
+    <div class="callout" style="margin-top:20px">
+      <div class="lbl">Free faculty office hours (self-study resources)</div>
+      <p><strong>Meta Blueprint</strong> and <strong>TikTok Academy / Creative Center</strong> for platform-official ads training; <strong>Google Veo &amp; the tool sites</strong> for AI production; and this hub's Documents 07–12 for the strategy the program applies. But the real teacher is reps on live Wima content — <strong>ship, measure, adjust.</strong></p>
+    </div>
+    <div class="callout blue" style="margin-top:14px">
+      <div class="lbl">The one line to graduate on</div>
+      <p class="thesis">You will not have learned social media marketing when you can define it. You'll have learned it when Wima's phone is buzzing with WhatsApp orders you can trace back to a post you made on purpose.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">The Wima MBA — Social Media Marketing for the Building Industry</div>
+      <div class="fdisc">AI tools, adoption figures, and ad benchmarks drawn from public 2026 industry sources (Sociality.io, Fortune Business Insights, Zapier, and tool comparison reviews); tool pricing and features change frequently — verify on each provider's site before subscribing, and validate ad costs with your own test spend. This is a practitioner training program, not an accredited degree. Capstone to Documents 07–12, Wima Ecosystem Hub.</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Document 13 · Wima Ecosystem Hub</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var COURSES=[
+    {t:"1",code:"SM 501",title:"Platform Strategy &amp; Algorithms",chair:"Chair of Platform Strategy",learn:"How each platform's algorithm decides reach; why watch-time, shares and saves are the true currency; matching message to platform (TikTok = discovery, WhatsApp = conversion, LinkedIn = B2B).",apply:"Map Wima's channel mix and the one funnel — discover → follow → WhatsApp → buy.",deliv:"A written Wima channel strategy: which platform does which job, and why."},
+    {t:"1",code:"SM 502",title:"Content &amp; Creative Craft",chair:"Chair of Content &amp; Creative",learn:"The first-3-seconds hook; the content formats that spread for build topics; the 3:1 value-to-sell ratio; batching &amp; repurposing so one idea becomes five posts.",apply:"Write 10 hooks for a Deal Hub product; design the drywall education series.",deliv:"A 2-week Wima content batch, hooks written and formats chosen."},
+    {t:"1",code:"SM 503",title:"Marketing Ethics &amp; Brand Trust",chair:"Chair of Ethics &amp; Trust",learn:"Where clever ends and sleazy begins; responsible claims; why a single exposed stunt can undo years of trust; the ethics of AI-generated content and disclosure.",apply:"Pressure-test every planned tactic against 'builds trust or spends it?'",deliv:"Wima's social ethics charter — the do/never list the team posts by."},
+    {t:"1",code:"SM 504",title:"Consumer Behaviour in the Feed",chair:"Practitioner-in-Residence",learn:"How a Ghanaian self-builder and a diaspora client actually decide; loss aversion, trust signals, and the psychology of a high-stakes, considered purchase.",apply:"Map the emotional journey of a diaspora builder from fear to trust.",deliv:"A buyer-psychology brief for Wima's two core audiences."},
+    {t:"2",code:"SM 601",title:"Organic Growth Science",chair:"Chair of Analytics &amp; Growth",learn:"Engineering the signals that grow you (shares > saves > completion > comments); the 0→1k→10k→100k ladder; trends, collaboration, and social search.",apply:"Design the growth plan for Wima's first 10,000 followers.",deliv:"A follower-growth playbook with weekly cadence and share-driven formats."},
+    {t:"2",code:"SM 602",title:"Paid Media &amp; Performance",chair:"Chair of Paid Media",learn:"Campaign structure; objectives mapped to the funnel; targeting (incl. diaspora geo); click-to-WhatsApp as the killer format; budgeting, retargeting, and reading your own CPM/CPC/cost-per-message.",apply:"Build a click-to-WhatsApp campaign for the Dry Wall launch.",deliv:"A live test campaign with a defined budget and success metric."},
+    {t:"2",code:"SM 603",title:"B2B &amp; LinkedIn Growth",chair:"Chair of B2B &amp; LinkedIn",learn:"Founder-led thought leadership; warming decision-makers; carousels &amp; data posts; the slow-compounding B2B rhythm; social selling without spamming.",apply:"Warm bank &amp; professional decision-makers for the finance and vetted-execution rails.",deliv:"A 30-day founder LinkedIn plan targeting Wima's B2B audiences."},
+    {t:"2",code:"SM 604",title:"Community &amp; Conversational Commerce",chair:"Chair of Community",learn:"WhatsApp as a relationship and conversion rail; broadcast lists, groups, Status; consent &amp; anti-spam discipline; turning a community into repeat orders.",apply:"Stand up Wima's builders' group and diaspora support group.",deliv:"A WhatsApp community playbook with the funnel from group to order."},
+    {t:"3",code:"SM 701",title:"AI-Augmented Marketing",chair:"Chair of AI-Augmented Marketing",learn:"The full 2026 AI stack; the 70/30 principle; building a production workflow where one person outputs like a team; prompt craft for brand voice; the limits of AI.",apply:"Build Wima's AI content workflow: script → video → clips → captions → schedule.",deliv:"A documented AI production pipeline the team can run daily."},
+    {t:"3",code:"SM 702",title:"Analytics &amp; Growth Measurement",chair:"Chair of Analytics &amp; Growth",learn:"Metrics that map to money vs vanity; the weekly review; disciplined one-variable testing; attribution gaps and not overreacting to dashboards.",apply:"Set Wima's weekly review: top posts by completion &amp; shares, rebuild around winners.",deliv:"A Wima metrics dashboard and weekly review ritual."},
+    {t:"3",code:"SM 703",title:"Ethical Ambush &amp; Cultural Moments",chair:"Chair of Ethics &amp; Trust",learn:"Trend- &amp; news-jacking; Ghana's seasonal calendar as a content calendar; comment-section presence; competitor-adjacent done honestly; the hard 'never' list.",apply:"Build Wima's moment-marketing calendar (rainy season → roofing, festive → finish-your-build).",deliv:"A 12-month ethical-ambush calendar for Wima."},
+    {t:"3",code:"SM 704",title:"Live Commerce &amp; Funnels",chair:"The Dean",learn:"The QVC-of-building model; selling the deal not the commodity; community pros as hosts; funnel design from cold reach to WhatsApp order; when live is worth the ops.",apply:"Design a Wima live deal-drop for a Deal Hub group-buy.",deliv:"A live deal-drop run-of-show and funnel map."},
+    {t:"E",code:"EL 801",title:"Construction &amp; PropTech Marketing",chair:"Practitioner-in-Residence",learn:"What converts a builder, renovator, and diaspora client; how PropTech competitors (Ownkey, meQasa) market, and the build-education gap they leave open.",apply:"Position Wima against the field using the competitive brief.",deliv:"A Wima positioning &amp; messaging guide for the building niche."},
+    {t:"E",code:"EL 802",title:"Diaspora Marketing",chair:"Practitioner-in-Residence",learn:"Reaching Ghanaians abroad as builders; trust &amp; scam-fear content; geo + interest targeting; multilingual &amp; time-zone considerations; the USD-value client.",apply:"Build the diaspora-builder funnel to the Procurement Desk.",deliv:"A diaspora acquisition plan across content, LinkedIn and paid."},
+    {t:"E",code:"EL 803",title:"Brand &amp; Thought Leadership",chair:"The Dean",learn:"Building the founder and brand as the trusted authority; turning strategy work into content; PR, partnerships, and the data-asset flywheel (the price tracker).",apply:"Turn Documents 07–12 into a thought-leadership content stream.",deliv:"A thought-leadership editorial plan for Wima and its founder."},
+    {t:"C",code:"CAP 900",title:"Capstone · The Wima Go-To-Market",chair:"The Dean",learn:"Integration of every course into one running engine: calendar, paid, ambush, LinkedIn, AI workflow — launched, measured, and scaled on the live Dry Wall case.",apply:"Everything, at once, for real.",deliv:"A live, growing, measurable Wima marketing engine. The business is the diploma."}
+  ];
+  var TOOLS=[
+    {c:["write"],n:"ChatGPT",cat:"Write · strategy",d:"Ideation, scripts, captions, content plans. The general-purpose workhorse for drafting fast.",bf:"First drafts &amp; brainstorming at volume"},
+    {c:["write"],n:"Claude",cat:"Write · reasoning",d:"Strong long-form, strategy and nuanced writing; good for turning documents into content.",bf:"Thoughtful long-form &amp; strategy"},
+    {c:["write"],n:"Jasper",cat:"Write · brand voice",d:"Marketing-tuned writer with brand-voice memory and agent workflows.",bf:"Teams needing consistent brand voice"},
+    {c:["design"],n:"Canva (Magic Studio)",cat:"Design",d:"Templates, AI image generation, background removal, brand kits — the small-team design engine.",bf:"All Wima graphics &amp; carousels"},
+    {c:["design"],n:"Adobe Firefly",cat:"Design · image",d:"Commercial-safe AI image generation and infographics.",bf:"Original visuals &amp; infographics"},
+    {c:["video"],n:"CapCut",cat:"Video · editing",d:"Free, mobile+desktop editor: auto-captions, templates, TTS, background removal. The practical default for raw footage.",bf:"Editing your own build footage"},
+    {c:["video"],n:"Descript",cat:"Video · editing",d:"Edit video by editing the transcript; Studio Sound cleans audio; great for talking-head.",bf:"Talking-head &amp; longer video"},
+    {c:["video"],n:"Google Veo / Sora / Runway",cat:"Video · generative",d:"Frontier text-to-video for B-roll and cinematic moments. Verify current access &amp; pricing.",bf:"Generated B-roll &amp; effects"},
+    {c:["repurpose"],n:"OpusClip",cat:"Repurpose · clips",d:"Turns one long video into many ranked short clips with virality scoring and auto-captions.",bf:"YouTube/long video → weeks of Shorts"},
+    {c:["repurpose"],n:"Vizard",cat:"Repurpose · clips",d:"Strong AI clipping at a lower price than OpusClip; 4K + API on paid tiers.",bf:"Clipping on a tighter budget"},
+    {c:["repurpose","video"],n:"Submagic",cat:"Repurpose · captions",d:"Animated, keyword-highlighted captions that lift retention on short-form.",bf:"Captions that hold attention"},
+    {c:["voice"],n:"ElevenLabs",cat:"Voice",d:"Natural AI voiceover and dubbing, multilingual — useful for diaspora &amp; multi-language content.",bf:"Voiceover &amp; translation"},
+    {c:["voice"],n:"HeyGen / Synthesia",cat:"Voice · avatar",d:"AI avatars/spokesperson videos from a script, multilingual — no filming needed.",bf:"Faceless or multilingual explainers"},
+    {c:["schedule"],n:"Buffer",cat:"Schedule",d:"Simple, affordable scheduler with an AI assistant; strong free tier for small teams.",bf:"Lean Wima scheduling"},
+    {c:["schedule","analyze"],n:"Metricool",cat:"Schedule · analyse",d:"Scheduling + analytics + competitor &amp; ad tracking at an affordable price.",bf:"Scheduling with real reporting"},
+    {c:["schedule"],n:"SocialBee / Publer",cat:"Schedule",d:"Evergreen recycling and category-based scheduling; keep feeds active without daily effort.",bf:"Recycling evergreen build content"},
+    {c:["analyze"],n:"Sprout Social",cat:"Analyse · listening",d:"Enterprise-grade analytics, sentiment and social listening (premium price).",bf:"Serious listening at scale"},
+    {c:["analyze"],n:"Brandwatch",cat:"Analyse · listening",d:"Deep social listening and trend detection — insight platform, not a publisher.",bf:"Market &amp; competitor intelligence"},
+    {c:["linkedin"],n:"Supergrow",cat:"LinkedIn",d:"LinkedIn-first system: AI posts in your voice, branded carousels, scheduling with auto first-comment, analytics.",bf:"Running LinkedIn as a growth channel"},
+    {c:["linkedin"],n:"Taplio",cat:"LinkedIn",d:"LinkedIn content, scheduling and engagement growth in one place.",bf:"Founder LinkedIn growth"},
+    {c:["ads"],n:"Meta Advantage+",cat:"Ads · built-in",d:"Meta's own AI campaign automation — audience &amp; creative optimisation inside Ads Manager.",bf:"Scaling Meta ads efficiently"},
+    {c:["ads"],n:"TikTok Smart+",cat:"Ads · built-in",d:"TikTok's automated campaign type; pair with Spark Ads to boost proven organic videos.",bf:"Scaling TikTok ads"},
+    {c:["ads"],n:"Zeely AI",cat:"Ads · creative",d:"Turns a product URL into platform-ready video and static ad variants at speed.",bf:"Bulk ad-creative variants"}
+  ];
+
+  // Curriculum render
+  var coursesEl=document.getElementById("courses");
+  function renderCourses(term){
+    var list=COURSES.filter(function(c){return c.t===term;});
+    coursesEl.innerHTML=list.map(function(c){
+      return '<details class="course"><summary>'+
+        '<span class="code">'+c.code+'</span>'+
+        '<span class="ctitle">'+c.title+'</span>'+
+        '<span class="chair">'+c.chair+'</span>'+
+        '<span class="plus">+</span></summary>'+
+        '<div class="body">'+
+          '<h5>What you\'ll master</h5><p style="font-size:14px">'+c.learn+'</p>'+
+          '<div class="apply"><b>Applied to Wima</b>'+c.apply+'</div>'+
+          '<div class="deliv"><b>Ship to pass</b>'+c.deliv+'</div>'+
+        '</div></details>';
+    }).join("");
+  }
+  var tabs=document.querySelectorAll("#termtabs button");
+  tabs.forEach(function(b){
+    b.addEventListener("click",function(){
+      tabs.forEach(function(x){x.classList.remove("active");});
+      b.classList.add("active");
+      renderCourses(b.getAttribute("data-term"));
+    });
+  });
+  renderCourses("1");
+
+  // Toolkit render + filter
+  var toolsEl=document.getElementById("tools");
+  function renderTools(cat){
+    var list=TOOLS.filter(function(t){return cat==="all"||t.c.indexOf(cat)>-1;});
+    toolsEl.innerHTML=list.map(function(t){
+      return '<div class="tool"><div class="tn">'+t.n+'</div><div class="tcat">'+t.cat+'</div>'+
+        '<p>'+t.d+'</p><div class="bestfor"><b>Best for:</b> '+t.bf+'</div></div>';
+    }).join("");
+  }
+  var fbtns=document.querySelectorAll("#filterbar button");
+  fbtns.forEach(function(b){
+    b.addEventListener("click",function(){
+      fbtns.forEach(function(x){x.classList.remove("active");});
+      b.classList.add("active");
+      renderTools(b.getAttribute("data-cat"));
+    });
+  });
+  renderTools("all");
+})();
+</script>
+</body>
+</html>

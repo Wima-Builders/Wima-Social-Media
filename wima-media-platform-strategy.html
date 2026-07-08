@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima Media Platform — Market Dominance Strategy</title>
+<style>
+  :root{
+    --bg:#14100d;            /* warm charcoal base */
+    --bg-2:#1b1611;          /* raised charcoal */
+    --bg-3:#221c16;          /* card */
+    --line:#332a22;          /* hairline */
+    --line-2:#463a2e;
+    --ink:#f3ece2;           /* primary text */
+    --ink-2:#c6b8a6;         /* secondary text */
+    --ink-3:#8a7b68;         /* muted */
+    --ochre:#e0a54e;         /* materials/earth accent */
+    --ochre-deep:#c07f2c;
+    --blueprint:#6fb0c9;     /* data / blueprint accent */
+    --clay:#c76b4a;          /* alert / emphasis */
+    --green:#7fa66a;         /* positive */
+    --maxw:1080px;
+    --serif:"Fraunces","Georgia",serif;
+    --sans:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Menlo,monospace;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--sans);line-height:1.6;font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- Topbar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:14px;
+    padding:14px 26px;
+    background:rgba(20,16,13,.86);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .logomark{
+    width:38px;height:38px;border-radius:9px;flex:none;
+    display:grid;place-items:center;
+    background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));
+    color:#1a130a;font-family:var(--serif);font-weight:700;font-size:17px;
+    letter-spacing:-.5px;box-shadow:0 2px 10px rgba(0,0,0,.4);
+  }
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:15px;letter-spacing:.2px}
+  .brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .topbar nav{margin-left:auto;display:flex;gap:22px;font-size:13px;color:var(--ink-2)}
+  .topbar nav a:hover{color:var(--ochre)}
+  @media(max-width:720px){.topbar nav{display:none}}
+
+  /* ---------- Layout ---------- */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ochre);margin:0 0 18px;display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.12;margin:0}
+  h2{font-size:clamp(26px,4vw,40px);margin-bottom:20px}
+  h3{font-size:20px;margin-bottom:10px}
+  p{margin:0 0 16px;color:var(--ink-2)}
+  p strong,li strong{color:var(--ink);font-weight:600}
+  .lead{font-size:19px;color:var(--ink);max-width:70ch}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 72px;border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(900px 420px at 78% -8%,rgba(224,165,78,.16),transparent 60%),
+      radial-gradient(700px 400px at 8% 108%,rgba(111,176,201,.09),transparent 55%);
+  }
+  .hero .kicker{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ochre);margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(34px,6.2vw,62px);max-width:16ch;margin-bottom:24px}
+  .hero h1 em{font-style:normal;color:var(--ochre)}
+  .hero .sub{font-size:20px;color:var(--ink-2);max-width:64ch;margin-bottom:34px}
+  .thesis{
+    border-left:3px solid var(--ochre);padding:18px 22px;margin:0;
+    background:linear-gradient(90deg,rgba(224,165,78,.07),transparent);
+    font-family:var(--serif);font-size:21px;color:var(--ink);font-style:italic;max-width:62ch;
+  }
+  .herometa{display:flex;flex-wrap:wrap;gap:28px;margin-top:38px;padding-top:26px;border-top:1px solid var(--line)}
+  .herometa div{min-width:120px}
+  .herometa .n{font-family:var(--serif);font-size:30px;color:var(--ochre);line-height:1}
+  .herometa .l{font-size:12.5px;color:var(--ink-3);margin-top:7px;letter-spacing:.03em}
+
+  /* ---------- Stat band ---------- */
+  .band{background:var(--bg-2)}
+  .statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .stat{background:var(--bg-3);padding:24px 20px}
+  .stat .n{font-family:var(--serif);font-size:30px;color:var(--ink);line-height:1}
+  .stat .n b{color:var(--ochre);font-weight:600}
+  .stat .l{font-size:13px;color:var(--ink-2);margin-top:10px;line-height:1.45}
+  .stat .src{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-top:9px;letter-spacing:.02em}
+  @media(max-width:860px){.statgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.statgrid{grid-template-columns:1fr}}
+
+  /* ---------- Generic cards ---------- */
+  .cards{display:grid;gap:16px}
+  .cards.two{grid-template-columns:1fr 1fr}
+  .cards.three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.cards.two,.cards.three{grid-template-columns:1fr}}
+  .card{background:var(--bg-3);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .card h3{color:var(--ink)}
+  .card p:last-child{margin-bottom:0}
+
+  /* ---------- Competitive table ---------- */
+  .tablewrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:640px;font-size:14px}
+  th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--bg-2);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+  tbody tr:last-child td{border-bottom:none}
+  td .who{color:var(--ink);font-weight:600;font-family:var(--serif);font-size:16px}
+  .tag{display:inline-block;font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--line-2);color:var(--ink-2)}
+  .tag.win{color:var(--green);border-color:rgba(127,166,106,.4);background:rgba(127,166,106,.08)}
+  .tag.gap{color:var(--clay);border-color:rgba(199,107,74,.4);background:rgba(199,107,74,.08)}
+  .whitespace{background:linear-gradient(90deg,rgba(224,165,78,.1),transparent)}
+  .whitespace td .who{color:var(--ochre)}
+
+  /* ---------- Wedge diagram ---------- */
+  .wedge{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:820px){.wedge{grid-template-columns:1fr}}
+  .layer{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--bg-3)}
+  .layer .cap{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+  .layer.owned{border-color:rgba(224,165,78,.45);background:linear-gradient(160deg,rgba(224,165,78,.08),var(--bg-3))}
+  .layer.owned .cap{color:var(--ochre)}
+  .bigshare{font-family:var(--serif);font-size:40px;line-height:1;margin-bottom:6px}
+  .layer.owned .bigshare{color:var(--ochre)}
+  .layer.taken .bigshare{color:var(--ink-3)}
+
+  /* ---------- Roadmap / phases ---------- */
+  .phase{display:grid;grid-template-columns:150px 1fr;gap:26px;padding:30px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border-bottom:none}
+  @media(max-width:720px){.phase{grid-template-columns:1fr;gap:12px}}
+  .phase .when{position:relative}
+  .phase .ph{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
+  .phase .mo{font-family:var(--serif);font-size:22px;color:var(--ink);margin-top:4px}
+  .phase .goal{font-size:13px;color:var(--ink-3);margin-top:8px;line-height:1.4}
+  .phase h3{margin-bottom:14px}
+  .checklist{list-style:none;padding:0;margin:0 0 6px}
+  .checklist li{position:relative;padding:0 0 10px 26px;color:var(--ink-2);font-size:14.5px}
+  .checklist li::before{content:"";position:absolute;left:2px;top:8px;width:8px;height:8px;border-radius:2px;background:var(--ochre);opacity:.8}
+  .kpi{display:inline-flex;gap:8px;align-items:baseline;margin-top:6px;font-family:var(--mono);font-size:12px;color:var(--blueprint);border:1px solid rgba(111,176,201,.3);background:rgba(111,176,201,.06);padding:6px 11px;border-radius:8px}
+  .kpi b{color:var(--ink)}
+
+  /* ---------- Growth ladder ---------- */
+  .ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:820px){.ladder{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.ladder{grid-template-columns:1fr}}
+  .rung{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--bg-3)}
+  .rung .num{font-family:var(--serif);font-size:34px;color:var(--ochre);line-height:1}
+  .rung .stage{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:12px 0 8px}
+  .rung p{font-size:13.5px;margin:0}
+
+  /* ---------- Pillar sequence ---------- */
+  .pill{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line)}
+  .pill:last-child{border-bottom:none}
+  .pill .idx{font-family:var(--serif);font-size:15px;color:#1a130a;background:var(--ochre);width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none;font-weight:600}
+  .pill.later .idx{background:var(--bg-2);color:var(--ink-3);border:1px solid var(--line-2)}
+  .pill .txt b{color:var(--ink);font-family:var(--serif);font-size:16px}
+  .pill .txt p{margin:4px 0 0;font-size:13.5px}
+  .pill .ph-lab{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-3);white-space:nowrap;padding-left:14px}
+
+  /* ---------- Callout ---------- */
+  .callout{border:1px solid var(--line-2);border-radius:14px;padding:24px 26px;background:linear-gradient(150deg,rgba(199,107,74,.08),var(--bg-3))}
+  .callout .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:10px}
+  .callout p:last-child{margin-bottom:0}
+
+  /* ---------- Channel bars ---------- */
+  .channels{display:grid;gap:12px}
+  .chan{display:grid;grid-template-columns:130px 1fr 54px;align-items:center;gap:14px}
+  .chan .cn{font-size:14px;color:var(--ink)}
+  .chan .track{height:9px;background:var(--bg-2);border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+  .chan .fill{height:100%;background:linear-gradient(90deg,var(--ochre-deep),var(--ochre));border-radius:20px}
+  .chan .pct{font-family:var(--mono);font-size:12.5px;color:var(--ochre);text-align:right}
+  .chan small{display:block;color:var(--ink-3);font-size:11.5px;margin-top:2px}
+
+  footer{padding:44px 0 60px;color:var(--ink-3);font-size:13px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+  .disc{font-size:12px;color:var(--ink-3);line-height:1.5;max-width:70ch;margin-top:14px}
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" title="Back to the hub" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit"><div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>Media Platform · Strategy</span></div></a>
+  <nav>
+    <a href="#market">Market</a>
+    <a href="#wedge">The Wedge</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#growth">Growth</a>
+    <a href="#dominance">Dominance</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Media Platform · Market-Dominance Strategy · 24-Month Plan</div>
+    <h1>Don't build another property portal. Own the thing <em>nobody owns</em>: how to build in Ghana.</h1>
+    <p class="sub">The listings war is over — meQasa won it. But Ghana's real market isn't buying finished homes, it's building them, slowly and blindly. That knowledge layer is empty. This is the plan to take it, starting as one specialised blog and compounding into the country's most trusted building authority.</p>
+    <p class="thesis">Wima becomes the trusted authority on building in Ghana — beginning as a specialised blog for the self-builder and the diaspora builder, expanding pillar by pillar only after each is won.</p>
+    <div class="herometa">
+      <div><div class="n">~99%</div><div class="l">of Ghanaians build incrementally rather than buy or mortgage</div></div>
+      <div><div class="n">$6.65B</div><div class="l">diaspora remittances (2024), much of it into land &amp; building</div></div>
+      <div><div class="n">0</div><div class="l">incumbents own the "how to build" category</div></div>
+      <div><div class="n">91.8%</div><div class="l">of internet users reachable on WhatsApp — the community rail</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- MARKET -->
+<section id="market" class="band">
+  <div class="wrap">
+    <p class="eyebrow">The Market We Are Reading</p>
+    <h2>A market defined by a paradox — huge demand, almost no transactions</h2>
+    <p class="lead" style="margin-bottom:34px">Ghana has a structural housing shortage that never closes, yet almost no one buys through the formal channels the incumbents serve. The gap between those two facts is the whole opportunity.</p>
+    <div class="statgrid">
+      <div class="stat"><div class="n"><b>1.8–2M</b></div><div class="l">unit housing deficit — structural, not cyclical; reaffirmed by the Minister of Works &amp; Housing, Jan 2026</div><div class="src">Min. of Works &amp; Housing · GhanaWeb</div></div>
+      <div class="stat"><div class="n"><b>1.3M</b></div><div class="l">empty dwellings alongside that deficit — units built at the wrong price point</div><div class="src">GSS via TheAfricanvestor</div></div>
+      <div class="stat"><div class="n"><b>0.8%</b></div><div class="l">of households finance housing via a mortgage; penetration &lt;0.5% of GDP — the rest self-build</div><div class="src">Eden Heights Q3 2025 Report</div></div>
+      <div class="stat"><div class="n"><b>65%</b></div><div class="l">of all national property transactions sit in Greater Accra — your core geography already</div><div class="src">Imaani / TheAfricanvestor 2026</div></div>
+      <div class="stat"><div class="n"><b>~3M</b></div><div class="l">Ghanaians in the diaspora, channelling significant capital into property back home</div><div class="src">Eden Heights · NewsGhana</div></div>
+      <div class="stat"><div class="n"><b>9.7%</b></div><div class="l">construction-cost inflation (Sept 2025), easing from 40%+ peaks — build activity is unlocking</div><div class="src">NewsGhana · GSS</div></div>
+      <div class="stat"><div class="n"><b>~15M</b></div><div class="l">social media users in Ghana; a build-education audience that is reachable and cheap today</div><div class="src">DataReportal · Statista</div></div>
+      <div class="stat"><div class="n"><b>21–22%</b></div><div class="l">lending rates, down from ~32%; every point cut widens the buyer &amp; builder pool</div><div class="src">Bank of Ghana · Imaani 2026</div></div>
+    </div>
+    <div class="cards two" style="margin-top:22px">
+      <div class="card">
+        <h3>What this means</h3>
+        <p>The people with money and intent are not shopping listings — they are <strong>acquiring land and building over years</strong>, making dozens of high-stakes decisions (materials, contractors, ceilings, finishing, budget) with almost no trustworthy guidance. That is a demand for <strong>education</strong>, not a demand for a marketplace.</p>
+      </div>
+      <div class="card">
+        <h3>Why the timing is right</h3>
+        <p>Falling inflation, a recovering cedi, and easing construction costs are pulling <strong>stalled self-builds back to life</strong> in 2026. More people building = more people searching "how." Whoever is the trusted voice when that wave hits owns the relationship — and every downstream Wima business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIVE -->
+<section id="competitive">
+  <div class="wrap">
+    <p class="eyebrow">The Competitive Map</p>
+    <h2>Everyone crowds the transaction layer. The knowledge layer is wide open.</h2>
+    <p class="lead" style="margin-bottom:30px">The incumbents are strong — but they are all the same shape: listings marketplaces or developer blogs selling their own inventory. None is a neutral, build-first education brand. That is the seam.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Player</th><th>What they are</th><th>Strength</th><th>The gap they leave</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="who">meQasa</span></td>
+            <td>The #1 listings portal. 40k+ properties, 230+ developers, 2,500+ agents; 100k+ monthly seekers, 3.4M reach via GhanaWeb.</td>
+            <td><span class="tag win">Listings + SEO + funded</span></td>
+            <td>Blog is a support function, not the product. Thin on construction &amp; self-build. Weak on video &amp; community.</td>
+          </tr>
+          <tr>
+            <td><span class="who">Ghana Property Centre</span></td>
+            <td>Listings marketplace + agent network.</td>
+            <td><span class="tag win">Listings depth</span></td>
+            <td>No education identity. Serves buyers, not builders.</td>
+          </tr>
+          <tr>
+            <td><span class="who">Ownkey</span></td>
+            <td>PropTech with strong market-report content (Ghana Property Awards winner).</td>
+            <td><span class="tag win">Data / reports</span></td>
+            <td>Transaction &amp; investor framed; not the practical "how to build" voice for the mass self-builder.</td>
+          </tr>
+          <tr>
+            <td><span class="who">Developer blogs</span><br><span style="font-size:12px;color:var(--ink-3)">Eden Heights · Imaani · Ghana Property Finder</span></td>
+            <td>Content marketing that ultimately sells their own units.</td>
+            <td><span class="tag win">SEO volume</span></td>
+            <td>Structural trust ceiling — they profit from the advice. Cannot be neutral.</td>
+          </tr>
+          <tr>
+            <td><span class="who">GhanaWeb Real Estate</span></td>
+            <td>News-portal vertical (launched 2025) + meQasa feed.</td>
+            <td><span class="tag win">Mass distribution</span></td>
+            <td>Generic; no depth, no ownership of the build journey.</td>
+          </tr>
+          <tr class="whitespace">
+            <td><span class="who">Wima Builders Media</span></td>
+            <td>Neutral, practical <strong>build-education</strong> brand, backed by real operating businesses (Deal Hub materials + Diaspora Procurement).</td>
+            <td><span class="tag gap">Open category</span></td>
+            <td><strong>This is the space no one is in.</strong> Authority meQasa can't fake; trust developer blogs can't earn.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:24px">
+      <div class="lbl">The strategic discipline</div>
+      <p>Do <strong>not</strong> compete on listings — that is meQasa's fortified hill, defended with real funding and 12 years of SEO. Compete on the adjacent, unclaimed category: <strong>the knowledge and community layer beneath every build.</strong> Win where they are absent; annex their territory later from a position of trust.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE WEDGE -->
+<section id="wedge" class="band">
+  <div class="wrap">
+    <p class="eyebrow">The Wedge · Where We Start Small</p>
+    <h2>Two pillars, one audience, total ownership — before anything else</h2>
+    <p class="lead" style="margin-bottom:30px">The brief lists eight content pillars and sixteen audiences. Launching all of them is a magazine, not a beachhead — and it guarantees you are second-best at everything. Dominance means being <em>unmistakably first</em> at one thing. Here is that one thing.</p>
+
+    <div class="wedge" style="margin-bottom:26px">
+      <div class="layer taken">
+        <div class="cap">The transaction layer — already taken</div>
+        <div class="bigshare">~1–5%</div>
+        <p style="margin:0">of the market: people buying finished property or using mortgages. This is where every incumbent fights. Crowded, funded, and small.</p>
+      </div>
+      <div class="layer owned">
+        <div class="cap">The build layer — yours to own</div>
+        <div class="bigshare">~95%+</div>
+        <p style="margin:0">of the market: people acquiring land and <strong>building incrementally</strong>, plus the diaspora building remotely. Enormous, high-intent, and unserved by real education.</p>
+      </div>
+    </div>
+
+    <div class="cards two">
+      <div class="card">
+        <h3>Beachhead Pillar A — Building in Ghana</h3>
+        <p>The end-to-end self-build journey: land verification, the building process, costliest mistakes, cost-saving material choices, and project management. <strong>Wima Deal Hub gives you genuine, defensible authority here</strong> that no listings portal has.</p>
+      </div>
+      <div class="card">
+        <h3>Beachhead Pillar B — Diaspora Building</h3>
+        <p>Building from abroad without being cheated: remote monitoring, procurement, common scams, and case studies. The highest-value, most under-served, most trust-hungry audience — and <strong>the Diaspora Procurement Desk is the proof you can serve it.</strong></p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:22px">
+      <div class="lbl">Why this specific wedge — and not the others</div>
+      <p>These are the only two pillars where Wima has <strong>real operating businesses behind the content</strong> (materials + remote procurement). That is your unfair advantage and your trust moat. Finance, design, and industry-intelligence pillars are strong later plays — but you have no proprietary authority in them <em>yet</em>, so leading with them would make you a commentator, not the source. Earn the right to expand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNELS -->
+<section id="channels">
+  <div class="wrap">
+    <p class="eyebrow">The Distribution Reality</p>
+    <h2>Win on the channels the incumbents neglect</h2>
+    <p class="lead" style="margin-bottom:30px">The blog is the authority asset (owned, searchable, compounding). But blogs alone don't build community in Ghana — messaging and short-form video do. The incumbents are blog-and-listings shops. This is the open flank.</p>
+    <div class="channels">
+      <div class="chan"><div class="cn">WhatsApp<small>Community + distribution rail</small></div><div class="track"><div class="fill" style="width:92%"></div></div><div class="pct">91.8%</div></div>
+      <div class="chan"><div class="cn">Facebook<small>Broad reach, older &amp; diaspora</small></div><div class="track"><div class="fill" style="width:77%"></div></div><div class="pct">77.4%</div></div>
+      <div class="chan"><div class="cn">TikTok<small>Build-education video — under-defended</small></div><div class="track"><div class="fill" style="width:70%"></div></div><div class="pct">~70%</div></div>
+      <div class="chan"><div class="cn">The blog / SEO<small>Owned authority, compounds forever</small></div><div class="track"><div class="fill" style="width:100%"></div></div><div class="pct">Core</div></div>
+    </div>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-top:14px">Reach as share of Ghana's internet users. Source: DataReportal / Statista, 2023–2026.</p>
+    <div class="cards three" style="margin-top:26px">
+      <div class="card"><h3>Blog = the vault</h3><p>Every question a builder Googles becomes an evergreen article. This is the asset meQasa's blog is too thin to defend. SEO the long tail: "cost to roof a house in Ghana," "how to verify land title," "building from the UK."</p></div>
+      <div class="card"><h3>WhatsApp = the community</h3><p>The rail that reaches almost everyone. Regional builder groups, a diaspora build-support group, and a broadcast list. This is where trust and repeat relationships live — and where leads convert.</p></div>
+      <div class="card"><h3>Short video = the reach</h3><p>60-second site walk-throughs, "one mistake that cost this builder GHS 40k," material explainers. Low cost, high spread, and almost nobody credible is doing it for construction.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="band">
+  <div class="wrap">
+    <p class="eyebrow">The 24-Month Roadmap</p>
+    <h2>Start as a blog. Compound into an authority. Monetize last.</h2>
+    <p class="lead" style="margin-bottom:20px">Four phases, mapped to the brief's monetization ladder. Trust and audience come first; revenue is a consequence of them, never the opening move.</p>
+
+    <div class="phase">
+      <div class="when">
+        <div class="ph">Phase 0</div>
+        <div class="mo">Months 0–3</div>
+        <div class="goal">Prove the content engine on ONE pillar.</div>
+      </div>
+      <div>
+        <h3>The Specialised Blog</h3>
+        <ul class="checklist">
+          <li>Launch the blog on the "Building in Ghana" pillar only. Publish <strong>2 deeply useful, SEO-targeted articles per week</strong> answering real builder questions.</li>
+          <li>Stand up one WhatsApp broadcast list + one flagship community group. Every article ends with a "join the builders' group" call.</li>
+          <li>Cross-post condensed versions to Facebook; begin one short-form video per week.</li>
+          <li>Instrument everything: search terms, saves, group joins. Let the data tell you the next 10 articles.</li>
+        </ul>
+        <span class="kpi"><b>Target:</b> first 1,000 followers · 20+ evergreen articles indexed</span>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="when">
+        <div class="ph">Phase 1</div>
+        <div class="mo">Months 3–9</div>
+        <div class="goal">Add the diaspora pillar + video. Build the community moat.</div>
+      </div>
+      <div>
+        <h3>Two Pillars &amp; The Community</h3>
+        <ul class="checklist">
+          <li>Open <strong>Pillar B — Diaspora Building</strong>. Launch a dedicated diaspora WhatsApp support group and a fortnightly email newsletter (the diaspora expect email).</li>
+          <li>Scale short-form video to 3×/week; publish the first "builder case study" (real project, real numbers, real mistakes).</li>
+          <li>Begin light, honest cross-references to Wima Deal Hub &amp; the Diaspora Procurement Desk — <strong>as the natural next step, never as an ad.</strong></li>
+          <li>Launch a monthly signature format: e.g. "The Build Report" — a recurring, quotable piece that becomes a habit.</li>
+        </ul>
+        <span class="kpi"><b>Target:</b> 10,000 followers · newsletter live · first Deal Hub leads attributed to content</span>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="when">
+        <div class="ph">Phase 2</div>
+        <div class="mo">Months 9–18</div>
+        <div class="goal">Expand pillars from a position of trust. Become the reference.</div>
+      </div>
+      <div>
+        <h3>The Authority</h3>
+        <ul class="checklist">
+          <li>Annex adjacent pillars in order of proven demand: <strong>Construction Systems → Design &amp; Inspiration (Wima Signature) → Money &amp; Finance → Industry Intelligence.</strong></li>
+          <li>Launch <strong>Industry Intelligence</strong> as a data asset: a monthly material-price tracker. This is what makes you <em>cited</em> — the go-to reference the brief is aiming for.</li>
+          <li>Formalise the professional network (QS, architects, contractors) and a church/institution network for reach.</li>
+          <li>Turn on Phase-3 monetization gently: supplier features and lead generation to Wima businesses.</li>
+        </ul>
+        <span class="kpi"><b>Target:</b> 50,000 followers · price tracker cited by media · repeatable lead flow</span>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="when">
+        <div class="ph">Phase 3</div>
+        <div class="mo">Months 18–24</div>
+        <div class="goal">Consolidate dominance. Lay the crowdfunding trust foundation.</div>
+      </div>
+      <div>
+        <h3>The Ecosystem Flywheel</h3>
+        <ul class="checklist">
+          <li>Be the default answer to "how do I build in Ghana." Own the informational search + social layer even where meQasa owns listings.</li>
+          <li>Layer advertising &amp; supplier promotions onto proven traffic; formalise the lead-gen engine into all Wima verticals.</li>
+          <li>Begin <strong>investor education</strong> content — the deliberate trust runway for future Genesis / CORE / crowdfunding, built long before any raise.</li>
+          <li>Publish an annual "State of Building in Ghana" report — your Ownkey-beating flagship data asset and relationship-capital magnet.</li>
+        </ul>
+        <span class="kpi"><b>Target:</b> 100,000 followers · owned data asset · warm audience primed for crowdfunding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLAR SEQUENCE -->
+<section id="pillars">
+  <div class="wrap">
+    <p class="eyebrow">Pillar Sequencing</p>
+    <h2>All eight pillars survive — but as a phased conquest, not a launch</h2>
+    <p class="lead" style="margin-bottom:24px">Nothing in your original brief is discarded. It is re-ordered so each pillar launches only when you have the authority to win it.</p>
+    <div style="border:1px solid var(--line);border-radius:14px;padding:6px 24px;background:var(--bg-3)">
+      <div class="pill"><div class="idx">1</div><div class="txt"><b>Building in Ghana</b><p>Beachhead. Deal Hub authority. The self-build journey.</p></div><div class="ph-lab">Phase 0</div></div>
+      <div class="pill"><div class="idx">2</div><div class="txt"><b>Diaspora Building</b><p>Highest-value audience. Procurement Desk authority.</p></div><div class="ph-lab">Phase 1</div></div>
+      <div class="pill later"><div class="idx">3</div><div class="txt"><b>Construction Systems</b><p>Ceilings, drywall, cladding, finishing — deep technical trust.</p></div><div class="ph-lab">Phase 2</div></div>
+      <div class="pill later"><div class="idx">4</div><div class="txt"><b>Design &amp; Inspiration</b><p>Powers Wima Signature. Before/after, renovation ideas.</p></div><div class="ph-lab">Phase 2</div></div>
+      <div class="pill later"><div class="idx">5</div><div class="txt"><b>Money &amp; Finance</b><p>Construction finance, procurement finance — sets up CORE.</p></div><div class="ph-lab">Phase 2</div></div>
+      <div class="pill later"><div class="idx">6</div><div class="txt"><b>Industry Intelligence</b><p>Material-price tracker — the data asset that gets you cited.</p></div><div class="ph-lab">Phase 2</div></div>
+      <div class="pill later"><div class="idx">7</div><div class="txt"><b>Property &amp; Real Estate</b><p>Land, investment, JVs — sets up Genesis.</p></div><div class="ph-lab">Phase 3</div></div>
+      <div class="pill later"><div class="idx">8</div><div class="txt"><b>Success Stories</b><p>Woven throughout as social proof, formalised as a pillar in Phase 3.</p></div><div class="ph-lab">Phase 3</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GROWTH LADDER -->
+<section id="growth" class="band">
+  <div class="wrap">
+    <p class="eyebrow">The Growth Ladder</p>
+    <h2>How each follower milestone is actually won</h2>
+    <div class="ladder">
+      <div class="rung">
+        <div class="num">1K</div>
+        <div class="stage">Prove usefulness</div>
+        <p>Won by being genuinely the most useful build content in Ghana. Personal outreach, builder groups, one killer "mistakes" article that gets shared. No spend needed.</p>
+      </div>
+      <div class="rung">
+        <div class="num">10K</div>
+        <div class="stage">Consistency + video</div>
+        <p>Won by relentless publishing cadence and short-form video reach. The diaspora group becomes a referral engine. First shares from happy builders compound.</p>
+      </div>
+      <div class="rung">
+        <div class="num">50K</div>
+        <div class="stage">Become the reference</div>
+        <p>Won by the data asset (price tracker) earning press citations and backlinks, plus network effects from professional &amp; church partnerships. SEO now dominant on build queries.</p>
+      </div>
+      <div class="rung">
+        <div class="num">100K</div>
+        <div class="stage">Category default</div>
+        <p>Won by ubiquity — you are the name people tag when someone asks "how do I build?" Newsletter + community + video + search all reinforce each other.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MONETIZATION & CROWDFUNDING -->
+<section id="monetize">
+  <div class="wrap">
+    <p class="eyebrow">Monetization &amp; The Crowdfunding Bridge</p>
+    <h2>Revenue follows trust — in that order, never reversed</h2>
+    <div class="cards two">
+      <div class="card">
+        <h3>The monetization order</h3>
+        <p><strong>1 · Trust &amp; audience</strong> (Phase 0–1) — no monetization, only usefulness.<br>
+        <strong>2 · Wima businesses</strong> (Phase 1–2) — Deal Hub, Signature &amp; Diaspora leads from content.<br>
+        <strong>3 · Advertising &amp; suppliers</strong> (Phase 2–3) — layered onto proven traffic.<br>
+        <strong>4 · Genesis / CORE / crowdfunding</strong> (Phase 3+) — the investment community.</p>
+      </div>
+      <div class="card">
+        <h3>The crowdfunding trust runway</h3>
+        <p>A crowdfunding raise fails without <strong>pre-existing trust, an educated audience, and relationship capital.</strong> This platform manufactures exactly those, deliberately, for two years before any raise. By the time Genesis or CORE launches, you are not asking strangers for money — you are inviting a <strong>community that already trusts you</strong> and understands the opportunity because you taught them.</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:22px">
+      <div class="lbl">The data flywheel</div>
+      <p>Every article read, every group question, every price checked is <strong>behavioural data you own</strong> — what people are building, where, with what budget, and what they fear. That intelligence sharpens Deal Hub pricing, Signature targeting, and diaspora offers, and eventually de-risks Genesis/CORE. The media platform isn't a cost centre; it's the ecosystem's <strong>demand-sensing engine.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- DOMINANCE SCORECARD -->
+<section id="dominance" class="band">
+  <div class="wrap">
+    <p class="eyebrow">What Dominance Looks Like</p>
+    <h2>The scorecard — how we'll know we've won</h2>
+    <div class="statgrid">
+      <div class="stat"><div class="n"><b>#1</b></div><div class="l">organic result for the build-intent queries meQasa's blog can't defend</div></div>
+      <div class="stat"><div class="n"><b>100K</b></div><div class="l">engaged followers across the owned channels by month 24</div></div>
+      <div class="stat"><div class="n"><b>Cited</b></div><div class="l">the Wima price tracker &amp; annual report referenced by Ghanaian media</div></div>
+      <div class="stat"><div class="n"><b>&gt;1</b></div><div class="l">Wima business measurably fed by content-attributed leads every month</div></div>
+    </div>
+    <div class="callout" style="margin-top:24px">
+      <div class="lbl">One sentence to hold the whole strategy</div>
+      <p style="font-family:var(--serif);font-size:20px;color:var(--ink);font-style:italic">meQasa owns where Ghanaians <em>buy</em> property. Wima will own where — and how — Ghanaians <em>build</em> it. That is the larger market, the emptier field, and the foundation for everything else in the ecosystem.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">Wima Builders — Media Platform Strategy</div>
+      <div class="disc">Market figures drawn from the Ministry of Works &amp; Housing, Ghana Statistical Service, Bank of Ghana, DataReportal / Statista, NewsGhana, and Ghanaian real-estate market reports (2025–2026), and are indicative directional estimates for planning. Competitive figures reflect publicly reported data. This is an internal strategy document, not investment advice.</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Document 07 · Wima Ecosystem Hub</div>
+  </div>
+</footer>
+
+</body>
+</html>
