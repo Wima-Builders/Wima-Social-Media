@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — Ghana Social Playbook &amp; Diaspora Engagement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;--bg-2:#1b1611;--bg-3:#221c16;--line:#332a22;--line-2:#463a2e;
+    --ink:#f3ece2;--ink-2:#c6b8a6;--ink-3:#8a7b68;
+    --ochre:#e0a54e;--ochre-deep:#c07f2c;--blueprint:#6fb0c9;--clay:#c76b4a;--green:#7fa66a;--violet:#a98fd0;
+    --maxw:1080px;--serif:"Fraunces","Georgia",serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:inherit}button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:5px}
+  .topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:14px;padding:14px 26px;background:rgba(20,16,13,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logomark{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));color:#1a130a;font-family:var(--serif);font-weight:700;font-size:17px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:15px}.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .topbar nav{margin-left:auto;display:flex;gap:16px;font-size:13px;color:var(--ink-2)}
+  .topbar nav a{text-decoration:none}.topbar nav a:hover{color:var(--ochre)}
+  @media(max-width:860px){.topbar nav{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.13;margin:0}
+  h2{font-size:clamp(24px,3.6vw,35px);margin-bottom:16px}
+  h3{font-size:20px;margin-bottom:10px}
+  p{margin:0 0 14px;color:var(--ink-2)}p strong{color:var(--ink);font-weight:600}
+  .lead{font-size:18px;color:var(--ink);max-width:74ch}
+  .muted{color:var(--ink-3);font-size:12.5px}
+  ul{margin:0 0 12px;padding-left:20px}li{color:var(--ink-2);margin-bottom:6px}li strong{color:var(--ink)}
+
+  .hero{padding:82px 0 56px;border-bottom:1px solid var(--line);background:radial-gradient(1000px 460px at 84% -12%,rgba(224,165,78,.16),transparent 60%),radial-gradient(700px 380px at 0% 116%,rgba(111,176,201,.08),transparent 55%)}
+  .hero .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:20px}
+  .hero h1{font-size:clamp(31px,5.4vw,52px);max-width:19ch;margin-bottom:22px}
+  .hero h1 em{font-style:normal;color:var(--ochre)}
+  .hero .sub{font-size:19px;color:var(--ink-2);max-width:62ch}
+
+  .statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .sb{background:var(--bg-3);padding:20px 18px}
+  .sb .n{font-family:var(--serif);font-size:clamp(22px,3vw,28px);color:var(--ochre);line-height:1}
+  .sb .l{font-size:12px;color:var(--ink-2);margin-top:8px;line-height:1.4}
+  .sb .s{font-family:var(--mono);font-size:9.5px;color:var(--ink-3);margin-top:6px}
+  @media(max-width:820px){.statbar{grid-template-columns:1fr 1fr}}
+
+  .cards{display:grid;gap:14px}.cards.two{grid-template-columns:1fr 1fr}.cards.three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.cards.two,.cards.three{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:22px}
+  .card h4{font-family:var(--serif);font-size:16px;margin-bottom:8px}
+  .card p{font-size:14px;margin:0}
+  .card .src{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:10px}
+
+  /* pain explorer */
+  .explorer{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;align-items:start}
+  @media(max-width:860px){.explorer{grid-template-columns:1fr}}
+  .painlist{display:flex;flex-direction:column;gap:8px}
+  .painlist button{display:flex;gap:12px;align-items:center;text-align:left;border:1px solid var(--line);border-radius:12px;background:var(--bg-3);padding:14px 16px;color:var(--ink-2);cursor:pointer;transition:.2s;font-size:14px}
+  .painlist button:hover{color:var(--ink)}
+  .painlist button.active{border-color:var(--clay);background:linear-gradient(160deg,rgba(199,107,74,.1),var(--bg-3));color:var(--ink)}
+  .painlist .pi{font-family:var(--mono);font-size:11px;color:var(--clay);flex:none;width:20px}
+  .painlist .pt{font-family:var(--serif);font-size:15px;line-height:1.15}
+  .paindetail{border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:26px;min-height:340px}
+  .paindetail .dk{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:8px}
+  .paindetail h3{font-size:23px;margin-bottom:14px}
+  .paindetail .row{padding:12px 0;border-top:1px solid var(--line)}
+  .paindetail .row:first-of-type{border-top:none}
+  .paindetail .rk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+  .paindetail .rk.fear{color:var(--clay)}.paindetail .rk.content{color:var(--blueprint)}.paindetail .rk.serve{color:var(--green)}
+  .paindetail .rv{font-size:14.5px;color:var(--ink-2)}
+  .paindetail .rv b{color:var(--ink)}
+
+  /* funnel */
+  .funnel{display:flex;flex-direction:column;gap:8px}
+  .frow{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center}
+  @media(max-width:600px){.frow{grid-template-columns:1fr;gap:3px}}
+  .frow .fs{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ochre);text-align:right}
+  @media(max-width:600px){.frow .fs{text-align:left}}
+  .frow .fb{border:1px solid var(--line);border-radius:10px;padding:12px 16px;background:var(--bg-3);font-size:13.5px}
+  .frow .fb b{color:var(--ink);font-family:var(--serif)}
+
+  .platform{border-left:3px solid var(--blueprint);padding:4px 0 4px 18px;margin-bottom:16px}
+  .platform .pn{font-family:var(--serif);font-size:17px;color:var(--ink)}
+  .platform .pj{font-family:var(--mono);font-size:11px;color:var(--blueprint);text-transform:uppercase;letter-spacing:.06em;margin:2px 0 6px}
+  .platform p{font-size:14px;margin:0}
+
+  .callout{border:1px solid var(--line-2);border-radius:14px;padding:22px 24px;background:linear-gradient(150deg,rgba(224,165,78,.08),var(--bg-3));margin-top:6px}
+  .callout.clay{background:linear-gradient(150deg,rgba(199,107,74,.09),var(--bg-3))}
+  .callout.green{background:linear-gradient(150deg,rgba(127,166,106,.08),var(--bg-3))}
+  .callout .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:9px}
+  .callout.clay .lbl{color:var(--clay)}.callout.green .lbl{color:var(--green)}
+  .callout p:last-child{margin-bottom:0}
+  .thesis{font-family:var(--serif);font-size:20px;color:var(--ink);font-style:italic;line-height:1.4}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+  .chip{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--line-2);color:var(--ink-2)}
+
+  footer{padding:40px 0 60px;color:var(--ink-3)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .fdisc{font-size:12px;color:var(--ink-3);max-width:80ch;margin-top:12px;line-height:1.5}
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>Ghana Social Playbook · Diaspora</span></div>
+  <nav><a href="#works">What Works</a><a href="#pains">Pain Points</a><a href="#reach">Reach</a><a href="#funnel">The Funnel</a></nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Document 14 · Research-Backed · Ghana Real Estate Social</div>
+    <h1>Sell the diaspora the one thing they can't get: <em>someone they don't have to blindly trust</em>.</h1>
+    <p class="sub">The research is clear on both halves of this: what actually works on social in Ghana, and what really keeps a diaspora builder awake at night. Their deepest fear isn't distance — it's being betrayed by the people they trusted with their money. That fear is Wima's opening.</p>
+  </div>
+</header>
+
+<!-- WHAT WORKS -->
+<section id="works">
+  <div class="wrap">
+    <p class="eyebrow">Part 1 · What Works On Social In Ghana</p>
+    <h2>The evidence base — not opinion, observed behaviour</h2>
+    <div class="statbar" style="margin-bottom:24px">
+      <div class="sb"><div class="n">93%</div><div class="l">of internet users active on WhatsApp — a WhatsApp-first country</div><div class="s">DataReportal 2026</div></div>
+      <div class="sb"><div class="n">7.95M</div><div class="l">Facebook users; YouTube 7.81M (+13.7%); TikTok 7.4M</div><div class="s">Websys/DataReportal</div></div>
+      <div class="sb"><div class="n">3M</div><div class="l">LinkedIn members, growing 15.4%/yr — the untapped B2B rail</div><div class="s">2026 data</div></div>
+      <div class="sb"><div class="n">85%</div><div class="l">access the internet on mobile — design for the phone first</div><div class="s">Websys 2026</div></div>
+    </div>
+    <div class="cards three">
+      <div class="card"><h4>Interest starts on social — deals close on WhatsApp</h4><p>The universal pattern in Ghanaian marketing: social earns attention, WhatsApp closes. One-click "message us" is non-negotiable. Every post routes here.</p><div class="src">Ronel Agency · Florida Realtors global playbook</div></div>
+      <div class="card"><h4>Trust before transaction</h4><p>Scams have made buyers cautious — "you can't expect people to buy unless they trust you first." Trust content isn't soft; it's the prerequisite to every sale.</p><div class="src">Ronel Agency 2025</div></div>
+      <div class="card"><h4>Live &amp; interactive sells</h4><p>Ghanaians engage in real-time — live showcases, Q&amp;As and giveaways drive buying. This is why the live deal-drop rail works here specifically.</p><div class="src">Ronel Agency · Ghana market</div></div>
+      <div class="card"><h4>Highly visual, video-led</h4><p>Quality visuals are a necessity, not a luxury. Property tours, neighbourhood videos, drone footage, bright sharp imagery. Blurry flyers lose.</p><div class="src">Ghana market research 2026</div></div>
+      <div class="card"><h4>Reactive &amp; trend-based works</h4><p>Brands that ride trends and news win (a top Accra hotel grew bookings on trend content). Validates the ethical-ambush calendar.</p><div class="src">Websys 2025</div></div>
+      <div class="card"><h4>Two-way, not broadcast</h4><p>Comments, polls, DMs and story Q&amp;As build the relationship. Answering questions publicly is itself trust-building content.</p><div class="src">Ghana brand case studies</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section id="pains" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Part 2 · Diaspora Pain Points → How Wima Serves Each</p>
+    <h2>Tap a fear. See the content that speaks to it, and the service that resolves it.</h2>
+    <p class="lead" style="margin-bottom:24px">Every diaspora pain is a content opportunity <em>and</em> a service Wima can render. This is how "serve them according to their pain points" becomes concrete — fear by fear.</p>
+    <div class="explorer">
+      <div class="painlist" id="painlist"></div>
+      <div class="paindetail" id="paindetail" aria-live="polite"></div>
+    </div>
+    <div class="callout clay" style="margin-top:22px">
+      <div class="lbl">The emotional core to lead with</div>
+      <p>Across the research, the deepest wound is <strong>betrayal by trusted people</strong> — "money sent for one thing, used for another," family and friends who mislead. Wima's single most powerful message: <strong>"You should never have to gamble on whether your own people will do right by you. We're the accountable party that isn't family and isn't a stranger with your cash."</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- REACH -->
+<section id="reach">
+  <div class="wrap">
+    <p class="eyebrow">Part 3 · How To Actually Reach The Diaspora</p>
+    <h2>Where they are, and how to get in front of them</h2>
+    <div class="platform"><div class="pn">Meta geo-targeted ads (Facebook + Instagram)</div><div class="pj">The primary paid reach</div><p>Target Ghanaians in the <strong>UK, US, Canada</strong> by location + interest (Ghana, diaspora, property, "building in Ghana"). Location-based ads are the proven way to reach overseas buyers without leaving Accra. Click-to-WhatsApp as the action.</p></div>
+    <div class="platform"><div class="pn">LinkedIn — the high-income diaspora</div><div class="pj">Under-used, growing 15.4%/yr</div><p>Reach diaspora <strong>professionals</strong> (doctors, engineers, finance) by their job — the premium USD-earning client. Founder-led thought leadership from Wima's strategy work builds the authority that converts them.</p></div>
+    <div class="platform"><div class="pn">WhatsApp Business — the close</div><div class="pj">Where trust and deals live</div><p>Broadcast lists, a dedicated diaspora build-support group, real-time responses, encryption (matters to high-net-worth). Time-zone-aware replies. This is the relationship rail.</p></div>
+    <div class="platform"><div class="pn">Diaspora Facebook groups &amp; associations</div><div class="pj">Community reach</div><p>Ghanaian diaspora groups, hometown &amp; church associations abroad. Show up with genuine value (the ethical-ambush comment strategy), not spam. These are dense pockets of exactly the right people.</p></div>
+    <div class="platform"><div class="pn">Founder as the face</div><div class="pj">Become the trusted voice</div><p>The diaspora buys from a person they trust. Gershon fronting the education — on camera, in comments, in the group — outperforms a faceless brand. Be the influencer for your own niche.</p></div>
+    <div class="callout green" style="margin-top:12px">
+      <div class="lbl">The content that reaches AND converts them</div>
+      <p><strong>Video is the trust-builder.</strong> Live site walk-throughs, drone footage, milestone video updates, and real project reveals directly answer the diaspora's core fear — lack of trustworthy visibility. Where competitors say "don't worry, it's a good place," Wima <em>shows</em> them, on video, on a schedule. That single behaviour beats every slogan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FUNNEL -->
+<section id="funnel" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Part 4 · The Fear-To-Trust Funnel</p>
+    <h2>Move a diaspora builder from anxious stranger to loyal client</h2>
+    <div class="funnel" style="margin-bottom:20px">
+      <div class="frow"><div class="fs">1 · Reach</div><div class="fb"><b>Geo-targeted video + LinkedIn.</b> A scam-story or "biggest diaspora mistake" video stops the scroll. They feel seen.</div></div>
+      <div class="frow"><div class="fs">2 · Educate</div><div class="fb"><b>Answer the fear.</b> Land verification, milestone payments, "don't rely on family alone," how to monitor a build remotely. Trust compounds.</div></div>
+      <div class="frow"><div class="fs">3 · Prove</div><div class="fb"><b>Show, don't tell.</b> Real project video updates, drone footage, a diaspora client's story. The Procurement Desk made visible.</div></div>
+      <div class="frow"><div class="fs">4 · Relationship</div><div class="fb"><b>Into WhatsApp.</b> The diaspora support group + one-to-one, time-zone-aware. Questions answered by a real, accountable person.</div></div>
+      <div class="frow"><div class="fs">5 · Serve</div><div class="fb"><b>The Procurement Desk delivers.</b> Milestone-linked payments, scheduled video updates, vetted execution. The fear is gone — they refer others.</div></div>
+    </div>
+    <div class="callout">
+      <div class="lbl">The trust-content toolkit (make these on repeat)</div>
+      <div class="chips">
+        <span class="chip">Scam-story case studies</span><span class="chip">"Don't rely on family alone"</span><span class="chip">Milestone-payment explainer</span><span class="chip">Lands Commission verification guide</span><span class="chip">Live site walk-through</span><span class="chip">Drone progress update</span><span class="chip">Leasehold explained (99 vs 50 yr)</span><span class="chip">"Money sent, misused" — how we prevent it</span><span class="chip">Diaspora client testimonial</span><span class="chip">Before you send money, watch this</span>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:16px">
+      <div class="lbl">The one line to hold</div>
+      <p class="thesis">Competitors show the diaspora a house and say "trust me." Wima shows them the whole build, on a schedule, and says "you don't have to." In a market built on broken trust, being the one you can verify is the entire advantage.</p>
+    </div>
+    <p class="muted" style="margin-top:16px">Deployment: this hub is ready for GitHub Pages. See the step-by-step in <strong>DEPLOY.md</strong> (included alongside these documents).</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">Wima Builders — Ghana Social Playbook &amp; Diaspora Engagement</div>
+      <div class="fdisc">Social behaviour and platform figures drawn from public 2025–2026 Ghana marketing sources (DataReportal/Statista, Websys, Ronel Agency, Florida Realtors global playbook); diaspora pain points synthesised from Ghanaian diaspora property guidance (MyJoyOnline, GhanaWeb, Housing In Ghana, DOBIISON, BuilderRex, Prop-Tis, myPropertyGhana). Directional for planning; validate with your own audience data. Companion to Documents 07–13, Wima Ecosystem Hub.</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Document 14 · Wima Ecosystem Hub</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var PAINS=[
+    {t:"Betrayal by family / friends",fear:"They asked a relative to supervise or buy — and the money was misused, the updates were lies, or the land was never theirs. The deepest, most personal wound.",content:"\"Don't let familiar faces derail your investment\" · \"Money sent, money misused — how it happens\" · diaspora testimonial of a trust gone wrong (and fixed).",serve:"A <b>neutral, accountable party</b> — not family, not a faceless stranger. Wima's name is on the outcome, with milestone-linked payments so no one can misuse a lump sum."},
+    {t:"No trustworthy visibility",fear:"They're paying for something they can't see. Photos are cherry-picked, the phone call says \"don't worry, it's a good place.\" They're flying blind.",content:"Live site walk-throughs · drone progress footage · scheduled video updates · \"what a real milestone update looks like.\"",serve:"<b>Scheduled video &amp; drone updates</b> as a standard. Wima shows the whole build, on a calendar — the exact opposite of \"don't worry.\""},
+    {t:"Unreliable contractors",fear:"Builders who vanish mid-project, inflate costs, or deliver poor work. No way to hold anyone accountable from 5,000 miles away.",content:"\"How contractors overcharge the diaspora\" · vetting checklist · \"the mistake that doubled this build's cost.\"",serve:"<b>Vetted execution</b> — Wima-checked professionals with a completion guarantee. The contractor answers to Wima, and Wima answers to the client."},
+    {t:"Land fraud & double sales",fear:"Double-sold land, \"land guards,\" vanished deposits, and litigation. The classic diaspora horror story.",content:"Lands Commission verification guide · \"how to spot double-sold land\" · cadastral site-plan explainer · fraud case study.",serve:"<b>Verified land &amp; documentation</b> — Lands Commission searches and licensed-surveyor checks before a cedi moves. Due diligence as a service."},
+    {t:"Paying upfront blindly",fear:"Being asked for the full amount before anything is built — then watching it disappear with nothing to show.",content:"\"Never pay in full upfront\" · how milestone payments protect you · the payment-schedule template.",serve:"<b>Milestone-linked payments</b> tied to documented, video-verified progress. Money is released against proof, not promises."},
+    {t:"Communication gaps & delays",fear:"Living thousands of miles away with inconsistent updates and no real-time answers across time zones. Silence breeds fear.",content:"\"How to monitor your build from abroad\" · the weekly-update standard · what good communication looks like.",serve:"<b>Time-zone-aware WhatsApp</b> + a diaspora support group + a set update rhythm. A real, responsive human on the ground."},
+    {t:"Legal & tenure confusion",fear:"Leasehold vs freehold, 99-year vs 50-year, documentation they don't understand — and fear of an expensive dispute later.",content:"\"Leasehold explained for the diaspora\" · documentation checklist · \"the papers you must have.\"",serve:"<b>Guided documentation</b> — the right searches, the right professionals, the right papers, explained plainly and handled locally."},
+    {t:"The empty-house liability",fear:"A big finished house that sits empty, earns nothing, and slowly decays — an expensive monument, not an asset.",content:"\"Build to earn, not just to own\" · management &amp; short-let options · what actually rents in Accra.",serve:"<b>Beyond-build guidance</b> — connecting the finished home to management, tenanting or short-let income so it works, not just stands."}
+  ];
+  var list=document.getElementById("painlist");
+  var detail=document.getElementById("paindetail");
+  list.innerHTML=PAINS.map(function(p,i){
+    return '<button data-i="'+i+'"'+(i===0?' class="active"':'')+'><span class="pi">'+String(i+1).padStart(2,'0')+'</span><span class="pt">'+p.t+'</span></button>';
+  }).join("");
+  function render(i){
+    var p=PAINS[i];
+    detail.innerHTML=
+      '<div class="dk">Diaspora fear #'+(i+1)+'</div>'+
+      '<h3>'+p.t+'</h3>'+
+      '<div class="row"><div class="rk fear">The fear</div><div class="rv">'+p.fear+'</div></div>'+
+      '<div class="row"><div class="rk content">Content that speaks to it</div><div class="rv">'+p.content+'</div></div>'+
+      '<div class="row"><div class="rk serve">How Wima serves it</div><div class="rv">'+p.serve+'</div></div>';
+    list.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',+b.getAttribute('data-i')===i);});
+  }
+  list.querySelectorAll('button').forEach(function(b){
+    var i=+b.getAttribute('data-i');
+    b.addEventListener('click',function(){render(i);});
+    b.addEventListener('mouseenter',function(){render(i);});
+  });
+  render(0);
+})();
+</script>
+</body>
+</html>
