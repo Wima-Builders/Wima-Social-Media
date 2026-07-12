@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima Builders — Media Platform &amp; Ecosystem Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;--bg-2:#1b1611;--bg-3:#221c16;--line:#332a22;--line-2:#463a2e;
+    --ink:#f3ece2;--ink-2:#c6b8a6;--ink-3:#8a7b68;
+    --ochre:#e0a54e;--ochre-deep:#c07f2c;--blueprint:#6fb0c9;--clay:#c76b4a;--green:#7fa66a;--violet:#a98fd0;
+    --maxw:1080px;--serif:"Fraunces","Georgia",serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:6px}
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:15px 26px;background:rgba(20,16,13,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logomark{width:40px;height:40px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));color:#1a130a;font-family:var(--serif);font-weight:700;font-size:18px;letter-spacing:-.5px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:16px}.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .hero{padding:96px 0 60px;background:radial-gradient(1000px 480px at 82% -12%,rgba(224,165,78,.16),transparent 60%),radial-gradient(720px 400px at 2% 116%,rgba(111,176,201,.08),transparent 55%);border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:22px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,60px);line-height:1.08;letter-spacing:-.01em;margin:0 0 24px;max-width:17ch}
+  h1 em{font-style:normal;color:var(--ochre)}
+  .sub{font-size:20px;color:var(--ink-2);max-width:62ch;margin:0 0 30px}
+  .thesis{border-left:3px solid var(--ochre);padding:16px 22px;background:linear-gradient(90deg,rgba(224,165,78,.07),transparent);font-family:var(--serif);font-size:19px;font-style:italic;color:var(--ink);max-width:64ch}
+  section{padding:60px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin:0 0 26px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  .docs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.docs{grid-template-columns:1fr}}
+  .doc{display:block;border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:26px;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden}
+  .doc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+  .doc.d7::before{background:var(--ochre)}.doc.d8::before{background:var(--blueprint)}.doc.d9::before{background:var(--clay)}.doc.d10::before{background:var(--green)}.doc.d11::before{background:var(--violet)}.doc.d12::before{background:#d08fa8}.doc.d13::before{background:linear-gradient(var(--ochre),var(--blueprint))}.doc.d14::before{background:var(--clay)}.doc.d15::before{background:var(--green)}.doc.d16::before{background:var(--ochre)}.doc.d17::before{background:var(--blueprint)}.doc.d18::before{background:var(--violet)}.doc.d19::before{background:linear-gradient(var(--green),var(--ochre))}.doc.d20::before{background:var(--blueprint)}.doc.d22::before{background:linear-gradient(var(--ochre),var(--green))}.doc.d21::before{background:var(--ochre)}
+  .doc.wide{grid-column:1 / -1}
+  .doc:hover{transform:translateY(-3px);border-color:var(--ochre);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+  .doc .n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+  .doc h3{font-family:var(--serif);font-weight:600;font-size:23px;margin:0 0 10px;letter-spacing:-.01em}
+  .doc p{margin:0 0 16px;color:var(--ink-2);font-size:14.5px}
+  .doc .go{font-family:var(--mono);font-size:12px;color:var(--ochre);display:inline-flex;align-items:center;gap:7px}
+  .doc:hover .go{gap:11px}
+  .flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;color:var(--ink-3);margin-top:8px}
+  .flow b{color:var(--ink-2);font-weight:500}.flow .a{color:var(--ochre)}
+  footer{padding:40px 0 60px;color:var(--ink-3);font-size:13px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  /* ===== homepage navigation bar ===== */
+  .topbar nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+  .navlink{display:inline-flex;align-items:center;gap:5px;padding:8px 13px;border-radius:8px;font-size:13.5px;color:var(--ink-2);cursor:pointer;background:none;border:none;font-family:inherit;transition:.18s;white-space:nowrap}
+  .navlink:hover{color:var(--ink);background:var(--bg-3)}
+  .navitem{position:relative}
+  .navitem .caret{font-size:9px;color:var(--ink-3);transition:transform .2s}
+  .navitem.open>.navlink{color:var(--ochre);background:var(--bg-3)}
+  .navitem.open .caret{transform:rotate(180deg);color:var(--ochre)}
+  .dropdown{position:absolute;top:calc(100% + 8px);right:0;min-width:290px;background:var(--bg-2);border:1px solid var(--line-2);border-radius:12px;padding:8px;box-shadow:0 18px 44px rgba(0,0,0,.55);display:none;z-index:80}
+  .navitem.open .dropdown{display:block}
+  .dropdown a{display:flex;gap:11px;align-items:baseline;padding:9px 12px;border-radius:8px;color:var(--ink-2);transition:.14s}
+  .dropdown a:hover{background:var(--bg-3);color:var(--ink)}
+  .dropdown a .dn{font-family:var(--mono);font-size:10px;color:var(--ochre);flex:none;width:18px;padding-top:1px}
+  .dropdown a .dt{font-size:13.5px;line-height:1.3}
+  .dropdown .sep{height:1px;background:var(--line);margin:6px 8px}
+  @media(max-width:860px){
+    .topbar{flex-wrap:wrap}
+    .topbar nav{order:3;width:100%;margin-left:0;flex-wrap:wrap;gap:4px;padding-top:6px}
+    .navitem{position:static}
+    .dropdown{position:static;min-width:0;width:100%;box-shadow:none;margin-top:4px}
+  }
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" title="Home" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit"><div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>Media Platform &amp; Ecosystem Hub</span></div></a>
+  <nav id="mainnav" aria-label="All documents">
+    <a class="navlink" href="index.html">Home</a>
+    <a class="navlink" href="wima-community-content-playbook.html">Playbook</a>
+    <a class="navlink" href="wima-social-mba.html">MBA</a>
+    <a class="navlink" href="wima-mba-lecture-notes.html">Lectures</a>
+    <div class="navitem">
+      <button class="navlink" data-menu aria-haspopup="true" aria-expanded="false">Strategy <span class="caret">▾</span></button>
+      <div class="dropdown">
+        <a href="wima-media-platform-strategy.html"><span class="dn">07</span><span class="dt">Media Platform Strategy</span></a>
+        <a href="wima-seo-target-map.html"><span class="dn">08</span><span class="dt">SEO Target Map</span></a>
+        <a href="wima-competitive-brief.html"><span class="dn">09</span><span class="dt">Competitive Brief</span></a>
+        <a href="wima-ecosystem-flywheel.html"><span class="dn">10</span><span class="dt">Ecosystem Flywheel</span></a>
+        <a href="wima-bank-partnership-pitch.html"><span class="dn">11</span><span class="dt">Bank Partnership Pitch</span></a>
+        <a href="wima-social-mba.html"><span class="dn">12</span><span class="dt">The MBA — Social Media Marketing</span></a>
+        <a href="wima-mba-lecture-notes.html"><span class="dn">21</span><span class="dt">MBA Lecture Notes &amp; Implementation</span></a>
+        <a href="wima-social-playbook.html"><span class="dn">13</span><span class="dt">Ghana Social Playbook</span></a>
+        <a href="wima-supplier-onboarding.html"><span class="dn">14</span><span class="dt">Supplier &amp; Manufacturer Onboarding</span></a>
+      </div>
+    </div>
+    <div class="navitem">
+      <button class="navlink" data-menu aria-haspopup="true" aria-expanded="false">Research <span class="caret">▾</span></button>
+      <div class="dropdown">
+        <a href="wima-research-investment-thesis.html"><span class="dn">15</span><span class="dt">Investment Thesis — $5M in 5 Years</span></a>
+        <a href="wima-founders-verdict.html"><span class="dn">16</span><span class="dt">The Founder's Verdict</span></a>
+        <a href="wima-learning-from-meqasa.html"><span class="dn">17</span><span class="dt">Learning from meQasa</span></a>
+        <a href="wima-global-players.html"><span class="dn">18</span><span class="dt">Houzz, Livspace &amp; Global Players</span></a>
+        <div class="sep"></div>
+        <a href="wima-resource-hub-plan.html"><span class="dn">20</span><span class="dt">The Resource Hub Plan</span></a>
+        <a href="wima-2026-deep-dive.html"><span class="dn">22</span><span class="dt">2026 Deep-Dive &amp; Expert Panel</span></a>
+        <a href="wima-community-content-playbook.html"><span class="dn">19</span><span class="dt">Community &amp; Content Playbook</span></a>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Strategy · Research · Documents 07–19 · 2026</div>
+    <h1>Own how Ghana <em>builds</em> — then monetize the whole journey.</h1>
+    <p class="sub">A four-document strategy for turning Wima Builders into the country's most trusted building authority and the ecosystem beneath it: a media platform that earns the audience, and five revenue rails that audience unlocks.</p>
+    <p class="thesis">Ownkey tells Ghanaians what to buy. Wima walks the whole build with them — and earns at every step.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Start Here · The Consolidated Playbook</p>
+    <div class="docs" style="margin-bottom:40px">
+      <a class="doc d19 wide" href="wima-community-content-playbook.html">
+        <div class="n">Document 19 · Playbook · Interactive</div>
+        <h3>The Community &amp; Content Playbook</h3>
+        <p>The master playbook in one place: why community — not deals — is the asset, the content pillars that build it, the professionals and master craftsmen recruited quietly by recommendation, an interactive rights-clearance ladder for using other creators' content legally, and the scale-ups the community unlocks (tendering, Deal Hub, flash sales, big-ticket local and international procurement).</p>
+        <span class="go">Open the playbook →</span>
+      </a>
+    </div>
+    <p class="eyebrow">The Strategy Set · Documents 07–14</p>
+    <div class="docs">
+      <a class="doc d7" href="wima-media-platform-strategy.html">
+        <div class="n">Document 07 · Strategy</div>
+        <h3>Media Platform &amp; Market-Dominance Strategy</h3>
+        <p>The wedge, the 24-month roadmap, and why the play is "how to build," not another property portal. The foundation the rest builds on.</p>
+        <span class="go">Open document →</span>
+      </a>
+      <a class="doc d8" href="wima-seo-target-map.html">
+        <div class="n">Document 08 · Execution</div>
+        <h3>SEO Target Map — 25 Build-Intent Queries</h3>
+        <p>The specialised-blog wedge made concrete: 25 queries clustered by winnability, sequenced in three waves, timed to the Dry Wall launch.</p>
+        <span class="go">Open document →</span>
+      </a>
+      <a class="doc d9" href="wima-competitive-brief.html">
+        <div class="n">Document 09 · Intelligence</div>
+        <h3>Competitive Brief — The Field &amp; The Wedge</h3>
+        <p>Why Ownkey is the real threat, where it's trapped in the buying frame, and the operating-business moat it structurally cannot copy.</p>
+        <span class="go">Open document →</span>
+      </a>
+      <a class="doc d10" href="wima-ecosystem-flywheel.html">
+        <div class="n">Document 10 · Capstone · Interactive</div>
+        <h3>The Ecosystem Flywheel — The Endgame</h3>
+        <p>The interactive machine: five revenue rails — Deal Hub, Tendering, Live Commerce, Vetted Execution and Bank Finance — turning around a data core.</p>
+        <span class="go">Explore the flywheel →</span>
+      </a>
+      <a class="doc d11" href="wima-bank-partnership-pitch.html">
+        <div class="n">Document 11 · Partnership · External</div>
+        <h3>Bank Lending Partnership — Pitch</h3>
+        <p>The sell to a bank's mortgage desk: Wima reaches the 90% who self-build, delivers them pre-qualified and lower-risk, and proves it in a 90-day pilot. Activates the finance rail.</p>
+        <span class="go">Open document →</span>
+      </a>
+      <a class="doc d13 wide" href="wima-social-mba.html">
+        <div class="n">Document 12 · The MBA · Interactive</div>
+        <h3>The Wima MBA — Social Media Marketing for the Building Industry</h3>
+        <p>The full marketing education in one place (now including the organic + paid + ethical-ambush training): ten faculty chairs, a three-term case-method curriculum with electives and a capstone, a filterable 2026 AI toolkit, and a LinkedIn/B2B course — built so you learn it and apply it at once.</p>
+        <span class="go">Enter the program →</span>
+      </a>
+      <a class="doc d21 wide" href="wima-mba-lecture-notes.html">
+        <div class="n">Document 21 · MBA Lecture Notes · Interactive</div>
+        <h3>MBA Lecture Notes &amp; Implementation</h3>
+        <p>The lectures themselves — practical and implementable. Nine core lectures, each with key lessons, a real case study, a step-by-step way to implement it on Wima this week, and links to read further. Oriented to scaling Wima Builders and Deal Hub: learn it Monday, ship it Friday.</p>
+        <span class="go">Open the lecture notes →</span>
+      </a>
+      <a class="doc d14 wide" href="wima-social-playbook.html">
+        <div class="n">Document 13 · Research · Interactive</div>
+        <h3>Ghana Social Playbook — Middle Class + Diaspora</h3>
+        <p>Evidence-backed and dual-audience: what works on social in Ghana, plus an interactive explorer you toggle between the local middle-class builder and the diaspora — eight pain points each, mapped to the content that speaks to them and the Wima service that resolves them, with a funnel for each.</p>
+        <span class="go">Open the playbook →</span>
+      </a>
+      <a class="doc d12 wide" href="wima-supplier-onboarding.html">
+        <div class="n">Document 14 · Strategy · Interactive</div>
+        <h3>Supplier &amp; Manufacturer Onboarding</h3>
+        <p>The supply side of Deal Hub: how to introduce Wima to distributors, manufacturers and international suppliers as a demand channel (not another buyer), an interactive value-proposition explorer by supplier type, a first-contact message template, a six-step ease-first onboarding flow, and the local-then-international sequence.</p>
+        <span class="go">Open the strategy →</span>
+      </a>
+    </div>
+    <div class="flow">
+      <b>Content</b><span class="a">→</span><b>Deal Hub</b><span class="a">→</span><b>Tendering</b><span class="a">→</span><b>Live deals</b><span class="a">→</span><b>Execution</b><span class="a">→</span><b>Finance</b><span class="a">→</span><b style="color:var(--blueprint)">Data</b><span class="a">↺</span>
+    </div>
+  </div>
+</section>
+
+<section style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="eyebrow">Research</p>
+    <div class="docs">
+      <a class="doc d22 wide" href="wima-2026-deep-dive.html">
+        <div class="n">Document 22 · Deep Research · Interactive</div>
+        <h3>The 2026 Deep-Dive &amp; Expert Panel — Strategy Upgrade</h3>
+        <p>The freshest research pass, run through the expert panel to sharpen the whole strategy: Ghana's 2026 macro window (rates 30%→14%, cedi +27%), the deficit-vs-empty-units paradox, an interactive opportunity map, the Infra.Market proof for Deal Hub ($2B on demand aggregation), eight sharpened expert recommendations, and a ten-point punch list of what to change now.</p>
+        <span class="go">Open the deep-dive →</span>
+      </a>
+      <a class="doc d15 wide" href="wima-research-investment-thesis.html">
+        <div class="n">Document 15 · Research · Interactive</div>
+        <h3>The Path to $5M in 5 Years — Investment Thesis</h3>
+        <p>A data-backed answer to where to invest and in what order: Ghana's 2026 returns ranked by segment, the asset-light-first sequence (what to do first vs. what to expand into), the international playbook (co-host → arbitrage → own), and an interactive three-scenario $5M model — with the risks stated plainly.</p>
+        <span class="go">Open the thesis →</span>
+      </a>
+      <a class="doc d16 wide" href="wima-founders-verdict.html">
+        <div class="n">Document 16 · Research · Interactive</div>
+        <h3>The Founder's Verdict — The Business I'd Build</h3>
+        <p>The decisive answer: if you were starting a Ghana real estate business today, which one and where to focus. An interactive panel of eight local and international experts each name the area they'd bet on with data, synthesised into one asset-light business, four ranked focus areas, a do/avoid list, and the first 90 days.</p>
+        <span class="go">Open the verdict →</span>
+      </a>
+      <a class="doc d17 wide" href="wima-learning-from-meqasa.html">
+        <div class="n">Document 17 · Research · Interactive</div>
+        <h3>Learning from meQasa — Dominance &amp; Head-to-Head</h3>
+        <p>What Ghana's #1 property portal teaches — and warns. An interactive walk through meQasa's six-move dominance playbook (each mapped to a Wima adaptation), the ceiling the listings-only model hit (the investor divested; the CEO's own admission), and a full meQasa vs Wima comparison matrix.</p>
+        <span class="go">Open the study →</span>
+      </a>
+      <a class="doc d18 wide" href="wima-global-players.html">
+        <div class="n">Document 18 · Research · Interactive</div>
+        <h3>Learning from Houzz, Livspace, Zillow <h3>Learning from Houzz, Livspace &amp; Global Players</h3>amp; Global Players</h3>
+        <p>Three case studies — the mature vision (Houzz), the emerging-market mirror of Ghana (Livspace), and the data-and-dominance play (Zillow, including its costly iBuying mistake) — plus Pinterest, Angi and IKEA. An interactive lessons panel on social, marketing, email and data/monetization, each mapped to a Wima move, with a copy / adapt / avoid synthesis.</p>
+        <span class="go">Open the study →</span>
+      </a>
+      <a class="doc d20 wide" href="wima-resource-hub-plan.html">
+        <div class="n">Document 20 · Plan · Interactive</div>
+        <h3>The Resource Hub Plan — Return-Traffic Engine</h3>
+        <p>The library of checklists, calculators, guides and templates that make people come back and fuel the social feed: ~70 resources browsable by category along the build journey, the stickiness tiers, a prioritised three-phase build order, and a video + flyer content angle for every Phase-1 resource. The tools get built later — this is the plan.</p>
+        <span class="go">Open the plan →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">Wima Builders — Ecosystem Hub</div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Documents 07–19 · Hosted on GitHub Pages</div>
+  </div>
+</footer>
+<script>
+(function(){
+  "use strict";
+  var items=[].slice.call(document.querySelectorAll('#mainnav .navitem'));
+  function closeAll(except){
+    items.forEach(function(it){
+      if(it!==except){it.classList.remove('open');var b=it.querySelector('[data-menu]');if(b)b.setAttribute('aria-expanded','false');}
+    });
+  }
+  items.forEach(function(it){
+    var btn=it.querySelector('[data-menu]');
+    if(!btn)return;
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      var willOpen=!it.classList.contains('open');
+      closeAll(it);
+      it.classList.toggle('open',willOpen);
+      btn.setAttribute('aria-expanded',willOpen?'true':'false');
+    });
+  });
+  document.addEventListener('click',function(){closeAll(null);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll(null);});
+})();
+</script>
+</body>
+</html>

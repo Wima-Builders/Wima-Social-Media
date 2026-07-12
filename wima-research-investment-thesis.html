@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — Research: The Path to $5M in 5 Years</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;--bg-2:#1b1611;--bg-3:#221c16;--line:#332a22;--line-2:#463a2e;
+    --ink:#f3ece2;--ink-2:#c6b8a6;--ink-3:#8a7b68;
+    --ochre:#e0a54e;--ochre-deep:#c07f2c;--blueprint:#6fb0c9;--clay:#c76b4a;--green:#7fa66a;--violet:#a98fd0;
+    --maxw:1080px;--serif:"Fraunces","Georgia",serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:inherit}button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:5px}
+  .topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:14px;padding:14px 26px;background:rgba(20,16,13,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logomark{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));color:#1a130a;font-family:var(--serif);font-weight:700;font-size:17px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:15px}.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .topbar nav{margin-left:auto;display:flex;gap:15px;font-size:13px;color:var(--ink-2)}
+  .topbar nav a{text-decoration:none}.topbar nav a:hover{color:var(--ochre)}
+  @media(max-width:900px){.topbar{flex-wrap:wrap}.topbar nav{order:3;width:100%;margin-left:0;overflow-x:auto;gap:18px;padding:8px 2px 2px}.topbar nav a{flex:0 0 auto}.topbar nav::-webkit-scrollbar{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.13;margin:0}
+  h2{font-size:clamp(24px,3.6vw,35px);margin-bottom:16px}
+  h3{font-size:20px;margin-bottom:10px}
+  p{margin:0 0 14px;color:var(--ink-2)}p strong{color:var(--ink);font-weight:600}
+  .lead{font-size:18px;color:var(--ink);max-width:74ch}
+  .muted{color:var(--ink-3);font-size:12.5px}
+  ul{margin:0 0 12px;padding-left:20px}li{color:var(--ink-2);margin-bottom:6px}li strong{color:var(--ink)}
+
+  .hero{padding:84px 0 58px;border-bottom:1px solid var(--line);background:radial-gradient(1000px 460px at 84% -12%,rgba(224,165,78,.17),transparent 60%),radial-gradient(700px 380px at 0% 116%,rgba(127,166,106,.08),transparent 55%)}
+  .hero .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:20px}
+  .hero h1{font-size:clamp(32px,5.6vw,56px);max-width:17ch;margin-bottom:22px}
+  .hero h1 em{font-style:normal;color:var(--ochre)}
+  .hero .sub{font-size:19px;color:var(--ink-2);max-width:62ch}
+
+  .keyfind{border-left:3px solid var(--ochre);padding:16px 22px;background:linear-gradient(90deg,rgba(224,165,78,.07),transparent);margin:32px 0 0;max-width:66ch}
+  .keyfind b{color:var(--ochre)}
+
+  /* ranked returns table */
+  .tablewrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:660px;font-size:13.5px}
+  th,td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{background:var(--bg-2);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+  tbody tr:last-child td{border-bottom:none}
+  td .seg{font-family:var(--serif);font-size:15px;color:var(--ink)}
+  td .m{font-family:var(--mono);color:var(--green);font-size:13px}
+  .rank{font-family:var(--serif);font-size:18px;color:var(--ochre)}
+  tr.hl td{background:linear-gradient(90deg,rgba(224,165,78,.08),transparent)}
+
+  .cards{display:grid;gap:14px}.cards.two{grid-template-columns:1fr 1fr}.cards.three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.cards.two,.cards.three{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:22px}
+  .card h4{font-family:var(--serif);font-size:16px;margin-bottom:8px}
+  .card p{font-size:14px;margin:0}
+
+  /* phased plan */
+  .move{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:20px 22px;margin-bottom:12px;position:relative;overflow:hidden}
+  .move::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+  .move.first::before{background:var(--green)}.move.expand::before{background:var(--violet)}
+  .move .mh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .move .mn{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+  .move h4{font-family:var(--serif);font-size:18px}
+  .move .cap{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid var(--line-2)}
+  .move.first .cap{color:var(--green);border-color:rgba(127,166,106,.4);background:rgba(127,166,106,.08)}
+  .move.expand .cap{color:var(--violet);border-color:rgba(169,143,208,.4);background:rgba(169,143,208,.08)}
+  .move p{font-size:14px;margin:0 0 6px}
+  .move .why{font-size:13px;color:var(--ink-3)}
+  .move .why b{color:var(--green)}
+  .move.expand .why b{color:var(--violet)}
+
+  /* scenario model */
+  .scentabs{display:inline-flex;border:1px solid var(--line-2);border-radius:24px;padding:4px;background:var(--bg-3);margin-bottom:22px;gap:4px}
+  .scentabs button{border:none;background:transparent;color:var(--ink-2);padding:9px 18px;border-radius:20px;font-family:var(--mono);font-size:12px;cursor:pointer;transition:.2s}
+  .scentabs button.active{background:var(--ochre);color:#1a130a;font-weight:600}
+  .model{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.model{grid-template-columns:1fr}}
+  .mbox{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:22px}
+  .mbox .ml{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+  .mbox .mv{font-family:var(--serif);font-size:30px;color:var(--ink);line-height:1}
+  .mbox .mv.ochre{color:var(--ochre)}.mbox .mv.green{color:var(--green)}.mbox .mv.violet{color:var(--violet)}
+  .mbox .md{font-size:13px;color:var(--ink-2);margin-top:8px}
+  .total{border:1px solid var(--line-2);border-radius:14px;padding:22px 24px;margin-top:14px;background:linear-gradient(150deg,rgba(224,165,78,.1),var(--bg-3));display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .total .tl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre)}
+  .total .tv{font-family:var(--serif);font-size:40px;color:var(--ochre);line-height:1}
+  .total .tn{font-size:13px;color:var(--ink-2)}
+
+  .callout{border:1px solid var(--line-2);border-radius:14px;padding:22px 24px;background:linear-gradient(150deg,rgba(224,165,78,.07),var(--bg-3));margin-top:6px}
+  .callout.clay{background:linear-gradient(150deg,rgba(199,107,74,.09),var(--bg-3))}
+  .callout.green{background:linear-gradient(150deg,rgba(127,166,106,.08),var(--bg-3))}
+  .callout .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:9px}
+  .callout.clay .lbl{color:var(--clay)}.callout.green .lbl{color:var(--green)}
+  .callout p:last-child{margin-bottom:0}
+  .thesis{font-family:var(--serif);font-size:20px;color:var(--ink);font-style:italic;line-height:1.4}
+
+  .bp{border-left:3px solid var(--blueprint);padding:4px 0 4px 18px;margin-bottom:14px}
+  .bp .bn{font-family:var(--serif);font-size:16px;color:var(--ink)}
+  .bp .bt{font-family:var(--mono);font-size:10.5px;color:var(--blueprint);text-transform:uppercase;letter-spacing:.06em;margin:2px 0 5px}
+  .bp p{font-size:13.5px;margin:0}
+
+  .risk{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.risk{grid-template-columns:1fr}}
+  .rc{border:1px solid rgba(199,107,74,.3);border-radius:12px;background:rgba(199,107,74,.05);padding:16px 18px}
+  .rc h4{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--clay);margin-bottom:6px}
+  .rc p{font-size:13px;margin:0}
+
+  footer{padding:40px 0 60px;color:var(--ink-3)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .fdisc{font-size:12px;color:var(--ink-3);max-width:82ch;margin-top:12px;line-height:1.5}
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" title="Back to the hub" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit"><div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>Research · Investment Thesis</span></div></a>
+  <nav><a href="#returns">Where Returns Are</a><a href="#insight">The Insight</a><a href="#first">Do First</a><a href="#expand">Expand</a><a href="#model">The $5M Model</a><a href="#risks">Risks</a></nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Document 15 · Research · Data-Backed Investment Thesis</div>
+    <h1>How I'd turn Ghana real estate into <em>$5M in five years</em>.</h1>
+    <p class="sub">Given everything the data shows, here's where I'd put capital and effort, in what order, and why — grounded in Ghana's 2026 returns and the international playbooks that actually work. The short version: don't buy first. Build a cash machine first, then let it buy the assets.</p>
+    <div class="keyfind">
+      <b>The core realisation:</b> $5M in five years won't come from rental income alone — it comes from building a <b>valuable, recurring-revenue, asset-light business</b> and reinvesting its cash into appreciating assets. The business is most of the $5M; the property is the rest.
+    </div>
+  </div>
+</header>
+
+<!-- RETURNS -->
+<section id="returns">
+  <div class="wrap">
+    <p class="eyebrow">Part 1 · Where The Returns Actually Are</p>
+    <h2>Ghana real estate, ranked by return (2026 data)</h2>
+    <p class="lead" style="margin-bottom:22px">Ghana offers gross yields of 6–13.5% vs 3–5% in the UK and 4–7% in the US — a real premium. But the segments are not equal. Here's the ranking that matters.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>#</th><th>Segment</th><th>Return</th><th>Capital</th><th>The catch</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td class="rank">1</td><td><span class="seg">Short-let / Airbnb (prime Accra)</span></td><td class="m">15–25% gross</td><td>Med–High (or low via mgmt)</td><td>Huge dispersion — top 10% earn $2,283/mo, median only ~$625. Execution is everything.</td></tr>
+          <tr class="hl"><td class="rank">2</td><td><span class="seg">Mid-market gated townhouses</span></td><td class="m">18–26% total</td><td>High</td><td>Best risk-adjusted <em>total</em> return (yield + appreciation), but capital-heavy to develop or buy.</td></tr>
+          <tr><td class="rank">3</td><td><span class="seg">Peri-urban land banking</span></td><td class="m">50–200% / 5–10yr</td><td>Med–High</td><td>Appreciation only, no cash flow; must be in a confirmed infrastructure corridor. Fraud risk.</td></tr>
+          <tr><td class="rank">4</td><td><span class="seg">Commercial (retail / office)</span></td><td class="m">8–14% gross</td><td>High</td><td>USD leases, longer terms — but big tickets and slower to fill.</td></tr>
+          <tr><td class="rank">5</td><td><span class="seg">Student housing (KNUST belt, etc.)</span></td><td class="m">8–12% gross</td><td>Med</td><td>Tight vacancy, steady demand; niche and location-locked.</td></tr>
+          <tr><td class="rank">6</td><td><span class="seg">Mid-market / commuter long-let</span></td><td class="m">9–12% gross</td><td>Med</td><td>Lower entry (Adenta, Madina, Kasoa); reliable but modest.</td></tr>
+          <tr><td class="rank">7</td><td><span class="seg">Prime long-let apartments</span></td><td class="m">4–7% net</td><td>High</td><td>Safe, near-passive, but the lowest net yield of the residential set.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:12px">Sources: Ownkey, Ghana Property Finder, MyJoyOnline / Imaani, The Africanvestor, AirROI, Airbtics (2026). Gross figures; net runs 20–40% lower after costs, management and the 8% (resident) / 15% (non-resident) rental tax.</p>
+  </div>
+</section>
+
+<!-- INSIGHT -->
+<section id="insight" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Part 2 · The Insight That Changes The Play</p>
+    <h2>In the best segment, execution — not ownership — captures the return</h2>
+    <div class="cards two" style="margin-bottom:20px">
+      <div class="card"><h4>The dispersion is the opportunity</h4><p>Accra's short-let median earns ~$625/month while the top 10% earn $2,283+, on the same city and similar assets. The gap is <strong>operational skill</strong> — pricing, response time, backup power, reviews. Whoever runs units well captures 3–4× the median. That means you don't need to <em>own</em> to win — you need to <em>operate</em>.</p></div>
+      <div class="card"><h4>Wima already owns the unfair advantage</h4><p>Diaspora and middle-class clients own <strong>empty and under-earning houses</strong> — the "empty-house liability" from the playbook. Wima's audience <em>is</em> the supply of units to manage. No one else can source managed inventory this cheaply. That turns Wima's trust brand directly into a short-let management pipeline.</p></div>
+    </div>
+    <div class="callout green">
+      <div class="lbl">The strategy in one move</div>
+      <p>Enter the highest-yield category <strong>asset-light</strong>: run a short-let management company on other people's units for a 15–25% fee. Zero property capital, immediate recurring cash, and it monetises the exact audience Wima is already building. Then let that cash buy the assets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTERNATIONAL BEST PRACTICE -->
+<section id="bp">
+  <div class="wrap">
+    <p class="eyebrow">Part 3 · The International Playbook</p>
+    <h2>The proven sequence, borrowed from mature markets</h2>
+    <p class="lead" style="margin-bottom:20px">This isn't a Ghana experiment — it's a well-worn path in the US, UK and Gulf STR markets, adapted to local conditions.</p>
+    <div class="bp"><div class="bn">Co-host → Arbitrage → Own</div><div class="bt">The STR wealth ladder (BNB Mastery, AirDNA)</div><p>The globally recommended sequence: start co-hosting (manage others' units, zero capital, scale by referral), reinvest the fee income, then buy for equity and appreciation. Cash-light first, wealth later.</p></div>
+    <div class="bp"><div class="bn">The asset-light toll road</div><div class="bt">Airbnb · Alibaba · Zillow</div><p>The most valuable real-estate companies own the flow, not the buildings. Wima's tendering platform and management layer are the same model — take a fee on activity without carrying the asset.</p></div>
+    <div class="bp"><div class="bn">Group-buying leverage</div><div class="bt">Pinduoduo</div><p>Aggregated demand forces price down — the Deal Hub model, and a cash-generative operating line with almost no asset base.</p></div>
+    <div class="bp"><div class="bn">Land banking</div><div class="bt">Global appreciation play</div><p>Buy in the path of confirmed infrastructure, hold, sell into the appreciation. Capital-efficient equity growth with no operations.</p></div>
+    <div class="bp"><div class="bn">Fractional &amp; crowdfunded real estate</div><div class="bt">Fundrise · Reinvest24 · Stake</div><p>Pool many small investors to fund bigger developments — the model behind Wima's future Genesis / CORE, and the way to access development capital without a bank.</p></div>
+    <div class="callout clay" style="margin-top:8px">
+      <div class="lbl">The cautionary tale to respect</div>
+      <p><strong>Sonder</strong> scaled short-let on master leases (arbitrage at scale) and collapsed when markets shifted — fixed rent, no equity, no cushion. The lesson: arbitrage is a <em>transitional</em> cash tactic, never the endgame. Co-host to learn, arbitrage selectively, own to build wealth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DO FIRST -->
+<section id="first" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Part 4 · What I'd Do First</p>
+    <h2>Phase 1 (Months 0–18) — build the cash machine, near-zero property capital</h2>
+    <p class="lead" style="margin-bottom:20px">Every first move is asset-light, cash-generative, and builds the audience and data that fund everything after. No big property buys yet — earn the right.</p>
+    <div class="move first"><div class="mh"><span class="mn">Move 01</span><h4>Short-let management company</h4><span class="cap">Zero property capital</span></div><p>Manage diaspora- and middle-class-owned units as professional short-lets for 15–25% of gross. Solves clients' empty-house problem; builds recurring fee income immediately.</p><div class="why"><b>Why first:</b> highest-yield category, entered with no asset risk, monetising the audience Wima already owns.</div></div>
+    <div class="move first"><div class="mh"><span class="mn">Move 02</span><h4>Deal Hub materials commerce</h4><span class="cap">Margin on volume</span></div><p>Group-buy aggregation — margin on pooled materials volume. Already the live beachhead; scale it.</p><div class="why"><b>Why first:</b> cash-generative, builds supplier relationships, and trains the market on Wima.</div></div>
+    <div class="move first"><div class="mh"><span class="mn">Move 03</span><h4>Diaspora Procurement Desk fees</h4><span class="cap">Service fees</span></div><p>Project-management fees on remote diaspora builds — high-trust, high-value, low capital.</p><div class="why"><b>Why first:</b> premium margins from the audience most willing to pay for trust.</div></div>
+    <div class="move first"><div class="mh"><span class="mn">Move 04</span><h4>Vetted execution + finance commissions</h4><span class="cap">Commission</span></div><p>Materials pull-through from vetted pros, plus bank-loan origination commissions. Pure margin on activity.</p><div class="why"><b>Why first:</b> no capital, and it deepens the moat around every other line.</div></div>
+    <div class="callout" style="margin-top:8px">
+      <div class="lbl">What Phase 1 produces</div>
+      <p>A profitable, recurring-revenue operating business plus the audience, data and reputation to raise capital and buy assets on favourable terms. <strong>This is the engine that funds the $5M — and most of its value.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPAND -->
+<section id="expand">
+  <div class="wrap">
+    <p class="eyebrow">Part 5 · Then Expand</p>
+    <h2>Phase 2–3 (Months 18–60) — deploy the cash into equity &amp; appreciation</h2>
+    <p class="lead" style="margin-bottom:20px">Only once the engine throws off cash and data do we buy assets — and we buy the ones the management business has already <em>proven</em> perform.</p>
+    <div class="move expand"><div class="mh"><span class="mn">Move 05</span><h4>Arbitrage → own the proven short-lets</h4><span class="cap">Expand</span></div><p>Master-lease then acquire the specific units your management data shows are winners — de-risked by operating knowledge you already have. Build a 10–20 unit portfolio.</p><div class="why"><b>Why now:</b> the management business tells you exactly which assets pay before you commit capital.</div></div>
+    <div class="move expand"><div class="mh"><span class="mn">Move 06</span><h4>Land banking in infrastructure corridors</h4><span class="cap">Expand</span></div><p>Deploy operating profits into peri-urban land in confirmed road/utility corridors. 50–200% appreciation over the hold, no operations.</p><div class="why"><b>Why now:</b> capital-efficient equity growth, funded by Phase 1 cash, not debt.</div></div>
+    <div class="move expand"><div class="mh"><span class="mn">Move 07</span><h4>Mid-market gated development / off-plan</h4><span class="cap">Expand</span></div><p>The best total return (18–26%) but the most capital — do it last, with proven demand and, ideally, crowdfunded capital.</p><div class="why"><b>Why last:</b> highest capital and execution risk; only sensible once demand and capital access are proven.</div></div>
+    <div class="move expand"><div class="mh"><span class="mn">Move 08</span><h4>Platform scale: tendering, proptech, Genesis/CORE</h4><span class="cap">Expand</span></div><p>The tendering toll-road, the loyalty/CRM proptech layer, and fractional/crowdfunded vehicles for capital access and a valuation multiple.</p><div class="why"><b>Why now:</b> turns the business from a services firm into a platform — where the big enterprise value sits.</div></div>
+  </div>
+</section>
+
+<!-- MODEL -->
+<section id="model" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Part 6 · The $5M Model</p>
+    <h2>Where the five million actually comes from</h2>
+    <p class="lead" style="margin-bottom:20px">An illustrative Year-5 net-worth model. Toggle the scenario. These are planning estimates built on the data above — <strong>not guarantees</strong>, and heavily assumption-dependent (see risks).</p>
+    <div class="scentabs" id="scentabs">
+      <button data-s="cons" >Conservative</button>
+      <button data-s="base" class="active">Base</button>
+      <button data-s="stretch">Stretch</button>
+    </div>
+    <div class="model">
+      <div class="mbox"><div class="ml">Component A · The operating business</div><div class="mv ochre" id="vA">—</div><div class="md" id="dA">—</div></div>
+      <div class="mbox"><div class="ml">Component B · Owned asset equity</div><div class="mv green" id="vB">—</div><div class="md" id="dB">—</div></div>
+    </div>
+    <div class="total"><div><div class="tl">Year-5 net worth</div><div class="tv" id="vT">—</div></div><div class="tn" id="dT">—</div></div>
+    <div class="callout" style="margin-top:18px">
+      <div class="lbl">Read the model correctly</div>
+      <p>Notice that <strong>most of the $5M is Component A — the enterprise value of a recurring-revenue business</strong>, not rental cash. A profitable, asset-light proptech/services company earning ~$1M+ with good margins can be worth 3–4× revenue. That is the real engine. The property portfolio (B) is the reinforcing, appreciating base — not the primary driver. <span class="muted">This is a strategic planning model, not financial advice or a forecast of actual returns.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- RISKS -->
+<section id="risks">
+  <div class="wrap">
+    <p class="eyebrow">Part 7 · The Risks (Read Before Anything)</p>
+    <h2>What could break this — and how to hold it</h2>
+    <div class="risk" style="margin-bottom:18px">
+      <div class="rc"><h4>Currency risk</h4><p>The cedi can depreciate against the USD, eroding local-currency gains. Favour USD-earning lines (diaspora, short-let to foreign guests) as a natural hedge.</p></div>
+      <div class="rc"><h4>Occupancy dispersion</h4><p>Short-let median occupancy is only 33–46%. Weak operation = weak returns. The whole thesis rests on operating in the top quartile, not the median.</p></div>
+      <div class="rc"><h4>Arbitrage fragility</h4><p>Fixed rent with no equity sank Sonder. Keep arbitrage limited and transitional; hold cash reserves per unit; prefer co-hosting and ownership.</p></div>
+      <div class="rc"><h4>Land fraud</h4><p>Peri-urban land carries double-sale and title risk. Only via Lands Commission verification and licensed surveyors — never on trust.</p></div>
+      <div class="rc"><h4>Regulation &amp; tax</h4><p>GTA short-let licensing, 8%/15% rental tax, and evolving rules. Model net-of-tax and stay compliant from day one.</p></div>
+      <div class="rc"><h4>Execution capacity</h4><p>All of this demands operating discipline and a team. The plan scales only as fast as the operating capability behind it.</p></div>
+    </div>
+    <div class="callout clay">
+      <div class="lbl">Honest framing</div>
+      <p>$5M in five years is <strong>ambitious, not guaranteed</strong>. It is achievable in the base-to-stretch range <em>if</em> the operating business scales and is well-run — and it depends on execution, market conditions, and capital access. This document is strategic research to inform your own decisions; it is not financial advice, and Wima should validate every number against its own results and a qualified adviser.</p>
+    </div>
+    <div class="callout green" style="margin-top:16px">
+      <div class="lbl">The one line to hold</div>
+      <p class="thesis">Don't chase the highest-yield asset by buying it. Build the business that operates it for everyone else first — then let that cash quietly buy the assets, on your terms. Cash machine first; portfolio second; wealth compounds from both.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">Wima Builders — Research: The Path to $5M in 5 Years</div>
+      <div class="fdisc">Return figures from public 2026 Ghana sources (Ownkey, Ghana Property Finder, MyJoyOnline/Imaani, The Africanvestor, AirROI, Airbtics); international models from US/UK/Gulf STR and proptech sources (BNB Mastery, AirDNA, Hostfully, and public company histories incl. Sonder, Airbnb, Fundrise). All returns are gross unless stated; net runs materially lower after costs, management and tax. The $5M model is an illustrative, assumption-dependent planning scenario — <strong>not a forecast, not a guarantee, and not financial or investment advice.</strong> Consult a qualified adviser and validate against Wima's own data before deploying capital. Companion to Documents 07–14, Wima Ecosystem Hub.</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Document 15 · Wima Ecosystem Hub</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var S={
+    cons:{A:"$2.0M",dA:"Business at ~$0.7M revenue \u00d7 ~3\u00d7 \u2014 slower scale, fewer managed units",B:"$0.6M",dB:"A handful of owned short-lets + a modest land parcel",T:"$2.6M",dT:"Below target \u2014 a solid business, but scale or capital fell short"},
+    base:{A:"$3.8M",dA:"Business at ~$1.1M recurring revenue \u00d7 ~3.5\u00d7 \u2014 ~70\u201390 managed units + Deal Hub + fees",B:"$1.1M",dB:"10\u201315 owned/arbitraged short-lets + land in an appreciating corridor",T:"$4.9M",dT:"On target \u2014 driven mostly by the value of the operating business"},
+    stretch:{A:"$6.5M",dA:"Business at ~$1.6M revenue \u00d7 ~4\u00d7 (platform multiple) \u2014 tendering + proptech live",B:"$2.5M",dB:"20+ units, larger land bank, first gated development equity",T:"$9.0M",dT:"Above target \u2014 platform scale + crowdfunded development compound the outcome"}
+  };
+  function set(s){
+    var d=S[s];
+    document.getElementById("vA").textContent=d.A;document.getElementById("dA").textContent=d.dA;
+    document.getElementById("vB").textContent=d.B;document.getElementById("dB").textContent=d.dB;
+    document.getElementById("vT").textContent=d.T;document.getElementById("dT").textContent=d.dT;
+    document.querySelectorAll("#scentabs button").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-s")===s);});
+  }
+  document.querySelectorAll("#scentabs button").forEach(function(b){b.addEventListener("click",function(){set(b.getAttribute("data-s"));});});
+  set("base");
+})();
+</script>
+</body>
+</html>
