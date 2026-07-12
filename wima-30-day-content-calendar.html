@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — 30-Day Content Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--surface:#F4F1EA;--panel:#ECEAE0;--rule:#D8D3C4;
+  --ink:#1C1917;--ink2:#3C3830;--slate:#44403C;--muted:#78716C;--faint:#A8A29E;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;
+  --edu:#1D4ED8;--edu-lt:#EFF6FF;--insp:#0F766E;--insp-lt:#F0FDFA;
+  --ppl:#7C3AED;--ppl-lt:#F5F3FF;--ent:#DC2626;--ent-lt:#FEF2F2;
+  --proof:#15803D;--proof-lt:#F0FDF4;--offer:#C47A0A;--offer-lt:#FEF3DC;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;}
+.nav{position:sticky;top:52px;z-index:200;background:var(--ink);border-bottom:2px solid var(--amber);height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;}
+.nav-brand{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--amber);text-transform:uppercase;letter-spacing:.14em;}
+.nav-links{display:flex;gap:2px;}
+.nav-links a{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.72);padding:5px 10px;text-decoration:none;border-radius:3px;transition:all .12s;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber);background:rgba(196,122,10,.12);}
+.hero{padding:60px 56px 44px;border-bottom:2px solid var(--ink);}
+.hero-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--faint);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.hero-eye::before{content:'';width:24px;height:2px;background:var(--amber);}
+.hero h1{font-family:var(--serif);font-size:clamp(36px,5vw,58px);font-weight:900;line-height:1.03;letter-spacing:-.02em;margin-bottom:16px;}
+.hero h1 em{font-style:italic;color:var(--amber);}
+.hero-sub{font-size:15.5px;font-weight:300;color:var(--slate);max-width:640px;line-height:1.75;margin-bottom:26px;}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;}
+.lg{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.06em;padding:4px 10px;border-radius:3px;font-weight:600;}
+.lg.edu{background:var(--edu-lt);color:var(--edu);}.lg.insp{background:var(--insp-lt);color:var(--insp);}
+.lg.ppl{background:var(--ppl-lt);color:var(--ppl);}.lg.ent{background:var(--ent-lt);color:var(--ent);}
+.lg.proof{background:var(--proof-lt);color:var(--proof);}.lg.offer{background:var(--offer-lt);color:var(--offer);}
+.page{max-width:920px;}
+.week{padding:40px 56px 20px;border-bottom:1px solid var(--rule);}
+.week-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.week-eye .wtag{background:var(--ink);color:white;padding:1px 8px;font-size:8px;border-radius:2px;}
+.week h2{font-family:var(--serif);font-size:28px;font-weight:700;line-height:1.1;margin-bottom:4px;}
+.week h2 em{font-style:italic;color:var(--amber);}
+.week-arc{font-size:13px;color:var(--slate);font-style:italic;font-weight:300;max-width:620px;margin-bottom:8px;}
+.day{background:white;border:1px solid var(--rule);border-left:4px solid var(--amber);margin:0 56px 12px;padding:16px 20px;}
+.day.edu{border-left-color:var(--edu);}.day.insp{border-left-color:var(--insp);}.day.ppl{border-left-color:var(--ppl);}
+.day.ent{border-left-color:var(--ent);}.day.proof{border-left-color:var(--proof);}.day.offer{border-left-color:var(--offer);}
+.day-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.day-num{font-family:var(--mono);font-size:11px;font-weight:600;color:white;background:var(--ink);padding:3px 9px;border-radius:3px;letter-spacing:.05em;}
+.day-pillar{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:2px;font-weight:600;}
+.day-pillar.edu{background:var(--edu-lt);color:var(--edu);}.day-pillar.insp{background:var(--insp-lt);color:var(--insp);}
+.day-pillar.ppl{background:var(--ppl-lt);color:var(--ppl);}.day-pillar.ent{background:var(--ent-lt);color:var(--ent);}
+.day-pillar.proof{background:var(--proof-lt);color:var(--proof);}.day-pillar.offer{background:var(--offer-lt);color:var(--offer);}
+.day-meta{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-left:auto;text-align:right;}
+.day-copy{font-size:13.5px;color:var(--ink2);line-height:1.7;}
+.day-copy strong{color:var(--ink);}
+.day-cta{font-family:var(--mono);font-size:10px;color:var(--amber2);margin-top:8px;display:block;border-top:1px dashed var(--rule);padding-top:8px;}
+.day-note{font-family:var(--mono);font-size:9px;color:var(--muted);font-style:italic;margin-top:6px;display:block;}
+.footer{background:var(--ink);color:rgba(255,255,255,.24);padding:18px 56px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.07em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.footer-brand{font-family:var(--serif);font-size:14px;color:var(--amber);text-transform:none;font-style:italic;}
+.ibox{margin:0 56px 12px;padding:12px 16px;border-left:3px solid var(--amber);background:var(--amber-lt);font-size:12.5px;line-height:1.6;color:#5A3800;}
+.ibox-lbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.14em;display:block;margin-bottom:4px;opacity:.65;}
+
+.wb-topbar{position:fixed;top:0;left:0;right:0;z-index:9999;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;font-family:'IBM Plex Mono','Courier New',monospace;}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;white-space:nowrap;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.1);margin:0 10px;}
+.wb-topbar-links{display:flex;gap:1px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.88);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;transition:all .12s;border:1px solid transparent;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;border-color:rgba(196,122,10,.7);background:rgba(196,122,10,.22);}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.55);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;}
+.wb-push{height:52px;}
+@media(max-width:768px){
+  .nav{padding:0 20px;}.nav-links{display:none;}
+  .hero,.week{padding-left:20px;padding-right:20px;}
+  .day,.ibox{margin-left:20px;margin-right:20px;}
+  .day-meta{margin-left:0;text-align:left;width:100%;}
+  .footer{padding:14px 20px;flex-direction:column;}
+  .wb-topbar-name{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+    <a href="index.html" class="wb-home">⌂ Hub</a>
+    <a href="wima-master-hub.html">Master Hub</a>
+    <a href="wima-campaign-brief.html">Marketing Brief</a>
+    <a href="wima-content-library.html">Content Library<span class="wb-badge">6 ch</span></a>
+    <a href="wima-social-content-library.html">Social Library<span class="wb-badge">Pillars</span></a>
+    <a href="wima-30-day-content-calendar.html" class="wb-active">30-Day Calendar<span class="wb-badge">Ready</span></a>
+    <a href="wima-flyers-launch.html">Flyers &amp; Launch</a>
+  </div>
+</div>
+<div class="wb-push"></div>
+
+<nav class="nav">
+  <div class="nav-brand">Wima — 30-Day Content Calendar</div>
+  <div class="nav-links">
+    <a href="#w1">Week 1</a><a href="#w2">Week 2</a><a href="#w3">Week 3</a><a href="#w4">Week 4</a><a href="#w5">Days 29–30</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eye">Wima Social · First 30 Days · Ready to post · Drywall-with-Jamal launch arc</div>
+  <h1>30 Days of Content —<br><em>ready to post, day by day.</em></h1>
+  <p class="hero-sub">A full month of ready copy, following the six-pillar rotation at a 3:1 value-to-offer ratio, building from trust to the Dry Wall with Jamal launch. Each day names its pillar, platform and format. Swap [number], [area] and photos as needed; every post ends on WhatsApp. Post one per day per platform, batch-film weekly, and review each Sunday by shares and WhatsApp messages started.</p>
+  <div class="legend">
+    <span class="lg edu">● Educate</span><span class="lg insp">● Inspire</span><span class="lg ppl">● People</span>
+    <span class="lg ent">● Entertain</span><span class="lg proof">● Proof</span><span class="lg offer">● Offer</span>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- WEEK 1 -->
+<div class="week" id="w1">
+  <div class="week-eye"><span class="wtag">Week 1</span> Days 1–7</div>
+  <h2>Earn the trust <em>first.</em></h2>
+  <p class="week-arc">No hard selling this week. Establish Wima as the honest guide who saves people from being cheated — introduce the "completeness gap," meet Jamal, and prove the eye for quality. One soft offer only (the free BOQ).</p>
+</div>
+<div class="day edu"><div class="day-head"><span class="day-num">Day 01</span><span class="day-pillar edu">Educate</span><span class="day-meta">Facebook group · post as Gershon</span></div>
+<div class="day-copy">Chale, real talk for anyone building in Accra 🏗️<br>Most stalled, half-finished houses in Ghana didn't run out of money by accident — they ran out because the <strong>first quote left out 30–40% of the real cost.</strong> No itemised list. Just a number on the phone.<br>Before you accept ANY quote, ask one question: "Can you give me an itemised BOQ — every material, by name and price?" If they can't, that's your warning.</div>
+<span class="day-cta">CTA → "Want a free itemised BOQ for your project? WhatsApp us 👇 [number]"</span></div>
+
+<div class="day insp"><div class="day-head"><span class="day-num">Day 02</span><span class="day-pillar insp">Inspire</span><span class="day-meta">Instagram Reel + WhatsApp Status</span></div>
+<div class="day-copy">Bare concrete ceiling, exposed wires ❌ → clean drywall ceiling with recessed lights ✅<br>Same room. One working day. [area], Accra.<br>From GHS 85/m², supply &amp; install.</div>
+<span class="day-cta">CTA → "Send your ceiling size on WhatsApp for a free BOQ in 24 hrs 👇 [number]"</span>
+<span class="day-note">Use a REAL before/after photo — never stock. Post Status version ~7pm GH time.</span></div>
+
+<div class="day ppl"><div class="day-head"><span class="day-num">Day 03</span><span class="day-pillar ppl">People</span><span class="day-meta">Instagram Reel + TikTok</span></div>
+<div class="day-copy">Meet Jamal 👷🏾 — 12 years cutting, fixing and finishing drywall across Accra.<br><em>"People think drywall is just boards on a frame. But a joint you can't see, a corner that's dead straight — that's the difference between a room that looks finished and one that looks cheap."</em><br>Jamal leads every Wima drywall install. This is who's coming to your site.</div>
+<span class="day-cta">CTA → "WhatsApp us to book Jamal's team 👇 [number]"</span>
+<span class="day-note">Jamal is Wima's human face (the Duolingo lesson). This is the drywall launch made personal.</span></div>
+
+<div class="day edu"><div class="day-head"><span class="day-num">Day 04</span><span class="day-pillar edu">Educate</span><span class="day-meta">TikTok / Reel · myth-bust</span></div>
+<div class="day-copy">"Drywall is not strong." — the myth that costs Ghanaians money 🚫<br>Truth: for internal partitions, drywall is faster, cleaner, cheaper to move later, and hides wiring &amp; plumbing neatly. Blockwork has its place — foundations, external walls — but for that extra bedroom or office division? Drywall wins on time and cost.<br>Know which to use where, and you stop overpaying.</div>
+<span class="day-cta">CTA → "Not sure which your project needs? Ask us free on WhatsApp 👇 [number]"</span></div>
+
+<div class="day proof"><div class="day-head"><span class="day-num">Day 05</span><span class="day-pillar proof">Proof</span><span class="day-meta">WhatsApp Status + Facebook · voice note</span></div>
+<div class="day-copy">💬 From a client in [area] this week:<br><em>"I WhatsApped Wima expecting to wait days. The BOQ came the same evening — every line explained. They came when they said they'd come. Ceiling done in one day. No wahala."</em><br>That's the standard. Every time.</div>
+<span class="day-cta">CTA → "Get your free BOQ today 👇 [number]"</span>
+<span class="day-note">Ask clients for a VOICE NOTE, transcribe in their real voice. Always get permission.</span></div>
+
+<div class="day ent"><div class="day-head"><span class="day-num">Day 06</span><span class="day-pillar ent">Entertain</span><span class="day-meta">TikTok / Reel · the Zillow-surfing play</span></div>
+<div class="day-copy">"This Accra home has a drywall feature ceiling you have to see to believe 👀"<br>[Slow pan across a dramatic coffered/curved ceiling with cove lighting.]<br>Yes — this is drywall. Yes — it's in Ghana. No, it didn't cost what you think.<br>Follow for more Ghana builds you won't believe 🏗️</div>
+<span class="day-cta">CTA → soft: "Wima Deal Hub — follow for the good stuff."</span>
+<span class="day-note">Pure entertainment, no hard sell. Built for shares. Window-shoppers become followers.</span></div>
+
+<div class="day offer"><div class="day-head"><span class="day-num">Day 07</span><span class="day-pillar offer">Offer (soft)</span><span class="day-meta">All platforms · the free-tool hook</span></div>
+<div class="day-copy">How much will your ceiling or partition actually cost? Stop guessing 🧮<br>Send your room size on WhatsApp → get a free, itemised BOQ in 24 hours. Every material, every price. No site-visit fee. No obligation.<br>Know your true cost <strong>before</strong> anyone quotes you.</div>
+<span class="day-cta">CTA → "WhatsApp your size now 👇 [number]"</span>
+<span class="day-note">Wima's "Zestimate" — a free tool that pulls everyone in and captures the WhatsApp number.</span></div>
+
+<!-- WEEK 2 -->
+<div class="week" id="w2">
+  <div class="week-eye"><span class="wtag">Week 2</span> Days 8–14</div>
+  <h2>Build authority, <em>go deep on drywall.</em></h2>
+  <p class="week-arc">Now show the expertise and the transformations. Teach people to spot quality, walk them through a real job, and introduce Deal Hub's group-buy idea for the first time.</p>
+</div>
+<div class="day edu"><div class="day-head"><span class="day-num">Day 08</span><span class="day-pillar edu">Educate</span><span class="day-meta">TikTok / Reel · "how to tell in 10 sec"</span></div>
+<div class="day-copy">"You paid for acoustic panels. You got cheap suspended grid. Here's how to tell in 10 seconds 👇"<br>[Two tiles side by side — weight, texture, quick sound test.]<br>Acoustic absorbs sound. Grid reflects it. Your BOQ should name which one, by brand. If it doesn't, don't pay yet.</div>
+<span class="day-cta">CTA → "Free itemised BOQ in 24 hrs — WhatsApp us 👇 [number]"</span></div>
+
+<div class="day insp"><div class="day-head"><span class="day-num">Day 09</span><span class="day-pillar insp">Inspire</span><span class="day-meta">Facebook + Instagram · process carousel</span></div>
+<div class="day-copy">Swipe to watch a bare office shell become two private, sound-separated rooms 👉<br>1: empty shell · 2: steel stud frame · 3: boards up · 4: taped &amp; jointed · 5: finished, furnished, in use.<br>Drywall partition, from GHS 85/m². One day.</div>
+<span class="day-cta">CTA → "WhatsApp your floor plan for a free BOQ 👇 [number]"</span></div>
+
+<div class="day ppl"><div class="day-head"><span class="day-num">Day 10</span><span class="day-pillar ppl">People</span><span class="day-meta">Instagram Reel + Status · a day on site</span></div>
+<div class="day-copy">A day on site with Jamal's team ⏱️<br>7am: measure &amp; mark. 9am: frame up. 12pm: boards fixed. 3pm: jointing. 5pm: clean site, room done.<br>No dust everywhere for a week. No "come back tomorrow" for a month. One day, done properly.</div>
+<span class="day-cta">CTA → "Book a one-day install 👇 [number]"</span></div>
+
+<div class="day edu"><div class="day-head"><span class="day-num">Day 11</span><span class="day-pillar edu">Educate</span><span class="day-meta">Facebook + carousel · saveable</span></div>
+<div class="day-copy">5 questions to ask BEFORE you hire any contractor in Ghana 📋<br>1. Can I see an itemised BOQ? 2. Is installation included in this price? 3. Who exactly is on site — can I meet them? 4. What's the timeline in writing? 5. What happens if something's wrong after?<br>Save this. Screenshot it. Use it on your next quote.</div>
+<span class="day-cta">CTA → "Wima answers all 5 upfront. WhatsApp us 👇 [number]"</span>
+<span class="day-note">Saveable checklists get bookmarked and shared (Houzz lesson).</span></div>
+
+<div class="day proof"><div class="day-head"><span class="day-num">Day 12</span><span class="day-pillar proof">Proof</span><span class="day-meta">Facebook + Instagram · mini case study</span></div>
+<div class="day-copy">Case study: a 2-bedroom in [area] needed a home office — fast.<br>Problem: open living room, no privacy, working from home.<br>Wima: drywall partition + door + soundproofing. BOQ in 24 hrs, install in 1 day. Total: GHS [X].<br>Result: a real, quiet office — for a fraction of building a block wall.</div>
+<span class="day-cta">CTA → "Need a room divided? WhatsApp us 👇 [number]"</span></div>
+
+<div class="day ent"><div class="day-head"><span class="day-num">Day 13</span><span class="day-pillar ent">Entertain</span><span class="day-meta">TikTok / Reel · satisfying install</span></div>
+<div class="day-copy">The most satisfying 15 seconds on your feed today 😌<br>[Fast, satisfying clip: board snapping clean on the score line, joint compound smoothing to glass, light flicking on.]<br>Drywall, done right. Sound on for the snap 🔊</div>
+<span class="day-cta">CTA → soft: "Wima Deal Hub 🏗️ Follow for more."</span>
+<span class="day-note">"Oddly satisfying" content travels far. Entertain, don't sell.</span></div>
+
+<div class="day offer"><div class="day-head"><span class="day-num">Day 14</span><span class="day-pillar offer">Offer</span><span class="day-meta">WhatsApp community first · then Status/FB</span></div>
+<div class="day-copy">Introducing <strong>Wima Deal Hub</strong> 🤝<br>Here's the idea: when builders buy materials <strong>together</strong>, we all get a better price than any of us could alone. Cement, boards, rods — pooled orders, lower cost.<br>Buy together, save 5–10%. First group-buy drops soon — join the community to get it first.</div>
+<span class="day-cta">CTA → "Reply 'DEALS' to join the Deal Hub community 👇 [number]"</span>
+<span class="day-note">The Infra.Market aggregation model, made plain. Builds the list for later drops.</span></div>
+
+<!-- WEEK 3 -->
+<div class="week" id="w3">
+  <div class="week-eye"><span class="wtag">Week 3</span> Days 15–21</div>
+  <h2>Speak to the <em>diaspora</em>, widen the lens.</h2>
+  <p class="week-arc">Bring in the diaspora audience (their fear is betrayal from afar), broaden beyond drywall to the wider offer, and grow the WhatsApp community ahead of the launch.</p>
+</div>
+<div class="day edu"><div class="day-head"><span class="day-num">Day 15</span><span class="day-pillar edu">Educate</span><span class="day-meta">Facebook (diaspora groups) + LinkedIn</span></div>
+<div class="day-copy">Building in Ghana from the UK, US or Canada? Read this before you send another pesewa 🌍<br>The #1 way diaspora money disappears: no itemised BOQ + no independent eyes on site. You send money for "the ceiling," but who verified the spec? Who checked the work?<br>Never fund a stage you can't see. Insist on an itemised BOQ and photo/video proof at every milestone.</div>
+<span class="day-cta">CTA → "Wima sends milestone photos + verified BOQs. WhatsApp us 👇 [number]"</span></div>
+
+<div class="day insp"><div class="day-head"><span class="day-num">Day 16</span><span class="day-pillar insp">Inspire</span><span class="day-meta">Instagram + Facebook · diaspora reveal</span></div>
+<div class="day-copy">Built and finished while the owner was in London 🇬🇧→🇬🇭<br>Every stage sent by WhatsApp: frame, boards, jointing, lighting, final reveal. She saw it all before she flew home to the keys.<br>This is how you build from abroad without the fear.</div>
+<span class="day-cta">CTA → "Building from abroad? Let's talk 👇 [number]"</span></div>
+
+<div class="day ppl"><div class="day-head"><span class="day-num">Day 17</span><span class="day-pillar ppl">People</span><span class="day-meta">Instagram + Facebook · the makers</span></div>
+<div class="day-copy">Behind every clean Wima finish is a master craftsman 👏🏾<br>Meet [name], our master tiler — 15 years, and an eye that catches a 2mm misalignment from across the room.<br>Wima works with vetted craftsmen only. Skill you can see, people you can trust.</div>
+<span class="day-cta">CTA → "Need vetted hands on your project? WhatsApp us 👇 [number]"</span></div>
+
+<div class="day ent"><div class="day-head"><span class="day-num">Day 18</span><span class="day-pillar ent">Entertain</span><span class="day-meta">TikTok / Reel · dream build</span></div>
+<div class="day-copy">Rate this Accra ceiling 1–10 👇 (be honest)<br>[Reveal a striking multi-level drywall ceiling with cove lighting and a feature pendant.]<br>Drop your score in the comments. Follow if you'd want this in your own home 🏠</div>
+<span class="day-cta">CTA → soft: engagement-first, "Wima Deal Hub."</span>
+<span class="day-note">"Rate this 1–10" drives comments = reach. Two-way engagement (Duolingo).</span></div>
+
+<div class="day proof"><div class="day-head"><span class="day-num">Day 19</span><span class="day-pillar proof">Proof</span><span class="day-meta">WhatsApp Status + Facebook · diaspora voice</span></div>
+<div class="day-copy">💬 From a client in Toronto 🇨🇦:<br><em>"I've been burned before — sent money home, got excuses. With Wima I got photos at every stage and a BOQ I actually understood. First time I've trusted a build in Ghana from this far."</em></div>
+<span class="day-cta">CTA → "Build from abroad with proof at every step 👇 [number]"</span></div>
+
+<div class="day edu"><div class="day-head"><span class="day-num">Day 20</span><span class="day-pillar edu">Educate</span><span class="day-meta">Facebook + carousel · widen the offer</span></div>
+<div class="day-copy">Your ceiling isn't just for looks — it's working harder than you think 🌡️<br>The right ceiling + insulation cuts heat, cuts noise, and cuts your fan/AC bill. A bare concrete soffit radiates heat all evening. A proper insulated drywall ceiling keeps rooms cooler for less.<br>Comfort and lower bills — from one upgrade.</div>
+<span class="day-cta">CTA → "Ask about insulated ceilings 👇 [number]"</span></div>
+
+<div class="day offer"><div class="day-head"><span class="day-num">Day 21</span><span class="day-pillar offer">Offer</span><span class="day-meta">WhatsApp-first · community invite</span></div>
+<div class="day-copy">🚪 The Wima community gets everything first.<br>Free BOQs, deal drops, price updates, build tips — before anyone else, straight to WhatsApp. No spam, leave anytime.<br>Something big drops next week. You'll want to be inside for it.</div>
+<span class="day-cta">CTA → "Reply 'JOIN' to get in before the launch 👇 [number]"</span>
+<span class="day-note">Build the list NOW so the Week-4 launch drops into a full room (WhatsApp-first lesson).</span></div>
+
+<!-- WEEK 4 -->
+<div class="week" id="w4">
+  <div class="week-eye"><span class="wtag">Week 4</span> Days 22–28</div>
+  <h2>Launch: <em>Dry Wall with Jamal.</em></h2>
+  <p class="week-arc">Now the community is warm — launch. Tease it, reveal the hero transformation, put Jamal front and centre, stack the proof, and drop the first real Deal Hub offer to the community first.</p>
+</div>
+<div class="day edu"><div class="day-head"><span class="day-num">Day 22</span><span class="day-pillar edu">Educate</span><span class="day-meta">All platforms · launch tease</span></div>
+<div class="day-copy">Why is drywall taking over Accra builds? Three reasons 👇<br>⚡ Speed — a room in a day, not a month. 💰 Cost — often less than blockwork once you count labour &amp; time. 🧹 Clean — no cement dust living in your house for weeks.<br>Something is launching this week to make it easier than ever. Watch this space 👀</div>
+<span class="day-cta">CTA → "Reply 'WALL' to be first to hear 👇 [number]"</span></div>
+
+<div class="day insp"><div class="day-head"><span class="day-num">Day 23</span><span class="day-pillar insp">Inspire</span><span class="day-meta">Instagram Reel + Status · hero before/after</span></div>
+<div class="day-copy">THE reveal. Bare shell → finished, lit, lived-in — in one working day 🤯<br>[Your best, most dramatic before/after. Full transformation, slow reveal, real lighting.]<br>This is what Dry Wall with Jamal does. Launching now.</div>
+<span class="day-cta">CTA → "WhatsApp 'JAMAL' for a free BOQ 👇 [number]"</span>
+<span class="day-note">Your single strongest before/after goes here — the launch hero.</span></div>
+
+<div class="day ppl"><div class="day-head"><span class="day-num">Day 24</span><span class="day-pillar ppl">People</span><span class="day-meta">All platforms · THE launch post</span></div>
+<div class="day-copy">🎉 It's here: <strong>Dry Wall with Jamal.</strong><br>Master-craftsman drywall — partitions, ceilings, features — supplied and installed, with an itemised BOQ in 24 hours and most jobs done in a day. Jamal on every site.<br>From GHS 85/m². Accra, Tema &amp; Kumasi.</div>
+<span class="day-cta">CTA → "WhatsApp your size for your free BOQ today 👇 [number]"</span>
+<span class="day-note">The flagship launch post. Pin it. Boost it (Day-24 organic winner → paid).</span></div>
+
+<div class="day proof"><div class="day-head"><span class="day-num">Day 25</span><span class="day-pillar proof">Proof</span><span class="day-meta">Facebook + Instagram · stacked results</span></div>
+<div class="day-copy">Since we started, here's what clients keep saying 💬<br>"Same-day BOQ." · "Came when they said." · "Done in a day." · "No dust, no wahala." · "First build I trusted from abroad."<br>Three things every time: an honest BOQ, real craftsmen, and we show up. That's the whole promise.</div>
+<span class="day-cta">CTA → "Join them — WhatsApp us 👇 [number]"</span></div>
+
+<div class="day ent"><div class="day-head"><span class="day-num">Day 26</span><span class="day-pillar ent">Entertain</span><span class="day-meta">TikTok / Reel · behind the scenes</span></div>
+<div class="day-copy">POV: it's launch week and Jamal's team is moving 🏃🏾‍♂️<br>[Fast, fun BTS montage — measuring, laughing, boards flying up, a finished room reveal, a fist-bump.]<br>This is the crew coming to your site. Real people, real work, real fast.</div>
+<span class="day-cta">CTA → soft: "Dry Wall with Jamal — WhatsApp us to book."</span></div>
+
+<div class="day edu"><div class="day-head"><span class="day-num">Day 27</span><span class="day-pillar edu">Educate</span><span class="day-meta">Facebook + carousel · FAQ / objections</span></div>
+<div class="day-copy">"But is drywall strong enough?" — your top questions, answered 🙋<br>Q: Will it hold a TV? Yes — with proper backing/anchors, no problem. Q: Waterproof? We use moisture-resistant board for kitchens/baths. Q: Soundproof? Add insulation for near-total sound separation. Q: How long? Most rooms, one day.<br>Any other question? Ask below or on WhatsApp.</div>
+<span class="day-cta">CTA → "Still unsure? Ask us free 👇 [number]"</span>
+<span class="day-note">Answering objections removes the last barrier before buying.</span></div>
+
+<div class="day offer"><div class="day-head"><span class="day-num">Day 28</span><span class="day-pillar offer">Offer</span><span class="day-meta">WhatsApp community FIRST · then all</span></div>
+<div class="day-copy">🚨 Community-only, 72 hours: <strong>launch drywall offer</strong><br>Book your Dry Wall with Jamal install this week and lock launch pricing + a free upgrade to moisture-resistant board in wet areas.<br>Community gets this first — that's the reward for being inside.</div>
+<span class="day-cta">CTA → "Reply 'BOOK' to claim launch pricing 👇 [number]"</span>
+<span class="day-note">Drop to the WhatsApp community FIRST (the +45% launch-day-revenue pattern).</span></div>
+
+<!-- DAYS 29-30 -->
+<div class="week" id="w5">
+  <div class="week-eye"><span class="wtag">Days 29–30</span> Close the loop</div>
+  <h2>Recap, thank, <em>and set up month two.</em></h2>
+  <p class="week-arc">End the month on proof and community — celebrate the wins, then point everyone to the free BOQ and the community for what's next.</p>
+</div>
+<div class="day proof"><div class="day-head"><span class="day-num">Day 29</span><span class="day-pillar proof">Proof</span><span class="day-meta">All platforms · month recap</span></div>
+<div class="day-copy">One month in — thank you, Accra 🙏🏾<br>Free BOQs sent. Rooms transformed in a day. A community of builders who buy smarter, together. And Jamal's team just getting started.<br>To everyone who trusted us: this is only the beginning.</div>
+<span class="day-cta">CTA → "Not yet inside? Reply 'JOIN' 👇 [number]"</span></div>
+
+<div class="day offer"><div class="day-head"><span class="day-num">Day 30</span><span class="day-pillar offer">Offer + Educate</span><span class="day-meta">All platforms · evergreen anchor</span></div>
+<div class="day-copy">Whatever you're building next, start the same way: <strong>know your true cost.</strong> 🧮<br>Send your size on WhatsApp → free itemised BOQ in 24 hours. No fee, no obligation, no wahala.<br>And join the Wima community for deals, tips and drywall done right — every week.</div>
+<span class="day-cta">CTA → "WhatsApp your size 👇 [number]"</span>
+<span class="day-note">Evergreen post — reuse it monthly. The free BOQ is the always-on hook.</span></div>
+
+<div class="ibox"><span class="ibox-lbl">How to run this month</span>Batch-film Week 1's videos in one session before Day 1, and stay one week ahead throughout. Post one piece per platform per day at Ghana peak times (6–9pm). Reply to every comment and WhatsApp in the first hour. Each Sunday, rank posts by <strong>shares and WhatsApp messages started</strong> (not views), and let the winners shape month two. When Drywall is established, repeat this exact arc for Kabinart (kitchens), then the Aquarium division.</div>
+
+</div><!-- end page -->
+
+<div class="footer">
+  <span class="footer-brand">Wima — 30-Day Content Calendar</span>
+  <span>Companion to the Social Content Library · Pillar rotation at 3:1 · Drywall-with-Jamal launch arc</span>
+  <span>Applies: Houzz · Livspace · Zillow · Duolingo · WhatsApp commerce · Infra.Market</span>
+</div>
+
+<script>
+const links=document.querySelectorAll('.nav-links a[href^="#"]');
+const secs=document.querySelectorAll('.week[id]');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-15% 0px -75% 0px'});
+secs.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
