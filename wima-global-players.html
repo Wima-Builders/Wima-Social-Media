@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — Learning from Houzz, Livspace &amp; Global Players</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;--bg-2:#1b1611;--bg-3:#221c16;--line:#332a22;--line-2:#463a2e;
+    --ink:#f3ece2;--ink-2:#c6b8a6;--ink-3:#8a7b68;
+    --ochre:#e0a54e;--ochre-deep:#c07f2c;--blueprint:#6fb0c9;--clay:#c76b4a;--green:#7fa66a;--violet:#a98fd0;
+    --maxw:1080px;--serif:"Fraunces","Georgia",serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:inherit}button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:5px}
+  .topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:14px;padding:14px 26px;background:rgba(20,16,13,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logomark{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));color:#1a130a;font-family:var(--serif);font-weight:700;font-size:17px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:15px}.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .topbar nav{margin-left:auto;display:flex;gap:15px;font-size:13px;color:var(--ink-2)}
+  .topbar nav a{text-decoration:none}.topbar nav a:hover{color:var(--ochre)}
+  @media(max-width:900px){.topbar{flex-wrap:wrap}.topbar nav{order:3;width:100%;margin-left:0;overflow-x:auto;gap:18px;padding:8px 2px 2px}.topbar nav a{flex:0 0 auto}.topbar nav::-webkit-scrollbar{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.13;margin:0}
+  h2{font-size:clamp(24px,3.6vw,35px);margin-bottom:16px}
+  h3{font-size:20px;margin-bottom:10px}
+  p{margin:0 0 14px;color:var(--ink-2)}p strong{color:var(--ink);font-weight:600}
+  .lead{font-size:18px;color:var(--ink);max-width:74ch}
+  .muted{color:var(--ink-3);font-size:12.5px}
+  ul{margin:0 0 12px;padding-left:20px}li{color:var(--ink-2);margin-bottom:6px}li strong{color:var(--ink)}
+
+  .hero{padding:84px 0 58px;border-bottom:1px solid var(--line);background:radial-gradient(1000px 460px at 84% -12%,rgba(224,165,78,.17),transparent 60%),radial-gradient(700px 380px at 0% 116%,rgba(111,176,201,.08),transparent 55%)}
+  .hero .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:20px}
+  .hero h1{font-size:clamp(31px,5.4vw,52px);max-width:19ch;margin-bottom:22px}
+  .hero h1 em{font-style:normal;color:var(--ochre)}
+  .hero .sub{font-size:19px;color:var(--ink-2);max-width:64ch}
+
+  /* case profiles */
+  .case{border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:26px;margin-bottom:16px;position:relative;overflow:hidden}
+  .case::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+  .case.houzz::before{background:var(--blueprint)}.case.liv::before{background:var(--ochre)}.case.zillow::before{background:var(--violet)}
+  .case .ch{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .case h3{font-size:23px}
+  .case .tag{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid var(--line-2);color:var(--ink-2)}
+  .case .sub{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-bottom:14px}
+  .stats{display:flex;flex-wrap:wrap;gap:20px;margin:14px 0 16px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stats div{min-width:90px}
+  .stats .n{font-family:var(--serif);font-size:22px;line-height:1}
+  .case.houzz .stats .n{color:var(--blueprint)}.case.liv .stats .n{color:var(--ochre)}.case.zillow .stats .n{color:var(--violet)}
+  .stats .l{font-size:11.5px;color:var(--ink-3);margin-top:5px}
+  .case p{font-size:14px}
+  .case .take{border-left:3px solid var(--green);padding:6px 0 6px 16px;margin-top:12px;font-size:14px}
+  .case .take b{color:var(--green);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+  /* tabs */
+  .tabs{display:inline-flex;border:1px solid var(--line-2);border-radius:24px;padding:4px;background:var(--bg-3);margin-bottom:22px;gap:4px;flex-wrap:wrap}
+  .tabs button{border:none;background:transparent;color:var(--ink-2);padding:9px 18px;border-radius:20px;font-family:var(--mono);font-size:12px;cursor:pointer;transition:.2s}
+  .tabs button.active{background:var(--ochre);color:#1a130a;font-weight:600}
+  .lessons{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.lessons{grid-template-columns:1fr}}
+  .lesson{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:20px}
+  .lesson .src{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--blueprint);margin-bottom:8px}
+  .lesson h4{font-family:var(--serif);font-size:16px;margin-bottom:6px}
+  .lesson p{font-size:13.5px;margin:0 0 10px}
+  .lesson .w{font-size:13px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:9px}
+  .lesson .w b{color:var(--green);font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+  .also{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:820px){.also{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:20px}
+  .card h4{font-family:var(--serif);font-size:16px;margin-bottom:6px}
+  .card .t{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);margin-bottom:8px}
+  .card p{font-size:13px;margin:0}
+
+  .split{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  @media(max-width:760px){.split{grid-template-columns:1fr}}
+  .box{border-radius:14px;padding:20px;border:1px solid var(--line)}
+  .box.copy{background:rgba(127,166,106,.06);border-color:rgba(127,166,106,.35)}
+  .box.adapt{background:rgba(224,165,78,.06);border-color:rgba(224,165,78,.35)}
+  .box.avoid{background:rgba(199,107,74,.06);border-color:rgba(199,107,74,.35)}
+  .box .bl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+  .box.copy .bl{color:var(--green)}.box.adapt .bl{color:var(--ochre)}.box.avoid .bl{color:var(--clay)}
+  .box ul{padding-left:17px;margin:0}.box li{font-size:13px;margin-bottom:8px}
+
+  .callout{border:1px solid var(--line-2);border-radius:14px;padding:22px 24px;background:linear-gradient(150deg,rgba(224,165,78,.07),var(--bg-3));margin-top:8px}
+  .callout .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:9px}
+  .callout p:last-child{margin-bottom:0}
+  .thesis{font-family:var(--serif);font-size:20px;color:var(--ink);font-style:italic;line-height:1.4}
+
+  footer{padding:40px 0 60px;color:var(--ink-3)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .fdisc{font-size:12px;color:var(--ink-3);max-width:82ch;margin-top:12px;line-height:1.5}
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" title="Back to the hub" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit"><div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>Research · Global Players</span></div></a>
+  <nav><a href="#houzz">Houzz</a><a href="#livspace">Livspace</a><a href="#zillow">Zillow</a><a href="#lessons">Lessons</a><a href="#synthesis">Copy / Avoid</a></nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Document 18 · Research · Learn From Global Players</div>
+    <h1>Three companies already solved Wima's problem — <em>one rich, one just like Ghana, one that owns the data</em>.</h1>
+    <p class="sub">Houzz shows what a home-and-build platform becomes at maturity. Livspace shows how to organise a fragmented, low-trust, contractor-dominated market — the exact conditions in Ghana. Zillow shows how to dominate with free tools, owned data, and content people browse for fun. Here's what each teaches.</p>
+  </div>
+</header>
+
+<!-- HOUZZ -->
+<section id="houzz">
+  <div class="wrap">
+    <p class="eyebrow">Case Study 1 · The Mature Vision</p>
+    <div class="case houzz">
+      <div class="ch"><h3>Houzz</h3><span class="tag">USA · founded 2009</span></div>
+      <div class="sub">Started by a couple renovating their own home — the pain point became the platform</div>
+      <div class="stats">
+        <div><div class="n">40M+</div><div class="l">monthly active users</div></div>
+        <div><div class="n">90%</div><div class="l">are homeowners</div></div>
+        <div><div class="n">2.7M+</div><div class="l">pro accounts</div></div>
+        <div><div class="n">~15%</div><div class="l">marketplace commission</div></div>
+      </div>
+      <p>Houzz is a search engine + social network + forum + marketplace, laser-focused on home. Its genius is turning <strong>inspiration into intent</strong>: users collect photos in "Ideabooks," then hire the pros and buy the products in those very images. Trust is engineered through <strong>Best of Houzz badges</strong> (community-rated), reviews, and answered questions. Keyword-tagged project photos rank on Google — some pros say 65% of their web traffic comes from Houzz.</p>
+      <div class="take"><b>The takeaway for Wima</b>Content isn't decoration — it's the top of the funnel. Save-worthy, keyword-tagged visual project content becomes both social proof and a search-traffic machine that feeds the marketplace beneath it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVSPACE -->
+<section id="livspace" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Case Study 2 · The Emerging-Market Mirror</p>
+    <div class="case liv">
+      <div class="ch"><h3>Livspace</h3><span class="tag">India / SEA · founded 2014</span></div>
+      <div class="sub">Organised a fragmented, low-trust, contractor-dominated home market — Ghana's exact conditions</div>
+      <div class="stats">
+        <div><div class="n">150K+</div><div class="l">homes delivered by 2025</div></div>
+        <div><div class="n">$1.2B</div><div class="l">valuation (IKEA-backed)</div></div>
+        <div><div class="n">2M+</div><div class="l">monthly blog/YouTube visits</div></div>
+        <div><div class="n">$50M</div><div class="l">bookings in one 30-day festival</div></div>
+      </div>
+      <p>Livspace's insight was that in a low-trust market, <strong>a purely online approach can't win</strong> — so it went hybrid: digital demand-gen plus offline Experience Centers where nervous homeowners touch materials and meet designers. Its marketing dramatised the <strong>pain</strong> ("Don't Try This At Home" — disappearing contractors, creeping costs, crumbling materials) then positioned itself as the stress-free expert. It segments leads by budget and property type for hyper-personalised <strong>email and WhatsApp catalogs</strong>, and runs e-commerce-style <strong>festivals</strong> with cashback and financing.</p>
+      <div class="take"><b>The takeaway for Wima</b>This is the closest thing to a Wima blueprint that exists. Hybrid online+offline for trust, pain-point storytelling, WhatsApp-native selling, and seasonal deal festivals — all proven in a market that looks like Ghana.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ZILLOW -->
+<section id="zillow">
+  <div class="wrap">
+    <p class="eyebrow">Case Study 3 · The Data &amp; Dominance Play</p>
+    <div class="case zillow">
+      <div class="ch"><h3>Zillow</h3><span class="tag">USA · founded 2006</span></div>
+      <div class="sub">Dominated with a free data tool, owned data, and content people browse for fun — then got burned owning inventory</div>
+      <div class="stats">
+        <div><div class="n">50%+</div><div class="l">of US real-estate portal traffic</div></div>
+        <div><div class="n">217M</div><div class="l">monthly unique users</div></div>
+        <div><div class="n">104M</div><div class="l">homes valued by Zestimate</div></div>
+        <div><div class="n">$200M+</div><div class="l">write-down when it tried to own homes</div></div>
+      </div>
+      <p>Zillow's wedge is the <strong>Zestimate</strong> — a free, instant value estimate on ~104 million homes, powered by data. It costs the user nothing, so everyone uses it, and Zillow became the household name and the default — over half of all US portal traffic, more than double its nearest rival. Everything stays <strong>free for consumers</strong>; Zillow <strong>monetises the professionals</strong> instead — agents pay for leads (Premier Agent), plus mortgage, rentals and data tools. And it turned browsing into entertainment: <strong>"Zillow surfing"</strong> and the fan-made <strong>Zillow Gone Wild</strong> made scrolling listings a national pastime — most viewers never intending to buy.</p>
+      <div class="take"><b>The takeaway for Wima</b>Give away a free data tool (a BOQ/cost calculator is Wima's Zestimate), <strong>own the data</strong> it generates, keep it free for builders, and monetise the supply side (suppliers, pros, banks). Make content browsable for fun, not just for buyers.</div>
+    </div>
+    <div class="callout clay" style="margin-top:18px;border:1px solid rgba(199,107,74,.35);border-radius:14px;padding:22px 24px;background:linear-gradient(150deg,rgba(199,107,74,.09),var(--bg-3))">
+      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:9px">⚠ The cautionary tale — read this twice</div>
+      <p style="margin:0;color:var(--ink-2)">Zillow had the best data in the industry and still <strong>lost hundreds of millions</strong> when it launched <strong>Zillow Offers</strong> — buying, renovating and reselling homes itself. The algorithm mispriced, the inventory piled up, and it shut the program down in 2021 with a $200M+ write-down. The lesson is the spine of Wima's whole strategy: <strong>even the data king got burned the moment it started owning the buildings.</strong> Own the data and the flow — not the inventory. Stay asset-light.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LESSONS -->
+<section id="lessons">
+  <div class="wrap">
+    <p class="eyebrow">The Lessons · Your Three Areas</p>
+    <h2>Social media, marketing, email &amp; data — distilled and mapped to Wima</h2>
+    <p class="lead" style="margin-bottom:20px">Switch between the areas. Each lesson shows which company proved it and exactly how Wima applies it.</p>
+    <div class="tabs" id="tabs">
+      <button data-t="social" class="active">Social Media</button>
+      <button data-t="marketing">Marketing</button>
+      <button data-t="email">Email Marketing</button>
+      <button data-t="data">Data &amp; Monetization</button>
+    </div>
+    <div class="lessons" id="lessonGrid"></div>
+  </div>
+</section>
+
+<!-- ALSO STUDY -->
+<section id="also" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Also Worth Studying</p>
+    <h2>Three more, for specific moves</h2>
+    <div class="also">
+      <div class="card"><div class="t">Visual discovery</div><h4>Pinterest</h4><p>Home content gets <strong>saved for future projects</strong> and is searchable for years. Treat social posts as an evergreen, keyword-tagged library — not disposable updates.</p></div>
+      <div class="card"><div class="t">Services marketplace</div><h4>Angi / Thumbtack</h4><p><strong>Reviews and vetting are the trust engine</strong> that lets homeowners hire strangers. Wima's vetted-execution ratings and guarantees are the same mechanism.</p></div>
+      <div class="card"><div class="t">Content &amp; aspiration</div><h4>IKEA</h4><p>Aspirational <strong>yet accessible</strong> — room sets, how-tos, affordable dreams. (Not incidentally, IKEA's Ingka backed Livspace.) Inspiration plus practicality plus price.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SYNTHESIS -->
+<section id="synthesis">
+  <div class="wrap">
+    <p class="eyebrow">The Synthesis</p>
+    <h2>What Wima copies, adapts, and avoids</h2>
+    <div class="split">
+      <div class="box copy">
+        <div class="bl">✓ Copy directly</div>
+        <ul>
+          <li>Pain-point storytelling (Livspace) — dramatise the diaspora betrayal &amp; the stalled build</li>
+          <li>Before/after + save-worthy visual content (Houzz/Pinterest)</li>
+          <li>Segmented, personalised email &amp; WhatsApp (both)</li>
+          <li>Seasonal deal festivals with incentives (Livspace)</li>
+          <li>Community Q&amp;A as authority-building content (Houzz)</li>
+          <li>A free data tool as the acquisition hook; own the data (Zillow)</li>
+          <li>Free for builders, monetise the supply side (Zillow)</li>
+        </ul>
+      </div>
+      <div class="box adapt">
+        <div class="bl">◆ Adapt for Ghana</div>
+        <ul>
+          <li>Hybrid online + offline — Livspace's Experience Centers → Wima build clinics &amp; showroom corners</li>
+          <li>Email-first (Houzz) → WhatsApp-first for locals, email for the diaspora</li>
+          <li>Trust badges (Best of Houzz) → Wima verified-pro &amp; verified-materials badges</li>
+          <li>Zestimate (Zillow) → a Ghana build-cost / BOQ calculator as Wima's free hook</li>
+          <li>"Zillow surfing" entertainment → dream-build &amp; reveal content for browsers</li>
+        </ul>
+      </div>
+      <div class="box avoid">
+        <div class="bl">✕ Avoid</div>
+        <ul>
+          <li><strong>Owning / flipping inventory — Zillow lost $200M+ doing it. Stay asset-light.</strong></li>
+          <li>Spreading across too many revenue lines too early (Houzz stretched thin, 2019 layoffs)</li>
+          <li>Scaling high-touch service faster than quality can hold (Livspace's cross-city variability)</li>
+          <li>Big-media spend before you have mass scale (Livspace deliberately delayed TV)</li>
+          <li>Copying US email cadence — Ghana is WhatsApp-first</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:20px">
+      <div class="lbl">The one line to hold</div>
+      <p class="thesis">Houzz proves where this can go; Livspace proves it works in a market like ours; Zillow proves you win by owning the data and the flow — and lose the moment you try to own the buildings. Wima runs the emerging-market playbook on the build-and-stay layer, gives away the tools, keeps the data, and never touches inventory.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">Wima Builders — Learning from Global Players</div>
+      <div class="fdisc">Houzz, Livspace and Zillow facts from public sources (Houzz/Livspace analyses via Venveo, HubSpot, WebFX, Digitofy, TheStrategyStory; Zillow via its investor filings, Business Strategy Hub, Sharetribe, CBS/Salon/Time/Washingtonian reporting on "Zillow surfing" and Zillow Gone Wild, 2020–2026). Figures are as publicly reported and change over time. Lessons are analytical, adapted to Ghanaian conditions; validate against Wima's own audience data. Companion to Documents 09 &amp; 15–17, Wima Ecosystem Hub.</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Document 18 · Wima Ecosystem Hub</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var L={
+    social:[
+      {src:"Houzz",h:"Turn inspiration into a searchable library",p:"Houzz's keyword-tagged project photos rank on Google and get saved in Ideabooks — content that works for years, not a day.",w:"Tag every before/after, site walk-through and finished project with build-intent keywords. Treat your feed as an evergreen, searchable body of proof."},
+      {src:"Houzz",h:"Answering questions IS content",p:"On Houzz, pros who answer community questions win exposure and authority — the algorithm rewards helpfulness.",w:"Be the most useful voice in WhatsApp groups, comment sections and diaspora forums. Every good answer is a trust deposit and free reach."},
+      {src:"Livspace",h:"Influencer &amp; client home tours",p:"Livspace uses creator-led home tours for visual storytelling and social proof at scale.",w:"Film real client reveals and let community pros (masons, designers) host. Real projects out-convert any polished ad."},
+      {src:"Pinterest / Houzz",h:"Before/after is the killer format",p:"The home industry runs on transformation imagery — the single most saved and shared content type.",w:"Make before/after the backbone of Wima's visual content: stalled build → finished home, empty house → earning short-let."},
+      {src:"Zillow",h:"Make browsing entertainment, not just shopping",p:"\"Zillow surfing\" — scrolling homes with no intent to buy — became a national pastime, and fan-made Zillow Gone Wild (2M+ followers) grew into a TV show. Property content is entertainment.",w:"Post dream builds, jaw-dropping reveals, and 'you won't believe this Ghanaian home' content. Entertain the window-shoppers too — they become the audience you monetise later, and they share."}
+    ],
+    marketing:[
+      {src:"Livspace",h:"Dramatise the pain, then be the fix",p:"\"Don't Try This At Home\" turned disappearing contractors and creeping costs into humour — a 40% jump in lead inquiries — then positioned Livspace as the stress-free expert.",w:"Wima's stories write themselves: the relative who misused the money, the quote that left out 30% of the cost, the half-built house. Dramatise the pain, then show the fix."},
+      {src:"Livspace",h:"Go hybrid — online can't build trust alone",p:"In a low-trust market Livspace paired digital with offline Experience Centers where homeowners touch materials and meet designers.",w:"Run build clinics, diaspora webinars, a Deal Hub showroom corner, and live site tours. Digital reach + tangible trust beats digital alone in Ghana."},
+      {src:"Livspace",h:"Seasonal deal festivals",p:"The 'Great Home Interiors Festival' — bundles, cashback, 0% financing — booked $50M in 30 days.",w:"Wima's live deal drops and seasonal pushes (Detty December, finish-before-Christmas) with group-buy pricing and finance options."},
+      {src:"Livspace",h:"Match the channel to your scale",p:"Livspace deliberately avoided TV early ('huge spill-over' for six markets) and stayed on focused digital until mass scale justified broad media.",w:"Don't overspend on broad media. Audience-first, targeted WhatsApp/TikTok/geo-ads until Wima has the scale that justifies more."},
+      {src:"Houzz + Livspace",h:"Transparency as the marketing message",p:"Both sell certainty — transparent pricing, warranties, managed projects — against a chaotic, opaque market.",w:"Wima's whole promise: 'You'll know the true cost, and you won't be cheated.' Make certainty the headline, not a footnote."}
+    ],
+    email:[
+      {src:"Houzz",h:"Segment by need, stage &amp; geography",p:"Houzz's lifecycle team segments hard: bathroom vs kitchen renovators, reluctant clients get time-limited offers, trade-show leads get personalised follow-ups.",w:"Segment Wima's list: diaspora vs local; planning vs building vs finishing; new-build vs renovation vs short-let. Send each the message that fits their moment."},
+      {src:"Houzz",h:"Useful content, not adverts",p:"Houzz's rule: emails build trust with genuinely useful content (trends, guides, short videos, past projects) — the promotion rides along, it doesn't lead.",w:"Wima's nurture emails lead with value — land-verification guides, cost breakdowns, milestone-payment explainers — with the offer as the quiet next step."},
+      {src:"Livspace",h:"Personalised nurture + WhatsApp catalogs",p:"Livspace uses CRM/ML to send hyper-personalised design inspirations and offers by email AND WhatsApp catalog, matched to budget and property type.",w:"Pair email with WhatsApp: email for the diaspora (who expect it), WhatsApp broadcast + catalogs for locals. Personalise by budget and project."},
+      {src:"Houzz",h:"Put partners on the list, not just clients",p:"Houzz advises including collaborators — suppliers, photographers, journalists — so the newsletter nurtures the whole ecosystem, not only buyers.",w:"Wima's list includes vetted pros, suppliers, and bank partners — the newsletter keeps the whole ecosystem warm, not just customers."},
+      {src:"Houzz",h:"Surveys close the loop",p:"Houzz uses email surveys to learn what the audience wants and adjust — feedback people give on a commute that they won't give on a call.",w:"Send short surveys after each project and to the audience — let real answers tell Wima which fears and offers to lead with next."}
+    ],
+    data:[
+      {src:"Zillow",h:"A free data tool is the hook",p:"Zillow's Zestimate gives a free instant value on ~104M homes. It costs the user nothing, so everyone uses it — making Zillow the default and a household name, with 50%+ of US portal traffic.",w:"Wima's BOQ calculator and cost estimator ARE the Zestimate: free tools that pull everyone in — even people not building yet — and make Wima the default 'how to build in Ghana' destination."},
+      {src:"Zillow",h:"Own the data you generate",p:"Every search, click and listing view feeds Zillow one of the richest property datasets anywhere — public records, prices, behaviour. The data is the moat, not any single building.",w:"Own Wima's data: build costs, materials prices, who's building where, what the diaspora asks for. Never let it sit with MTN or a third party — it compounds into the moat."},
+      {src:"Zillow",h:"Free for consumers, monetise the professionals",p:"Zillow keeps everything free for buyers and browsers, and charges the supply side — agents pay for leads (Premier Agent), plus mortgage, rentals and data tools. Monetisation enhances the experience, it doesn't interrupt it.",w:"Keep it free for builders; charge the supply side — suppliers (Deal Hub), pros (tendering), banks (finance referral). Exactly Wima's model, validated at Zillow's scale."},
+      {src:"Zillow (⚠ the warning)",h:"Don't start owning inventory",p:"With the best data in the industry, Zillow still lost hundreds of millions on Zillow Offers — buying and flipping homes — and shut it down in 2021.",w:"The clearest proof of Wima's asset-light thesis: own the data and the flow, never the buildings. Resist the pull to become a developer or hold inventory."}
+    ]
+  };
+  var grid=document.getElementById("lessonGrid");
+  function render(t){
+    grid.innerHTML=L[t].map(function(x){
+      return '<div class="lesson"><div class="src">'+x.src+'</div><h4>'+x.h+'</h4><p>'+x.p+'</p><div class="w"><b>Wima applies it</b>'+x.w+'</div></div>';
+    }).join("");
+    document.querySelectorAll('#tabs button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-t')===t);});
+  }
+  document.querySelectorAll('#tabs button').forEach(function(b){b.addEventListener('click',function(){render(b.getAttribute('data-t'));});});
+  render('social');
+})();
+</script>
+</body>
+</html>

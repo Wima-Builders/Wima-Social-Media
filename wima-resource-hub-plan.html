@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — The Resource Hub Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;--bg-2:#1b1611;--bg-3:#221c16;--line:#332a22;--line-2:#463a2e;
+    --ink:#f3ece2;--ink-2:#c6b8a6;--ink-3:#8a7b68;
+    --ochre:#e0a54e;--ochre-deep:#c07f2c;--blueprint:#6fb0c9;--clay:#c76b4a;--green:#7fa66a;--violet:#a98fd0;
+    --maxw:1080px;--serif:"Fraunces","Georgia",serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:inherit}button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:5px}
+  .topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:14px;padding:14px 26px;background:rgba(20,16,13,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logomark{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));color:#1a130a;font-family:var(--serif);font-weight:700;font-size:17px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:15px}.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .topbar nav{margin-left:auto;display:flex;gap:15px;font-size:13px;color:var(--ink-2)}
+  .topbar nav a{text-decoration:none}.topbar nav a:hover{color:var(--ochre)}
+  @media(max-width:900px){.topbar{flex-wrap:wrap}.topbar nav{order:3;width:100%;margin-left:0;overflow-x:auto;gap:18px;padding:8px 2px 2px}.topbar nav a{flex:0 0 auto}.topbar nav::-webkit-scrollbar{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.13;margin:0}
+  h2{font-size:clamp(24px,3.6vw,35px);margin-bottom:16px}
+  h3{font-size:20px;margin-bottom:10px}
+  p{margin:0 0 14px;color:var(--ink-2)}p strong{color:var(--ink);font-weight:600}
+  .lead{font-size:18px;color:var(--ink);max-width:74ch}
+  .muted{color:var(--ink-3);font-size:12.5px}
+  ul{margin:0 0 12px;padding-left:20px}li{color:var(--ink-2);margin-bottom:6px}li strong{color:var(--ink)}
+
+  .hero{padding:84px 0 58px;border-bottom:1px solid var(--line);background:radial-gradient(1000px 460px at 84% -12%,rgba(224,165,78,.17),transparent 60%),radial-gradient(700px 380px at 0% 116%,rgba(127,166,106,.08),transparent 55%)}
+  .hero .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:20px}
+  .hero h1{font-size:clamp(31px,5.4vw,52px);max-width:18ch;margin-bottom:22px}
+  .hero h1 em{font-style:normal;color:var(--ochre)}
+  .hero .sub{font-size:19px;color:var(--ink-2);max-width:64ch}
+  .keyline{border-left:3px solid var(--ochre);padding:16px 22px;background:linear-gradient(90deg,rgba(224,165,78,.07),transparent);margin-top:30px;max-width:70ch}
+  .keyline b{color:var(--ochre)}
+
+  .cards{display:grid;gap:14px}.cards.two{grid-template-columns:1fr 1fr}.cards.three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.cards.two,.cards.three{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:22px}
+  .card .k{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ochre);margin-bottom:8px}
+  .card h4{font-family:var(--serif);font-size:16px;margin-bottom:8px}
+  .card p{font-size:13.5px;margin:0}
+
+  /* category browser */
+  .cats{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+  .cats button{border:1px solid var(--line-2);background:var(--bg-3);color:var(--ink-2);padding:8px 13px;border-radius:20px;font-family:var(--mono);font-size:11.5px;cursor:pointer;transition:.2s}
+  .cats button:hover{color:var(--ink)}
+  .cats button.active{background:var(--ochre);color:#1a130a;border-color:var(--ochre)}
+  .catpanel{border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:24px;min-height:260px}
+  .catpanel .ct{font-family:var(--serif);font-size:20px;margin-bottom:4px}
+  .catpanel .cd{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-bottom:16px;text-transform:uppercase;letter-spacing:.06em}
+  .rlist{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(max-width:640px){.rlist{grid-template-columns:1fr}}
+  .ritem{display:flex;gap:10px;align-items:baseline;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg-2);font-size:13.5px}
+  .ritem .fmt{font-family:var(--mono);font-size:8.5px;letter-spacing:.04em;text-transform:uppercase;padding:2px 6px;border-radius:20px;flex:none;border:1px solid var(--line-2);color:var(--ink-3)}
+  .ritem .fmt.tool{color:var(--green);border-color:rgba(127,166,106,.4)}
+  .ritem .fmt.checklist{color:var(--blueprint);border-color:rgba(111,176,201,.4)}
+  .ritem .fmt.guide{color:var(--ochre);border-color:rgba(224,165,78,.4)}
+  .ritem .fmt.template{color:var(--violet);border-color:rgba(169,143,208,.4)}
+  .ritem .fmt.tracker{color:var(--clay);border-color:rgba(199,107,74,.4)}
+  .ritem .star{color:var(--ochre);flex:none}
+  .ritem .rn{color:var(--ink-2)}
+
+  /* tiers */
+  .tier{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:20px 22px;margin-bottom:12px;position:relative;overflow:hidden}
+  .tier::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+  .tier.t1::before{background:var(--green)}.tier.t2::before{background:var(--violet)}.tier.t3::before{background:var(--blueprint)}
+  .tier h4{font-family:var(--serif);font-size:17px;margin-bottom:5px}
+  .tier p{font-size:13.5px;margin:0}
+  .tier .lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  .tier.t1 .lbl{color:var(--green)}.tier.t2 .lbl{color:var(--violet)}.tier.t3 .lbl{color:var(--blueprint)}
+
+  /* phases */
+  .phase{border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:24px;margin-bottom:14px}
+  .phase .ph{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .phase .pn{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px}
+  .phase.p1 .pn{color:var(--green);background:rgba(127,166,106,.1);border:1px solid rgba(127,166,106,.4)}
+  .phase.p2 .pn{color:var(--ochre);background:rgba(224,165,78,.1);border:1px solid rgba(224,165,78,.4)}
+  .phase.p3 .pn{color:var(--blueprint);background:rgba(111,176,201,.1);border:1px solid rgba(111,176,201,.4)}
+  .phase h3{font-size:19px}
+  .phase .pw{font-size:13.5px;color:var(--ink-3);margin:6px 0 14px}
+  .angle{border-top:1px solid var(--line);padding:14px 0}
+  .angle:last-child{padding-bottom:0}
+  .angle .an{font-family:var(--serif);font-size:15px;color:var(--ink);margin-bottom:6px}
+  .angle .row{display:grid;grid-template-columns:70px 1fr;gap:10px;font-size:13px;margin-bottom:4px}
+  @media(max-width:600px){.angle .row{grid-template-columns:1fr;gap:2px}}
+  .angle .rk{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+  .angle .rk.vid{color:var(--clay)}.angle .rk.fly{color:var(--violet)}
+  .angle .rv{color:var(--ink-2)}
+  .plist{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+  .plist span{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--line-2);color:var(--ink-2)}
+
+  .callout{border:1px solid var(--line-2);border-radius:14px;padding:22px 24px;background:linear-gradient(150deg,rgba(224,165,78,.07),var(--bg-3));margin-top:8px}
+  .callout.green{background:linear-gradient(150deg,rgba(127,166,106,.08),var(--bg-3))}
+  .callout .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:9px}
+  .callout.green .lbl{color:var(--green)}
+  .callout p:last-child{margin-bottom:0}
+  .thesis{font-family:var(--serif);font-size:20px;color:var(--ink);font-style:italic;line-height:1.4}
+
+  footer{padding:40px 0 60px;color:var(--ink-3)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .fdisc{font-size:12px;color:var(--ink-3);max-width:82ch;margin-top:12px;line-height:1.5}
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" title="Back to the hub" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit"><div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>The Resource Hub Plan</span></div></a>
+  <nav><a href="#why">Why Resources</a><a href="#tiers">Stickiness</a><a href="#library">The Library</a><a href="#build">Build Order</a><a href="#angles">Content Angles</a></nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Document 20 · Plan · The Return-Traffic Engine</div>
+    <h1>Give people a reason to <em>come back</em> — not just visit once.</h1>
+    <p class="sub">A resource hub of checklists, calculators, guides and templates that people use again and again through their whole build. Each one is also a short video and a flyer. This document is the full library and the order to build it in — the tools come later.</p>
+    <div class="keyline"><b>Why this matters:</b> content people <b>use</b> — a BOQ calculator, a checklist they tick off on site — brings them back far more than content they merely read. Every return visit is another chance to convert them into the community, and every resource is fuel for a week of social posts.</div>
+  </div>
+</header>
+
+<!-- WHY -->
+<section id="why">
+  <div class="wrap">
+    <p class="eyebrow">Part 1 · Why A Resource Hub</p>
+    <h2>Four ways resources grow the business</h2>
+    <div class="cards two">
+      <div class="card"><div class="k">01 · Return traffic</div><h4>Tools pull people back</h4><p>Nobody re-reads a blog post, but they return to <em>use</em> a cost estimator or tick off a site checklist — again and again, across a build that lasts years.</p></div>
+      <div class="card"><div class="k">02 · Lead capture</div><h4>Templates are lead magnets</h4><p>"Download the free building checklist" in exchange for a WhatsApp number feeds the community list directly — the highest-value list you own.</p></div>
+      <div class="card"><div class="k">03 · Content fuel</div><h4>One resource, a week of posts</h4><p>Every checklist item is a short video ("5 things to check before you pour your foundation"); every calculator is a demo clip and a flyer.</p></div>
+      <div class="card"><div class="k">04 · Trust &amp; SEO</div><h4>Usefulness ranks and converts</h4><p>Genuinely helpful tools rank on Google for build-intent searches and prove Wima is the trusted authority — before any sale.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section id="tiers" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Part 2 · The Stickiness Tiers</p>
+    <h2>Not all resources pull equally — build in this order of impact</h2>
+    <div class="tier t1"><div class="lbl">Tier 1 · Strongest return-driver</div><h4>Interactive tools &amp; calculators</h4><p>BOQ calculator, cost-to-build estimator, materials quantity calculators, price tracker. People bookmark them, use them repeatedly, and share them on WhatsApp. This is the stickiness engine — build these first.</p></div>
+    <div class="tier t2"><div class="lbl">Tier 2 · Best lead magnets</div><h4>Printable templates</h4><p>Checklists, BOQ template, contractor agreement, milestone schedule. Gated behind a WhatsApp number, they convert visitors into community members.</p></div>
+    <div class="tier t3"><div class="lbl">Tier 3 · Endless content fuel</div><h4>Checklists &amp; guides</h4><p>Stage-by-stage checklists and how-to guides. Lower return-pull on their own, but each one is a ready-made script for short videos and flyers — the raw material of the whole content engine.</p></div>
+  </div>
+</section>
+
+<!-- LIBRARY -->
+<section id="library">
+  <div class="wrap">
+    <p class="eyebrow">Part 3 · The Full Library · Browse By Category</p>
+    <h2>Every resource, organised along the build journey</h2>
+    <p class="lead" style="margin-bottom:20px">Tap a category. ★ marks the five you named first. Format tags show what each becomes — <span class="muted">Tool, Calculator, Checklist, Guide, Template, Tracker.</span></p>
+    <div class="cats" id="cats"></div>
+    <div class="catpanel" id="catpanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- BUILD ORDER -->
+<section id="build" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Part 4 · The Prioritised Build Order</p>
+    <h2>What to make first for maximum return traffic</h2>
+    <div class="phase p1">
+      <div class="ph"><span class="pn">Phase 1 · Build first</span><h3>The stickiness core + high-search guides</h3></div>
+      <p class="pw">The tools people return to use, plus the guides people search for most. Fastest path to repeat visits and lead capture.</p>
+      <div class="plist">
+        <span>★ Simple BOQ calculator</span><span>Cost-to-build estimator</span><span>Materials quantity calculators</span><span>Materials price tracker</span><span>★ Master build checklist (printable)</span><span>★ How to register your land</span><span>How to verify land ownership</span><span>★ Statutory requirements + building permit</span>
+      </div>
+    </div>
+    <div class="phase p2">
+      <div class="ph"><span class="pn">Phase 2 · Build next</span><h3>Stage checklists + trust &amp; money tools</h3></div>
+      <p class="pw">The video-fuel checklists and the guides that address the deepest fears — cost, contractors, fake materials, finance.</p>
+      <div class="plist">
+        <span>Stage-by-stage checklists (6)</span><span>★ Why choose the right professionals</span><span>How to vet a contractor</span><span>How to spot fake cement</span><span>Milestone payment template</span><span>Mortgage affordability calculator</span><span>Phased building plan</span><span>Diaspora remote-build guide</span>
+      </div>
+    </div>
+    <div class="phase p3">
+      <div class="ph"><span class="pn">Phase 3 · Build later</span><h3>Beyond-the-build + advanced</h3></div>
+      <p class="pw">Resources that keep people coming back <em>after</em> completion, plus the deeper legal and niche guides.</p>
+      <div class="plist">
+        <span>Rent-out &amp; short-let guides</span><span>Short-let income estimator</span><span>Renovation ROI</span><span>Property management basics</span><span>Land dispute &amp; land guards</span><span>EPA permit guide</span><span>Home maintenance checklist</span><span>Stool/family land explained</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT ANGLES -->
+<section id="angles">
+  <div class="wrap">
+    <p class="eyebrow">Part 5 · Content Angles · Phase 1</p>
+    <h2>Each resource → a short video and a flyer</h2>
+    <p class="lead" style="margin-bottom:20px">The build order is also a content calendar. Here's the video hook and flyer angle for each Phase-1 resource, so production can start the moment a resource is ready.</p>
+
+    <div class="phase p1" style="background:var(--bg-3)">
+      <div class="angle"><div class="an">Simple BOQ calculator</div>
+        <div class="row"><div class="rk vid">Video</div><div class="rv">"Most Ghanaians start building without knowing the real cost. Watch me estimate a 3-bedroom in 60 seconds."</div></div>
+        <div class="row"><div class="rk fly">Flyer</div><div class="rv">"Know your true build cost — free BOQ calculator. Tap the link." + one clean cost breakdown.</div></div>
+      </div>
+      <div class="angle"><div class="an">Cost-to-build estimator</div>
+        <div class="row"><div class="rk vid">Video</div><div class="rv">"How much to build a 2-bed vs 3-bed vs 4-bed in Accra right now? The numbers might shock you."</div></div>
+        <div class="row"><div class="rk fly">Flyer</div><div class="rv">A price-by-house-type chart with "estimate yours free."</div></div>
+      </div>
+      <div class="angle"><div class="an">Materials price tracker</div>
+        <div class="row"><div class="rk vid">Video</div><div class="rv">"Cement went up again this month. Here's what materials cost today — and how to lock in a better price."</div></div>
+        <div class="row"><div class="rk fly">Flyer</div><div class="rv">Monthly "materials price watch" — instantly shareable, ties straight into Deal Hub.</div></div>
+      </div>
+      <div class="angle"><div class="an">Master build checklist (printable)</div>
+        <div class="row"><div class="rk vid">Video</div><div class="rv">"The complete build, foundation to keys, on one checklist. Comment BUILD and I'll send it free."</div></div>
+        <div class="row"><div class="rk fly">Flyer</div><div class="rv">The lead magnet — "Free building checklist, drop your WhatsApp." Captures the community.</div></div>
+      </div>
+      <div class="angle"><div class="an">How to register / verify your land</div>
+        <div class="row"><div class="rk vid">Video</div><div class="rv">"Before you pay for ANY land in Ghana, do these 3 checks — or risk losing everything."</div></div>
+        <div class="row"><div class="rk fly">Flyer</div><div class="rv">"Land verification checklist" — high-fear, high-share, high-search topic.</div></div>
+      </div>
+      <div class="angle"><div class="an">Statutory requirements + building permit</div>
+        <div class="row"><div class="rk vid">Video</div><div class="rv">"Building without a permit? Here's what it can cost you — and how to get one, step by step."</div></div>
+        <div class="row"><div class="rk fly">Flyer</div><div class="rv">"Building permit checklist" — clean, authoritative, positions Wima as the expert.</div></div>
+      </div>
+    </div>
+
+    <div class="callout green" style="margin-top:20px">
+      <div class="lbl">The compounding effect</div>
+      <p>Every resource works three times: it <strong>pulls return visits</strong>, it <strong>captures the WhatsApp number</strong>, and it <strong>becomes a week of clips and flyers</strong>. Build the Tier-1 tools first, gate the templates for leads, and let the checklists feed the feed. The resource hub is the content engine and the community funnel in one.</p>
+    </div>
+    <div class="callout" style="margin-top:16px">
+      <div class="lbl">The one line to hold</div>
+      <p class="thesis">A shop gives people a reason to visit once. A toolbox gives them a reason to come back every week of their build — and by the time they're ready to buy, they're already ours.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">Wima Builders — The Resource Hub Plan</div>
+      <div class="fdisc">A planning document: the resource library and prioritised build order for Wima's return-traffic engine. Resources are to be built later; calculators, legal/statutory guides and templates should be verified for accuracy and reviewed with qualified professionals before publication. Companion to the Community &amp; Content Playbook (Doc 19), Wima Ecosystem Hub.</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Document 20 · Wima Ecosystem Hub</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var C=[
+    {id:"A",name:"Getting Started &amp; Planning",items:[
+      {n:"Should I build or buy? decision guide",f:"guide"},
+      {n:"First-time builder's roadmap",f:"guide"},
+      {n:"Building from scratch to finish — master checklist",f:"checklist",star:1},
+      {n:"\u201cAm I ready to build?\u201d readiness self-check",f:"checklist"},
+      {n:"Realistic build timeline",f:"guide"},
+      {n:"What can I build on this plot?",f:"tool"}
+    ]},
+    {id:"B",name:"Land &amp; Legal",items:[
+      {n:"How to register your land (step by step)",f:"guide",star:1},
+      {n:"How to verify ownership before you buy",f:"guide"},
+      {n:"How to spot &amp; avoid land fraud",f:"guide"},
+      {n:"Leasehold vs freehold explained",f:"guide"},
+      {n:"Land documents checklist",f:"checklist"},
+      {n:"Dealing with land guards &amp; disputes",f:"guide"},
+      {n:"Stool / family land explained",f:"guide"}
+    ]},
+    {id:"C",name:"Statutory &amp; Compliance",items:[
+      {n:"Statutory requirements when building in Ghana",f:"guide",star:1},
+      {n:"How to get a building permit (step by step)",f:"guide"},
+      {n:"Building permit document checklist",f:"checklist"},
+      {n:"Setbacks, zoning &amp; planning rules",f:"guide"},
+      {n:"When you need an EPA permit",f:"guide"},
+      {n:"Building without a permit \u2014 the risks",f:"guide"}
+    ]},
+    {id:"D",name:"Costing &amp; Budgeting",items:[
+      {n:"Simple BOQ calculator",f:"tool",star:1},
+      {n:"Cost-to-build estimator",f:"tool"},
+      {n:"Current materials price tracker",f:"tracker"},
+      {n:"The \u201ccompleteness gap\u201d checklist",f:"checklist"},
+      {n:"Cost-per-stage breakdown",f:"guide"},
+      {n:"Quantity calculators (cement, blocks, rods, tiles)",f:"tool"},
+      {n:"Budget vs actual tracker",f:"tracker"}
+    ]},
+    {id:"E",name:"Design &amp; Professionals",items:[
+      {n:"Why choose the right professionals",f:"guide",star:1},
+      {n:"What each professional does",f:"guide"},
+      {n:"How to vet a contractor \u2014 red flags",f:"checklist"},
+      {n:"Questions to ask before you hire",f:"checklist"},
+      {n:"How to read a building plan",f:"guide"},
+      {n:"Master craftsmen guide",f:"guide"}
+    ]},
+    {id:"F",name:"Materials &amp; Procurement",items:[
+      {n:"How to spot fake cement / weak rods",f:"guide"},
+      {n:"Materials quality checklist",f:"checklist"},
+      {n:"Buy-in-bulk / group-buy guide",f:"guide"},
+      {n:"Source locally vs import",f:"guide"},
+      {n:"Procurement timeline",f:"guide"},
+      {n:"Site storage &amp; theft prevention",f:"checklist"}
+    ]},
+    {id:"G",name:"Construction Stages",items:[
+      {n:"Foundation checklist",f:"checklist"},
+      {n:"Walling checklist",f:"checklist"},
+      {n:"Roofing checklist",f:"checklist"},
+      {n:"Plumbing &amp; electrical checklist",f:"checklist"},
+      {n:"Plastering &amp; finishing checklist",f:"checklist"},
+      {n:"Final snagging checklist",f:"checklist"},
+      {n:"Common mistakes at each stage",f:"guide"}
+    ]},
+    {id:"H",name:"Finance &amp; Funding",items:[
+      {n:"How to finance your build (all options)",f:"guide"},
+      {n:"How construction &amp; mortgage loans work",f:"guide"},
+      {n:"Phased building plan \u2014 build without stalling",f:"guide"},
+      {n:"Milestone payment schedule template",f:"template"},
+      {n:"Mortgage / loan affordability calculator",f:"tool"},
+      {n:"Diaspora financing options",f:"guide"}
+    ]},
+    {id:"I",name:"Diaspora",items:[
+      {n:"How to build from abroad",f:"guide"},
+      {n:"How to monitor your build remotely",f:"guide"},
+      {n:"\u201cDon't rely on family alone\u201d safe supervision",f:"guide"},
+      {n:"How to send money safely for your build",f:"guide"},
+      {n:"How to choose a trusted project manager",f:"checklist"}
+    ]},
+    {id:"J",name:"Beyond the Build",items:[
+      {n:"How to rent out your property",f:"guide"},
+      {n:"Airbnb / short-let starter guide",f:"guide"},
+      {n:"Property management basics",f:"guide"},
+      {n:"Home maintenance checklist",f:"checklist"},
+      {n:"Renovation ROI \u2014 what adds value",f:"guide"},
+      {n:"Turn your empty house into income",f:"guide"}
+    ]},
+    {id:"K",name:"Interactive Tools",items:[
+      {n:"BOQ calculator",f:"tool"},
+      {n:"Cost-to-build estimator",f:"tool"},
+      {n:"Materials quantity calculators",f:"tool"},
+      {n:"Mortgage affordability calculator",f:"tool"},
+      {n:"Short-let income estimator",f:"tool"},
+      {n:"Build timeline generator",f:"tool"}
+    ]},
+    {id:"L",name:"Printable Templates",items:[
+      {n:"Printable building checklist",f:"template"},
+      {n:"BOQ template",f:"template"},
+      {n:"Contractor agreement template",f:"template"},
+      {n:"Milestone payment schedule",f:"template"},
+      {n:"Site inspection sheet",f:"template"},
+      {n:"Land &amp; permit document checklists",f:"template"}
+    ]}
+  ];
+  var cats=document.getElementById("cats");
+  cats.innerHTML=C.map(function(c,i){return '<button data-i="'+i+'"'+(i===0?' class="active"':'')+'>'+c.id+' · '+c.name+'</button>';}).join("");
+  var panel=document.getElementById("catpanel");
+  function render(i){
+    var c=C[i];
+    panel.innerHTML='<div class="ct">'+c.id+' · '+c.name+'</div><div class="cd">'+c.items.length+' resources</div>'+
+      '<div class="rlist">'+c.items.map(function(r){
+        return '<div class="ritem"><span class="fmt '+r.f+'">'+r.f+'</span><span class="rn">'+(r.star?'<span class="star">\u2605</span> ':'')+r.n+'</span></div>';
+      }).join("")+'</div>';
+    cats.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',+b.getAttribute('data-i')===i);});
+  }
+  cats.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){render(+b.getAttribute('data-i'));});});
+  render(0);
+})();
+</script>
+</body>
+</html>
