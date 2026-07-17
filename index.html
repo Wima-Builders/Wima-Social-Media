@@ -37,6 +37,9 @@
   .doc{display:block;border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:26px;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden}
   .doc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
   .doc.d7::before{background:var(--ochre)}.doc.d8::before{background:var(--blueprint)}.doc.d9::before{background:var(--clay)}.doc.d10::before{background:var(--green)}.doc.d11::before{background:var(--violet)}.doc.d12::before{background:#d08fa8}.doc.d13::before{background:linear-gradient(var(--ochre),var(--blueprint))}.doc.d14::before{background:var(--clay)}.doc.d15::before{background:var(--green)}.doc.d16::before{background:var(--ochre)}.doc.d17::before{background:var(--blueprint)}.doc.d18::before{background:var(--violet)}.doc.d19::before{background:linear-gradient(var(--green),var(--ochre))}.doc.d20::before{background:var(--blueprint)}.doc.d22::before{background:linear-gradient(var(--ochre),var(--green))}.doc.d23::before{background:linear-gradient(var(--clay),var(--ochre))}.doc.d24::before{background:linear-gradient(var(--green),var(--clay))}.doc.d21::before{background:var(--ochre)}
+  .doc.dcontent::before{background:linear-gradient(var(--ochre),var(--ochre-deep));width:5px}
+  .doc.dcontent{background:linear-gradient(150deg,rgba(224,165,78,.1),var(--bg-3));border-color:rgba(224,165,78,.4)}
+  .doc.dcontent:hover{border-color:var(--ochre)}
   .doc.wide{grid-column:1 / -1}
   .doc:hover{transform:translateY(-3px);border-color:var(--ochre);box-shadow:0 12px 30px rgba(0,0,0,.35)}
   .doc .n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
@@ -51,6 +54,8 @@
   /* ===== homepage navigation bar ===== */
   .topbar nav{margin-left:auto;display:flex;gap:4px;align-items:center}
   .navlink{display:inline-flex;align-items:center;gap:5px;padding:8px 13px;border-radius:8px;font-size:13.5px;color:var(--ink-2);cursor:pointer;background:none;border:none;font-family:inherit;transition:.18s;white-space:nowrap}
+  .navlink.navcontent{color:var(--ochre);border:1px solid rgba(224,165,78,.45);background:rgba(224,165,78,.08);font-weight:600}
+  .navlink.navcontent:hover{background:rgba(224,165,78,.18)}
   .navlink:hover{color:var(--ink);background:var(--bg-3)}
   .navitem{position:relative}
   .navitem .caret{font-size:9px;color:var(--ink-3);transition:transform .2s}
@@ -78,6 +83,7 @@
   <div class="brand"><b>Wima Builders</b><span>Media Platform &amp; Ecosystem Hub</span></div></a>
   <nav id="mainnav" aria-label="All documents">
     <a class="navlink" href="index.html">Home</a>
+    <a class="navlink navcontent" href="wima-content-hub.html">◆ Content Hub</a>
     <a class="navlink" href="wima-community-content-playbook.html">Playbook</a>
     <a class="navlink" href="wima-social-mba.html">MBA</a>
     <a class="navlink" href="wima-mba-lecture-notes.html">Lectures</a>
@@ -124,7 +130,16 @@
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">Start Here · The Consolidated Playbook</p>
+    <p class="eyebrow">Start Here · What Wima Publishes Every Day</p>
+    <div class="docs" style="margin-bottom:40px">
+      <a class="doc dcontent wide" href="wima-content-hub.html">
+        <div class="n">The Content Hub · Standalone · 4 assets · Post from this daily</div>
+        <h3>◆ The Content Hub — all of Wima's content, one front door</h3>
+        <p>Social media is how Wima grows, so the content has its own home. Everything in one place: <strong>60 days of ready content in four platform versions each</strong> (WhatsApp, Facebook, Video, LinkedIn), the 30-day launch calendar, the six-pillar strategy with the world's-best playbook (Houzz, Livspace, Zillow, Duolingo), and the six-channel library of blogs, email, landing pages and press. Start here every day.</p>
+        <span class="go">Open the Content Hub →</span>
+      </a>
+    </div>
+    <p class="eyebrow">The Consolidated Playbook</p>
     <div class="docs" style="margin-bottom:40px">
       <a class="doc d19 wide" href="wima-community-content-playbook.html">
         <div class="n">Document 19 · Playbook · Interactive</div>
