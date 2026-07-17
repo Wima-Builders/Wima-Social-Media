@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — OfBusiness: The Deep Dive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;--bg-2:#1b1611;--bg-3:#221c16;--line:#332a22;--line-2:#463a2e;
+    --ink:#f3ece2;--ink-2:#c6b8a6;--ink-3:#8a7b68;
+    --ochre:#e0a54e;--ochre-deep:#c07f2c;--blueprint:#6fb0c9;--clay:#c76b4a;--green:#7fa66a;--violet:#a98fd0;
+    --maxw:1080px;--serif:"Fraunces","Georgia",serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:inherit}button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:5px}
+  .topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:14px;padding:14px 26px;background:rgba(20,16,13,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logomark{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));color:#1a130a;font-family:var(--serif);font-weight:700;font-size:17px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:15px}.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .topbar nav{margin-left:auto;display:flex;gap:15px;font-size:13px;color:var(--ink-2)}
+  .topbar nav a{text-decoration:none}.topbar nav a:hover{color:var(--ochre)}
+  @media(max-width:860px){.topbar{flex-wrap:wrap}.topbar nav{order:3;width:100%;margin-left:0;overflow-x:auto;gap:18px;padding:8px 2px 2px}.topbar nav a{flex:0 0 auto}.topbar nav::-webkit-scrollbar{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.13;margin:0}
+  h2{font-size:clamp(24px,3.6vw,34px);margin-bottom:14px}
+  h3{font-size:20px;margin-bottom:10px}
+  p{margin:0 0 14px;color:var(--ink-2)}p strong{color:var(--ink);font-weight:600}
+  .lead{font-size:18px;color:var(--ink);max-width:74ch}
+  .muted{color:var(--ink-3);font-size:12.5px}
+
+  .hero{padding:80px 0 54px;border-bottom:1px solid var(--line);background:radial-gradient(1000px 460px at 84% -12%,rgba(127,166,106,.14),transparent 60%),radial-gradient(700px 380px at 0% 116%,rgba(224,165,78,.1),transparent 55%)}
+  .hero .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:20px}
+  .hero h1{font-size:clamp(30px,5.2vw,50px);max-width:19ch;margin-bottom:22px}
+  .hero h1 em{font-style:normal;color:var(--green)}
+  .hero .sub{font-size:19px;color:var(--ink-2);max-width:66ch}
+
+  .statband{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:34px}
+  .sb{background:var(--bg-3);padding:18px 16px}
+  .sb .n{font-family:var(--serif);font-size:clamp(19px,2.6vw,25px);color:var(--green);line-height:1}
+  .sb .l{font-size:11.5px;color:var(--ink-2);margin-top:7px;line-height:1.4}
+  @media(max-width:760px){.statband{grid-template-columns:1fr 1fr}}
+
+  /* head to head */
+  .h2h{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--bg-3)}
+  .h2h table{width:100%;border-collapse:collapse}
+  .h2h th,.h2h td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:14.5px}
+  .h2h thead th{background:var(--bg-2);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+  .h2h tbody tr:last-child td{border-bottom:none}
+  .h2h td:first-child{color:var(--ink-3);font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}
+  .h2h .im{color:var(--ink-2)}
+  .h2h .ob{color:var(--green);font-weight:600}
+  .h2h .win{background:rgba(127,166,106,.07)}
+
+  .prose p{max-width:74ch}
+  .pull{border-left:3px solid var(--green);padding:6px 0 6px 18px;margin:18px 0;font-family:var(--serif);font-size:19px;font-style:italic;color:var(--ink);line-height:1.4}
+
+  .engines{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:820px){.engines{grid-template-columns:1fr}}
+  .eng{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:20px;border-top:4px solid var(--blueprint)}
+  .eng.e2{border-top-color:var(--green)}.eng.e3{border-top-color:var(--violet)}
+  .eng .en{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+  .eng h4{font-size:18px;margin-bottom:4px}
+  .eng .sub{font-family:var(--mono);font-size:11px;color:var(--ochre);margin-bottom:10px}
+  .eng p{font-size:13px;margin:0 0 10px}
+  .eng .kick{border-top:1px solid var(--line);padding-top:9px;font-size:12.5px;color:var(--ink-2)}
+  .eng .kick b{color:var(--green);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+  .flywheel{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+  @media(max-width:820px){.flywheel{grid-template-columns:1fr 1fr}}
+  .fw{border:1px solid var(--line);border-radius:12px;background:var(--bg-3);padding:14px 15px;position:relative}
+  .fw .fn{font-family:var(--mono);font-size:9.5px;color:var(--violet);letter-spacing:.09em;margin-bottom:5px}
+  .fw h4{font-size:15px;margin-bottom:4px}
+  .fw p{font-size:12px;margin:0;line-height:1.5}
+
+  .cards{display:grid;gap:14px}.cards.two{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.cards.two{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:13px;background:var(--bg-3);padding:20px}
+  .card .k{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ochre);margin-bottom:7px}
+  .card h4{font-size:16px;margin-bottom:7px}
+  .card p{font-size:13px;margin:0}
+
+  .reg{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;align-items:start}
+  @media(max-width:860px){.reg{grid-template-columns:1fr}}
+  .lessons{display:flex;flex-direction:column;gap:7px}
+  .lessons button{display:flex;gap:11px;align-items:center;text-align:left;border:1px solid var(--line);border-radius:11px;background:var(--bg-3);padding:12px 14px;color:var(--ink-2);cursor:pointer;transition:.18s;font-size:13.5px}
+  .lessons button:hover{color:var(--ink)}
+  .lessons button.active{border-color:var(--green);background:linear-gradient(160deg,rgba(127,166,106,.12),var(--bg-3));color:var(--ink)}
+  .lessons .ln{font-family:var(--mono);font-size:11px;color:var(--green);flex:none;width:20px}
+  .ldetail{border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:26px;min-height:360px}
+  .ldetail h3{font-size:20px;margin-bottom:14px}
+  .ldetail .row{padding:12px 0;border-top:1px solid var(--line)}
+  .ldetail .rk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+  .ldetail .rk.did{color:var(--blueprint)}.ldetail .rk.copy{color:var(--green)}.ldetail .rk.diff{color:var(--clay)}
+  .ldetail .rv{font-size:14px;color:var(--ink-2)}.ldetail .rv b{color:var(--ink)}
+
+  .callout{border:1px solid var(--line-2);border-radius:14px;padding:22px 24px;background:linear-gradient(150deg,rgba(224,165,78,.07),var(--bg-3));margin-top:8px}
+  .callout.green{background:linear-gradient(150deg,rgba(127,166,106,.09),var(--bg-3))}
+  .callout.clay{background:linear-gradient(150deg,rgba(199,107,74,.09),var(--bg-3))}
+  .callout .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:9px}
+  .callout.green .lbl{color:var(--green)}.callout.clay .lbl{color:var(--clay)}
+  .callout p:last-child{margin-bottom:0}
+  .thesis{font-family:var(--serif);font-size:20px;color:var(--ink);font-style:italic;line-height:1.4}
+
+  footer{padding:40px 0 60px;color:var(--ink-3)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .fdisc{font-size:12px;color:var(--ink-3);max-width:82ch;margin-top:12px;line-height:1.5}
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" title="Back to the hub" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit"><div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>OfBusiness · The Deep Dive</span></div></a>
+  <nav><a href="#h2h">The Head-to-Head</a><a href="#origin">Origin</a><a href="#engines">Three Engines</a><a href="#bidassist">The Flywheel</a><a href="#numbers">The Numbers</a><a href="#translate">Wima Translation</a></nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Document 25 · Deep Dive · Interactive · The Closer Model</div>
+    <h1>OfBusiness: the rival that <em>never bought the factories — and earns 2.7× the profit.</em></h1>
+    <p class="sub">Same market as Infra.Market. Same buyers. Higher revenue, far higher profit, and a valuation the market prices at two to three times more. It got there by refusing the one move Infra.Market made — and by making its money somewhere Wima can actually reach. If Doc 24 was the cautionary tale, this is the blueprint.</p>
+    <div class="statband">
+      <div class="sb"><div class="n">₹22,241 cr</div><div class="l">FY25 revenue — above Infra.Market's ₹18,472 cr</div></div>
+      <div class="sb"><div class="n">₹597 cr</div><div class="l">FY25 profit — 2.7× Infra.Market's ₹220 cr</div></div>
+      <div class="sb"><div class="n">$6–9B</div><div class="l">IPO valuation target — vs Infra.Market's ~$2.6B</div></div>
+      <div class="sb"><div class="n">3</div><div class="l">engines: commerce · credit · tenders</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- HEAD TO HEAD -->
+<section id="h2h">
+  <div class="wrap">
+    <p class="eyebrow">The Head-To-Head · The Argument Settled</p>
+    <h2>Two companies, one market, opposite answers</h2>
+    <p class="lead" style="margin-bottom:20px">Both aggregate construction materials demand in India. Both started within a year of each other. Both are IPO-bound. One bought 250+ factories; one stayed light and lent money instead. Here is what FY25 says about who was right.</p>
+    <div class="h2h">
+      <table>
+        <thead><tr><th></th><th>Infra.Market (Doc 24)</th><th>OfBusiness</th></tr></thead>
+        <tbody>
+          <tr><td>Founded</td><td class="im">2016 · Mumbai</td><td class="ob">2015 · Gurugram</td></tr>
+          <tr><td>Core move</td><td class="im">Aggregate → private label → <b>own 250+ factories</b></td><td class="ob">Aggregate → <b>embed credit</b> → stay asset-light</td></tr>
+          <tr class="win"><td>FY25 revenue</td><td class="im">₹18,472 cr (~$2.1B)</td><td class="ob">₹22,241 cr — higher</td></tr>
+          <tr class="win"><td>FY25 net profit</td><td class="im">₹220 cr — <b>down 42%</b></td><td class="ob">₹597 cr — 2.7× more</td></tr>
+          <tr><td>Finance costs</td><td class="im">₹805 cr, <b>up 45%</b> — the profit killer</td><td class="ob">Lending is a <b>revenue line</b>, not just a cost</td></tr>
+          <tr><td>Where margin comes from</td><td class="im">Private label (16–18%) — built on debt</td><td class="ob">Materials + <b>financing spread</b> + subscriptions</td></tr>
+          <tr class="win"><td>Valuation / IPO</td><td class="im">~$2.6B · ₹5,000 cr IPO</td><td class="ob">Targeting <b>$6–9B</b> · $750M–$1B issue</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout green" style="margin-top:18px">
+      <div class="lbl">The punchline</div>
+      <p>OfBusiness earns <strong>2.7× the profit on higher revenue</strong> — and the market prices it at roughly <strong>two to three times Infra.Market's valuation</strong>. Not because it out-sold its rival, but because it refused to convert coordination into concrete. It never took on the asset base whose finance costs cut Infra.Market's profit by 42% in a record revenue year. <strong>Same thesis, lighter body, better outcome.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section id="origin" style="background:var(--bg-2)">
+  <div class="wrap prose">
+    <p class="eyebrow">Origin · The Insight</p>
+    <h2>An investor who noticed that credit and commerce are the same problem</h2>
+    <p class="lead" style="margin-bottom:18px">Asish Mohapatra was a venture capitalist at Matrix Partners looking at India's SMEs. Ruchi Kalra was at McKinsey. In 2015 they founded OfBusiness in Gurugram with Bhuvan Gupta, Vasant Sridhar and others, around a mission they stated plainly: <strong>democratise access to raw materials and credit for MSMEs.</strong> Note that "and credit" — it was in the founding sentence, not bolted on later.</p>
+    <p>The market was enormous and underserved: India's 63.4 million SMEs employ ~460 million people and generate ~30% of GDP — yet traditional banks barely lend to them. Small manufacturers and contractors were squeezed twice: they paid retail prices for raw materials because they couldn't order at volume, <em>and</em> they couldn't get working capital to buy at the right moment.</p>
+    <p class="pull">"As we explored the B2B value chains, we understood that credit and commerce went hand in hand. So we could either be a commerce company solving credit through partnerships — or build the credit play ourselves and capture the profit pool."</p>
+    <p>That sentence, from Oxyzo's Prashant Roy Sharma, is the fork in the road — and OfBusiness took the second path. They built the lender. In 2018 the purchase-financing arm was carved out as <strong>Oxyzo Financial Services</strong>, an RBI-registered NBFC led by Ruchi Kalra. In March 2022 Oxyzo raised <strong>$200M in India's largest-ever Series A</strong> (Alpha Wave, Tiger Global, Norwest), becoming a unicorn in its own right — the only woman-led Indian startup to do so that year. Its loan book has grown past ₹5,000 crore.</p>
+    <p>The parent hit unicorn status in July 2021 and has raised ~$776M across 15 rounds. But the structural point is what matters for Wima: <strong>the financing arm didn't just support the commerce — it became a business worth a billion dollars by itself</strong>, and roughly 70% of Oxyzo's lending now goes to businesses beyond OfBusiness's own platform.</p>
+  </div>
+</section>
+
+<!-- THREE ENGINES -->
+<section id="engines">
+  <div class="wrap">
+    <p class="eyebrow">The Model · Three Engines, One Flywheel</p>
+    <h2>Commerce brings them in. Credit makes the money. Tenders bring them back.</h2>
+    <p class="lead" style="margin-bottom:22px">This is the architecture Wima should study hardest — because it makes real money without owning a single asset.</p>
+    <div class="engines">
+      <div class="eng e1">
+        <div class="en">Engine 01 · The traffic</div>
+        <h4>Raw material procurement</h4>
+        <div class="sub">Thin margin · builds the relationship</div>
+        <p>Steel, cement, chemicals, polymers, construction materials across 9 industries. Verified suppliers, transparent prices, logistics enabled. It aggregates SME demand to unlock pricing none could get alone.</p>
+        <div class="kick"><b>The role</b>Materials are the front door, not the profit. They create the transaction — and the data.</div>
+      </div>
+      <div class="eng e2">
+        <div class="en">Engine 02 · The margin</div>
+        <h4>Oxyzo — embedded credit</h4>
+        <div class="sub">The real profit pool</div>
+        <p>Working capital lending matched to the cash-flow cycle of buying raw materials. Because OfBusiness sees every transaction, it underwrites on <strong>real behavioural data</strong> — approving in under 48 hours with materially lower default rates than banks.</p>
+        <div class="kick"><b>The role</b>This is where the money is. Banks can't underwrite these SMEs; OfBusiness can, because it owns the data.</div>
+      </div>
+      <div class="eng e3">
+        <div class="en">Engine 03 · The loop</div>
+        <h4>BidAssist — tender discovery</h4>
+        <div class="sub">Free utility that feeds everything</div>
+        <p>Launched 2017: aggregates and recommends government tenders to SMEs — 200,000+ tender sources across 190+ countries. Free to use, premium subscription available. It hands small builders <em>work they'd never have found</em>.</p>
+        <div class="kick"><b>The role</b>The genius move. Win them a contract → finance it → supply it. See the flywheel below.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIDASSIST FLYWHEEL -->
+<section id="bidassist" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">The Flywheel · The Single Best Idea In This Document</p>
+    <h2>Give them the job. Fund the job. Supply the job.</h2>
+    <p class="lead" style="margin-bottom:20px">BidAssist looks like a free tool. It is actually the top of a self-reinforcing loop that competitors can't easily copy — and it maps almost perfectly onto Wima's planned tendering desk.</p>
+    <div class="flywheel">
+      <div class="fw"><div class="fn">Step 01</div><h4>Find them work</h4><p>A small builder discovers a tender through BidAssist they'd never have known existed. Pure value, no ask.</p></div>
+      <div class="fw"><div class="fn">Step 02</div><h4>Fund the win</h4><p>They win it — but need working capital to buy materials. Oxyzo lends, underwritten on their platform history.</p></div>
+      <div class="fw"><div class="fn">Step 03</div><h4>Supply the job</h4><p>OfBusiness supplies the raw materials for the contract it just helped them win and finance.</p></div>
+      <div class="fw"><div class="fn">Step 04</div><h4>Own the data</h4><p>Every order sharpens the credit model, which prices the next loan better — which wins the next customer.</p></div>
+    </div>
+    <div class="callout green" style="margin-top:20px">
+      <div class="lbl">Why this is the lesson for Wima</div>
+      <p>Wima already has a tendering desk on the roadmap and a bank rail in the Bank Partnership Pitch — <strong>this is how they connect.</strong> Aggregate Ghana's tenders (government, estate developers, institutional) into something a small Accra builder can actually find and understand. Hand them work. Then be the one who helps them finance and supply it. <strong>The builder who got their contract from Wima does not shop around for boards.</strong> That's a moat no supplier can price-match — and it costs nothing but the aggregation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section id="numbers">
+  <div class="wrap">
+    <p class="eyebrow">The Numbers · Where It Stands</p>
+    <h2>Profitable, IPO-bound, and priced like a fintech</h2>
+    <div class="cards two">
+      <div class="card"><div class="k">The group</div><h4>OfBusiness</h4><p><strong>FY25 revenue ₹22,241 cr · PAT ₹597 cr.</strong> Founded 2015. ~$776M raised over 15 rounds. 1M+ SMEs served, 500,000+ orders, 30+ countries. Five banks mandated (Axis, Morgan Stanley, JPMorgan, Citi, BofA) for a <strong>$750M–$1B IPO at a $6–9B target valuation</strong>.</p></div>
+      <div class="card"><div class="k">The engine</div><h4>Oxyzo</h4><p>RBI-registered NBFC, carved out 2018, led by Ruchi Kalra. <strong>$200M Series A in 2022 — India's largest</strong> — unicorn at $1B. Loan book past ₹5,000 cr; AUM ₹5,000 cr+. Underwrites in under 48 hours on platform data. <strong>~70% of its lending is now outside OfBusiness</strong> — it outgrew its parent's platform.</p></div>
+    </div>
+    <div class="callout" style="margin-top:16px">
+      <div class="lbl">The tell</div>
+      <p>Look at what the market is pricing. Infra.Market — bigger brand, more factories, more physical control — is valued around <strong>$2.6B</strong>. OfBusiness, which owns comparatively little, is targeting <strong>$6–9B</strong>. Investors are paying a premium for the <em>asset-light, data-and-credit</em> model over the vertically integrated one. In this market, owning less is worth more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WIMA TRANSLATION -->
+<section id="translate" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">The Wima Translation · Tap Each Lesson</p>
+    <h2>What Wima copies — and where Wima must diverge</h2>
+    <p class="lead" style="margin-bottom:22px">OfBusiness is closer to Wima's reality than Infra.Market ever was: it made money without capital-heavy assets. But Wima is a young Ghanaian company, not a $776M-funded Indian group — so some moves need translating down, and one needs refusing outright.</p>
+    <div class="reg">
+      <div class="lessons" id="lessons"></div>
+      <div class="ldetail" id="ldetail" aria-live="polite"></div>
+    </div>
+    <div class="callout green" style="margin-top:22px">
+      <div class="lbl">The one line to hold</div>
+      <p class="thesis">Infra.Market proved the aggregation thesis and then bought the factories that ate its profit. OfBusiness proved the same thesis, refused the factories, and made its money on the flow — and earns 2.7× the profit for it. Wima copies OfBusiness's shape, not Infra.Market's ambition.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">Wima Builders — OfBusiness: The Deep Dive</div>
+      <div class="fdisc">Facts from public sources (Entrackr, Inc42, Tracxn, YourStory, StartupTalky, GrowthX, Business Outreach, OrangeOwl, BW Disrupt, IPO Central, 2022–2026). FY25 figures as reported: OfBusiness group revenue ₹22,241 cr / PAT ₹597 cr; Infra.Market revenue ₹18,472 cr / PAT ₹220 cr (Entrackr, January 2026). Valuation and IPO figures are reported targets, not completed transactions, and change over time; currency conversions approximate. Analysis and the Wima translation are Wima's own, adapted to Ghana; validate before committing capital. Lending and financial-services activity in Ghana is regulated by the Bank of Ghana — take professional advice before any credit product. Strategic research, not financial, investment or legal advice. Companion to Documents 23 (Deal Hub Devil's Advocate) &amp; 24 (Infra.Market Deep Dive), Wima Ecosystem Hub.</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Document 25 · Wima Ecosystem Hub</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var L=[
+    {t:"Credit and commerce are one problem",
+     did:"Built lending into the founding mission \u2014 \u2018raw materials <b>and credit</b>' \u2014 rather than adding it later. The materials create the relationship; the credit captures the profit pool.",
+     copy:"<b>Wima's builders have the identical squeeze:</b> they pay retail because they can't buy at volume, <em>and</em> they stall mid-build because cash runs out. Deal Hub solves the first. The <b>bank rail</b> (Doc 11) must solve the second \u2014 designed in now, not bolted on in year three.",
+     diff:"Wima <b>refers</b> financing to a bank partner rather than lending its own balance sheet. Oxyzo needed a $200M raise and an RBI licence; Ghana lending is Bank of Ghana-regulated. Capture the value through referral \u2014 take no credit risk."},
+    {t:"Own the data, underwrite the risk",
+     did:"Because it saw every transaction, Oxyzo underwrote on <b>real behavioural data</b> \u2014 approving in under 48 hours with far lower defaults than banks achieve on the same SMEs.",
+     copy:"<b>This is the AkomaPoints thesis, already proven.</b> Every Deal Hub order, BOQ and repeat purchase builds a behavioural record no Ghanaian bank has. That dataset is Wima's most defensible long-term asset \u2014 it makes Wima the party who can tell a bank <em>which</em> builder is good for the money.",
+     diff:"Wima starts by <b>owning and structuring the data</b>, and monetises it through better bank referrals and supplier terms \u2014 not by lending. The data asset compounds quietly from day one; the lending question can wait years."},
+    {t:"BidAssist — give them the job first",
+     did:"Aggregated 200,000+ tender sources into a free tool that finds SMEs work they'd never discover. Then financed the win. Then supplied the materials for it.",
+     copy:"<b>The best idea in this document, and Wima already has the seed:</b> the tendering desk. Aggregate Ghana's tenders \u2014 government, estate developers, institutions \u2014 into something a small Accra builder can find and read. Hand them work. Then finance and supply it. <b>A builder whose contract came from Wima doesn't price-check your boards.</b>",
+     diff:"Start manually and locally \u2014 a curated weekly tender digest to the community beats a 190-country scraper. The <em>mechanic</em> (free utility \u2192 work \u2192 finance \u2192 supply) scales down perfectly to one WhatsApp broadcast."},
+    {t:"Let them buy elsewhere",
+     did:"Allowed customers to procure materials on the open market if they found a better price \u2014 and <b>still</b> offered them purchase financing. About 20% do exactly that.",
+     copy:"<b>Radical, and exactly right for a trust market.</b> It proves the platform isn't a trap. Wima can do the same: if a member finds cement cheaper elsewhere, say so plainly \u2014 and keep serving them on the BOQ, the clinic, the tender digest and the install. Trust that survives a lost sale is the moat.",
+     diff:"Wima can go further, because honesty <em>is</em> the brand: publish the price update even when it doesn't favour a Deal Hub pool. The credibility compounds far beyond the lost margin."},
+    {t:"Serve who the banks won't",
+     did:"Targeted India's 63.4M SMEs \u2014 30% of GDP \u2014 that traditional banks structurally underserve. The underserved market was the whole opportunity.",
+     copy:"<b>Ghana's mirror image:</b> the ~90\u201395% who self-build, plus the diaspora. Mortgage lending is under 0.5% of GDP \u2014 the formal system barely touches these builders. They are not a marginal segment; they are <b>the</b> market, and nobody is serving them properly.",
+     diff:"Wima's self-builders are individuals, not manufacturing SMEs \u2014 so the emotional stakes (betrayal, a stalled family home) are higher than the commercial ones. Wima wins on <b>trust and completion</b>, not just price and credit."},
+    {t:"The financing arm outgrew the parent",
+     did:"~70% of Oxyzo's lending now goes to businesses <b>outside</b> OfBusiness. The infrastructure built to serve the platform became a bigger business than the platform's own flow.",
+     copy:"<b>The pattern behind GhanaOne.</b> AkomaPoints is being built as Wima's loyalty and data rail \u2014 but the rail itself, serving <em>other</em> Ghanaian SMEs, may become larger than Wima Builders. That's not a distraction; it's the documented arc of this exact model.",
+     diff:"Sequence it honestly: <b>Drywall \u2192 Deal Hub \u2192 AkomaPoints \u2192 GhanaOne.</b> Oxyzo was carved out in 2018 \u2014 three years after founding, once the commerce worked. Earn the right to the rail before building it."},
+    {t:"Profit before capital",
+     did:"Made real margin from the start, and structured for profitability \u2014 which is why FY25 shows ₹597 cr of profit while the asset-heavy rival's fell 42% to ₹220 cr on higher costs.",
+     copy:"<b>Prove Deal Hub's unit economics small before scaling.</b> One category, one city, real margin. Investors \u2014 and Ghana's macro \u2014 reward a business that works over one that promises.",
+     diff:"Wima has no $776M cushion, so this isn't a preference \u2014 it's survival. The asset-light line is what makes profitability reachable at Wima's size, and what lets it bend instead of break when the cedi moves."}
+  ];
+  var list=document.getElementById("lessons");
+  list.innerHTML=L.map(function(l,i){
+    return '<button data-i="'+i+'"'+(i===0?' class="active"':'')+'><span class="ln">'+(i+1)+'</span><span>'+l.t+'</span></button>';
+  }).join("");
+  var d=document.getElementById("ldetail");
+  function render(i){
+    var l=L[i];
+    d.innerHTML=
+      '<h3>'+l.t+'</h3>'+
+      '<div class="row"><div class="rk did">◆ What OfBusiness did</div><div class="rv">'+l.did+'</div></div>'+
+      '<div class="row"><div class="rk copy">◆ What Wima copies</div><div class="rv">'+l.copy+'</div></div>'+
+      '<div class="row"><div class="rk diff">◆ What Wima does differently</div><div class="rv">'+l.diff+'</div></div>';
+    list.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',+b.getAttribute('data-i')===i);});
+  }
+  list.querySelectorAll('button').forEach(function(b){
+    var i=+b.getAttribute('data-i');
+    b.addEventListener('click',function(){render(i);});
+    b.addEventListener('mouseenter',function(){render(i);});
+  });
+  render(0);
+})();
+</script>
+</body>
+</html>

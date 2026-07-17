@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — The 2026 Deep-Dive &amp; Expert Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;--bg-2:#1b1611;--bg-3:#221c16;--line:#332a22;--line-2:#463a2e;
+    --ink:#f3ece2;--ink-2:#c6b8a6;--ink-3:#8a7b68;
+    --ochre:#e0a54e;--ochre-deep:#c07f2c;--blueprint:#6fb0c9;--clay:#c76b4a;--green:#7fa66a;--violet:#a98fd0;
+    --maxw:1080px;--serif:"Fraunces","Georgia",serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:inherit}button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:5px}
+  .topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:14px;padding:14px 26px;background:rgba(20,16,13,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logomark{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));color:#1a130a;font-family:var(--serif);font-weight:700;font-size:17px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:15px}.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .topbar nav{margin-left:auto;display:flex;gap:15px;font-size:13px;color:var(--ink-2)}
+  .topbar nav a{text-decoration:none}.topbar nav a:hover{color:var(--ochre)}
+  @media(max-width:860px){.topbar{flex-wrap:wrap}.topbar nav{order:3;width:100%;margin-left:0;overflow-x:auto;gap:18px;padding:8px 2px 2px}.topbar nav a{flex:0 0 auto}.topbar nav::-webkit-scrollbar{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.13;margin:0}
+  h2{font-size:clamp(24px,3.6vw,34px);margin-bottom:14px}
+  h3{font-size:20px;margin-bottom:10px}
+  p{margin:0 0 14px;color:var(--ink-2)}p strong{color:var(--ink);font-weight:600}
+  .lead{font-size:18px;color:var(--ink);max-width:74ch}
+  .muted{color:var(--ink-3);font-size:12.5px}
+
+  .hero{padding:80px 0 54px;border-bottom:1px solid var(--line);background:radial-gradient(1000px 460px at 84% -12%,rgba(224,165,78,.17),transparent 60%),radial-gradient(700px 380px at 0% 116%,rgba(127,166,106,.08),transparent 55%)}
+  .hero .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:20px}
+  .hero h1{font-size:clamp(30px,5.2vw,50px);max-width:20ch;margin-bottom:22px}
+  .hero h1 em{font-style:normal;color:var(--ochre)}
+  .hero .sub{font-size:19px;color:var(--ink-2);max-width:66ch}
+
+  .statband{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:34px}
+  .sb{background:var(--bg-3);padding:18px 16px}
+  .sb .n{font-family:var(--serif);font-size:clamp(19px,2.6vw,25px);color:var(--ochre);line-height:1}
+  .sb .l{font-size:11.5px;color:var(--ink-2);margin-top:7px;line-height:1.4}
+  @media(max-width:760px){.statband{grid-template-columns:1fr 1fr}}
+
+  .paradox{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;margin:8px 0 0}
+  @media(max-width:680px){.paradox{grid-template-columns:1fr;gap:10px}}
+  .pbox{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:22px;text-align:center}
+  .pbox .pn{font-family:var(--serif);font-size:30px;color:var(--ochre);line-height:1}
+  .pbox.b .pn{color:var(--clay)}
+  .pbox .pl{font-size:13px;color:var(--ink-2);margin-top:8px}
+  .pvs{font-family:var(--mono);font-size:12px;color:var(--ink-3);text-align:center}
+
+  .cards{display:grid;gap:14px}.cards.two{grid-template-columns:1fr 1fr}.cards.three{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.cards.two,.cards.three{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--bg-3);padding:22px}
+  .card .k{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ochre);margin-bottom:8px}
+  .card h4{font-family:var(--serif);font-size:16px;margin-bottom:8px}
+  .card p{font-size:13.5px;margin:0}
+
+  /* opportunity map */
+  .map{display:flex;flex-direction:column;gap:8px}
+  .mrow{display:grid;grid-template-columns:.9fr 1.1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  @media(max-width:680px){.mrow{grid-template-columns:1fr}}
+  .mrow .fact{background:var(--bg-2);padding:16px 18px}
+  .mrow .impl{background:var(--bg-3);padding:16px 18px;border-left:1px solid var(--line)}
+  @media(max-width:680px){.mrow .impl{border-left:none;border-top:1px solid var(--line)}}
+  .mrow .fl{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--blueprint);margin-bottom:5px}
+  .mrow .il{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:5px}
+  .mrow .ft{font-size:13.5px;color:var(--ink)}.mrow .ft b{color:var(--ochre)}
+  .mrow .it{font-size:13.5px;color:var(--ink-2)}.mrow .it b{color:var(--ink)}
+
+  /* infra.market case */
+  .infra{border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:26px;position:relative;overflow:hidden}
+  .infra::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--green)}
+  .infra .ch{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .infra h3{font-size:22px}
+  .infra .tag{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--line-2);border-radius:20px;padding:4px 10px}
+  .infra .stats{display:flex;flex-wrap:wrap;gap:20px;margin:14px 0 16px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .infra .stats .n{font-family:var(--serif);font-size:21px;color:var(--green);line-height:1}
+  .infra .stats .l{font-size:11.5px;color:var(--ink-3);margin-top:5px}
+  .infra p{font-size:14px}
+  .infra .take{border-left:3px solid var(--green);padding:6px 0 6px 16px;margin-top:12px;font-size:14px}
+  .infra .take b{color:var(--green);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+  /* expert panel */
+  .panel{display:grid;grid-template-columns:.95fr 1.05fr;gap:20px;align-items:start}
+  @media(max-width:860px){.panel{grid-template-columns:1fr}}
+  .experts{display:flex;flex-direction:column;gap:8px}
+  .experts button{display:flex;gap:12px;align-items:center;text-align:left;border:1px solid var(--line);border-radius:12px;background:var(--bg-3);padding:12px 14px;color:var(--ink-2);cursor:pointer;transition:.2s;font-size:13.5px}
+  .experts button:hover{color:var(--ink)}
+  .experts button.active{border-color:var(--ochre);background:linear-gradient(160deg,rgba(224,165,78,.1),var(--bg-3));color:var(--ink)}
+  .experts .av{width:32px;height:32px;border-radius:8px;flex:none;display:grid;place-items:center;font-family:var(--serif);font-size:11px;font-weight:600;color:#1a130a;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep))}
+  .experts button.intl .av{background:linear-gradient(150deg,var(--blueprint),#4d8ba3);color:#0c1518}
+  .experts .en{font-family:var(--serif);font-size:13.5px;line-height:1.1;color:var(--ink)}
+  .experts .eo{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-top:2px}
+  .edetail{border:1px solid var(--line);border-radius:16px;background:var(--bg-3);padding:26px;min-height:340px}
+  .edetail .tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;margin-bottom:12px}
+  .edetail .tag.local{color:var(--ochre);border:1px solid rgba(224,165,78,.4)}
+  .edetail .tag.intl{color:var(--blueprint);border:1px solid rgba(111,176,201,.4)}
+  .edetail h3{font-size:20px;margin-bottom:4px}
+  .edetail .who{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-bottom:16px}
+  .edetail .row{padding:11px 0;border-top:1px solid var(--line)}
+  .edetail .rk{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+  .edetail .rk.find{color:var(--blueprint)}.edetail .rk.improve{color:var(--green)}
+  .edetail .rv{font-size:14.5px;color:var(--ink-2)}.edetail .rv b{color:var(--ink)}
+
+  /* punch list */
+  .punch{counter-reset:pc;display:flex;flex-direction:column;gap:9px}
+  .pitem{display:grid;grid-template-columns:34px 1fr;gap:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg-3);padding:15px 18px}
+  .pitem .pnum{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:#1a130a;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));flex:none}
+  .pitem h4{font-family:var(--serif);font-size:15.5px;margin-bottom:3px}
+  .pitem p{font-size:13.5px;margin:0}
+  .pitem .tags{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px}
+  .pitem .tags span{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);border:1px solid var(--line-2);border-radius:20px;padding:2px 8px}
+
+  .callout{border:1px solid var(--line-2);border-radius:14px;padding:22px 24px;background:linear-gradient(150deg,rgba(224,165,78,.07),var(--bg-3));margin-top:8px}
+  .callout.green{background:linear-gradient(150deg,rgba(127,166,106,.08),var(--bg-3))}
+  .callout.clay{background:linear-gradient(150deg,rgba(199,107,74,.09),var(--bg-3))}
+  .callout .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:9px}
+  .callout.green .lbl{color:var(--green)}.callout.clay .lbl{color:var(--clay)}
+  .callout p:last-child{margin-bottom:0}
+  .thesis{font-family:var(--serif);font-size:20px;color:var(--ink);font-style:italic;line-height:1.4}
+
+  footer{padding:40px 0 60px;color:var(--ink-3)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .fdisc{font-size:12px;color:var(--ink-3);max-width:82ch;margin-top:12px;line-height:1.5}
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" title="Back to the hub" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit"><div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>2026 Deep-Dive &amp; Expert Panel</span></div></a>
+  <nav><a href="#window">The Window</a><a href="#paradox">The Paradox</a><a href="#map">Opportunity Map</a><a href="#infra">Deal Hub Proof</a><a href="#panel">The Panel</a><a href="#punch">What To Change</a></nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Document 22 · Deep Research · Expert Panel · Strategy Upgrade</div>
+    <h1>The strategy is sound. <em>The 2026 data makes it sharper.</em></h1>
+    <p class="sub">A deep research pass into Ghana's 2026 real-estate reality and the best international models, run through the expert panel — to upgrade both the idea and the implementation. Fresh numbers, new opportunities, and a concrete list of what to change.</p>
+    <div class="statband">
+      <div class="sb"><div class="n">30% → 14%</div><div class="l">BoG policy rate — a decade's best financing window</div></div>
+      <div class="sb"><div class="n">+27%</div><div class="l">cedi appreciation in 2025 (Africa's best)</div></div>
+      <div class="sb"><div class="n">$6.65B</div><div class="l">record diaspora remittances, increasingly into property</div></div>
+      <div class="sb"><div class="n">&lt;0.5%</div><div class="l">mortgage penetration of GDP — the gap Wima's rails fill</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- THE WINDOW -->
+<section id="window">
+  <div class="wrap">
+    <p class="eyebrow">Finding 1 · The Macro Window</p>
+    <h2>2026 is a narrow, real opening — move with it</h2>
+    <p class="lead" style="margin-bottom:20px">After years of pressure, the fundamentals turned: inflation into single digits, the cedi recovering, default exited, the IMF programme completing May 2026, and consecutive rate cuts. This is the best financing environment in a decade — but analysts are clear it's a <strong>narrow window</strong>, not a new normal.</p>
+    <div class="cards three">
+      <div class="card"><div class="k">Why it matters</div><h4>Finance rails come alive</h4><p>Falling rates and competing banks revive mortgage and construction lending — Wima's bank-referral rail gets its best-ever conditions. Timing matters.</p></div>
+      <div class="card"><div class="k">Why it matters</div><h4>Diaspora entry point</h4><p>A stronger cedi and easing rates make 2026 one of the most favourable diaspora entry points in memory — the audience with USD is ready to move.</p></div>
+      <div class="card"><div class="k">The risk</div><h4>It can reverse</h4><p>A renewed inflation spike, sharp cedi depreciation, or an IMF-exit wobble could choke the recovery. Build asset-light so a reversal can't sink you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PARADOX -->
+<section id="paradox" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">Finding 2 · The Defining Paradox</p>
+    <h2>1.8 million short — and 1.3 million empty, at the same time</h2>
+    <p class="lead" style="margin-bottom:22px">This single fact reframes the whole opportunity. Ghana doesn't simply lack houses — it builds them at the <strong>wrong price point.</strong></p>
+    <div class="paradox">
+      <div class="pbox"><div class="pn">1.8M</div><div class="pl">unit housing deficit — acute in affordable &amp; mid-market</div></div>
+      <div class="pvs">exists alongside</div>
+      <div class="pbox b"><div class="pn">1.3M</div><div class="pl">empty dwelling units — luxury oversupply, thin buyers</div></div>
+    </div>
+    <div class="callout" style="margin-top:22px">
+      <div class="lbl">What it means for Wima</div>
+      <p>The money and the demand are in <strong>affordable and mid-market ($40K–$150K)</strong>, where sub-$150K gated units sell in under 45 days while $600K+ villas sit 90+ days. Two sharp implications: <strong>(1)</strong> Wima's self-builder audience is exactly the under-served majority — the strategy is aimed at the right people. <strong>(2)</strong> Those 1.3M empty units are a <strong>short-let and management goldmine</strong> — inventory that already exists, waiting to be activated.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITY MAP -->
+<section id="map">
+  <div class="wrap">
+    <p class="eyebrow">The 2026 Opportunity Map</p>
+    <h2>Each fresh data point → a sharpened Wima move</h2>
+    <p class="lead" style="margin-bottom:20px">The research, translated straight into action. Left: what the 2026 data says. Right: what Wima does about it.</p>
+    <div class="map">
+      <div class="mrow"><div class="fact"><div class="fl">Data</div><div class="ft">Mid-market gated townhouses ($100–350K) are 2026's <b>strongest asset class</b> (10–15% cedi growth); luxury is soft.</div></div><div class="impl"><div class="il">Wima move</div><div class="it">Aim the whole funnel at the <b>mid-market self-builder &amp; buyer</b> — not luxury. Sharpen the beachhead here.</div></div></div>
+      <div class="mrow"><div class="fact"><div class="fl">Data</div><div class="ft">Short-let yields <b>15–25%</b> — the top category — boosted by Year of Return / Beyond the Return tourism.</div></div><div class="impl"><div class="il">Wima move</div><div class="it">Stand up the <b>short-let management line</b> on diaspora &amp; empty units — the highest-yield, asset-light play.</div></div></div>
+      <div class="mrow"><div class="fact"><div class="fl">Data</div><div class="ft"><b>Replacement cost</b> (materials, labour, imports) is the #1 driver of property prices — it puts a floor under prices.</div></div><div class="impl"><div class="il">Wima move</div><div class="it"><b>Deal Hub attacks the biggest cost.</b> Group-buying materials isn't a side feature — it's aimed at the market's core pain.</div></div></div>
+      <div class="mrow"><div class="fact"><div class="fl">Data</div><div class="ft">Mortgage penetration is <b>under 0.5% of GDP</b>, but rates are easing and banks are competing (FNB 48-hr LOI, Republic pre-approvals).</div></div><div class="impl"><div class="il">Wima move</div><div class="it"><b>Accelerate the bank-finance rail now,</b> while the window is open and lenders want quality leads.</div></div></div>
+      <div class="mrow"><div class="fact"><div class="fl">Data</div><div class="ft">Verification is becoming baseline: <b>Lands Commission digital portal live,</b> rivals ship AI valuations (OwnEstimate).</div></div><div class="impl"><div class="il">Wima move</div><div class="it">Ship a <b>free build-cost/BOQ tool</b> and bake in land/materials/pro <b>verification</b> — table stakes now, and a data engine.</div></div></div>
+      <div class="mrow"><div class="fact"><div class="fl">Data</div><div class="ft"><b>65% of transactions</b> are in Greater Accra; Kumasi second; diaspora capital's share is growing.</div></div><div class="impl"><div class="il">Wima move</div><div class="it">Concentrate first on <b>Accra + Kumasi + the diaspora</b> — don't spread thin across the country early.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INFRA.MARKET -->
+<section id="infra" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">International Best Practice · The Deal Hub Proof</p>
+    <h2>Someone already built Deal Hub — to a $2B business</h2>
+    <div class="infra">
+      <div class="ch"><h3>Infra.Market</h3><span class="tag">India · founded 2016</span></div>
+      <div class="stats">
+        <div><div class="n">~$2.1B</div><div class="l">revenue (FY25), profitable most years</div></div>
+        <div><div class="n">5–7%</div><div class="l">input-cost saving for builders via pooling</div></div>
+        <div><div class="n">&gt;80%</div><div class="l">repeat-order rate</div></div>
+        <div><div class="n">2016→unicorn</div><div class="l">in ~5 years, bootstrapped first 3</div></div>
+      </div>
+      <p>Infra.Market fixed India's fragmented construction supply chain — the same coordination, standardisation and trust problem Ghana has. Its entry point was pure <strong>demand aggregation</strong>: pool the orders of hundreds of small contractors, and the pooled volume unlocks pricing individuals can't get — saving buyers 5–7% while giving manufacturers steady demand and fuller capacity. It stayed <strong>asset-light early</strong>, added quality standardisation and private labels <em>later</em>, and rode a flywheel: more buyers → more supplier leverage → lower prices → more buyers.</p>
+      <div class="take"><b>What Wima copies</b>Run Deal Hub as demand aggregation first — pool builders' orders, quantify the saving (\u201cbuy together, save 5–10%\u201d), keep suppliers happy with steady volume. Own the flow and the data; add private-label or deeper integration only much later.</div>
+    </div>
+    <div class="callout clay" style="margin-top:18px">
+      <div class="lbl">The paired warning</div>
+      <p>Infra.Market's move into <strong>owning manufacturing</strong> brought thinner margins (~8% EBITDA), heavy debt, and a 2025 credit downgrade — while its asset-light rival kept higher margins. Same lesson as Zillow's iBuying loss: <strong>aggregate and own the flow; be very slow to own physical assets.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERT PANEL -->
+<section id="panel">
+  <div class="wrap">
+    <p class="eyebrow">The Expert Panel · Tap Each</p>
+    <h2>Eight experts, one sharpened recommendation each</h2>
+    <p class="lead" style="margin-bottom:22px">The panel reconvened on the 2026 data. Each names one thing the research reveals — and the specific improvement Wima should make. Local (gold), international (blue).</p>
+    <div class="panel">
+      <div class="experts" id="experts"></div>
+      <div class="edetail" id="edetail" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PUNCH LIST -->
+<section id="punch" style="background:var(--bg-2)">
+  <div class="wrap">
+    <p class="eyebrow">The Upgrade · What To Change</p>
+    <h2>Ten concrete improvements to make now</h2>
+    <div class="punch">
+      <div class="pitem"><div class="pnum">1</div><div><h4>Ship the free BOQ / build-cost tool first</h4><p>It's Wima's Zestimate: the acquisition hook, the trust-builder, and the data engine. Verification (land, materials, pros) rides alongside it.</p><div class="tags"><span>Resource Hub</span><span>Data</span></div></div></div>
+      <div class="pitem"><div class="pnum">2</div><div><h4>Position Deal Hub as demand aggregation with a number</h4><p>Not \u201cgroup buying\u201d in the abstract — \u201cbuy together, save 5–10%.\u201d Quantify the saving (Infra.Market proved it) and promise suppliers steady volume.</p><div class="tags"><span>Deal Hub</span><span>Supplier doc</span></div></div></div>
+      <div class="pitem"><div class="pnum">3</div><div><h4>Sharpen the beachhead to mid-market &amp; affordable</h4><p>The data is decisive: demand is at $40–150K, not luxury. Point content, deals and services squarely at that self-builder and buyer.</p><div class="tags"><span>Founder's Verdict</span><span>Playbook</span></div></div></div>
+      <div class="pitem"><div class="pnum">4</div><div><h4>Elevate short-let management to a flagship line</h4><p>1.3M empty units + 15–25% yields + Year-of-Return demand = the highest-return, asset-light activation. Build the management offer for diaspora &amp; empty-home owners.</p><div class="tags"><span>Founder's Verdict</span><span>Thesis</span></div></div></div>
+      <div class="pitem"><div class="pnum">5</div><div><h4>Accelerate the bank-finance rail into the window</h4><p>Rates are easing and banks compete for quality leads now. Move the finance-referral conversations forward while conditions are best.</p><div class="tags"><span>Bank Pitch</span></div></div></div>
+      <div class="pitem"><div class="pnum">6</div><div><h4>Make verification a visible product</h4><p>Lands Commission digital search, genuine-materials checks, vetted pros — surface these as badges and services. Verification is now the market baseline.</p><div class="tags"><span>Competitive</span><span>Flywheel</span></div></div></div>
+      <div class="pitem"><div class="pnum">7</div><div><h4>Own the data deliberately</h4><p>Every calculator use, deal and enquiry is proprietary data on build costs, prices and demand. Design to capture it — the CRM should build itself silently.</p><div class="tags"><span>Data</span><span>Zillow lesson</span></div></div></div>
+      <div class="pitem"><div class="pnum">8</div><div><h4>Add hybrid offline trust touchpoints</h4><p>Build clinics, a Deal Hub showroom corner, diaspora webinars — the Livspace lesson. Low-trust markets need something tangible behind the screen.</p><div class="tags"><span>Playbook</span></div></div></div>
+      <div class="pitem"><div class="pnum">9</div><div><h4>Run the proven content playbook</h4><p>Dramatise the pain (Livspace), make browsing entertainment (Zillow), launch WhatsApp-first (Indian fashion), iterate relentlessly (Duolingo's 39 videos).</p><div class="tags"><span>MBA</span><span>Lecture Notes</span></div></div></div>
+      <div class="pitem"><div class="pnum">10</div><div><h4>Hold the asset-light line</h4><p>Zillow lost $200M and Infra.Market took on heavy debt the moment each owned physical assets. Own the flow, the data, the trust — resist owning inventory or factories.</p><div class="tags"><span>Guardrail</span></div></div></div>
+    </div>
+    <div class="callout" style="margin-top:20px">
+      <div class="lbl">The upgraded one-line thesis</div>
+      <p class="thesis">The 2026 data doesn't change Wima's direction — it loads it. Aim at the under-served mid-market and diaspora, attack the biggest cost with pooled buying, activate the empty homes, ship the free tool that owns the data — and move now, asset-light, while the window is open.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">Wima Builders — The 2026 Deep-Dive &amp; Expert Panel</div>
+      <div class="fdisc">Ghana 2026 figures from public sources (Ownkey Ghana Real Estate Market &amp; Trends Reports 2026; The Africanvestor; Eden Heights; Imaani Homes; Bank of Ghana; Ghana Statistical Service PBCI; Ministry of Works &amp; Housing; CAHF; IMF; World Bank; Afreximbank; B&amp;FT/NewsGhana). International model from Infra.Market public reporting (YourStory, Forbes India, business analyses). Figures are as publicly reported and change over time; the macro window carries real reversal risk. Expert panel comprises composite advisory roles, not named individuals. Strategic research, not financial or investment advice — validate before committing capital. Companion to Documents 07–21, Wima Ecosystem Hub.</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Document 22 · Wima Ecosystem Hub</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var E=[
+    {o:"local",init:"ME",n:"Market Economist",who:"Accra · macro",find:"2026 is the best financing environment in a decade — but a narrow window, with real reversal risk (cedi, IMF exit May 2026).",improve:"<b>Move now, not later.</b> Push the finance and diaspora rails forward while conditions hold, and build asset-light so a macro reversal can't sink the business."},
+    {o:"intl",init:"HE",n:"Housing Economist",who:"International · housing",find:"The 1.8M deficit sits beside 1.3M empty units — a wrong-price-point failure. Demand is acute at $40–150K; luxury is oversupplied.",improve:"<b>Sharpen the beachhead to mid-market &amp; affordable.</b> Point everything at the under-served majority; explicitly avoid luxury, where Wima's audience isn't."},
+    {o:"local",init:"SL",n:"Short-Let Specialist",who:"Accra · hospitality",find:"Short-let yields 15–25% (top category), lifted by Year of Return; and 1.3M empty units already exist as latent inventory.",improve:"<b>Make short-let management a flagship line.</b> Activate diaspora and empty-home owners' units — highest return, zero property capital."},
+    {o:"intl",init:"CM",n:"Construction-Materials Expert",who:"International · Infra.Market lens",find:"Infra.Market proved demand aggregation in a fragmented market — pooling orders saved builders 5–7% and hit ~$2B revenue.",improve:"<b>Run Deal Hub as aggregation-first with a quantified saving,</b> and stay asset-light — add private-label/manufacturing only much later, if ever."},
+    {o:"intl",init:"DT",n:"Proptech &amp; Data Strategist",who:"International · Zillow lens",find:"Verification is now baseline (Lands Commission digital portal live) and rivals ship free AI valuations (OwnEstimate).",improve:"<b>Ship a free build-cost/BOQ tool and own its data,</b> with land/materials/pro verification surfaced as product. The tool is the hook and the moat."},
+    {o:"local",init:"DP",n:"Diaspora Specialist",who:"Ghana ↔ diaspora",find:"Remittances hit a record $6.65B and diaspora capital's share of transactions is growing; a strong cedi makes 2026 a favourable entry.",improve:"<b>Go diaspora-first.</b> Lead with the USD-earning, high-trust-premium audience — remote build, procurement, and management as one stack."},
+    {o:"local",init:"TQ",n:"Trust &amp; Quality Chair",who:"Ghana · Livspace lens",find:"Ghana is a low-trust, high-fear market; verification and something tangible convert far better than online-only claims.",improve:"<b>Add hybrid offline touchpoints</b> — build clinics, a showroom corner, diaspora webinars — and dramatise the pain in content, then be the fix."},
+    {o:"intl",init:"RC",n:"Risk &amp; Contrarian Chair",who:"International · devil's advocate",find:"Both Zillow (iBuying, –$200M) and Infra.Market (owning factories, heavy debt) were punished the moment they owned physical assets.",improve:"<b>Hold the asset-light line without exception.</b> Own the flow, the data and the trust — never the inventory. And don't over-leverage into a window that can close."}
+  ];
+  var list=document.getElementById("experts");
+  list.innerHTML=E.map(function(e,i){
+    return '<button data-i="'+i+'" class="'+e.o+(i===0?' active':'')+'"><span class="av">'+e.init+'</span><span><span class="en">'+e.n+'</span><span class="eo">'+e.who+'</span></span></button>';
+  }).join("");
+  var detail=document.getElementById("edetail");
+  function render(i){
+    var e=E[i];
+    detail.innerHTML=
+      '<div class="tag '+(e.o==="local"?"local\">◆ Local — Ghana":"intl\">◆ International")+'</div>'+
+      '<h3>'+e.n+'</h3><div class="who">'+e.who+'</div>'+
+      '<div class="row"><div class="rk find">What the 2026 research reveals</div><div class="rv">'+e.find+'</div></div>'+
+      '<div class="row"><div class="rk improve">The improvement Wima should make</div><div class="rv">'+e.improve+'</div></div>';
+    list.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',+b.getAttribute('data-i')===i);});
+  }
+  list.querySelectorAll('button').forEach(function(b){
+    var i=+b.getAttribute('data-i');
+    b.addEventListener('click',function(){render(i);});
+    b.addEventListener('mouseenter',function(){render(i);});
+  });
+  render(0);
+})();
+</script>
+</body>
+</html>

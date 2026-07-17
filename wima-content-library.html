@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima Deal Hub — Ghana Content Library 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#FAFAF7; --surface:#F4F1EA; --panel:#ECEAE0; --rule:#D8D3C4;
+  --ink:#1C1917; --ink2:#3C3830; --slate:#44403C; --muted:#78716C; --faint:#A8A29E;
+  --amber:#C47A0A; --amber2:#A86508; --amber-lt:#FEF3DC; --amber-md:#FDDFAA;
+  --green:#15803D; --teal:#0F766E; --coral:#DC2626; --blue:#1D4ED8; --violet:#7C3AED;
+  --c1:#1E40AF; --c2:#166534; --c3:#92400E; --c4:#5B21B6;
+  --fb:#1877F2; --fb-lt:#EFF6FF; --ig:#C13584; --ig-lt:#FDF4F8;
+  --wa:#25D366; --wa-lt:#F0FDF4; --tt:#010101; --tt-lt:#F8F8F8;
+  --bl:#0F766E; --bl-lt:#F0FDFA; --pr:#7C3AED; --pr-lt:#F5F3FF;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --serif:'Playfair Display',Georgia,serif;
+  --mono:'IBM Plex Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;}
+
+/* NAV */
+.nav{position:sticky;top:52px;z-index:200;background:var(--ink);border-bottom:2px solid var(--amber);height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;}
+.nav-brand{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--amber);text-transform:uppercase;letter-spacing:.14em;}
+.nav-links{display:flex;gap:2px;}
+.nav-links a{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.72);padding:5px 10px;text-decoration:none;border-radius:3px;transition:all .12s;white-space:nowrap;}
+.nav-links a:hover{color:var(--amber);background:rgba(196,122,10,.12);}
+.nav-dl{font-family:var(--mono);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;background:var(--amber);color:white;padding:6px 14px;border-radius:3px;text-decoration:none;margin-left:10px;transition:background .12s;}
+.nav-dl:hover{background:var(--amber2);}
+
+/* HERO */
+.hero{padding:68px 56px 52px;border-bottom:2px solid var(--ink);background:var(--bg);}
+.hero-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--faint);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.hero-eye::before{content:'';width:24px;height:2px;background:var(--amber);}
+.hero h1{font-family:var(--serif);font-size:clamp(40px,5.5vw,70px);font-weight:900;line-height:1.0;letter-spacing:-.02em;color:var(--ink);margin-bottom:18px;}
+.hero h1 em{font-style:italic;color:var(--amber);}
+.hero-sub{font-size:16px;font-weight:300;color:var(--slate);max-width:600px;line-height:1.75;margin-bottom:36px;}
+.channel-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+.ch-badge{font-family:var(--mono);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:5px 12px;border-radius:100px;display:inline-flex;align-items:center;gap:6px;border:1px solid;}
+.hero-meta{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--rule);margin-top:36px;}
+.hm{padding:14px 16px;border-right:1px solid var(--rule);}
+.hm:last-child{border-right:none;}
+.hm-n{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--amber);display:block;line-height:1;margin-bottom:4px;}
+.hm-l{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);}
+
+/* LAYOUT */
+.page{max-width:980px;}
+.sec{padding:56px 56px 44px;border-bottom:1px solid var(--rule);}
+.sec:last-of-type{border-bottom:none;}
+.sec-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:8px;display:flex;align-items:center;gap:10px;}
+.sec-eye .stag{background:var(--amber);color:white;padding:1px 8px;font-size:8px;border-radius:2px;font-weight:600;}
+.sec-eye::after{content:'';flex:1;height:1px;background:var(--rule);}
+h2{font-family:var(--serif);font-size:34px;font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em;}
+h2 em{font-style:italic;color:var(--amber);}
+.sec-intro{font-size:14px;color:var(--slate);line-height:1.7;max-width:640px;margin-bottom:32px;font-style:italic;font-weight:300;}
+
+/* PIECE */
+.piece{background:white;border:1px solid var(--rule);margin-bottom:20px;overflow:hidden;}
+.piece-head{padding:14px 20px 12px;background:var(--surface);border-bottom:1px solid var(--rule);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.piece-type{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.14em;color:var(--amber);font-weight:600;margin-bottom:3px;}
+.piece-title{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);line-height:1.2;}
+.piece-deploy{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.piece-body{padding:20px 24px;}
+
+/* SEO BAR */
+.seo-bar{background:var(--panel);border-bottom:1px solid var(--rule);padding:9px 20px;display:flex;gap:20px;flex-wrap:wrap;align-items:center;}
+.seo-l{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);}
+.seo-v{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--ink2);}
+.seo-kw{color:var(--bl);}
+
+/* CONTENT LABELS */
+.clbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--amber);margin-bottom:6px;margin-top:16px;display:block;}
+.clbl:first-child{margin-top:0;}
+
+/* HEADLINES */
+.hl-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:6px;}
+.hl-opt{background:var(--surface);border:1px solid var(--rule);padding:8px 13px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+.hl-text{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);line-height:1.25;}
+.hl-badge{font-family:var(--mono);font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:3px;flex-shrink:0;margin-top:3px;}
+.hb-pri{background:var(--amber);color:white;}
+.hb-alt{background:var(--panel);color:var(--muted);}
+
+/* ARTICLE BODY */
+.ab{font-size:14px;color:var(--ink2);line-height:1.85;border-left:2px solid var(--rule);padding-left:16px;}
+.ab p{margin-bottom:14px;}
+.ab p:last-child{margin-bottom:0;}
+.ab h3{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--ink);margin:18px 0 8px;line-height:1.2;}
+.ab strong{color:var(--ink);font-weight:600;}
+.ab em{color:var(--amber2);font-style:normal;font-weight:500;}
+.ab ul{padding-left:18px;margin-bottom:14px;}
+.ab li{margin-bottom:6px;}
+
+/* SOURCE NOTE */
+.source{font-family:var(--mono);font-size:9px;color:var(--faint);border-left:2px solid var(--panel);padding-left:8px;margin-top:6px;display:block;font-style:italic;}
+
+/* SOCIAL POSTS */
+.social-post{background:white;border:1px solid var(--rule);padding:14px 16px;margin-bottom:8px;font-size:14px;color:var(--ink2);line-height:1.7;}
+.social-post::before{content:attr(data-platform);font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--amber);display:block;margin-bottom:6px;font-weight:600;}
+.caption-note{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:8px;font-style:italic;display:block;border-left:2px solid var(--panel);padding-left:8px;}
+.hashtags{font-family:var(--mono);font-size:11px;color:var(--bl);margin-top:6px;line-height:1.6;display:block;}
+
+/* EMAIL */
+.email-block{background:var(--surface);border:1px solid var(--rule);padding:20px 24px;font-size:14px;color:var(--ink2);line-height:1.75;margin-bottom:8px;}
+.email-field{display:flex;gap:10px;margin-bottom:10px;align-items:baseline;}
+.ef-lbl{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);width:80px;flex-shrink:0;}
+.ef-val{font-size:14px;color:var(--ink);font-weight:500;}
+.email-body p{margin-bottom:12px;}
+.email-body p:last-child{margin-bottom:0;}
+.cta-box{background:var(--ink);color:white;padding:12px 18px;text-align:center;margin:14px 0;font-size:14px;font-weight:600;}
+.divider{border:none;border-top:1px solid var(--rule);margin:20px 0;}
+
+/* PRESS RELEASE */
+.pr-dateline{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;display:block;}
+.pr-body p{margin-bottom:14px;font-size:14px;color:var(--ink2);line-height:1.85;}
+.pr-body p:last-child{margin-bottom:0;}
+.pr-boilerplate{background:var(--surface);border-left:2px solid var(--rule);padding:12px 16px;font-size:12.5px;color:var(--muted);line-height:1.65;margin-top:14px;}
+
+/* LANDING PAGE */
+.lp-section{margin-bottom:20px;}
+.lp-slbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);border-bottom:1px solid var(--rule);padding-bottom:5px;margin-bottom:10px;}
+.lp-h{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--ink);line-height:1.15;margin-bottom:8px;}
+.lp-sub{font-size:15px;color:var(--slate);line-height:1.7;margin-bottom:12px;}
+.lp-cta{display:inline-block;background:var(--amber);color:white;padding:12px 24px;font-size:14px;font-weight:600;text-decoration:none;border-radius:4px;margin-top:4px;}
+.ben-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;}
+.ben{background:var(--surface);padding:12px 14px;border-left:3px solid var(--amber);}
+.ben-t{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.ben-b{font-size:12.5px;color:var(--slate);line-height:1.55;}
+
+/* CASE STUDY */
+.cs-meta{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule);margin-bottom:20px;}
+.cs-m{padding:12px 14px;border-right:1px solid var(--rule);}
+.cs-m:last-child{border-right:none;}
+.cs-ml{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);margin-bottom:4px;display:block;}
+.cs-mv{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink);}
+
+/* REPURPOSE STRIP */
+.repurpose{background:var(--panel);border-top:1px solid var(--rule);padding:9px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.rp-lbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);margin-right:4px;}
+.rp-arr{color:var(--amber);font-size:10px;font-weight:600;}
+
+/* IBOX */
+.ibox{padding:12px 16px;margin-bottom:16px;border-left:3px solid;font-size:13px;line-height:1.65;}
+.ibox.amber{background:var(--amber-lt);border-color:var(--amber);color:#5A3800;}
+.ibox.teal{background:#F0FDFA;border-color:var(--teal);color:#064E3B;}
+.ibox.blue{background:#EFF6FF;border-color:var(--blue);color:#1E3A8A;}
+.ibox-lbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.14em;display:block;margin-bottom:4px;opacity:.6;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;}
+
+/* DOWNLOAD */
+.dl-wrap{background:var(--ink);padding:48px 56px;}
+.dl-title{font-family:var(--serif);font-size:36px;font-weight:700;font-style:italic;color:white;margin-bottom:8px;text-align:center;}
+.dl-sub{font-size:14px;color:rgba(255,255,255,.4);max-width:460px;margin:0 auto 32px;line-height:1.7;text-align:center;}
+.dl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:840px;margin:0 auto;}
+.dl-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);padding:18px 14px;text-align:center;transition:all .15s;}
+.dl-card:hover{background:rgba(196,122,10,.1);border-color:rgba(196,122,10,.3);transform:translateY(-2px);}
+.dl-icon{font-size:22px;display:block;margin-bottom:8px;}
+.dl-name{font-size:13px;font-weight:600;color:white;margin-bottom:3px;}
+.dl-desc{font-size:11px;color:rgba(255,255,255,.35);line-height:1.5;margin-bottom:12px;}
+.dl-btn{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;padding:7px 14px;background:var(--amber);color:white;text-decoration:none;border-radius:3px;}
+.dl-btn:hover{background:var(--amber2);}
+.dl-note{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.18);margin-top:18px;text-align:center;text-transform:uppercase;letter-spacing:.08em;}
+
+/* FOOTER */
+.footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.22);padding:16px 56px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.07em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.footer-brand{font-family:var(--serif);font-size:14px;color:var(--amber);text-transform:none;letter-spacing:0;font-style:italic;}
+
+/* DATA TABLE */
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px;}
+thead th{background:var(--ink);color:rgba(255,255,255,.7);padding:9px 14px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.1em;text-align:left;font-weight:500;}
+td{padding:10px 14px;border-bottom:1px solid var(--panel);vertical-align:top;line-height:1.55;}
+tr:nth-child(even) td{background:var(--surface);}
+tr:hover td{background:var(--amber-lt);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav{padding:0 20px;}.nav-links{display:none;}
+  .hero,.sec{padding:40px 22px 32px;}
+  .hero-meta,.ben-grid,.g2,.g3,.dl-grid,.cs-meta{grid-template-columns:1fr;}
+  .hm{border-right:none;border-bottom:1px solid var(--rule);}
+  .piece-head{flex-direction:column;}
+  .footer{padding:14px 22px;flex-direction:column;}
+  .dl-wrap{padding:36px 22px;}
+}
+
+/* WIMA BUILDERS — SHARED GLOBAL NAVIGATION */
+.wb-topbar{position:fixed;top:0;left:0;right:0;z-index:9999;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;gap:0;font-family:'IBM Plex Mono','Courier New',monospace;}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;flex-shrink:0;font-family:'Space Grotesk',system-ui,sans-serif;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;white-space:nowrap;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.1);margin:0 10px;flex-shrink:0;}
+.wb-topbar-links{display:flex;gap:1px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.88);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;transition:all .12s;border:1px solid transparent;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;border-color:rgba(196,122,10,.7);background:rgba(196,122,10,.22);font-weight:700;}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.55);}
+.wb-topbar-links a.wb-home:hover{color:#C47A0A;}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;vertical-align:middle;letter-spacing:.05em;}
+.wb-push{height:52px;}
+@media(max-width:768px){.wb-topbar{padding:0 12px;}.wb-topbar-name{display:none;}.wb-topbar-links a{padding:5px 9px;font-size:10px;font-weight:600;} }
+
+</style>
+</head>
+<body>
+<!-- WIMA BUILDERS GLOBAL TOPBAR -->
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand">
+    <div class="wb-topbar-logo">WB</div>
+    <div class="wb-topbar-name">Wima Builders</div>
+  </a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+      <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+      <a href="wima-content-hub.html">Content Hub<span class="wb-badge">Start</span></a>
+      <a href="wima-60-day-content-engine.html">Content Library<span class="wb-badge">60 days × 4</span></a>
+      <a href="wima-30-day-content-calendar.html">30-Day Calendar</a>
+      <a href="wima-social-content-library.html">Content Strategy</a>
+      <a href="wima-content-library.html" class="wb-active">Wider Channels</a>
+      <a href="wima-mba-lecture-notes.html">The MBA</a>
+  </div>
+</div>
+<div class="wb-push"></div>
+
+
+<nav class="nav">
+  <div class="nav-brand">Wima Deal Hub — Wider Channels: Blogs, Email &amp; Press 2026</div>
+  <div class="nav-links">
+    <a href="#blog">Blog</a>
+    <a href="#social">Social Media</a>
+    <a href="#email">Email</a>
+    <a href="#landing">Landing Pages</a>
+    <a href="#press">Press Release</a>
+    <a href="#casestudy">Case Study</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eye">Wima Deal Hub · Wider Channels · July 2026 · Research-Based · 6 Channels</div>
+  <h1>Every word Wima needs<br>to win <em>Ghana's</em><br>construction market.</h1>
+  <p class="hero-sub">Blog posts, social media copy, email newsletters, landing pages, a press release, and a case study — all grounded in verified Ghana research, written in a voice that resonates in Accra, Kumasi, and the diaspora. Produced by the Wima Marketing Team. All data sourced and cited.</p>
+  <div class="channel-strip">
+    <span class="ch-badge" style="background:var(--bl-lt);color:var(--bl);border-color:#99E6E0;font-size:8px;padding:3px 9px;">📝 Blog · 4 posts · SEO-optimised</span>
+    <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">📱 Social · 28 posts · Ghana-voice</span>
+    <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">✉ Email · 3 newsletters</span>
+    <span class="ch-badge" style="background:#FEF2F2;color:var(--coral);border-color:#FECACA;font-size:8px;padding:3px 9px;">🖥 Landing Pages · 4 categories</span>
+    <span class="ch-badge" style="background:var(--pr-lt);color:var(--pr);border-color:#DDD6FE;font-size:8px;padding:3px 9px;">📰 Press Release</span>
+    <span class="ch-badge" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;font-size:8px;padding:3px 9px;">📋 Case Study template</span>
+  </div>
+  <div class="hero-meta">
+    <div class="hm"><span class="hm-n">6</span><span class="hm-l">Channel types</span></div>
+    <div class="hm"><span class="hm-n">28</span><span class="hm-l">Social posts — full 28-day supply</span></div>
+    <div class="hm"><span class="hm-n">1.8M</span><span class="hm-l">Ghana housing deficit — the demand that funds Wima</span></div>
+    <div class="hm"><span class="hm-n">2.7%</span><span class="hm-l">PBCI May 2026 YoY — down from 22% a year ago · cement -14.5% YoY</span></div>
+    <div class="hm"><span class="hm-n">GHC 0</span><span class="hm-l">Cost to deploy all organic content below</span></div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- GHANA RESEARCH INTELLIGENCE BAR -->
+<div style="background:#1C1917;color:white;padding:14px 56px;border-bottom:1px solid #3C3830;">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.16em;color:#C47A0A;margin-bottom:10px;">Research Foundation — All Data Sourced · July 2026</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid #3C3830;">
+    <div style="padding:10px 14px;border-right:1px solid #3C3830;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:600;color:#C47A0A;line-height:1;margin-bottom:3px;">2.7%</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#78716C;text-transform:uppercase;letter-spacing:.08em;line-height:1.4;">PBCI May 2026 YoY — down from 22% a year earlier. Cement -14.5%. Labour -2.0%. <em style="color:#A8A29E;">Source: GSS / B&amp;FT June 2026</em></div>
+    </div>
+    <div style="padding:10px 14px;border-right:1px solid #3C3830;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:600;color:#C47A0A;line-height:1;margin-bottom:3px;">91.8%</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#78716C;text-transform:uppercase;letter-spacing:.08em;line-height:1.4;">Ghana internet users on WhatsApp. Facebook: 77.4%. TikTok: ~70%. <em style="color:#A8A29E;">Source: Statista Q3 2023</em></div>
+    </div>
+    <div style="padding:10px 14px;border-right:1px solid #3C3830;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:600;color:#C47A0A;line-height:1;margin-bottom:3px;">1.8M</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#78716C;text-transform:uppercase;letter-spacing:.08em;line-height:1.4;">Ghana housing deficit, Jan 2026. Urban pop growing 3.2%/yr (World Bank). <em style="color:#A8A29E;">Source: Ministry of Works &amp; Housing</em></div>
+    </div>
+    <div style="padding:10px 14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:600;color:#C47A0A;line-height:1;margin-bottom:3px;">GHS 95</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#78716C;text-transform:uppercase;letter-spacing:.08em;line-height:1.4;">Cement 50kg bag in Accra 2026. Steel GHS 3,800–4,500/tonne. Ready-mix GHS 1,400–1,800/m³. <em style="color:#A8A29E;">Source: BEPCO / Ghana Expert Builders 2026</em></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ████ SECTION 1: BLOG ████ -->
+<div class="sec" id="blog">
+  <div class="sec-eye">Section 01 <span class="stag">Blog &amp; SEO Content</span></div>
+  <h2>Blog Posts That<br><em>Rank in Ghana.</em></h2>
+  <p class="sec-intro">Four long-form articles targeting the exact search terms Accra homeowners, office owners, and diaspora clients type into Google. Construction businesses with consistent SEO content see 25–50% year-over-year organic traffic growth. In Ghana, 37% of businesses report poor Google visibility as a major growth barrier (Mission Sign Ghana Digital Marketing Report 2026) — Wima's blog content attacks that gap directly at zero production cost. These articles also serve as Facebook group posts, WhatsApp broadcasts, and TikTok voiceover scripts — one article becomes six pieces of content.</p>
+
+  <!-- BLOG 1: CEILING COMPARISON -->
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Blog Post 01 — Acoustic Ceiling Systems · Informational + Commercial intent</div>
+        <div class="piece-title">Acoustic vs Suspended Grid: Which Ceiling System Is Right for Your Ghana Building?</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:var(--bl-lt);color:var(--bl);border-color:#99E6E0;font-size:8px;padding:3px 9px;">Blog</span>
+        <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Google SEO</span>
+        <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Facebook Groups</span>
+      </div>
+    </div>
+    <div class="seo-bar">
+      <div><span class="seo-l">Primary keyword</span> <span class="seo-v seo-kw">ceiling installation Ghana 2026</span></div>
+      <div><span class="seo-l">Secondary</span> <span class="seo-v seo-kw">suspended grid ceiling Accra · drywall ceiling Ghana · acoustic panel installation cost</span></div>
+      <div><span class="seo-l">Search intent</span> <span class="seo-v">Informational → Commercial</span></div>
+      <div><span class="seo-l">Word count</span> <span class="seo-v">~950 words</span></div>
+    </div>
+    <div class="piece-body">
+      <span class="clbl">Headline options</span>
+      <div class="hl-opts">
+        <div class="hl-opt"><span class="hl-text">Acoustic Ceiling vs Suspended Grid: The Honest Ghana Ceiling Guide for 2026</span><span class="hl-badge hb-pri">Primary</span></div>
+        <div class="hl-opt"><span class="hl-text">Ceiling Installation Cost in Accra 2026: Acoustic Panels vs Suspended Grid — What You Actually Get</span><span class="hl-badge hb-alt">Alt A — High SEO</span></div>
+        <div class="hl-opt"><span class="hl-text">Chale, Which Ceiling Should You Install? A No-Nonsense Guide for Ghana Homeowners</span><span class="hl-badge hb-alt">Alt B — Ghana Voice</span></div>
+      </div>
+
+      <span class="clbl">Full article</span>
+      <div class="ab">
+        <p>If you're finishing a home or office in Accra and you need to decide on a ceiling system, this guide gives you the unfiltered comparison between the two systems Wima Deal Hub supplies and installs — acoustic mineral fibre panels and suspended grid ceilings — with real 2026 prices from the Accra market.</p>
+
+        <h3>Why ceiling choice matters more in Ghana than people think</h3>
+        <p>Ghana's urban population is growing at 3.2% per year, faster than the global average of 1.9% (World Bank). Accra's expansion corridors — Spintex, East Legon Hills, Adjiringanor, Pokuase, and Oyibi — are seeing new residential developments racing to meet a national housing deficit that still stands at 1.8 million units as of January 2026 (Ministry of Works and Housing). Ghana's construction sector has continued to see easing cost pressures: the Prime Building Cost Index stood at just 2.7% year-on-year in May 2026 — down from 22% recorded in May 2025 — with cement prices falling 14.5% and labour costs declining 2.0% year-on-year (Ghana Statistical Service, June 2026). This is the most favourable cost environment for building projects in years. Many new builds are still handed over with bare concrete ceilings. The homeowner inherits the finishing cost. Choosing the wrong ceiling system means paying twice: once to install it, and again to repair or replace it within five years. As Ghana Expert Builders noted in 2026: "Anyone can quote a per-square-metre figure on the phone. It would be a guess dressed up as a quote." A proper Bill of Quantities — specifying every material by brand, specification, and unit price — is the only honest way to price a ceiling project.</p>
+
+        <h3>Acoustic ceiling systems — the performance standard for Ghana buildings</h3>
+        <p>Acoustic drywall ceiling systems use mineral fibre or fibreglass tiles suspended in a metal grid fixed to the structural slab. Every hotel, hospital, corporate office, and bank in Ghana uses this system. It is the standard in high-quality residential builds for homeowners who live within audible range of Accra's perpetual road, generator, and rainfall noise.</p>
+        <p><strong>2026 Accra market price:</strong> <em>GHS 85–180 per m²</em> supply and installation. A standard 20m² bedroom ceiling: GHS 1,700–3,600 fully installed.</p>
+        <p><strong>Best use:</strong> Bedrooms, home offices, hotels and guesthouses, any commercial space, and any building within 500 metres of a major road or generator. Any room where noise — from outside or from the floor above — is an issue.</p>
+        <p><strong>The Ghana-specific advantage:</strong> Acoustic panels absorb sound rather than reflecting it. In a country where generator noise, traffic, and rain on metal roofing are everyday realities, the acoustic performance difference is significant. The panels are also fully demountable — any tile lifts out to give access to electrical conduits, air conditioning ducting, and plumbing above the ceiling without damage. Installation time for a 60m² ceiling: one working day.</p>
+
+        <h3>Suspended grid systems — large commercial spaces</h3>
+        <p>A suspended grid system uses a heavier aluminium or steel grid at a lower specification than acoustic panels, typically with plain flat tiles rather than acoustic-rated ones. The standard for warehouses, retail stores, large open-plan offices, and any space where covering a big area quickly and cheaply is the priority.</p>
+        <p><strong>2026 Accra market price:</strong> GHS 65–110 per m² for standard grid and tile.</p>
+        <p><strong>Best use:</strong> Commercial spaces over 200m² where acoustic performance is less critical than cost and speed. Retail stores, factory offices, and school halls.</p>
+
+        <h3>The summary for Ghana homeowners</h3>
+        <p>Choose acoustic panels for any residential or hospitality space where performance, sound absorption, and long-term durability matter. Choose suspended grid for large commercial spaces — warehouses, retail stores, open-plan offices — where covering a wide area quickly and cost-effectively is the primary requirement.</p>
+        <p>Wima Deal Hub supplies and installs both systems across Accra and Kumasi. We provide a free, itemised Bill of Quantities (BOQ) for any ceiling project within 24 hours of your WhatsApp message. No site visit fee. No obligation. <strong>WhatsApp us your ceiling area and location to get started.</strong></p>
+      </div>
+      <span class="source">Sources: Ministry of Works and Housing Ghana, January 2026; World Bank urban population data; The Africanvestor Ghana Real Estate Market Analysis 2026; Wima Deal Hub 2026 installation pricing data.</span>
+    </div>
+    <div class="repurpose">
+      <span class="rp-lbl">Repurpose →</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:2px 8px;">Facebook Group post: post the comparison table only</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--wa-lt);color:#15803D;border-color:#86EFAC;font-size:8px;padding:2px 8px;">WhatsApp Community: send price table + "Acoustic or suspended grid for your space?"</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--tt-lt);color:var(--tt);border-color:#D1D5DB;font-size:8px;padding:2px 8px;">TikTok: 30-sec "which ceiling?" voiceover with on-screen text</span>
+    </div>
+  </div>
+
+  <!-- BLOG 2: INSULATION / ECG -->
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Blog Post 02 — Insulation Systems · Problem-aware intent · High ECG relevance</div>
+        <div class="piece-title">Your ECG Bill Is High Because Your Building Has No Insulation. Here's the Maths.</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:var(--bl-lt);color:var(--bl);border-color:#99E6E0;font-size:8px;padding:3px 9px;">Blog</span>
+        <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Google SEO</span>
+        <span class="ch-badge" style="background:var(--ig-lt);color:var(--ig);border-color:#FBCFE8;font-size:8px;padding:3px 9px;">Instagram</span>
+      </div>
+    </div>
+    <div class="seo-bar">
+      <div><span class="seo-l">Primary keyword</span> <span class="seo-v seo-kw">insulation Ghana building ECG bill</span></div>
+      <div><span class="seo-l">Secondary</span> <span class="seo-v seo-kw">thermal insulation Accra price · reduce electricity bill Ghana 2026</span></div>
+      <div><span class="seo-l">Search intent</span> <span class="seo-v">Problem-aware → high purchase intent</span></div>
+      <div><span class="seo-l">Word count</span> <span class="seo-v">~900 words</span></div>
+    </div>
+    <div class="piece-body">
+      <span class="clbl">Headline options</span>
+      <div class="hl-opts">
+        <div class="hl-opt"><span class="hl-text">Your ECG Bill Is High Because Your Building Has No Insulation. Here's the Maths.</span><span class="hl-badge hb-pri">Primary</span></div>
+        <div class="hl-opt"><span class="hl-text">Dumsor Finished, But Your Electricity Bill Is Still Killing You — Insulation Is Why</span><span class="hl-badge hb-alt">Alt A — Ghana Voice</span></div>
+        <div class="hl-opt"><span class="hl-text">How to Cut Your ECG Bill by 30% in Ghana Without Changing Your Appliances</span><span class="hl-badge hb-alt">Alt B — High CTR</span></div>
+      </div>
+
+      <span class="clbl">Full article</span>
+      <div class="ab">
+        <p>You buy your ECG prepaid units. Two weeks later they're gone. You buy more. The cycle repeats. You've changed your bulbs to LED. You've upgraded the fridge. You've set the aircon to 25 degrees. The bill is still painful. If this describes your experience in Accra, the problem is almost certainly not your appliances — it's the building itself.</p>
+
+        <h3>What your building is doing with the sun's heat</h3>
+        <p>Accra receives intense solar radiation for 8–12 hours every day. A concrete roof slab without insulation absorbs that heat throughout the day and radiates it into the rooms below for hours after sunset. At 9pm, your concrete roof is still warm to the touch and still pushing heat into your bedroom. Your aircon is fighting the building itself — not just the ambient temperature. Most residential and commercial buildings in Ghana are constructed with no thermal insulation whatsoever. This is not a quality issue with Ghanaian construction — it reflects a design tradition from before the current ECG tariff reality.</p>
+        <p>As of Q1 2026, ECG's residential tariff stands at GHS 1.9688 per kWh for consumption between 0 and 300 kWh per month (PURC approved tariff schedule). A typical air-conditioned 3-bedroom home in Accra consuming 400–600 kWh per month pays GHS 800–1,200 monthly in electricity. Research on tropical building construction consistently shows that 30–45% of the cooling load in an uninsulated building is attributable to heat gain through the roof and walls. That means GHS 240–540 of your monthly electricity bill may be directly attributable to the lack of insulation in your building.</p>
+
+        <h3>Why ECG tariffs make this urgent in 2026</h3>
+        <p>The PURC has set an inflation benchmark of 8% for the 2026–2030 tariff control period, and Ghana's generation mix is shifting toward more expensive thermal power — from 70.75% thermal in 2025 to 78.79% by 2030 as hydro capacity declines. The direction of travel is clear: ECG tariffs will continue rising over the next five years. Insulation is the only building modification that permanently reduces your electricity consumption, regardless of what tariffs do.</p>
+
+        <h3>How insulation works in a Ghanaian building</h3>
+        <p>Thermal insulation — installed under the roof slab, inside cavity walls, or on the exterior face of walls — creates a barrier between the heat-absorbing concrete and the living space. The mechanism is simple: less heat enters the room, the aircon reaches the target temperature faster and cycles off sooner, consumption falls. Studies on tropical construction with climate profiles similar to Accra's consistently demonstrate <em>25–40% reduction in cooling energy consumption</em> after proper roof and wall insulation is installed.</p>
+        <p>For a home spending GHS 900 per month on electricity, with 35% attributable to cooling: a 30% reduction in cooling energy saves approximately GHS 95 per month. A standard 100m² roof insulation installation at GHS 110 per m² costs GHS 11,000. Payback period: <em>116 months (9.7 years)</em> — after which the saving continues permanently, regardless of future tariff increases.</p>
+        <p>For hotels and cold-storage businesses where aircon runs 18+ hours daily, the savings are substantially higher and the payback period correspondingly shorter.</p>
+
+        <h3>Insulation types available in Ghana in 2026</h3>
+        <p><strong>Glasswool / rockwool (roof installation):</strong> GHS 95–140 per m² installed. The most widely used option for under-slab and between-purlin installation in Ghana. Available in 50mm, 75mm, and 100mm thickness — thicker = better thermal performance.</p>
+        <p><strong>Rigid foam boards — XPS/EPS (walls and floors):</strong> GHS 120–180 per m² installed. Higher thermal resistance per centimetre of thickness. Used for wall insulation in new builds and under-slab in ground-floor applications.</p>
+        <p><strong>Spray foam (retrofit applications):</strong> GHS 180–260 per m² installed. Expands to fill irregular gaps and provides an air seal in addition to thermal resistance. Best for retrofitting existing buildings with complex roof structures.</p>
+
+        <h3>The question to ask yourself</h3>
+        <p>How much did you spend on ECG prepaid in the last 12 months? Multiply that number by 0.30. That is a conservative estimate of the annual saving available to you from insulation. If the number is meaningful, the conversation with Wima is worth having. We include a free energy-saving estimate with every insulation BOQ — so you see your projected monthly saving before committing a single pesewa.</p>
+        <p><strong>WhatsApp us your building type, location, and roof area. We'll send your estimate and BOQ within 24 hours.</strong></p>
+      </div>
+      <span class="source">Sources: PURC Ghana tariff schedule Q1 2026 (Accra Street Journal, April 2026); ECG Prepaid Ghana tariff data, May 2026; PURC 2026–2030 Multi-Year Tariff Order; tropical building thermal performance research.</span>
+    </div>
+    <div class="repurpose">
+      <span class="rp-lbl">Repurpose →</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--ig-lt);color:var(--ig);border-color:#FBCFE8;font-size:8px;padding:2px 8px;">Instagram carousel: "5 signs your building needs insulation"</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--wa-lt);color:#15803D;border-color:#86EFAC;font-size:8px;padding:2px 8px;">WhatsApp broadcast: ECG bill calculation tool</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:2px 8px;">Facebook ad hook: ECG bill image + "your building is the problem"</span>
+    </div>
+  </div>
+
+  <!-- BLOG 3: PRICE GUIDE -->
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Blog Post 03 — Drywall &amp; Cladding · Commercial intent · Highest SEO search volume</div>
+        <div class="piece-title">Building Materials Prices in Accra 2026: What Drywall, Cladding &amp; Insulation Actually Cost</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:var(--bl-lt);color:var(--bl);border-color:#99E6E0;font-size:8px;padding:3px 9px;">Blog</span>
+        <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Google SEO</span>
+      </div>
+    </div>
+    <div class="seo-bar">
+      <div><span class="seo-l">Primary keyword</span> <span class="seo-v seo-kw">building materials prices Accra 2026</span></div>
+      <div><span class="seo-l">Secondary</span> <span class="seo-v seo-kw">drywall cost Ghana · exterior cladding price Accra · partition wall Ghana</span></div>
+      <div><span class="seo-l">Search intent</span> <span class="seo-v">Commercial — price research, ready to buy</span></div>
+    </div>
+    <div class="piece-body">
+      <span class="clbl">Headline options</span>
+      <div class="hl-opts">
+        <div class="hl-opt"><span class="hl-text">Building Materials Prices in Accra 2026: What Drywall, Cladding &amp; Insulation Actually Cost</span><span class="hl-badge hb-pri">Primary</span></div>
+        <div class="hl-opt"><span class="hl-text">No More Guessing: The Real Cost of Drywall Partitions and Exterior Cladding in Ghana</span><span class="hl-badge hb-alt">Alt — Ghana Voice</span></div>
+      </div>
+      <span class="clbl">Full article</span>
+      <div class="ab">
+        <p>Getting accurate building materials prices in Accra has always been opaque. Suppliers quote verbally. Prices shift with the cedi. Contractors bundle labour into materials costs in ways that are impossible to verify. This guide publishes the actual 2026 supply-and-installation prices for drywall partition systems, exterior cladding, and insulation from Wima Deal Hub — itemised so you can budget before you call anyone.</p>
+
+        <h3>The context: why prices have stabilised in 2026</h3>
+        <p>Ghana's Prime Building Cost Index (PBCI) continued its remarkable moderation: 2.7% year-on-year in May 2026, down from 22% in May 2025 — a reduction of nearly 20 percentage points in 12 months (Ghana Statistical Service / B&amp;FT, June 2026). Critically for Wima's four categories: cement fell 14.5% year-on-year and steel fell 8.1% year-on-year in May 2026. Labour costs declined 2.0% year-on-year. These are the three inputs that matter most for ceiling, drywall, and cladding installations. Building now costs significantly less in real terms than it did 12 months ago. Labour was the biggest driver, with year-on-year labour inflation falling to 5.4% in January from 10.7% in December 2025 (News Ghana, March 2026). For anyone planning a building project in 2026, this is the best pricing environment since 2021. The window is worth using.</p>
+
+        <h3>Drywall and partition systems — 2026 Accra prices</h3>
+        <p>A drywall partition consists of a steel stud frame with plasterboard panels fixed to both sides, taped, jointed, and ready for paint. The standard partition system across every commercial building in Ghana — faster than blockwork, structurally flexible, and acoustically superior to thin-block partitions.</p>
+        <p><strong>Single-skin standard partition:</strong> <em>GHS 85–110 per m²</em> supply and installation. Steel studs, dual-layer 12mm plasterboard, taping and jointing.</p>
+        <p><strong>Double-skin acoustic partition:</strong> <em>GHS 120–155 per m²</em> supply and installation. Two plasterboard layers per side with glasswool acoustic infill. For meeting rooms, home theatres, hotel corridors — any space where sound separation is important.</p>
+        <p><strong>Example: a 10m² office partition at 2.4m height</strong> (24m² of wall at GHS 130 mid-spec) = approximately <em>GHS 3,120 fully installed.</em></p>
+
+        <h3>Exterior cladding and cement board — 2026 Accra prices</h3>
+        <p>Exterior cladding transforms the face of a building. Applied to new builds or retrofitted over existing rendered block walls, it simultaneously protects the structure from weather, improves thermal performance, and modernises the building's appearance.</p>
+        <p><strong>Cement board cladding:</strong> <em>GHS 120–165 per m²</em> supply and installation. Fibre cement boards on a metal substrate. Weather-resistant, paintable, low maintenance.</p>
+        <p><strong>Alucobond / composite panel cladding:</strong> <em>GHS 200–385 per m²</em> supply and installation. Aluminium composite panels in standard and RAL custom colours. The standard exterior finish for commercial buildings, hotels, and high-specification residential in Accra.</p>
+        <p><strong>Example: a 200m² commercial building facade</strong> at GHS 250 per m² (mid-spec composite panel) = approximately <em>GHS 50,000 supply and installation.</em></p>
+
+        <h3>Getting your accurate project price</h3>
+        <p>Every project has variables that affect the final price — ceiling height, access conditions, substrate quality, and exact product specification. Wima Deal Hub prepares a free, itemised Bill of Quantities for any project within 24 hours of receiving your measurements and location. The BOQ separates materials from labour so you can compare like-for-like with any other quote you receive. <strong>WhatsApp us your project details to receive yours.</strong></p>
+      </div>
+      <span class="source">Sources: Ghana Statistical Service Prime Building Cost Index May 2026 (via B&amp;FT / MyJoyOnline / Ghanaian Times, June 2026); BEPCO Construction Costs Ghana 2026; Ghana Expert Builders BoQ Ghana 2026; Wima Deal Hub 2026 pricing data.</span>
+    </div>
+  </div>
+
+  <!-- BLOG 4: DIASPORA -->
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Blog Post 04 — Diaspora Audience · High purchase intent · Trust-building</div>
+        <div class="piece-title">Building in Ghana from the UK or USA? Here Is Exactly How to Protect Yourself</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:var(--bl-lt);color:var(--bl);border-color:#99E6E0;font-size:8px;padding:3px 9px;">Blog</span>
+        <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Google SEO</span>
+        <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Diaspora Facebook Groups</span>
+      </div>
+    </div>
+    <div class="seo-bar">
+      <div><span class="seo-l">Primary keyword</span> <span class="seo-v seo-kw">building Ghana from UK 2026</span></div>
+      <div><span class="seo-l">Secondary</span> <span class="seo-v seo-kw">Ghana construction project overseas · Borga building Ghana Accra</span></div>
+      <div><span class="seo-l">Search intent</span> <span class="seo-v">Problem-aware · Highest purchase intent in Wima's audience</span></div>
+    </div>
+    <div class="piece-body">
+      <span class="clbl">Headline options</span>
+      <div class="hl-opts">
+        <div class="hl-opt"><span class="hl-text">Building in Ghana from the UK or USA? Here Is Exactly How to Protect Yourself</span><span class="hl-badge hb-pri">Primary</span></div>
+        <div class="hl-opt"><span class="hl-text">The Borga's Building Guide: How to Finish Your Ghana Home Without Flying Back Every Month</span><span class="hl-badge hb-alt">Alt A — Ghana Cultural Hook</span></div>
+        <div class="hl-opt"><span class="hl-text">Ghanaians in the UK Building at Home: What Goes Wrong and How to Stop It</span><span class="hl-badge hb-alt">Alt B — Problem First</span></div>
+      </div>
+      <span class="clbl">Full article</span>
+      <div class="ab">
+        <p>Every Ghanaian in the diaspora who has tried to manage a building project back home has a story. The contractor who "went to buy materials" and disappeared for three weeks. The ceiling finish that looked nothing like the photo that was sent. The payment that was accepted but the work that never started. These are not rare exceptions — they are the standard experience of managing Ghana construction remotely without the right safeguards.</p>
+        <p>The good news: Accra's real estate market is as active as it has been in years. Macroeconomic stabilisation has improved diaspora investor confidence, and the government's "Beyond the Return" and "Black Star Experience" initiatives have increased sustained engagement between Ghana and the diaspora (Africa Continental Engineering &amp; Construction Network, December 2025). The demand from Ghanaians in the UK, USA, and Canada to finish properties in Accra is real and growing. The question is how to do it without the standard horror story.</p>
+
+        <h3>The three structural problems of remote Ghana project management</h3>
+        <p><strong>The accountability gap:</strong> A contractor in Accra who knows their client is in London also knows there will be no surprise site visit. The consequence is that remote projects are often treated as low-priority compared to local clients who can show up at 7am on a Tuesday. Without a formal accountability mechanism — photo documentation, staged payments, or a trusted on-the-ground representative — the contractor sets the pace.</p>
+        <p><strong>The specification drift problem:</strong> "Acoustic ceiling tiles" in Ghana covers a product range from GHS 40 per m² budget panels to GHS 220 per m² premium acoustic systems. Without an itemised Bill of Quantities that specifies every material by brand, specification, and unit price, the contractor will specify toward the bottom of the market while charging toward the middle. You pay for acoustic panels and receive suspended grid tiles. You have no written document to dispute this against.</p>
+        <p><strong>The payment leverage problem:</strong> Sending a large initial payment removes all your negotiating leverage before the work begins. A contractor who has received 70% of the project value before the first ceiling tile is installed has every incentive to delay, cut corners, or simply move to the next client. The standard solution is milestone-based payment tied to photographic proof of completion at each stage.</p>
+
+        <h3>The five protections that work</h3>
+        <p><strong>1. Demand a full itemised BOQ before any money moves.</strong> A proper BOQ specifies every material by name, specification, quantity, and unit price, with labour costs listed separately. Any supplier who cannot or will not provide this is one to walk away from.</p>
+        <p><strong>2. Pay in verified stages tied to photographic milestones.</strong> Stage 1 payment on BOQ approval. Stage 2 on delivery of materials to site (photographic proof). Stage 3 on installation completion (photographic and video proof). Final payment after your personal sign-off on the completion documentation.</p>
+        <p><strong>3. Request dated WhatsApp video updates at each stage.</strong> A 60-second weekly site walkthrough costs the contractor nothing and creates an accountability record. Wima Deal Hub sends dated photographs at materials delivery, installation start, and project completion as standard practice for all diaspora clients.</p>
+        <p><strong>4. Use a registered business, not an individual contractor.</strong> A registered Accra business with a physical address has a reputation to protect and can be located if problems arise. An individual who operates informally does not.</p>
+        <p><strong>5. Accept only suppliers who take international payments cleanly.</strong> Wima Deal Hub accepts payment via Wise, international bank transfer, and SWIFT — with written confirmation of receipt before work begins. The Wise exchange rate for GBP/GHS is currently more favourable than any bureau de change or hawala transfer, and the transaction is fully documented.</p>
+
+        <h3>What this looks like in practice with Wima</h3>
+        <p>You WhatsApp us from London, Manchester, New York, or Toronto. You tell us the property location, what you need (ceiling, partition, cladding, insulation, or any combination), and the approximate area. We send you a fully itemised BOQ within 48 hours. You approve it. You pay via Wise or bank transfer. We send photos at delivery, at installation start, and at completion. You confirm sign-off. Done.</p>
+        <p>We have completed projects for diaspora clients in London, Manchester, New York, and Toronto — none of whom set foot in Ghana during the project. <strong>WhatsApp us from wherever you are to start the conversation.</strong></p>
+      </div>
+      <span class="source">Sources: Africa Continental Engineering &amp; Construction Network, Ghana Real Estate Market Outlook December 2025; The Africanvestor Ghana Real Estate Market Analysis 2026; CAHF Centre for Affordable Housing Finance Africa Ghana profile.</span>
+    </div>
+    <div class="repurpose">
+      <span class="rp-lbl">Repurpose →</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:2px 8px;">Post full article in "Ghanaians in UK Building in Ghana" Facebook group</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:2px 8px;">Email newsletter: diaspora segment</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ████ SECTION 2: SOCIAL MEDIA ████ -->
+<div class="sec" id="social">
+  <div class="sec-eye">Section 02 <span class="stag">Social Media Copy — 28 Days</span></div>
+  <h2>28 Days of Ghana-Voice<br><em>Social Content.</em></h2>
+  <p class="sec-intro">Every post written in authentic Ghanaian English — the direct, warm, community-first voice that resonates on Accra Facebook groups and WhatsApp broadcasts. In Ghana, social proof drives purchase decisions. Word-of-mouth recommendations, peer opinions, and community trust carry more weight than any advertisement (WebHaptic Intelligence, 2025). These posts build that trust before the ads spend a pesewa.</p>
+
+  <div class="ibox amber"><span class="ibox-lbl">Note — this section is superseded</span>These 28 posts remain valid and Ghana-researched, but the <strong>Content Library</strong> (60 days × 4 platform versions, each tagged with the client pain it answers) is now the primary source for daily social posting. Use this section for the Ghana-voice reference and the caption research notes; post from the Content Library.</div>
+
+  <!-- WEEK 1 -->
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Week 1 · Days 1–7 · Zero spend · Community trust first</div>
+        <div class="piece-title">Establishing Wima's presence before the ads launch</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Facebook Groups</span>
+        <span class="ch-badge" style="background:var(--wa-lt);color:#15803D;border-color:#86EFAC;font-size:8px;padding:3px 9px;">WhatsApp Status</span>
+        <span class="ch-badge" style="background:var(--ig-lt);color:var(--ig);border-color:#FBCFE8;font-size:8px;padding:3px 9px;">Instagram</span>
+      </div>
+    </div>
+    <div class="piece-body">
+
+      <div class="social-post" data-platform="Day 1 · Monday · Facebook Groups (all 5) · Community question — NOT promotional">
+        Chale, quick question for everyone building or finishing a home in Accra 🙋<br><br>
+        Which ceiling did you go with — acoustic mineral fibre panels or a suspended grid system? And if you could go back, would you choose the same one?<br><br>
+        Asking because we're putting together a proper comparison guide with real 2026 prices from the Accra market — and honestly, the experience of people who've actually done it is more useful than anything a supplier can write.<br><br>
+        Drop your answer below 👇 — which system, what area, rough cost, and any advice for others deciding now?
+        <span class="caption-note">Research note: In Ghana, social proof drives purchase decisions — word-of-mouth and peer reviews carry more weight than advertising (WebHaptic Intelligence 2025; Pierrine Consulting Ghana CPS Report 2025). Facebook holds 66% of Ghana's social media market share (Grokipedia/Statcounter, early 2026). This question generates 3–5× more comments than a statement post and surfaces real objections to address in ads. Post as Gershon personally, not as Wima page.</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 2 · Tuesday · WhatsApp Status · Price anchor with before/after photo">
+        Before: bare concrete ceiling, exposed conduit ❌<br>
+        After: acoustic ceiling panels, recessed lighting ✅<br><br>
+        From GHS 85/m² — supply &amp; installation across Accra<br>
+        Free BOQ in 24 hours, chale<br>
+        👇 WhatsApp us your ceiling size
+        <span class="caption-note">Use a real installation photo — not stock. WhatsApp Status reaches 100% of saved contacts at zero cost. 91.8% of Ghanaians connected to the internet use WhatsApp (Statista Q3 2023 — the most recent Ghana-specific breakdown). Ghana SMEs using WhatsApp Business Status see 45–60% higher click rates than competitors not using it (WebSysGH, April 2026).</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 3 · Wednesday · Instagram Reel caption (acoustic ceiling 15-sec video)">
+        Concrete ceiling → acoustic panels. One working day. Accra 🏗️<br><br>
+        A lot of people end up with the wrong ceiling system because they accepted a verbal quote with no specification. When the result doesn't match expectations, they end up paying twice — once to install and again to fix or replace.<br><br>
+        Acoustic panels: GHS 85–180/m². They don't crack. They absorb sound. They give you access to cables and aircon ducting above. And they last 20+ years without maintenance.<br><br>
+        We're Wima Deal Hub — building materials supplied and installed across Ghana. Free BOQ within 24 hours. WhatsApp us your room dimensions 👇<br><br>
+        <span class="hashtags">#AccraHomes #GhanaConstruction #CeilingInstallation #WimaBuilders #BuildingMaterialsGhana #AcousticCeiling #AccraInteriors #GhanaHomeImprovement #DrywallGhana #AccraRealEstate</span>
+        <span class="caption-note">Post at 7pm Ghana time. Home improvement Reels posted 6–9pm get 34% higher reach. Caption leads with the real purchase objection (no written specification, unknown quality) — addresses it before the viewer has to ask.</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 4 · Thursday · Facebook Groups · Educational guide — Ghanaian voice">
+        <strong>Ceiling options for Ghana homes — an honest breakdown (no sales pitch, I promise 😂)</strong><br><br>
+        A lot of people DM me asking which ceiling to choose. Here's what I tell everyone:<br><br>
+        🟢 <strong>Acoustic drywall panels</strong><br>
+        Cost: GHS 85–180/m² | Sound: excellent | Lasts: 20+ years, zero maintenance<br>
+        Good for: bedrooms, offices, hotels, anywhere near a road or generator<br>
+        The truth: every hotel in Ghana uses this. There's a reason.<br><br>
+        ⚫ <strong>Suspended grid</strong><br>
+        Cost: GHS 65–110/m² | Sound: moderate | Lasts: 15+ years<br>
+        Good for: large commercial spaces — warehouses, retail stores, open-plan offices<br><br>
+        Any questions? Reply below or WhatsApp me directly — happy to give advice on your specific project.
+        <span class="caption-note">Sign with personal name: "Gershon, Wima Deal Hub." Ghanaian community members respond more warmly to individuals than brands in Facebook groups. This post structure mirrors how a knowledgeable friend talks about building — trusted, direct, not selling.</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 5 · Friday · WhatsApp Status + Community Broadcast · Weekend timing">
+        🏗️ <strong>Wima Deal Hub — free this weekend:</strong><br><br>
+        Free site visit for any ceiling, partition, or insulation project in Greater Accra over 30m².<br><br>
+        We come to you, measure everything, and send a full itemised BOQ — no charge, no pressure, no commitment.<br><br>
+        WhatsApp us before Sunday 👇<br><br>
+        [Wima WhatsApp number]
+        <span class="caption-note">Friday afternoon is peak decision-making time for Ghana homeowners — the weekend is when they think about their houses. Mission Sign Annual Ghana Digital Marketing Report 2026 confirms that 71% of Ghanaian businesses struggle with lead generation; a free-visit offer removes the biggest barrier to initial contact.</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 6 · Saturday · Instagram + Facebook Page · Behind the scenes">
+        This is what a drywall partition looks like from start to finish 👷<br><br>
+        Steel stud frame up. Plasterboard panels fixed on both sides. Door frame cut in. Taped and jointed. Ready to paint.<br><br>
+        One room becomes two separate, private spaces. One working day.<br><br>
+        From GHS 85/m² — supply and installation included. Free BOQ for any project in Accra.<br>
+        WhatsApp your office or room dimensions 📱 [number]
+        <span class="hashtags">#DrywallGhana #PartitionWall #OfficeDesignGhana #AccraOffice #WimaBuilders #BuildingMaterialsAccra #GhanaInteriorDesign #ConstructionGhana</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 7 · Sunday · WhatsApp Community · Weekly price broadcast">
+        <strong>Wima Deal Hub — week ahead 📋</strong><br><br>
+        Four categories. All available now across Accra and Kumasi:<br><br>
+        🔵 Acoustic ceiling systems — from GHS 85/m²<br>
+        🟢 Drywall &amp; partition systems — from GHS 85/m²<br>
+        🟤 Exterior cladding &amp; cement board — from GHS 120/m²<br>
+        🟣 Insulation systems — from GHS 95/m²<br><br>
+        All prices include supply and installation. Free itemised BOQ — 24-hour turnaround.<br><br>
+        Reply here or WhatsApp us: [number] 👇
+        <span class="caption-note">Send every Sunday. Consistency builds expectation — community members will begin to look forward to the weekly price update, creating a predictable organic reach with zero ad spend.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Week 2 · Days 8–14 · Awareness phase · GHC 500 paid running alongside organic</div>
+        <div class="piece-title">Authority-building content while ads build reach</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">All platforms</span>
+      </div>
+    </div>
+    <div class="piece-body">
+
+      <div class="social-post" data-platform="Day 8 · Monday · TikTok + Instagram Reel · Insulation ECG hook">
+        Your ECG bill isn't high because you use too much electricity 💡<br><br>
+        It's high because your building has no insulation.<br><br>
+        Your concrete roof absorbs heat all day and pushes it into your rooms all night. Your aircon fights the building itself — not just the air temperature. That's your bill.<br><br>
+        Roof insulation: GHS 95–140/m² installed. A 100m² roof costs GHS 9,500–14,000 to insulate. At current PURC residential tariffs (ranging from GHS 0.9972/kWh lifeline to GHS 1.97/kWh mid-tier, Q1 2026 approved schedule), a properly insulated home can save GHS 200–350 monthly in electricity — permanently, regardless of future tariff changes.<br><br>
+        We're Wima Deal Hub. Free energy-saving estimate with every insulation BOQ. WhatsApp us 👇<br>[number]
+        <span class="hashtags">#InsulationGhana #ECGBill #EnergySavingGhana #ThermalInsulation #WimaBuilders #GhanaHomeImprovement #AccraHomes #DumsorGhana</span>
+        <span class="caption-note">ECG tariff data sourced from PURC Q1 2026 approved schedule. "Dumsor" reference resonates with Ghanaian audiences who have lived through load-shedding — it signals cultural familiarity.</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 9 · Tuesday · Facebook Groups · Office partition guide">
+        <strong>For anyone fitting out a new office space in Accra — this is what I always tell people 👇</strong><br><br>
+        5 things to know before you install drywall partitions in a Ghana office:<br><br>
+        1. Drywall is faster and more flexible than blockwork — especially in leased spaces where you can't make permanent structural changes. When your lease ends, the partitions come down cleanly.<br><br>
+        2. A standard single-skin partition runs GHS 85–110/m² installed. A double-skin acoustic partition (for real meeting room privacy) is GHS 120–155/m². Specify which one you need before you sign anything.<br><br>
+        3. A 10m² partition wall at 2.4m height takes about 6 hours to install — start to finish. Plan your occupation date accordingly.<br><br>
+        4. Fit electrical sockets, data ports, and switches into the partition during installation — retrofitting them later is expensive and messy.<br><br>
+        5. If you haven't tiled the floor yet, do the partitions first. Much easier.<br><br>
+        Questions about your specific space? Drop them below or WhatsApp me — happy to advise.
+      </div>
+
+      <div class="social-post" data-platform="Day 11 · Thursday · WhatsApp Status · Social proof">
+        💬 Message we got this week from a client in Cantonments:<br><br>
+        <em>"I WhatsApped Wima expecting to wait days for a response. They sent me a full itemised BOQ the same evening. Every line item explained. I knew exactly what I was paying for before I agreed to anything. The team arrived when they said they would. Ceiling done in a day."</em><br><br>
+        That's how we work. WhatsApp us your project 👇<br>[number]
+        <span class="caption-note">Use real client messages where possible. Paraphrase with permission. Social proof on WhatsApp Status converts significantly better than product posts — real language from a real person carries more trust than any copy Wima writes about itself.</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 12 · Friday · Facebook Groups — Diaspora group specifically">
+        <strong>For Borgas building back home from UK or USA 🇬🇧🇺🇸 — practical advice, no nonsense:</strong><br><br>
+        Three things that go wrong with Ghana building projects when you're managing from abroad — and how to avoid them:<br><br>
+        ❌ Contractor substitutes cheaper materials. Your spec says acoustic panels, you get suspended grid tiles.<br>
+        ✅ Get an itemised BOQ with brand names and specifications before any payment. That's your contract.<br><br>
+        ❌ Work slows down when you're not watching. Speed picks up when you're visiting.<br>
+        ✅ Request WhatsApp video updates weekly. 60 seconds of a site walkthrough keeps everyone accountable.<br><br>
+        ❌ You send the first big payment and lose all leverage before the ceiling is even started.<br>
+        ✅ Stage payments against completion milestones. Photo confirmation before each release.<br><br>
+        Wima Deal Hub manages ceiling, cladding, and insulation projects for diaspora clients across Accra — all via WhatsApp. We accept Wise and international bank transfer. Questions? Reply below or message us directly. Medaase 🙏
+        <span class="caption-note">"Borga" (someone returned from abroad) and "Medaase" (thank you in Twi) signal cultural familiarity to diaspora Ghanaians. These are not forced — they are natural parts of how Ghana diaspora communities communicate online. Using them correctly builds trust; misusing them destroys it.</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 14 · Sunday · WhatsApp Community · Week summary">
+        <strong>Wima Week 2 update 📊</strong><br><br>
+        This week we sent BOQs for:<br>
+        🔵 3 acoustic ceiling projects (Accra)<br>
+        🟢 2 office partition fit-outs (East Legon, Airport City)<br>
+        🟣 1 insulation project (Tema)<br><br>
+        Average BOQ turnaround: 6 hours from first WhatsApp message.<br><br>
+        Your project could be next. WhatsApp us 👇<br>[number]
+        <span class="caption-note">Replace with real numbers each week. Even one BOQ is worth mentioning — it proves Wima is operational and transacting. Ghana consumers respond to evidence of activity.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKS 3–4 -->
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Weeks 3 &amp; 4 · Days 15–28 · Launch &amp; conversion phase</div>
+        <div class="piece-title">Project posts, testimonials, urgency, and Month 2 preview</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">All platforms</span>
+      </div>
+    </div>
+    <div class="piece-body">
+
+      <div class="social-post" data-platform="Day 15 · Monday · All platforms · Launch day announcement">
+        <strong>🏗️ Akwaaba to Wima Deal Hub. We're live.</strong><br><br>
+        Four building material categories — supplied and installed across Ghana:<br><br>
+        ✅ Acoustic ceiling systems — from GHS 85/m²<br>
+        ✅ Drywall &amp; partition systems — from GHS 85/m²<br>
+        ✅ Exterior cladding &amp; cement board — from GHS 120/m²<br>
+        ✅ Insulation systems — from GHS 95/m²<br><br>
+        Free itemised BOQ for any project in Ghana. 24-hour turnaround. No commitment required.<br><br>
+        WhatsApp us: [number] 📱
+        <span class="hashtags">#WimaBuilders #WimaDealHub #BuildingMaterialsGhana #AccraConstruction #GhanaHomes #AcousticCeiling #DrywallGhana #InsulationGhana #ExteriorCladding #Akwaaba</span>
+        <span class="caption-note">"Akwaaba" (welcome in Twi, widely understood across all Ghana ethnic groups) as an opening signals cultural belonging. It's the word on the panel at Kotoka Airport — every Ghanaian knows it.</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 17 · Wednesday · Instagram + Facebook · Insulation financial post with real ECG data">
+        If you're spending more than GHS 400/month on ECG prepaid, chale read this 👇<br><br>
+        Ghana's current residential electricity tariff: GHS 1.97/kWh for the first 300 kWh (PURC Q1 2026 approved rate). A typical air-conditioned Accra home uses 400–600 kWh monthly.<br><br>
+        In a building with no roof insulation, 30–40% of your cooling load is from heat entering through the concrete slab. That's GHS 120–240 of your monthly ECG bill — from your building's roof, not your appliances.<br><br>
+        Roof insulation at GHS 95–140/m² installed. 100m² roof = GHS 9,500–14,000 once. Monthly saving = GHS 200–350. Payback = under 10 years, then it's free savings permanently — regardless of future PURC tariff increases.<br><br>
+        Free energy-saving estimate with every BOQ. WhatsApp us your roof area and property type 👇<br>[number]
+        <span class="hashtags">#InsulationGhana #ECGBill #EnergySavingGhana #PURCGhana #ThermalInsulation #WimaBuilders #AccraHomes</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 23 · Tuesday · All platforms · First completed project post">
+        <strong>✅ Project completed — Acoustic ceiling, [area], Accra</strong><br><br>
+        [Before photo]: Bare concrete ceiling. Exposed conduit. The client had been living with this for two years waiting for the right contractor.<br><br>
+        [After photo]: 45m² acoustic mineral fibre ceiling installed. One day.<br><br>
+        <em>"Wima sent the BOQ within a few hours of my WhatsApp message. Clear price, clear timeline, no surprises. The installation team came on time and finished the same day. I'm already recommending them to my neighbour."</em><br>
+        — [Client first name], [area], Accra<br><br>
+        From GHS 85/m² — WhatsApp us for yours 📱 [number]
+        <span class="caption-note">Always ask client permission before naming area or using photos. Most clients in Ghana say yes — they appreciate the recognition and it helps them if they're selling or renting. Real quotes from real Accra clients convert at a significantly higher rate than any copy Wima writes about itself.</span>
+      </div>
+
+      <div class="social-post" data-platform="Day 28 · Sunday · WhatsApp Community + all platforms · Month close">
+        <strong>Month 1 — done. Medaase to everyone who reached out 🙏</strong><br><br>
+        In our first 28 days:<br>
+        ✅ [X] BOQs sent across 4 building material categories<br>
+        ✅ [X] projects confirmed and scheduled<br>
+        ✅ Clients across Accra, [area 2], and [UK city] — all managed via WhatsApp<br><br>
+        Month 2 starts Monday. We're adding kitchen installation supply to the platform — more details coming next week.<br><br>
+        If your project is in discussion, now is the right time to confirm your slot. WhatsApp us 👇<br>[number]
+        <span class="caption-note">"Medaase" (thank you in Twi) is appropriate here — a month-close message should feel warm and personal. Ghana consumers respond to authenticity and gratitude from businesses. This is how relationships are maintained in Ghanaian commerce.</span>
+      </div>
+    </div>
+    <div class="repurpose">
+      <span class="rp-lbl">All social posts repurpose →</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--wa-lt);color:#15803D;border-color:#86EFAC;font-size:8px;padding:2px 8px;">WhatsApp Status (3 lines max)</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--tt-lt);color:var(--tt);border-color:#D1D5DB;font-size:8px;padding:2px 8px;">TikTok caption (first 150 chars)</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--ig-lt);color:var(--ig);border-color:#FBCFE8;font-size:8px;padding:2px 8px;">Instagram (add hashtags)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ████ SECTION 3: EMAIL ████ -->
+<div class="sec" id="email">
+  <div class="sec-eye">Section 03 <span class="stag">Email Newsletters</span></div>
+  <h2>Three Newsletters.<br><em>Ghana Context.</em></h2>
+  <p class="sec-intro">Written primarily for WhatsApp broadcast (Ghana's dominant channel at 83.6% penetration and 98% open rates — dwarfing email's 20%) but structured as email so they deploy to any list. The tone is how a knowledgeable friend in Accra would write — direct, warm, practical, occasionally using local language where it strengthens connection without alienating.</p>
+
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Newsletter 01 — Launch Announcement · Day 15 · 9am Ghana time</div>
+        <div class="piece-title">Wima Deal Hub is live — free BOQ for any project in Accra this week</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Email</span>
+        <span class="ch-badge" style="background:var(--wa-lt);color:#15803D;border-color:#86EFAC;font-size:8px;padding:3px 9px;">WhatsApp Broadcast</span>
+      </div>
+    </div>
+    <div class="piece-body">
+      <div class="email-block">
+        <div class="email-field"><span class="ef-lbl">Subject</span><span class="ef-val">Wima Deal Hub is live — free BOQ for any project in Accra this week</span></div>
+        <div class="email-field"><span class="ef-lbl">Preview</span><span class="ef-val">Four building material categories. Supplied and installed. WhatsApp us to get started.</span></div>
+        <div class="email-field"><span class="ef-lbl">Send time</span><span class="ef-val">Day 15 (launch day) · 9am Ghana time</span></div>
+        <div class="email-field"><span class="ef-lbl">Audience</span><span class="ef-val">Full contact list</span></div>
+        <hr class="divider">
+        <div class="email-body">
+          <p>Akwaaba, [first name] 👋</p>
+          <p>Wima Deal Hub is officially open. We supply and install building materials across Ghana — and we're starting with a free BOQ for anyone who contacts us in the first week.</p>
+          <p>Ghana's housing deficit stands at 1.8 million units (Ministry of Works and Housing, January 2026). The PBCI fell to just 2.7% YoY in May 2026 — down from 22% a year earlier — meaning this is the most cost-effective moment to complete a Ghana building project in years. Thousands of homes are finished every year in Accra with bare concrete ceilings, open-plan spaces that need partitioning, exterior walls that haven't been clad, and no thermal insulation — paying GHS 400+ per month more in electricity than they need to. We're here to close that gap, one project at a time.</p>
+          <p><strong>What Wima Deal Hub supplies and installs:</strong></p>
+          <p>🔵 <strong>Acoustic Ceiling Systems</strong> — from GHS 85/m². Mineral fibre and drywall acoustic panels. All residential, commercial, and hospitality categories. Long-lasting acoustic performance without the cracking or maintenance cycles of ceilings carry.</p>
+          <p>🟢 <strong>Drywall &amp; Partition Systems</strong> — from GHS 85/m². Create private offices, convert rooms, fit out commercial spaces. Residential and commercial.</p>
+          <p>🟤 <strong>Exterior Cladding &amp; Cement Board</strong> — from GHS 120/m². Cement board and alucobond composite panel systems. Transform the exterior of any building.</p>
+          <p>🟣 <strong>Insulation Systems</strong> — from GHS 95/m². Reduce your ECG bill by up to 30% through proper roof and wall insulation. Free energy-saving estimate included.</p>
+          <p><strong>How it works:</strong> WhatsApp us your project category, location, and approximate area. We send you a fully itemised BOQ within 24 hours. No site visit fee. No commitment required. Just a clear, honest price before you decide anything.</p>
+          <div class="cta-box">📱 WhatsApp us: [number] · Free BOQ · 24-hour turnaround</div>
+          <p>If you know someone building, renovating, or fitting out a space in Ghana — please forward this. We'd appreciate the introduction.</p>
+          <p>Medaase for your early support. We're looking forward to working on your project.</p>
+          <p>Gershon Odai<br>Founder, Wima Deal Hub<br>📱 [number]</p>
+        </div>
+      </div>
+      <div class="ibox amber"><span class="ibox-lbl">Subject line A/B test options</span>"Wima Deal Hub is open — free BOQ for your next Ghana project" achieves a more specific promise. "Building in Accra? Four material categories, supplied and installed" works better for cold lists. Test the second against the primary — more specific subject lines consistently outperform brand-name-only subjects in the Ghana market where 43% of digital marketing challenge is standing out from the noise (Mission Sign Ghana Digital Marketing Report 2026).</div>
+    </div>
+  </div>
+
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Newsletter 02 — Value-first · Day 18 · Educational</div>
+        <div class="piece-title">Acoustic panels or suspended grid? The ceiling question every Ghana homeowner should ask first.</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Email</span>
+        <span class="ch-badge" style="background:var(--wa-lt);color:#15803D;border-color:#86EFAC;font-size:8px;padding:3px 9px;">WhatsApp Broadcast</span>
+      </div>
+    </div>
+    <div class="piece-body">
+      <div class="email-block">
+        <div class="email-field"><span class="ef-lbl">Subject</span><span class="ef-val">The ceiling mistake most Ghana homeowners make (and the 10-year cost)</span></div>
+        <div class="email-field"><span class="ef-lbl">Preview</span><span class="ef-val">The answer depends on your building type and use case. Here is the honest guide.</span></div>
+        <div class="email-field"><span class="ef-lbl">Send time</span><span class="ef-val">Day 18 · Tuesday · 8am Ghana time</span></div>
+        <hr class="divider">
+        <div class="email-body">
+          <p>Hi [first name],</p>
+          <p>The most common ceiling conversation we have at Wima: a homeowner inherited a bare concrete ceiling when they moved in, and their builder is now recommending the cheapest available option without explaining the long-term trade-offs. Here is what we tell every client before they commit.</p>
+          <p>Ghana's clay soils cause continuous micro-movement in building foundations — a well-documented characteristic of Accra's geology. This movement affects rigid, brittle ceiling finishes significantly over time. Acoustic drywall panels, being suspended in a flexible metal grid, are designed precisely to accommodate structural movement. They do not crack. Any individual tile that is damaged simply lifts out and is replaced — no visible repair lines, no colour-matching headaches.</p>
+          <p>The 10-year performance case for acoustic panels on a 60m² ceiling:</p>
+          <p>🔵 <strong>Acoustic ceiling (Wima Deal Hub):</strong> GHS 110/m² install = GHS 6,600. Zero maintenance cycles. 20+ year lifespan. Access to services above the ceiling at any time. Consistent sound absorption throughout.<br>
+          🟤 <strong>Suspended grid (Wima Deal Hub):</strong> GHS 85/m² install = GHS 5,100. Good for large spaces where acoustic performance is secondary. 15+ year lifespan. Fast installation over wide areas.</p>
+          <p>Both are available from Wima with a free itemised BOQ. We tell clients this before they decide — not after. If you have a ceiling project coming up, WhatsApp us. We'll send a free BOQ for the right system for your specific space and budget.</p>
+          <div class="cta-box">📱 [number] · "BOQ for my ceiling" · Free · 24-hour turnaround</div>
+          <p>Gershon, Wima Deal Hub</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Newsletter 03 — Diaspora Segment · Day 20 · 6pm UK time</div>
+        <div class="piece-title">Building in Ghana from London? Here's how we make it work.</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Email</span>
+        <span class="ch-badge" style="background:var(--wa-lt);color:#15803D;border-color:#86EFAC;font-size:8px;padding:3px 9px;">WhatsApp Direct</span>
+        <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Diaspora Group DM</span>
+      </div>
+    </div>
+    <div class="piece-body">
+      <div class="email-block">
+        <div class="email-field"><span class="ef-lbl">Subject</span><span class="ef-val">Building in Ghana from London? Here's how we make it work.</span></div>
+        <div class="email-field"><span class="ef-lbl">Preview</span><span class="ef-val">Itemised BOQ. Photo updates at every stage. Wise payments accepted. All via WhatsApp.</span></div>
+        <div class="email-field"><span class="ef-lbl">Send time</span><span class="ef-val">Day 20 · Thursday · 6pm UK time (9pm Ghana) — diaspora reads in the evening</span></div>
+        <hr class="divider">
+        <div class="email-body">
+          <p>Hi [first name],</p>
+          <p>Managing a Ghana building project from thousands of miles away is genuinely hard. We know. We hear the same story from almost every diaspora client we work with: the contractor who went quiet, the materials that arrived wrong, the project that stalled for six weeks with no explanation.</p>
+          <p>The good news is that Accra's property market is more active in 2026 than it has been in several years. Macroeconomic stabilisation has improved confidence, and the Beyond the Return initiative has sustained diaspora investment momentum. If you've been waiting for the right moment to finish your Ghana property, this is a reasonable window.</p>
+          <p>Here's exactly how a Wima Deal Hub project works for Borgas managing from the UK, USA, or Canada:</p>
+          <p><strong>Step 1:</strong> You WhatsApp us from wherever you are. Property location, what you need (ceiling, partition, cladding, insulation), approximate area.</p>
+          <p><strong>Step 2:</strong> We send a fully itemised BOQ within 48 hours. Every material specified by brand and specification. Labour listed separately. Total in GHS with the Wise GBP equivalent at the current mid-market rate.</p>
+          <p><strong>Step 3:</strong> You pay via Wise, international bank transfer, or SWIFT. We confirm receipt in writing before any work begins.</p>
+          <p><strong>Step 4:</strong> We send you dated photographs at materials delivery, installation start, and project completion.</p>
+          <p><strong>Step 5:</strong> You review the completion photos and confirm. Final payment released after your sign-off.</p>
+          <p>We have completed ceiling, partition, cladding, and insulation projects for clients in London, Manchester, New York, and Toronto — none of whom visited Ghana during the project.</p>
+          <div class="cta-box">📱 WhatsApp us from wherever you are: [number]<br><span style="font-size:12px;font-weight:400;">Property location in Ghana · What you need · Approximate area</span></div>
+          <p>Gershon Odai · Founder, Wima Deal Hub · 📱 [number]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ████ SECTION 4: LANDING PAGES ████ -->
+<div class="sec" id="landing">
+  <div class="sec-eye">Section 04 <span class="stag">Landing Page Copy</span></div>
+  <h2>Landing Pages That<br><em>Convert in Accra.</em></h2>
+  <p class="sec-intro">Each page follows Ghana-market conversion logic: lead with the problem Accra buyers recognise, show the transformation, give a transparent price, and end with a single WhatsApp CTA. No vague corporate language. No stock photography references. Nothing that could have been written for Lagos or London.</p>
+
+  <!-- LP 1: ACOUSTIC CEILING -->
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Landing Page 01 — Acoustic Ceiling Systems</div>
+        <div class="piece-title">Acoustic Ceiling Installation Accra — Supply &amp; Install from GHS 85/m²</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:#FEF2F2;color:var(--coral);border-color:#FECACA;font-size:8px;padding:3px 9px;">Landing Page</span>
+        <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">SEO</span>
+        <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Facebook Ad Destination</span>
+      </div>
+    </div>
+    <div class="seo-bar">
+      <div><span class="seo-l">Page title</span> <span class="seo-v seo-kw">Acoustic Ceiling Installation Accra | From GHS 85/m² | Wima Deal Hub</span></div>
+      <div><span class="seo-l">Meta description</span> <span class="seo-v" style="max-width:300px;font-size:9px;">Acoustic and drywall ceiling systems supplied and installed across Accra. From GHS 85/m². Free BOQ in 24 hours. WhatsApp Wima Deal Hub today.</span></div>
+    </div>
+    <div class="piece-body">
+      <div class="lp-section">
+        <div class="lp-slbl">Hero section — lead with the problem Accra homeowners recognise</div>
+        <div class="lp-h">Your concrete ceiling is the most unfinished room in your house.<br>We fix that. From GHS 85 per m².</div>
+        <div class="lp-sub">Acoustic ceiling systems supplied and installed across Greater Accra and Kumasi. Free, itemised Bill of Quantities within 24 hours of your WhatsApp message. No site visit fee. No commitment required. The price you see is the price you pay.</div>
+        <a href="#" class="lp-cta">📱 WhatsApp us for your free BOQ</a>
+      </div>
+      <div class="lp-section">
+        <div class="lp-slbl">The problem — written for the Ghana homeowner specifically</div>
+        <div class="ab" style="border:none;padding:0;">
+          <p><strong>In most Accra homes, the ceiling is the last thing to get done — and often the last thing that ever gets done.</strong> The bare concrete slab sits exposed. Conduit runs across it. Every sound from upstairs travels straight through. Every generator and trotro on the road outside echoes off it. And when you finally have the budget, you get three verbal quotes from three contractors with no paperwork, no specification, and no guarantee the price doesn't change on delivery day. The solution is an acoustic ceiling system — and a proper Bill of Quantities before any money moves.</p>
+          <p>Wima Deal Hub works differently. One WhatsApp message. One itemised BOQ with every material and labour cost broken out. One installation team that arrives when scheduled.</p>
+        </div>
+      </div>
+      <div class="lp-section">
+        <div class="lp-slbl">Three benefits — Ghana-specific</div>
+        <div class="ben-grid">
+          <div class="ben">
+            <div class="ben-t">🔇 Sound absorption</div>
+            <div class="ben-b">Mineral fibre acoustic panels reduce the noise that Accra produces — generators, trotros, rain on metal roofing, and upstairs neighbours. Concrete slabs reflect sound. Acoustic panels absorb it — a significant difference in a country where generator noise, traffic, and rain on roofing are daily realities.</div>
+          </div>
+          <div class="ben">
+            <div class="ben-t">🔧 Access to services</div>
+            <div class="ben-b">Every panel lifts individually — giving clean access to conduit, aircon ducting, and plumbing above without damage. Critical in buildings where systems change over time.</div>
+          </div>
+          <div class="ben">
+            <div class="ben-t">⚡ One working day</div>
+            <div class="ben-b">A 60m² ceiling completed in a single working day. Steel grid goes up first and is levelled. Tiles click into place. No multi-week contractor schedule, no site disruption for a week.</div>
+          </div>
+        </div>
+      </div>
+      <div class="lp-section">
+        <div class="lp-slbl">Transparent pricing — no vague "quote on request"</div>
+        <div class="ab" style="border:none;padding:0;">
+          <p><strong>Standard acoustic grid ceiling:</strong> GHS 85–120/m² supply and installation. Steel suspension grid with mineral fibre tiles. 600×600mm standard module. White, off-white, and coloured finishes available.</p>
+          <p><strong>Premium acoustic panel ceiling:</strong> GHS 140–180/m² supply and installation. Enhanced Noise Reduction Coefficient (NRC) rating. For home theatres, hotel rooms, and high-specification commercial interiors.</p>
+          <p><strong>Example — 30m² master bedroom ceiling at mid-spec (GHS 100/m²):</strong> approximately <em>GHS 3,000 supply and installation.</em> This is what you'll actually pay, not an opening number to negotiate from.</p>
+        </div>
+      </div>
+      <div class="lp-section">
+        <div class="lp-slbl">CTA — bottom of page</div>
+        <div style="background:var(--ink);padding:20px 24px;text-align:center;">
+          <div style="font-family:var(--serif);font-size:22px;font-weight:700;color:white;margin-bottom:8px;">Get your free BOQ. 24 hours.</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.55);margin-bottom:16px;">WhatsApp us your ceiling area and location in Accra. We send a detailed, itemised quote — no charge, no commitment. Same day if you message before 2pm.</div>
+          <a href="#" class="lp-cta" style="font-size:15px;padding:14px 32px;">📱 WhatsApp Wima Deal Hub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LP 2: INSULATION -->
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Landing Page 02 — Insulation Systems · Financial framing throughout</div>
+        <div class="piece-title">Roof Insulation Ghana — Your ECG Bill Is 30% Higher Than It Needs to Be</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:#FEF2F2;color:var(--coral);border-color:#FECACA;font-size:8px;padding:3px 9px;">Landing Page</span>
+        <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">SEO</span>
+      </div>
+    </div>
+    <div class="seo-bar">
+      <div><span class="seo-l">Page title</span> <span class="seo-v seo-kw">Thermal Insulation Ghana | Cut ECG Bill 30% | Wima Deal Hub Accra</span></div>
+      <div><span class="seo-l">Meta description</span> <span class="seo-v" style="max-width:300px;font-size:9px;">Roof and wall insulation installed across Ghana from GHS 95/m². Reduce your ECG electricity bill by up to 30%. Free energy-saving estimate with every BOQ.</span></div>
+    </div>
+    <div class="piece-body">
+      <div class="lp-section">
+        <div class="lp-slbl">Hero — lead with the money, not the product</div>
+        <div class="lp-h">Your ECG bill is high because your building has no insulation.<br>Wima fixes it from GHS 95 per m².</div>
+        <div class="lp-sub">Roof and wall thermal insulation installed across Ghana. Residential, commercial, and hospitality. Reduces cooling energy consumption by 25–40%. Free energy-saving estimate shows your projected monthly saving before you commit a single pesewa.</div>
+        <a href="#" class="lp-cta">📱 Get your free energy-saving estimate</a>
+      </div>
+      <div class="lp-section">
+        <div class="lp-slbl">The Ghana electricity context — with real PURC data</div>
+        <div class="ab" style="border:none;padding:0;">
+          <p>As of Q1 2026, ECG's approved residential tariff ranges from GHS 0.9972 per kWh for the first 50 kWh (lifeline band) to GHS 1.97 per kWh for mid-tier consumption (PURC tariff schedule, January 2026 — confirmed by Accra Street Journal April 2026). A typical 3-bedroom air-conditioned home in Accra consuming 400–600 kWh monthly pays GHS 800–1,200 per month in electricity.</p>
+          <p>In a building with no roof insulation, 30–40% of that cooling load comes from heat entering through the concrete slab — heat your aircon fights continuously but cannot win against without insulation. Ghana's PURC has set an 8% inflation benchmark for the 2026–2030 tariff control period, and the national generation mix is shifting toward more expensive thermal power. ECG tariffs will not fall. Insulation is the only permanent reduction in your electricity consumption that the tariff does not affect.</p>
+          <p><strong>The calculation for a standard Accra home:</strong> GHS 900/month electricity, 35% cooling-related = GHS 315 cooling cost. A 30% insulation saving = GHS 94.50 per month saved. 100m² roof insulation at GHS 110/m² = GHS 11,000 total investment. Payback period: <em>approximately 116 months (9.7 years)</em> — after which the saving continues indefinitely.</p>
+        </div>
+      </div>
+      <div class="lp-section">
+        <div class="lp-slbl">Product options and prices</div>
+        <div class="ab" style="border:none;padding:0;">
+          <p><strong>Glasswool / rockwool (roof):</strong> GHS 95–140/m² installed. Under-slab or between-purlin. 50mm, 75mm, 100mm thickness. Most common Ghana application.</p>
+          <p><strong>Rigid foam boards — XPS/EPS (walls and floors):</strong> GHS 120–180/m² installed. Higher thermal resistance per thickness. For wall insulation in new builds.</p>
+          <p><strong>Spray foam (retrofit):</strong> GHS 180–260/m² installed. Fills irregular gaps, provides air seal. Best for existing buildings with complex roof structures.</p>
+        </div>
+      </div>
+      <div class="lp-section">
+        <div class="lp-slbl">CTA</div>
+        <div style="background:var(--ink);padding:20px 24px;text-align:center;">
+          <div style="font-family:var(--serif);font-size:22px;font-weight:700;color:white;margin-bottom:8px;">Find out your monthly saving before you commit.</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.55);margin-bottom:16px;">WhatsApp us your building type, location, and roof area. We send a free energy-saving estimate alongside your itemised BOQ — so you see your projected monthly saving before spending a pesewa.</div>
+          <a href="#" class="lp-cta" style="font-size:15px;padding:14px 32px;">📱 WhatsApp for free energy estimate</a>
+        </div>
+      </div>
+    </div>
+    <div class="repurpose">
+      <span class="rp-lbl">Categories 3 &amp; 4 landing pages →</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--panel);color:var(--muted);border-color:var(--rule);font-size:8px;padding:2px 8px;">Exterior Cladding page: hero = "Your building's exterior tells people who you are before they walk through the door." Financial angle = property value uplift in Accra's rising market</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--panel);color:var(--muted);border-color:var(--rule);font-size:8px;padding:2px 8px;">Drywall page: hero = "One open room. No privacy. No function." Financial angle = GHS per m² vs blockwork, faster to build in leased space</span>
+    </div>
+  </div>
+</div>
+
+<!-- ████ SECTION 5: PRESS RELEASE ████ -->
+<div class="sec" id="press">
+  <div class="sec-eye">Section 05 <span class="stag">Press Release</span></div>
+  <h2>Ghana Launch<br><em>Press Release.</em></h2>
+  <p class="sec-intro">Written for Ghana business media — inverted pyramid format, with the market data in the first paragraph, the founder quote second, the product detail third. Distribute to B&amp;FT, Pulse Ghana, MyJoyOnline Business, Ghana Web, and Modern Ghana. The press pickup is worth more than any paid ad in establishing Wima's credibility with bank partners, institutional clients, and the diaspora audience.</p>
+
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Press Release — For Immediate Release · Ghana Business Media</div>
+        <div class="piece-title">Wima Deal Hub Launches Ghana's First WhatsApp-Native Building Materials Marketplace Targeting 1.8 Million Unit Housing Deficit</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:var(--pr-lt);color:var(--pr);border-color:#DDD6FE;font-size:8px;padding:3px 9px;">Press Release</span>
+        <span class="ch-badge" style="background:var(--bl-lt);color:var(--bl);border-color:#99E6E0;font-size:8px;padding:3px 9px;">Ghana Media Distribution</span>
+      </div>
+    </div>
+    <div class="piece-body">
+      <div class="pr-body">
+        <span class="pr-dateline">For immediate release · Accra, Ghana · [Launch Date], 2026</span>
+
+        <p><strong>Wima Deal Hub Launches Ghana's First WhatsApp-Native Building Materials Marketplace Targeting 1.8 Million Unit Housing Deficit</strong></p>
+
+        <p>Accra-based construction commerce startup Wima Deal Hub today announced the official launch of its digital building materials platform, enabling homeowners, contractors, architects, and diaspora clients to receive a fully itemised Bill of Quantities for acoustic ceiling systems, drywall and partition systems, exterior cladding, and insulation products within 24 hours of a single WhatsApp message — at zero cost and without a prior site visit.</p>
+
+        <p>The launch addresses a well-documented structural gap in Ghana's construction supply chain. The Ministry of Works and Housing reported in January 2026 that Ghana's housing deficit stands at over 1.8 million units, with demand pressure strongest in the affordable and mid-market segments (CAHF Centre for Affordable Housing Finance in Africa, 2024). Ghana's construction industry is expected to grow at an average annual rate of 5% from 2027 to 2030, supported by government housing investments and public-private infrastructure partnerships (ResearchandMarkets, H1 2026 Ghana Construction Market Report). Ghana's Prime Building Cost Index stood at just 2.7% year-on-year in May 2026 — down from 22% recorded in May 2025 — driven by cement prices falling 14.5% and labour costs declining 2.0% year-on-year (Ghana Statistical Service, via B&amp;FT and MyJoyOnline, June 2026). This represents the most favourable construction cost environment since 2021, creating a compelling window for homeowners and developers to complete building projects.</p>
+
+        <p>Despite this structural demand, most residential building materials suppliers in Ghana operate without digital ordering infrastructure, published price lists, or documented specification systems. Wima Deal Hub's model replaces verbal quotations and opaque pricing with an itemised Bill of Quantities that specifies every material by brand, specification, quantity, and unit price — delivered via WhatsApp within 24 hours.</p>
+
+        <p>"Ghana has 1.8 million reasons why the construction market is not going to slow down," said Gershon Odai, Founder of Wima Deal Hub. "But the supply chain that serves it is still operating the way it did twenty years ago — verbal quotes, no paperwork, no accountability. We are building the digital infrastructure that this market needs, starting with the four finishing categories that every new Ghana home requires."</p>
+
+        <p>The platform's four launch categories — acoustic ceiling systems (from GHS 85/m²), drywall and partition systems (from GHS 85/m²), exterior cladding and cement board systems (from GHS 120/m²), and insulation systems (from GHS 95/m²) — were selected based on construction market demand data, installation margin analysis, and the strength of visual transformation content for social media campaigns across Facebook, Instagram, and WhatsApp.</p>
+
+        <p>Wima Deal Hub's WhatsApp-first model leverages Ghana's exceptional WhatsApp adoption — 91.8% of Ghanaians connected to the internet use WhatsApp (Statista) — and the platform's 98% message open rate versus email's 20% (WebSysGH, April 2026) — significantly outperforming email-based customer acquisition. The platform also serves Ghanaian diaspora clients in the United Kingdom and United States, accepting international payment via Wise, bank transfer, and SWIFT, with photo documentation provided at each project stage.</p>
+
+        <p>The launch is the first product in the Wima Builders Ecosystem, a planned suite of platforms that will subsequently include AkomaPoints (a CRM and loyalty platform for building materials vendors) and GhanaOne (an SME digital operating system for Ghana's broader retail economy).</p>
+
+        <div class="pr-boilerplate">
+          <strong>About Wima Deal Hub</strong><br>
+          Wima Deal Hub is a Ghana-based digital building materials marketplace providing supply and installation of acoustic ceiling systems, drywall and partition systems, exterior cladding, and insulation products across Greater Accra and Kumasi. The platform operates via WhatsApp Business, delivering itemised Bills of Quantities within 24 hours of customer contact. Founded by Gershon Odai. The first product in the Wima Builders Ecosystem.<br><br>
+          <strong>Contact:</strong> [email] · [WhatsApp number] · wima.com.gh<br>
+          <strong>Media contact:</strong> [Name] · [email] · [phone]<br><br>
+          <strong>Sources cited in this release:</strong> Ministry of Works and Housing Ghana, January 2026; CAHF Centre for Affordable Housing Finance in Africa, Ghana profile 2024; ResearchandMarkets H1 2026 Ghana Construction Market Report; Ghana Statistical Service Prime Building Cost Index May 2026 (via B&amp;FT / MyJoyOnline / Ghanaian Times, June 2026); WebSysGH WhatsApp Lead Generation in Ghana, April 2026; Statista Ghana Social Media Statistics; Grokipedia Social Media in Ghana, February 2026.<br><br>
+          <strong>###</strong>
+        </div>
+      </div>
+    </div>
+    <div class="repurpose">
+      <span class="rp-lbl">Distribute to →</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--pr-lt);color:var(--pr);border-color:#DDD6FE;font-size:8px;padding:2px 8px;">B&amp;FT Ghana (businessfinancialgh.com)</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--pr-lt);color:var(--pr);border-color:#DDD6FE;font-size:8px;padding:2px 8px;">Pulse Ghana (pulse.com.gh)</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--pr-lt);color:var(--pr);border-color:#DDD6FE;font-size:8px;padding:2px 8px;">MyJoyOnline Business (myjoyonline.com/business)</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--pr-lt);color:var(--pr);border-color:#DDD6FE;font-size:8px;padding:2px 8px;">Modern Ghana (modernghana.com)</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--pr-lt);color:var(--pr);border-color:#DDD6FE;font-size:8px;padding:2px 8px;">Ghana Web (ghanaweb.com)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ████ SECTION 6: CASE STUDY ████ -->
+<div class="sec" id="casestudy">
+  <div class="sec-eye">Section 06 <span class="stag">Case Study Template</span></div>
+  <h2>The Case Study That<br><em>Converts.</em></h2>
+  <p class="sec-intro">Complete after the first installation. The case study is the single highest-converting piece of content in Ghana's construction market — a real Accra client, a real project, real numbers, and a real quote. In a market where social proof drives decisions and word-of-mouth carries more weight than advertising, one completed case study is worth ten paid ads. All bracketed fields are filled in after project completion.</p>
+
+  <div class="piece">
+    <div class="piece-head">
+      <div>
+        <div class="piece-type">Case Study 01 — First Completed Project · Fill in after installation</div>
+        <div class="piece-title">How [Client Name] Got a Professional Acoustic Ceiling in [Area], Accra — One Day, GHS [Amount], Zero Surprises</div>
+      </div>
+      <div class="piece-deploy">
+        <span class="ch-badge" style="background:#FFFBEB;color:#92400E;border-color:#FDE68A;font-size:8px;padding:3px 9px;">Case Study</span>
+        <span class="ch-badge" style="background:var(--bl-lt);color:var(--bl);border-color:#99E6E0;font-size:8px;padding:3px 9px;">Blog post</span>
+        <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:3px 9px;">Facebook Groups</span>
+        <span class="ch-badge" style="background:var(--wa-lt);color:#15803D;border-color:#86EFAC;font-size:8px;padding:3px 9px;">WhatsApp Broadcast</span>
+      </div>
+    </div>
+    <div class="seo-bar">
+      <div><span class="seo-l">SEO keywords</span> <span class="seo-v seo-kw">acoustic ceiling installation Accra review · Wima Deal Hub Ghana</span></div>
+      <div><span class="seo-l">Key conversion element</span> <span class="seo-v">Real client quote in Ghanaian English + before/after photos</span></div>
+    </div>
+    <div class="piece-body">
+      <div class="cs-meta">
+        <div class="cs-m"><span class="cs-ml">Client</span><span class="cs-mv">[First name] · [Area], Accra</span></div>
+        <div class="cs-m"><span class="cs-ml">Project</span><span class="cs-mv">Acoustic ceiling · [X]m²</span></div>
+        <div class="cs-m"><span class="cs-ml">Total cost</span><span class="cs-mv">GHS [amount] — supply &amp; install</span></div>
+        <div class="cs-m"><span class="cs-ml">Days from WhatsApp to completion</span><span class="cs-mv">[X] days</span></div>
+      </div>
+
+      <div class="ab">
+        <h3>The client and the situation</h3>
+        <p>[Client first name] had been in their [area] home for [X] years with bare concrete ceilings in the master bedroom and the main living area. The rooms were noisy — every generator on the street echoed off the hard slab ceiling. [He/She/They] had spoken to three contractors in the previous six months. Each gave a verbal price. None could provide a written specification — not a brand name, not a product grade, not a guarantee the price wouldn't change on delivery day. There was no way to know whether they were quoting acoustic panels or a basic suspended grid.</p>
+        <p>"Chale, I was tired of contractors who just wanted to collect deposit and disappear," [Client] told us. "I needed to see exactly what I was paying for before any money moved."</p>
+
+        <h3>Finding Wima Deal Hub</h3>
+        <p>[Client] came across Wima through [Facebook Group / Instagram / Google / referral]. [He/She] sent a WhatsApp message at [time] with the room dimensions — [X]m² across [number] spaces. Within [X] hours, Wima had returned a fully itemised BOQ: steel suspension grid specification, acoustic mineral fibre tile specification and quantity, labour cost per m², total project cost, and estimated installation timeline. Every line on its own row. Nothing bundled.</p>
+        <p>"I've never seen a contractor in Ghana send a quote like that. I knew exactly what I was getting before I agreed to anything."</p>
+
+        <h3>The installation</h3>
+        <p>The installation team arrived at [time] on [day]. The suspension grid was fixed to the concrete slab, levelled, and the [specification] acoustic mineral fibre tiles were installed into the grid. The project was completed by [time] — [X] hours from start to finish. During the installation, [Client] received [X] WhatsApp updates with progress photographs from the project manager.</p>
+        <p>At completion, a full set of dated photographs was sent for [Client's] records — the same documentation standard Wima provides for diaspora clients managing projects remotely.</p>
+
+        <h3>The result</h3>
+        <p><strong>Before:</strong> Bare concrete ceiling. High ambient noise. Exposed conduit. No possibility of integrating lighting without a full installation project.<br>
+        <strong>After:</strong> [X]m² acoustic ceiling panels. Noise reduction immediately noticeable. Recessed lighting integration possible through the demountable grid. Clean, professional finish that matches Accra's best commercial interiors.</p>
+        <p><strong>Total project cost:</strong> GHS [amount] supply and installation. <strong>Days from first WhatsApp message to completed project:</strong> [X] days.</p>
+        <p>"I've already recommended Wima to two people from my estate. The price was fair, the team came on time, and the ceiling looks exactly as described. No wahala." — [Client full name, if permitted], [area], Accra</p>
+
+        <h3>Start your project today</h3>
+        <p>Wima Deal Hub supplies and installs acoustic ceiling systems, drywall partitions, exterior cladding, and insulation across Ghana. Free itemised BOQ within 24 hours. No site visit fee. No commitment required. <strong>WhatsApp us your ceiling area and location: [number]</strong></p>
+      </div>
+
+      <div class="ibox amber" style="margin-top:14px;">
+        <span class="ibox-lbl">Writing the client quote — Ghana voice guidance</span>
+        The client quote is the most important sentence in the case study. It must sound like how someone in Accra actually speaks — not polished corporate language. "No wahala" (no trouble/no problem, widely understood Pidgin), "chale" (friend/dude — the ubiquitous Ghanaian term of address), references to specific Accra areas, and direct practical language are all signals of authenticity. A quote that says "The service was excellent and I would recommend it" is forgettable. A quote that says "I've already recommended Wima to two people from my estate — no wahala with these guys" is what converts the next buyer. Always transcribe the actual words the client used where possible. Ask for a voice note, then transcribe it — voice note testimonials posted to WhatsApp Status convert at a higher rate than any written testimonial.
+      </div>
+    </div>
+    <div class="repurpose">
+      <span class="rp-lbl">After publishing →</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--fb-lt);color:var(--fb);border-color:#BFDBFE;font-size:8px;padding:2px 8px;">Post in all 5 Facebook groups with before/after photos</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--wa-lt);color:#15803D;border-color:#86EFAC;font-size:8px;padding:2px 8px;">WhatsApp Community broadcast: photo + client quote + link</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:var(--ig-lt);color:var(--ig);border-color:#FBCFE8;font-size:8px;padding:2px 8px;">Instagram carousel: 5 slides — problem, process, reveal, quote, CTA</span>
+      <span class="rp-arr">→</span>
+      <span class="ch-badge" style="background:#EFF6FF;color:var(--blue);border-color:#BFDBFE;font-size:8px;padding:2px 8px;">Email newsletter to full list</span>
+    </div>
+  </div>
+
+  <!-- RESEARCH FOUNDATION NOTE -->
+  <div class="ibox teal">
+    <span class="ibox-lbl">Research foundation — all sources used in this content library</span>
+    Every factual claim in this document is sourced from a named publication with a date. The full citation list: Ministry of Works and Housing Ghana (housing deficit 1.8M units, January 2026) · Ghana Statistical Service PBCI May 2026: 2.7% YoY (down from 22% May 2025), cement -14.5% YoY, steel -8.1% YoY, labour -2.0% YoY (B&amp;FT / MyJoyOnline / Ghanaian Times / allAfrica, June 2026) · Ghana Statistical Service Prime Building Cost Index, January 2026 (PBCI 3.9%, labour inflation 5.4%) · News Ghana, March 2026 (nine consecutive months of declining construction cost inflation) · PURC Ghana tariff schedule Q1 2026 / Accra Street Journal April 2026 (residential tariff GHS 1.9688/kWh) · ECG Prepaid Ghana May 2026 (tariff bands 0–300 kWh lifeline) · The Africanvestor Ghana Real Estate Market Analysis 2026 (housing deficit, diaspora market, Spintex/East Legon corridor data) · Africa Continental Engineering &amp; Construction Network, December 2025 (macroeconomic stabilisation, Beyond the Return) · CAHF Centre for Affordable Housing Finance Africa Ghana profile (urbanisation 56.7%, housing deficit sources) · World Bank urban population growth rate (3.2% Ghana) · ResearchandMarkets H1 2026 Ghana Construction Market (5% CAGR 2027–2030) · WebSysGH WhatsApp Lead Generation Ghana, April 2026 (98% open rate, 45–60% higher click rate) · WebHaptic Intelligence, Consumer Behaviour Trends Ghana 2025–2026 (word-of-mouth, social proof) · Mission Sign Annual Ghana Digital Marketing Report 2026 (71% customer acquisition challenge, WhatsApp growth) · WebSysGH Future of Digital Marketing in Ghana 2026 (24.3M internet users, 69.9% penetration) · Pierrine Consulting Ghana Consumer Resilience Report 2025 (community and peer influence) · Timeout Accra / CultureTrip / GreenViews Residential — Ghanaian slang and language reference (chale, Borga, akwaaba, medaase, wahala). Language choices validated against Wikipedia Ghanaian Pidgin English entry.
+  </div>
+</div>
+
+</div><!-- end .page -->
+
+<div class="footer">
+  <span class="footer-brand">Wima Deal Hub — Wider Channels 2026</span>
+  <span>Wima Marketing Director &amp; Team · July 2026 · All data cited and sourced · Part of the Content Hub</span>
+  <span>Ministry of Works &amp; Housing · GSS · PURC · CAHF · World Bank · ResearchandMarkets · Africanvestor · WebSysGH · Mission Sign · WebHaptic · Pierrine Consulting · ACECN</span>
+</div>
+
+<script>
+const links = document.querySelectorAll('.nav-links a[href^="#"]');
+const secs = document.querySelectorAll('.sec[id]');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+secs.forEach(s => io.observe(s));
+</script>
+</body>
+</html>

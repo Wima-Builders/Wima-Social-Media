@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — Social Media Content Library 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--surface:#F4F1EA;--panel:#ECEAE0;--rule:#D8D3C4;
+  --ink:#1C1917;--ink2:#3C3830;--slate:#44403C;--muted:#78716C;--faint:#A8A29E;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;--amber-md:#FDDFAA;
+  --green:#15803D;--teal:#0F766E;--coral:#DC2626;--blue:#1D4ED8;--violet:#7C3AED;
+  --fb:#1877F2;--fb-lt:#EFF6FF;--ig:#C13584;--ig-lt:#FDF4F8;
+  --wa:#25D366;--wa-lt:#F0FDF4;--tt:#010101;--tt-lt:#F8F8F8;
+  --bl:#0F766E;--bl-lt:#F0FDFA;--li:#0A66C2;--li-lt:#EFF6FF;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;}
+.nav{position:sticky;top:52px;z-index:200;background:var(--ink);border-bottom:2px solid var(--amber);height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;}
+.nav-brand{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--amber);text-transform:uppercase;letter-spacing:.14em;}
+.nav-links{display:flex;gap:2px;}
+.nav-links a{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.72);padding:5px 10px;text-decoration:none;border-radius:3px;transition:all .12s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--amber);background:rgba(196,122,10,.12);}
+.hero{padding:64px 56px 48px;border-bottom:2px solid var(--ink);background:var(--bg);}
+.hero-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--faint);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.hero-eye::before{content:'';width:24px;height:2px;background:var(--amber);}
+.hero h1{font-family:var(--serif);font-size:clamp(38px,5.2vw,64px);font-weight:900;line-height:1.02;letter-spacing:-.02em;color:var(--ink);margin-bottom:18px;}
+.hero h1 em{font-style:italic;color:var(--amber);}
+.hero-sub{font-size:16px;font-weight:300;color:var(--slate);max-width:640px;line-height:1.75;margin-bottom:30px;}
+.hero-meta{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--rule);margin-top:34px;}
+.hm{padding:14px 16px;border-right:1px solid var(--rule);}.hm:last-child{border-right:none;}
+.hm-n{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--amber);display:block;line-height:1;margin-bottom:4px;}
+.hm-l{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);line-height:1.4;}
+.page{max-width:980px;}
+.sec{padding:54px 56px 44px;border-bottom:1px solid var(--rule);}
+.sec-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:8px;display:flex;align-items:center;gap:10px;}
+.sec-eye .stag{background:var(--amber);color:white;padding:1px 8px;font-size:8px;border-radius:2px;font-weight:600;}
+.sec-eye::after{content:'';flex:1;height:1px;background:var(--rule);}
+h2{font-family:var(--serif);font-size:33px;font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em;}
+h2 em{font-style:italic;color:var(--amber);}
+.sec-intro{font-size:14px;color:var(--slate);line-height:1.7;max-width:660px;margin-bottom:30px;font-style:italic;font-weight:300;}
+.clbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--amber);margin-bottom:6px;margin-top:16px;display:block;}
+.clbl:first-child{margin-top:0;}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:8px;}
+.pillar{background:white;border:1px solid var(--rule);border-top:3px solid var(--amber);padding:16px 18px;}
+.pillar.p2{border-top-color:var(--teal);}.pillar.p3{border-top-color:var(--violet);}.pillar.p4{border-top-color:var(--coral);}.pillar.p5{border-top-color:var(--green);}.pillar.p6{border-top-color:var(--blue);}
+.pillar-n{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:5px;}
+.pillar-t{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.15;}
+.pillar-b{font-size:12.5px;color:var(--slate);line-height:1.55;}
+.pillar-ex{font-family:var(--mono);font-size:10px;color:var(--amber2);margin-top:8px;display:block;}
+
+/* lessons */
+.lesson{background:white;border:1px solid var(--rule);margin-bottom:12px;overflow:hidden;}
+.lesson-head{padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.lesson-co{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--ink);}
+.lesson-tag{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:white;background:var(--amber);padding:2px 8px;border-radius:2px;}
+.lesson-body{padding:16px 22px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:680px){.lesson-body{grid-template-columns:1fr;}}
+.lb-lbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;display:block;}
+.lb-did .lb-lbl{color:var(--blue);}.lb-wima .lb-lbl{color:var(--green);}
+.lb-t{font-size:13.5px;color:var(--ink2);line-height:1.6;}.lb-t strong{color:var(--ink);}
+
+/* playbook */
+.pb{background:white;border:1px solid var(--rule);border-left:4px solid var(--amber);padding:16px 20px;margin-bottom:10px;}
+.pb.wa{border-left-color:var(--wa);}.pb.tt{border-left-color:var(--tt);}.pb.ig{border-left-color:var(--ig);}.pb.li{border-left-color:var(--li);}.pb.fb{border-left-color:var(--fb);}
+.pb-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+.pb-name{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--ink);}
+.pb-stat{font-family:var(--mono);font-size:10px;color:var(--amber2);}
+.pb-role{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);margin-left:auto;}
+.pb-body{font-size:13px;color:var(--slate);line-height:1.65;}
+.pb-body strong{color:var(--ink);}
+
+/* social post */
+.social-post{background:white;border:1px solid var(--rule);padding:14px 16px;margin-bottom:8px;font-size:14px;color:var(--ink2);line-height:1.7;}
+.social-post::before{content:attr(data-platform);font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--amber);display:block;margin-bottom:6px;font-weight:600;}
+.caption-note{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:8px;font-style:italic;display:block;border-left:2px solid var(--panel);padding-left:8px;}
+.hashtags{font-family:var(--mono);font-size:11px;color:var(--bl);margin-top:6px;line-height:1.6;display:block;}
+.pillar-band{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:white;background:var(--ink);padding:6px 14px;margin:20px 0 10px;display:inline-block;border-radius:2px;}
+
+/* ibox */
+.ibox{padding:12px 16px;margin-bottom:16px;border-left:3px solid;font-size:13px;line-height:1.65;}
+.ibox.amber{background:var(--amber-lt);border-color:var(--amber);color:#5A3800;}
+.ibox.teal{background:#F0FDFA;border-color:var(--teal);color:#064E3B;}
+.ibox-lbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.14em;display:block;margin-bottom:4px;opacity:.6;}
+
+/* mba map */
+.mba-row{display:grid;grid-template-columns:auto 1fr;gap:14px;border:1px solid var(--rule);border-left:3px solid var(--violet);background:white;padding:12px 16px;margin-bottom:8px;align-items:center;}
+.mba-lec{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--violet);white-space:nowrap;}
+.mba-t{font-size:13px;color:var(--ink2);line-height:1.55;}.mba-t strong{color:var(--ink);}
+
+.footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.22);padding:16px 56px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.07em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.footer-brand{font-family:var(--serif);font-size:14px;color:var(--amber);text-transform:none;letter-spacing:0;font-style:italic;}
+
+.wb-topbar{position:fixed;top:0;left:0;right:0;z-index:9999;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;font-family:'IBM Plex Mono','Courier New',monospace;}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;flex-shrink:0;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;white-space:nowrap;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.1);margin:0 10px;flex-shrink:0;}
+.wb-topbar-links{display:flex;gap:1px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.88);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;transition:all .12s;border:1px solid transparent;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;border-color:rgba(196,122,10,.7);background:rgba(196,122,10,.22);font-weight:700;}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.55);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;letter-spacing:.05em;}
+.wb-push{height:52px;}
+@media(max-width:768px){
+  .nav{padding:0 20px;}.nav-links{display:none;}
+  .hero,.sec{padding:38px 20px 30px;}
+  .hero-meta,.pillars,.lesson-body{grid-template-columns:1fr;}
+  .hm{border-right:none;border-bottom:1px solid var(--rule);}
+  .footer{padding:14px 20px;flex-direction:column;}
+  .wb-topbar{padding:0 12px;}.wb-topbar-name{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+      <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+      <a href="wima-content-hub.html">Content Hub<span class="wb-badge">Start</span></a>
+      <a href="wima-60-day-content-engine.html">Content Library<span class="wb-badge">60 days × 4</span></a>
+      <a href="wima-30-day-content-calendar.html">30-Day Calendar</a>
+      <a href="wima-social-content-library.html" class="wb-active">Content Strategy</a>
+      <a href="wima-content-library.html">Wider Channels</a>
+      <a href="wima-mba-lecture-notes.html">The MBA</a>
+  </div>
+</div>
+<div class="wb-push"></div>
+
+<nav class="nav">
+  <div class="nav-brand">Wima — Social Media Content Library 2026</div>
+  <div class="nav-links">
+    <a href="#pillars">Pillars</a>
+    <a href="#lessons">World's Best</a>
+    <a href="#playbooks">Platforms</a>
+    <a href="#library">The Library</a>
+    <a href="#formats">Power Formats</a>
+    <a href="#mba">MBA Link</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eye">Wima Social · Content Library · A system, not just posts · Ghana-grounded · Learns from the world's best</div>
+  <h1>Social media is where Wima <em>earns the community</em> — before it sells a thing.</h1>
+  <p class="hero-sub">Not a pile of posts — a system. Six content pillars, the proven playbook of the world's best home &amp; property brands (Houzz, Livspace, Zillow, Duolingo, and the WhatsApp-commerce leaders) adapted for Ghana, platform-by-platform tactics, a ready-to-post library organised by pillar, and the highest-impact formats — all tied to the Social Media MBA. Content builds the community; deals are what you do to a community you already earned.</p>
+  <div class="hero-meta">
+    <div class="hm"><span class="hm-n">6</span><span class="hm-l">Content pillars — the strategic backbone</span></div>
+    <div class="hm"><span class="hm-n">3:1</span><span class="hm-l">Value-to-offer ratio — earn attention before spending it</span></div>
+    <div class="hm"><span class="hm-n">91.8%</span><span class="hm-l">Ghana internet users on WhatsApp · 98% open rate</span></div>
+    <div class="hm"><span class="hm-n">5</span><span class="hm-l">Platform playbooks — FB · WhatsApp · TikTok · IG · LinkedIn</span></div>
+    <div class="hm"><span class="hm-n">Drywall</span><span class="hm-l">First launch — with Jamal as the face</span></div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- SECTION 1: PILLARS -->
+<div class="sec" id="pillars">
+  <div class="sec-eye">Section 01 <span class="stag">The Strategy</span></div>
+  <h2>Six Content Pillars —<br><em>and why they beat random posting.</em></h2>
+  <p class="sec-intro">Random posts build nothing. A pillar system builds a community that recognises Wima, trusts it, and buys when it's ready. The rule underneath all six: roughly three parts value (educate, inspire, people, entertain, proof) to one part offer. Deals land only on a community you've already earned.</p>
+  <div class="pillars">
+    <div class="pillar p1"><div class="pillar-n">Pillar 01 · Value</div><div class="pillar-t">Educate</div><div class="pillar-b">Teach people to build well and not get cheated — cost breakdowns, the build order, "mistakes that cost you twice," how to read a BOQ.</div><span class="pillar-ex">e.g. "5 checks before you pour your foundation"</span></div>
+    <div class="pillar p2"><div class="pillar-n">Pillar 02 · Value</div><div class="pillar-t">Inspire</div><div class="pillar-b">The dream, made real. Before/after transformations, finished reveals, site walk-throughs. The single most-shared content the home industry runs on.</div><span class="pillar-ex">e.g. bare concrete → acoustic ceiling reveal</span></div>
+    <div class="pillar p3"><div class="pillar-n">Pillar 03 · Value</div><div class="pillar-t">People</div><div class="pillar-b">Honour the makers. Jamal the drywall craftsman, master masons and tilers, featured consultants. People follow people — put a human face on Wima.</div><span class="pillar-ex">e.g. "Meet Jamal — 12 years, every board perfect"</span></div>
+    <div class="pillar p4"><div class="pillar-n">Pillar 04 · Value</div><div class="pillar-t">Entertain</div><div class="pillar-b">Make browsing fun (the Zillow lesson). Dream builds, jaw-dropping Ghanaian homes, "you won't believe this" — content window-shoppers share, not just buyers.</div><span class="pillar-ex">e.g. "Ghana builds gone wild" reveals</span></div>
+    <div class="pillar p5"><div class="pillar-n">Pillar 05 · Value</div><div class="pillar-t">Proof</div><div class="pillar-b">Real clients, real numbers, real quotes. Case studies, testimonials, voice notes. In Ghana, social proof and word-of-mouth beat any advert.</div><span class="pillar-ex">e.g. "No wahala with these guys" — real client</span></div>
+    <div class="pillar p6"><div class="pillar-n">Pillar 06 · Offer</div><div class="pillar-t">Offer</div><div class="pillar-b">The smallest pillar. Deal Hub drops, free-BOQ CTAs, WhatsApp-first launches — used sparingly, landing on an audience that already values Wima.</div><span class="pillar-ex">e.g. "Community gets this cement deal first"</span></div>
+  </div>
+  <div class="ibox amber"><span class="ibox-lbl">The one rule that ties them together</span>For every offer post, publish three that give pure value. A feed of discounts trains bargain-hunters who vanish when the deal ends; a feed of value trains a community that stays — and then buys. Every post, whatever the pillar, ends with a single WhatsApp call-to-action: interest starts on social, deals close on WhatsApp.</div>
+</div>
+
+<!-- SECTION 2: WORLD'S BEST -->
+<div class="sec" id="lessons">
+  <div class="sec-eye">Section 02 <span class="stag">Learn From The World's Best</span></div>
+  <h2>What the global leaders do —<br><em>and Wima's Ghana version.</em></h2>
+  <p class="sec-intro">The home-and-property giants already solved social. We don't copy their market — we copy their mechanics. Each lesson below is proven at scale and adapted to Accra, Kumasi, and the diaspora. This section doubles as a case-method module in the Social Media MBA.</p>
+
+  <div class="lesson">
+    <div class="lesson-head"><span class="lesson-co">Houzz</span><span class="lesson-tag">USA · 40M+ users</span></div>
+    <div class="lesson-body">
+      <div class="lb-did"><span class="lb-lbl">What they did</span><div class="lb-t">Turned <strong>keyword-tagged project photos into a searchable library</strong> that ranks on Google for years, and made <strong>answering questions</strong> its own content — pros who help win reach and authority.</div></div>
+      <div class="lb-wima"><span class="lb-lbl">Wima's Ghana version</span><div class="lb-t">Tag every before/after and reveal with build-intent keywords so the feed becomes evergreen, searchable proof. Be the <strong>most useful voice</strong> in Accra Facebook groups and WhatsApp Q&amp;A — every answer is a trust deposit and free reach.</div></div>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <div class="lesson-head"><span class="lesson-co">Livspace</span><span class="lesson-tag">India · Ghana-like market</span></div>
+    <div class="lesson-body">
+      <div class="lb-did"><span class="lb-lbl">What they did</span><div class="lb-t"><strong>Dramatised the pain</strong> ("Don't Try This At Home" — disappearing contractors, creeping costs) for ~40% more leads, then sold <strong>WhatsApp-first with catalogs</strong> and ran seasonal <strong>deal festivals</strong>.</div></div>
+      <div class="lb-wima"><span class="lb-lbl">Wima's Ghana version</span><div class="lb-t">Wima's pain stories write themselves — the relative who "managed" the money, the quote that left out 30% of the cost. Dramatise it, then be the fix. Run WhatsApp catalogs and Detty-December deal drops.</div></div>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <div class="lesson-head"><span class="lesson-co">Zillow</span><span class="lesson-tag">USA · 50%+ of portal traffic</span></div>
+    <div class="lesson-body">
+      <div class="lb-did"><span class="lb-lbl">What they did</span><div class="lb-t">Made <strong>browsing entertainment</strong> — "Zillow surfing" became a pastime and fan-made Zillow Gone Wild a TV show. Gave away a <strong>free data tool</strong> (Zestimate) as the hook, and <strong>owned the data.</strong></div></div>
+      <div class="lb-wima"><span class="lb-lbl">Wima's Ghana version</span><div class="lb-t">Post dream builds and "you won't believe this Ghanaian home" content for the window-shoppers — they share and become the audience. Make a <strong>free build-cost/BOQ tool</strong> Wima's Zestimate, and own the data every use generates.</div></div>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <div class="lesson-head"><span class="lesson-co">Duolingo</span><span class="lesson-tag">16M+ TikTok followers</span></div>
+    <div class="lesson-body">
+      <div class="lb-did"><span class="lb-lbl">What they did</span><div class="lb-t">Took until their <strong>39th video</strong> to hit — and broke through only when they accepted "people want to be <strong>entertained, not sold to</strong>." Gave a personality (Duo) a human face, and married <strong>paid + organic</strong>.</div></div>
+      <div class="lb-wima"><span class="lb-lbl">Wima's Ghana version</span><div class="lb-t">Entertain first, sell second. Make <strong>Jamal and Gershon</strong> the human faces (Wima's Duo). Iterate relentlessly — don't quit at post 38. Boost the organic winners with paid; never pay to push a flop.</div></div>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <div class="lesson-head"><span class="lesson-co">WhatsApp Commerce Leaders</span><span class="lesson-tag">Tata CLiQ · Indian fashion · Unilever</span></div>
+    <div class="lesson-body">
+      <div class="lb-did"><span class="lb-lbl">What they did</span><div class="lb-t">An Indian fashion brand went <strong>WhatsApp-first</strong> — catalog 24h before the website — for <strong>~45% higher launch-day revenue.</strong> Tata CLiQ was <strong>useful first</strong> (order updates), then sold, for ~10x ROI. WhatsApp sees ~98% open rates.</div></div>
+      <div class="lb-wima"><span class="lb-lbl">Wima's Ghana version</span><div class="lb-t">Drop every Deal Hub deal to the WhatsApp community <strong>first</strong> — subscribers feel like insiders. Lead with utility (price updates, tips), then the offer. Ghana is the ideal market for this — 91.8% WhatsApp penetration.</div></div>
+    </div>
+  </div>
+
+  <div class="lesson">
+    <div class="lesson-head"><span class="lesson-co">Infra.Market</span><span class="lesson-tag">India · ~$2B on aggregation</span></div>
+    <div class="lesson-body">
+      <div class="lb-did"><span class="lb-lbl">What they did</span><div class="lb-t">Built a $2B construction-materials business by <strong>pooling small contractors' orders</strong> to save buyers 5–7% — proving demand aggregation in a fragmented market like Ghana's.</div></div>
+      <div class="lb-wima"><span class="lb-lbl">Wima's Ghana version</span><div class="lb-t">Make Deal Hub's social message concrete: <strong>"Buy together, save 5–10%."</strong> Post the running group-buy count; the bigger the pool, the better the price — social content that literally sells the aggregation.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: PLATFORM PLAYBOOKS -->
+<div class="sec" id="playbooks">
+  <div class="sec-eye">Section 03 <span class="stag">Platform Playbooks</span></div>
+  <h2>Five Platforms,<br><em>Five Different Jobs.</em></h2>
+  <p class="sec-intro">Each platform does one job in the funnel. Post native to each — never copy-paste the same clip everywhere. Percentages are Ghana-specific reach; the job is what that platform is <em>for</em> in Wima's system.</p>
+
+  <div class="pb wa">
+    <div class="pb-head"><span class="pb-name">WhatsApp</span><span class="pb-stat">91.8% of GH internet users · 98% open rate</span><span class="pb-role">Job: CONVERT</span></div>
+    <div class="pb-body">The closing rail — where every other platform sends people. <strong>Status</strong> (free, reaches all saved contacts): before/after, weekly price update, social proof. <strong>Broadcast lists</strong> (opt-in only): deal drops, BOQ turnarounds. <strong>Community groups</strong>: builders' tips + Q&amp;A. <strong>Launch every Deal Hub deal here first.</strong> Reply within minutes — speed is a competitive advantage. Consent is non-negotiable.</div>
+  </div>
+  <div class="pb fb">
+    <div class="pb-head"><span class="pb-name">Facebook</span><span class="pb-stat">~66% of GH social share · groups are gold</span><span class="pb-role">Job: COMMUNITY + REACH</span></div>
+    <div class="pb-body">Where Ghana's building conversations happen. Post as <strong>Gershon personally</strong> in groups, not as a faceless page — community members respond to people. Lead with <strong>questions</strong> (3–5× the comments of statements) and <strong>educational guides</strong>. Target diaspora groups ("Ghanaians in UK Building in Ghana") separately. This is the organic engine that warms the audience before any ad spend.</div>
+  </div>
+  <div class="pb tt">
+    <div class="pb-head"><span class="pb-name">TikTok</span><span class="pb-stat">~70% of GH internet users</span><span class="pb-role">Job: DISCOVERY</span></div>
+    <div class="pb-body">The Duolingo lesson lives here: <strong>entertain, don't sell.</strong> Fast before/afters, "which ceiling?" explainers, satisfying install clips, trend-jacking within 48 hours. Hook in 3 seconds, no logo up front. This is where strangers who've never heard of Wima discover it. Iterate relentlessly — most won't hit; keep going.</div>
+  </div>
+  <div class="pb ig">
+    <div class="pb-head"><span class="pb-name">Instagram</span><span class="pb-stat">Reels + carousels · aspirational</span><span class="pb-role">Job: INSPIRE + PROOF</span></div>
+    <div class="pb-body">The visual portfolio. <strong>Before/after Reels</strong> (post 6–9pm Ghana time for 34% more reach), <strong>carousels</strong> ("5 signs your building needs insulation"), finished-project galleries. Keyword-rich captions + hashtags so posts stay searchable. This is Wima's Houzz-style save-worthy library.</div>
+  </div>
+  <div class="pb li">
+    <div class="pb-head"><span class="pb-name">LinkedIn</span><span class="pb-stat">Untapped in GH construction · B2B</span><span class="pb-role">Job: SUPPLIERS + BANKS</span></div>
+    <div class="pb-body">The rail almost no Ghana builder uses — which is the opportunity. <strong>Founder-led</strong> posts from Gershon (turn the strategy docs into insight posts), <strong>data &amp; market posts</strong> (PBCI, cost trends), and warming <strong>bank partners, suppliers, and professionals</strong> for weeks before any pitch. Slow, compounding, high-value.</div>
+  </div>
+</div>
+
+<!-- SECTION 4: THE LIBRARY -->
+<div class="sec" id="library">
+  <div class="sec-eye">Section 04 <span class="stag">The Ready-To-Post Library</span></div>
+  <h2>The Library,<br><em>Organised by Pillar.</em></h2>
+  <p class="sec-intro">Ready-to-post copy, grouped by the six pillars so you always know what each post is <em>for</em>. Drywall with Jamal leads (the first launch); ceilings, cladding, and insulation follow. Swap [number], [area], and product as needed. All end with a WhatsApp CTA.</p>
+
+  <span class="pillar-band">Pillar 01 · Educate</span>
+  <div class="social-post" data-platform="Facebook Groups · post as Gershon · question format">
+    Chale, honest question for anyone doing a drywall partition or ceiling in Accra 🙋<br><br>
+    Did your contractor give you an <strong>itemised BOQ</strong> — every material by name, spec and price — or just a number on the phone?<br><br>
+    Asking because the number-on-the-phone quote is exactly how people end up paying for acoustic panels and receiving cheap suspended grid. Drop your experience below 👇
+    <span class="caption-note">Questions get 3–5× the comments of statements (Houzz "answering IS content" lesson). Surfaces the real objection — no written spec — which becomes your next educational post and your ad angle.</span>
+  </div>
+  <div class="social-post" data-platform="TikTok / Reel · 30-sec educational · hook in 3 sec">
+    "You paid for acoustic panels. You got suspended grid. Here's how to tell the difference in 10 seconds 👇"<br><br>
+    [Show the two tiles side by side — weight, texture, sound test.]<br><br>
+    Acoustic absorbs sound. Grid reflects it. Your BOQ should name which one, by brand. If it doesn't, don't pay yet.<br><br>
+    Wima Deal Hub — free itemised BOQ in 24 hours. WhatsApp us 👇
+    <span class="hashtags">#GhanaConstruction #DrywallGhana #CeilingGhana #WimaBuilders #BuildingMaterialsGhana #AccraHomes</span>
+    <span class="caption-note">Entertain-while-you-educate (Duolingo). The "how to tell in 10 seconds" hook is a pattern-interrupt that holds watch-time.</span>
+  </div>
+
+  <span class="pillar-band">Pillar 02 · Inspire (Before / After)</span>
+  <div class="social-post" data-platform="Instagram Reel + WhatsApp Status · the killer format">
+    Bare concrete, exposed conduit ❌ → drywall ceiling, recessed lighting ✅<br><br>
+    Same room. One working day. Jamal and the team, [area], Accra.<br><br>
+    From GHS 85/m² — supply &amp; installation. Free BOQ in 24 hrs.<br>
+    WhatsApp your ceiling size 👇 [number]
+    <span class="hashtags">#BeforeAndAfter #DrywallGhana #AccraHomes #WimaBuilders #CeilingInstallation #GhanaHomeImprovement</span>
+    <span class="caption-note">Before/after is the single most-shared home format (Houzz/Pinterest/Zillow). Use a REAL photo, never stock. Post Status version at 7pm GH time.</span>
+  </div>
+  <div class="social-post" data-platform="Facebook Page + Instagram · transformation carousel">
+    Swipe to watch a bare office shell become two private, sound-separated rooms 👉<br><br>
+    Slide 1: empty open-plan shell · Slide 2: steel stud frame · Slide 3: boards up · Slide 4: taped &amp; jointed · Slide 5: finished, furnished, in use.<br><br>
+    Drywall partition, from GHS 85/m². One day. Free BOQ 👇 [number]
+    <span class="caption-note">The process carousel satisfies the same curiosity Zillow-surfers have — people love watching spaces transform, whether or not they're buying.</span>
+  </div>
+
+  <span class="pillar-band">Pillar 03 · People (Jamal &amp; the Makers)</span>
+  <div class="social-post" data-platform="Instagram Reel + TikTok · founder/craftsman feature">
+    Meet Jamal 👷🏾 — 12 years cutting, fixing and finishing drywall across Accra.<br><br>
+    "People think drywall is just boards on a frame. But a clean joint you can't see, a corner that's dead straight — that's the difference between a room that looks finished and one that looks cheap."<br><br>
+    Jamal leads every Wima drywall install. This is who's coming to your site.<br>
+    WhatsApp us 👇 [number]
+    <span class="hashtags">#MeetTheTeam #DrywallGhana #Craftsmanship #WimaBuilders #AccraConstruction</span>
+    <span class="caption-note">Duolingo's lesson: a human face humanises the brand. Jamal IS Wima's Duo. People trust a craftsman before they trust a logo — and this is the drywall-first launch made personal.</span>
+  </div>
+
+  <span class="pillar-band">Pillar 04 · Entertain (Browsing as a Pastime)</span>
+  <div class="social-post" data-platform="TikTok / Reel · the Zillow-surfing play">
+    "This Accra home has a drywall feature ceiling you have to see to believe 👀"<br><br>
+    [Slow pan across a dramatic coffered / curved drywall ceiling with cove lighting.]<br><br>
+    Yes — this is drywall. Yes — it's in Ghana. No, it didn't cost what you think.<br><br>
+    Follow for more Ghana builds you won't believe. Wima Deal Hub 🏗️
+    <span class="hashtags">#GhanaBuildsGoneWild #DreamHomeGhana #AccraInteriors #WimaBuilders #CeilingGoals</span>
+    <span class="caption-note">Pure entertainment (Zillow). No hard sell — the "you won't believe" hook is built for shares. Window-shoppers become followers become the community you monetise later.</span>
+  </div>
+
+  <span class="pillar-band">Pillar 05 · Proof (Real Clients)</span>
+  <div class="social-post" data-platform="WhatsApp Status + Facebook · testimonial (voice-note transcribed)">
+    💬 From a client in [area] this week:<br><br>
+    <em>"I WhatsApped Wima expecting to wait days. Jamal's BOQ came the same evening — every line explained. They came when they said. Ceiling done in a day. No wahala with these guys."</em><br><br>
+    That's how we work. WhatsApp us 👇 [number]
+    <span class="caption-note">Ask for a VOICE NOTE, transcribe it (Ghana-voice: "no wahala," "chale"). Voice-note testimonials on Status convert higher than any copy Wima writes about itself. Always get permission.</span>
+  </div>
+
+  <span class="pillar-band">Pillar 06 · Offer (WhatsApp-First Drops)</span>
+  <div class="social-post" data-platform="WhatsApp Community FIRST · then Status · then FB">
+    🚨 Community-only, 48 hours: <strong>Deal Hub cement group-buy</strong><br><br>
+    The more of us who buy together, the lower the price — that's how Deal Hub works. Right now [X] builders are in. Join before Thursday and lock the group price.<br><br>
+    Buy together, save 5–10%. Reply "CEMENT" to join 👇
+    <span class="caption-note">The Indian-fashion-brand + Infra.Market lesson combined: drop to the WhatsApp community FIRST (insiders), and sell the aggregation explicitly ("buy together, save 5–10%"). Post the running count — social proof of the pool growing.</span>
+  </div>
+  <div class="social-post" data-platform="All platforms · the free-tool hook (Zillow Zestimate play)">
+    How much will your ceiling actually cost? Stop guessing. 🧮<br><br>
+    Send us your room size on WhatsApp and get a free, itemised BOQ in 24 hours — every material, every price, no site-visit fee, no obligation.<br><br>
+    Know your true cost before anyone quotes you 👇 [number]
+    <span class="caption-note">Wima's Zestimate: a free tool that pulls everyone in — even people not building yet — builds trust, and generates data on demand. The strongest return-traffic content Wima can run.</span>
+  </div>
+
+  <div class="ibox teal"><span class="ibox-lbl">How to run the library — the weekly rhythm</span>Post 1 pillar-post per platform per day, cycling Educate → Inspire → People → Entertain → Proof, with an Offer only every 4th post. Batch-film 8 pieces in one session (Duolingo's leverage), cut each native per platform, and schedule a week ahead. Reply to every comment in the first hour. Review weekly by <strong>shares and WhatsApp messages started</strong> — not views — and rebuild next week around whatever won.</div>
+</div>
+
+<!-- SECTION 5: POWER FORMATS -->
+<div class="sec" id="formats">
+  <div class="sec-eye">Section 05 <span class="stag">Highest-Impact Formats</span></div>
+  <h2>The Formats That<br><em>Do the Heavy Lifting.</em></h2>
+  <p class="sec-intro">Not all content pulls equally. These six formats, drawn straight from what works for the global leaders, deserve the most of your production time.</p>
+  <div class="pillars">
+    <div class="pillar p1"><div class="pillar-n">Format 01</div><div class="pillar-t">Before / After</div><div class="pillar-b">The home industry's most-shared format. Every finished project = one. Non-negotiable weekly output.</div></div>
+    <div class="pillar p2"><div class="pillar-n">Format 02</div><div class="pillar-t">The Free-Tool Post</div><div class="pillar-b">"Send your size, get a free BOQ." Wima's Zestimate — pulls return traffic and captures the WhatsApp number.</div></div>
+    <div class="pillar p3"><div class="pillar-n">Format 03</div><div class="pillar-t">Pain-Story + Fix</div><div class="pillar-b">Dramatise the betrayal / the wasted money (Livspace), then be the fix. Highest emotional pull, especially for diaspora.</div></div>
+    <div class="pillar p4"><div class="pillar-n">Format 04</div><div class="pillar-t">Craftsman Feature</div><div class="pillar-b">Jamal and the makers on camera. Humanises the brand (Duolingo) and proves real skill behind the promise.</div></div>
+    <div class="pillar p5"><div class="pillar-n">Format 05</div><div class="pillar-t">Voice-Note Testimonial</div><div class="pillar-b">Real client, real Ghana voice, transcribed. Converts higher than any written copy. Get permission, always.</div></div>
+    <div class="pillar p6"><div class="pillar-n">Format 06</div><div class="pillar-t">WhatsApp-First Drop</div><div class="pillar-b">Community gets the Deal Hub deal first (+45% launch-day revenue pattern). Sell the aggregation: "buy together, save."</div></div>
+  </div>
+</div>
+
+<!-- SECTION 6: MBA LINK -->
+<div class="sec" id="mba">
+  <div class="sec-eye">Section 06 <span class="stag">Part Of The MBA</span></div>
+  <h2>This Library Is a<br><em>Social Media MBA Module.</em></h2>
+  <p class="sec-intro">Every part of this library maps to a lecture in the Wima Social Media MBA — so the team doesn't just post, they understand why. Use this as the applied lab for the MBA lecture notes.</p>
+  <div class="mba-row"><span class="mba-lec">Lecture 1 · Platform Strategy</span><span class="mba-t"><strong>Section 03 · Platform Playbooks.</strong> Each platform's one job in the funnel; post native; everything routes to WhatsApp.</span></div>
+  <div class="mba-row"><span class="mba-lec">Lecture 2 · Content Craft</span><span class="mba-t"><strong>Sections 01 &amp; 04 · Pillars &amp; the Library.</strong> Hooks first, 3:1 value ratio, entertain-don't-sell, batch &amp; repurpose.</span></div>
+  <div class="mba-row"><span class="mba-lec">Lecture 3 · Organic Growth</span><span class="mba-t"><strong>Pillars 04 &amp; 05 · Entertain &amp; Proof.</strong> Share-worthy formats, comment-section engagement, the weekly review rhythm.</span></div>
+  <div class="mba-row"><span class="mba-lec">Lecture 4 · Paid Media</span><span class="mba-t"><strong>Pillar 06 · Offer.</strong> Boost only the organic winners; click-to-WhatsApp; measure cost-per-message.</span></div>
+  <div class="mba-row"><span class="mba-lec">Lecture 5 · B2B &amp; LinkedIn</span><span class="mba-t"><strong>Playbook · LinkedIn.</strong> Founder-led posts warming suppliers and banks before the pitch.</span></div>
+  <div class="mba-row"><span class="mba-lec">Lecture 6 · Community &amp; WhatsApp</span><span class="mba-t"><strong>Playbook · WhatsApp + Format 06.</strong> WhatsApp-first drops, Status, broadcast, community-first launches.</span></div>
+  <div class="mba-row"><span class="mba-lec">Case Method</span><span class="mba-t"><strong>Section 02 · The World's Best.</strong> Houzz, Livspace, Zillow, Duolingo, WhatsApp commerce — the case studies behind every tactic here.</span></div>
+  <div class="ibox amber" style="margin-top:16px;"><span class="ibox-lbl">The through-line</span>Social media is where Wima earns the community — and the community is the asset that makes tendering, Deal Hub, flash sales, and big-ticket procurement work later. Content first; deals second. Learn it in the MBA, run it from this library, measure it every Sunday.</div>
+</div>
+
+</div><!-- end .page -->
+
+<div class="footer">
+  <span class="footer-brand">Wima — Social Media Content Library 2026</span>
+  <span>Companion to the Content Library (6 channels) · Part of the Social Media MBA</span>
+  <span>Learns from: Houzz · Livspace · Zillow · Duolingo · Tata CLiQ · Infra.Market · Ghana data: GSS · Ministry of Works &amp; Housing · Statista · PURC</span>
+</div>
+
+<script>
+const links=document.querySelectorAll('.nav-links a[href^="#"]');
+const secs=document.querySelectorAll('.sec[id]');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-20% 0px -70% 0px'});
+secs.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

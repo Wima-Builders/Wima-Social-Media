@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — The Content Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,600;1,700&amp;family=DM+Sans:wght@0,300;0,400;0,500;0,600;0,700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--surface:#F4F1EA;--panel:#ECEAE0;--rule:#D8D3C4;
+  --ink:#1C1917;--ink2:#3C3830;--slate:#44403C;--muted:#78716C;--faint:#A8A29E;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;
+  --edu:#1D4ED8;--insp:#0F766E;--ppl:#7C3AED;--ent:#DC2626;--proof:#15803D;--offer:#C47A0A;
+  --wa:#128C7E;--wa-lt:#F0FDF4;--fb:#1877F2;--vid:#DC2626;--li:#0A66C2;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.62;}
+a{color:inherit;}button{font-family:inherit;}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px;}
+
+.wb-topbar{position:sticky;top:0;z-index:900;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 24px;font-family:var(--mono);}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;white-space:nowrap;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 12px;}
+.wb-topbar-links{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;border:1px solid transparent;transition:all .12s;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;border-color:rgba(196,122,10,.7);background:rgba(196,122,10,.22);}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.5);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;}
+
+.subnav{position:sticky;top:52px;z-index:850;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.1);height:42px;display:flex;align-items:center;padding:0 24px;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.subnav::-webkit-scrollbar{display:none;}
+.subnav a{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.6);padding:5px 10px;text-decoration:none;border-radius:3px;white-space:nowrap;}
+.subnav a:hover,.subnav a.active{color:var(--amber);background:rgba(196,122,10,.14);}
+
+.hero{padding:70px 48px 50px;border-bottom:2px solid var(--ink);background:radial-gradient(900px 400px at 88% -20%,rgba(196,122,10,.13),transparent 62%),var(--bg);}
+.hero-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--faint);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.hero-eye::before{content:'';width:26px;height:2px;background:var(--amber);}
+.hero h1{font-family:var(--serif);font-size:clamp(36px,5.4vw,64px);font-weight:900;line-height:1.0;letter-spacing:-.022em;margin-bottom:20px;max-width:17ch;}
+.hero h1 em{font-style:italic;color:var(--amber);}
+.hero-sub{font-size:17px;font-weight:300;color:var(--slate);max-width:660px;line-height:1.72;}
+.hero-meta{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--rule);margin-top:36px;background:white;}
+.hm{padding:15px 16px;border-right:1px solid var(--rule);}
+.hm:last-child{border-right:none;}
+.hm-n{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--amber);display:block;line-height:1;margin-bottom:5px;}
+.hm-l{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);line-height:1.45;}
+
+.wrap{max-width:1020px;}
+.sec{padding:52px 48px 44px;border-bottom:1px solid var(--rule);}
+.sec.alt{background:var(--surface);}
+.sec-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:8px;display:flex;align-items:center;gap:10px;}
+.sec-eye .stag{background:var(--amber);color:white;padding:1px 8px;font-size:8px;border-radius:2px;font-weight:600;}
+.sec-eye::after{content:'';flex:1;height:1px;background:var(--rule);}
+h2{font-family:var(--serif);font-size:33px;font-weight:700;line-height:1.1;margin-bottom:6px;letter-spacing:-.012em;}
+h2 em{font-style:italic;color:var(--amber);}
+.sec-intro{font-size:14px;color:var(--slate);line-height:1.7;max-width:670px;margin-bottom:28px;font-style:italic;font-weight:300;}
+.pull{border-left:3px solid var(--amber);padding:4px 0 4px 16px;margin:18px 0;font-family:var(--serif);font-size:19px;font-style:italic;color:var(--ink);line-height:1.4;}
+
+/* standards */
+.stds{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.std{background:white;border:1px solid var(--rule);padding:16px 18px;border-top:3px solid var(--amber);}
+.std .sn{font-family:var(--mono);font-size:9px;color:var(--faint);letter-spacing:.09em;margin-bottom:5px;}
+.std h4{font-family:var(--serif);font-size:16px;margin-bottom:5px;line-height:1.2;}
+.std p{font-size:12.5px;color:var(--slate);line-height:1.55;}
+
+/* asset cards */
+.assets{display:grid;gap:14px;}
+.asset{display:block;background:white;border:1px solid var(--rule);border-left:5px solid var(--amber);padding:22px 24px;text-decoration:none;transition:all .14s;}
+.asset:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(28,25,23,.09);}
+.asset.feature{background:linear-gradient(140deg,var(--amber-lt),white 62%);}
+.asset .a-tag{font-family:var(--mono);font-size:8.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--amber2);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.asset .a-pill{background:var(--ink);color:white;padding:1px 7px;border-radius:2px;font-size:7.5px;}
+.asset h3{font-family:var(--serif);font-size:21px;font-weight:700;margin-bottom:7px;line-height:1.15;}
+.asset p{font-size:13px;color:var(--slate);line-height:1.6;margin-bottom:10px;max-width:72ch;}
+.asset .a-go{font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--amber2);}
+.asset.c2{border-left-color:var(--insp);}.asset.c2 .a-tag,.asset.c2 .a-go{color:var(--insp);}
+.asset.c3{border-left-color:var(--ppl);}.asset.c3 .a-tag,.asset.c3 .a-go{color:var(--ppl);}
+.asset.c4{border-left-color:var(--proof);}.asset.c4 .a-tag,.asset.c4 .a-go{color:var(--proof);}
+
+/* hook browser */
+.hookwrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:18px;align-items:start;}
+.hooktabs{display:flex;flex-direction:column;gap:6px;}
+.hooktabs button{text-align:left;border:1px solid var(--rule);background:white;padding:11px 14px;cursor:pointer;font-size:13px;color:var(--slate);transition:.14s;display:flex;gap:10px;align-items:center;}
+.hooktabs button:hover{border-color:var(--amber);}
+.hooktabs button.active{background:var(--ink);color:white;border-color:var(--ink);}
+.hooktabs .hn{font-family:var(--mono);font-size:10px;color:var(--amber);flex:none;}
+.hookdetail{background:white;border:1px solid var(--rule);padding:22px 24px;min-height:320px;}
+.hookdetail h4{font-family:var(--serif);font-size:20px;margin-bottom:4px;}
+.hookdetail .why{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--amber2);margin-bottom:14px;}
+.hookdetail .ex{border-left:3px solid var(--amber);background:var(--amber-lt);padding:10px 14px;margin-bottom:8px;font-size:13.5px;color:#5A3800;line-height:1.5;}
+.hookdetail .ex b{color:#3D2500;}
+.hookdetail .note{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:12px;font-style:italic;line-height:1.5;}
+
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.pstep{background:white;border:1px solid var(--rule);padding:14px 15px;position:relative;}
+.pstep .pn{font-family:var(--mono);font-size:9px;color:var(--amber);letter-spacing:.09em;margin-bottom:5px;}
+.pstep h4{font-family:var(--serif);font-size:15px;margin-bottom:4px;line-height:1.2;}
+.pstep p{font-size:11.5px;color:var(--slate);line-height:1.5;}
+
+/* two-col compare */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.vscol{background:white;border:1px solid var(--rule);padding:20px 22px;border-top:4px solid var(--insp);}
+.vscol.paid{border-top-color:var(--fb);}
+.vscol .vl{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--insp);margin-bottom:6px;}
+.vscol.paid .vl{color:var(--fb);}
+.vscol h3{font-family:var(--serif);font-size:20px;margin-bottom:8px;}
+.vscol ul{list-style:none;}
+.vscol li{font-size:13px;color:var(--slate);line-height:1.55;padding:6px 0 6px 16px;position:relative;border-bottom:1px solid var(--panel);}
+.vscol li:last-child{border-bottom:none;}
+.vscol li::before{content:'▸';position:absolute;left:0;color:var(--amber);}
+.vscol li b{color:var(--ink);}
+
+/* phase browser */
+.phwrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px;align-items:start;}
+.phtabs{display:flex;flex-direction:column;gap:6px;}
+.phtabs button{text-align:left;border:1px solid var(--rule);background:white;padding:12px 14px;cursor:pointer;transition:.14s;}
+.phtabs button:hover{border-color:var(--amber);}
+.phtabs button.active{background:var(--ink);border-color:var(--ink);}
+.phtabs .pt{font-family:var(--mono);font-size:9px;letter-spacing:.09em;color:var(--amber);margin-bottom:3px;}
+.phtabs .pl{font-family:var(--serif);font-size:15px;color:var(--ink);}
+.phtabs button.active .pl{color:white;}
+.phdetail{background:white;border:1px solid var(--rule);padding:22px 24px;min-height:340px;}
+.phdetail h4{font-family:var(--serif);font-size:21px;margin-bottom:3px;}
+.phdetail .goal{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--amber2);margin-bottom:14px;}
+.phdetail .prow{border-top:1px solid var(--panel);padding:11px 0;}
+.phdetail .pk{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.09em;margin-bottom:4px;}
+.phdetail .pk.v{color:var(--vid);}.phdetail .pk.p{color:var(--fb);}.phdetail .pk.c{color:var(--wa);}.phdetail .pk.m{color:var(--proof);}
+.phdetail .pv{font-size:13.5px;color:var(--slate);line-height:1.6;}
+.phdetail .pv b{color:var(--ink);}
+
+/* community */
+.arch{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;}
+.node{background:white;border:1px solid var(--rule);padding:14px;border-left:3px solid var(--wa);}
+.node h4{font-family:var(--serif);font-size:15px;margin-bottom:4px;}
+.node p{font-size:11.5px;color:var(--slate);line-height:1.5;}
+.rituals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.rit{background:white;border:1px solid var(--rule);padding:14px;}
+.rit .day{font-family:var(--mono);font-size:9px;color:var(--amber);letter-spacing:.09em;margin-bottom:4px;}
+.rit h4{font-family:var(--serif);font-size:14.5px;margin-bottom:3px;}
+.rit p{font-size:11.5px;color:var(--slate);line-height:1.45;}
+
+/* scoreboard */
+.score{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.scard{background:white;border:1px solid var(--rule);padding:18px 20px;}
+.scard.bad{border-left:4px solid var(--ent);}
+.scard.good{border-left:4px solid var(--proof);}
+.scard .sl{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.scard.bad .sl{color:var(--ent);}.scard.good .sl{color:var(--proof);}
+.scard ul{list-style:none;}
+.scard li{font-size:13px;color:var(--slate);padding:5px 0 5px 15px;position:relative;line-height:1.5;}
+.scard li::before{position:absolute;left:0;}
+.scard.bad li::before{content:'✕';color:var(--ent);}
+.scard.good li::before{content:'✓';color:var(--proof);}
+.scard li b{color:var(--ink);}
+
+.pills{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.pill{background:white;border:1px solid var(--rule);border-top:3px solid var(--amber);padding:13px 12px;}
+.pill.p1{border-top-color:var(--edu);}.pill.p2{border-top-color:var(--insp);}.pill.p3{border-top-color:var(--ppl);}
+.pill.p4{border-top-color:var(--ent);}.pill.p5{border-top-color:var(--proof);}.pill.p6{border-top-color:var(--offer);}
+.pill h4{font-family:var(--serif);font-size:15px;margin-bottom:4px;}
+.pill p{font-size:11px;color:var(--muted);line-height:1.45;}
+
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.fstep{background:white;border:1px solid var(--rule);padding:16px 18px;}
+.fstep .fn{font-family:var(--mono);font-size:9px;color:var(--amber);letter-spacing:.1em;margin-bottom:6px;}
+.fstep h4{font-family:var(--serif);font-size:16px;margin-bottom:5px;}
+.fstep p{font-size:12px;color:var(--slate);line-height:1.5;}
+
+.ibox{padding:16px 20px;border-left:3px solid var(--amber);background:var(--amber-lt);font-size:13.5px;line-height:1.65;color:#5A3800;margin-top:22px;}
+.ibox-lbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.14em;display:block;margin-bottom:5px;opacity:.65;}
+.ibox b{color:#3D2500;}
+
+.footer{background:var(--ink);color:rgba(255,255,255,.26);padding:22px 48px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.07em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.footer-brand{font-family:var(--serif);font-size:15px;color:var(--amber);text-transform:none;letter-spacing:0;font-style:italic;}
+
+@media(max-width:900px){
+  .stds,.flow,.pipe,.arch,.rituals{grid-template-columns:1fr 1fr;}
+  .pills{grid-template-columns:1fr 1fr 1fr;}
+  .hookwrap,.phwrap,.vs,.score{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .hero,.sec{padding-left:20px;padding-right:20px;}
+  .hero{padding-top:44px;}
+  .hero-meta{grid-template-columns:1fr 1fr;}
+  .hm{border-bottom:1px solid var(--rule);}
+  .stds,.flow,.pipe,.arch,.rituals,.pills{grid-template-columns:1fr;}
+  .footer{padding:18px 20px;flex-direction:column;}
+  .wb-topbar{padding:0 12px;}.wb-topbar-name{display:none;}
+  .subnav{padding:0 12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+      <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+      <a href="wima-content-hub.html" class="wb-active">Content Hub<span class="wb-badge">Start</span></a>
+      <a href="wima-60-day-content-engine.html">Content Library<span class="wb-badge">60 days × 4</span></a>
+      <a href="wima-30-day-content-calendar.html">30-Day Calendar</a>
+      <a href="wima-social-content-library.html">Content Strategy</a>
+      <a href="wima-content-library.html">Wider Channels</a>
+      <a href="wima-mba-lecture-notes.html">The MBA</a>
+  </div>
+</div>
+
+<div class="subnav" id="subnav">
+  <a href="#standards">The Standards</a>
+  <a href="#assets">The Assets</a>
+  <a href="#video">Short-Video System</a>
+  <a href="#amplify">Organic × Paid</a>
+  <a href="#dealhub">Deal Hub Launch</a>
+  <a href="#community">The Community</a>
+  <a href="#score">Scoreboard</a>
+</div>
+
+<div class="hero">
+  <div class="hero-eye">The Content Hub · Command centre · Short-video system · Paid × organic · Deal Hub launch · Community build</div>
+  <h1>Wima's content, run like a <em>world-class team.</em></h1>
+  <p class="hero-sub">Not a folder of posts — an operating system. The standards a top creative team holds itself to, a short-form video engine built for the 3-second economy, the discipline that decides what gets paid budget, the campaign that launches Deal Hub, and the blueprint for the community that makes all of it compound. Everything Wima publishes starts here.</p>
+  <div class="hero-meta">
+    <div class="hm"><span class="hm-n">3 sec</span><span class="hm-l">to win or lose — 71% decide immediately</span></div>
+    <div class="hm"><span class="hm-n">85%</span><span class="hm-l">of marketers: short video is the top format (2026)</span></div>
+    <div class="hm"><span class="hm-n">76%</span><span class="hm-l">more likely to buy from brands with a real community</span></div>
+    <div class="hm"><span class="hm-n">1 : 4</span><span class="hm-l">offer-to-value ratio — earn before you ask</span></div>
+    <div class="hm"><span class="hm-n">240</span><span class="hm-l">posts ready · 60 days × 4 platforms</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- STANDARDS -->
+<div class="sec" id="standards">
+  <div class="sec-eye">01 <span class="stag">The Standards</span></div>
+  <h2>Nine rules <em>we don't break.</em></h2>
+  <p class="sec-intro">The difference between a company that posts and a media team that wins isn't budget or talent — it's a small set of non-negotiables held under pressure. These are Wima's.</p>
+  <div class="stds">
+    <div class="std"><div class="sn">Rule 01</div><h4>Hook or die</h4><p>You have three seconds. 71% of viewers decide almost immediately whether to keep watching. No logo intros, no "hi guys, welcome back." The first frame is the whole job.</p></div>
+    <div class="std"><div class="sn">Rule 02</div><h4>Volume beats polish</h4><p>A smartphone clip with a sharp hook outperforms a professionally produced film with a weak one. Never let production quality become the excuse for not shipping.</p></div>
+    <div class="std"><div class="sn">Rule 03</div><h4>One idea per asset</h4><p>One post, one point, one CTA. If it needs two ideas, it's two posts. Confusion is the enemy of conversion.</p></div>
+    <div class="std"><div class="sn">Rule 04</div><h4>Native, never cross-posted</h4><p>The same message, re-written for each platform's job. A TikTok pasted to LinkedIn insults both audiences. The 60-Day Engine exists precisely for this.</p></div>
+    <div class="std"><div class="sn">Rule 05</div><h4>Systems over inspiration</h4><p>Nobody waits to feel creative. One shoot a week on a live job, 2–3 clips out, a week ahead. <b>Consistency beats volume</b> — three posts every week for a year beats ten posts one week and silence the next.</p></div>
+    <div class="std"><div class="sn">Rule 06</div><h4>Test hooks like headlines</h4><p>Same video, different opening. Post both, compare 48-hour retention. Winners become templates; the hook library grows. Guessing is banned.</p></div>
+    <div class="std"><div class="sn">Rule 07</div><h4>Never pay to push a flop</h4><p>Paid doesn't fix weak creative — it buys reach for it. Only content that already earned organic traction gets budget. Organic is the lab; paid is the amplifier.</p></div>
+    <div class="std"><div class="sn">Rule 08</div><h4>Measure the business, not the vanity</h4><p>Views are not the goal. Shares and <em>WhatsApp messages started</em> are. A 200-view post that starts 6 conversations beats a 20,000-view post that starts none.</p></div>
+    <div class="std"><div class="sn">Rule 09</div><h4>Real, or don't post it</h4><p>Audiences detect templated, generic, AI-flavoured content instantly — and in a trust market that's fatal. Real sites, real Jamal, real clients, real numbers. Authenticity <em>is</em> the strategy.</p></div>
+  </div>
+  <div class="pull">"If it comes for price, it leaves for price. If it comes for trust, it stays." — the line under every decision here.</div>
+</div>
+
+<!-- ASSETS -->
+<div class="sec alt" id="assets">
+  <div class="sec-eye">02 <span class="stag">The Assets</span></div>
+  <h2>Four libraries. <em>One system.</em></h2>
+  <p class="sec-intro">Learn the why, get the month, run all channels, fill the wider estate. Post daily from the Engine; come back to the others when you need the thinking.</p>
+  <div class="assets">
+    <a class="asset feature" href="wima-60-day-content-engine.html">
+      <div class="a-tag"><span class="a-pill">The Content Library · post daily from this</span> 60 days × 4 platforms · Interactive</div>
+      <h3>The Content Library</h3>
+      <p>Everything Wima posts, ready to go: 60 days × four native versions each — WhatsApp (convert), Facebook (community), Video script (discovery), LinkedIn (founder-led B2B). Month 1 runs the Dry Wall with Jamal launch; Month 2 scales into Deal Hub, Cool-Ceiling, cladding, insulation and diaspora. Every day tagged with its pillar and the client pain it answers. <strong>This is the library — start here.</strong></p>
+      <span class="a-go">Open the Content Library →</span>
+    </a>
+    <a class="asset c2" href="wima-30-day-content-calendar.html">
+      <div class="a-tag"><span class="a-pill">The first month</span> Day-by-day · Ready copy</div>
+      <h3>The 30-Day Content Calendar</h3>
+      <p>The simplest place to start: 30 days of ready copy on the pillar rotation — trust, authority, diaspora, launch — with pillar, platform, format and WhatsApp CTA on every day.</p>
+      <span class="a-go">Open the calendar →</span>
+    </a>
+    <a class="asset c3" href="wima-social-content-library.html">
+      <div class="a-tag"><span class="a-pill">The thinking behind it</span> Pillars · Playbooks · World's best</div>
+      <h3>The Content Strategy</h3>
+      <p>The system behind the posts: six pillars, five platform playbooks, and what Houzz, Livspace, Zillow, Duolingo, the WhatsApp-commerce leaders and Infra.Market each proved — translated into a Ghana move.</p>
+      <span class="a-go">Open the strategy →</span>
+    </a>
+    <a class="asset c4" href="wima-content-library.html">
+      <div class="a-tag"><span class="a-pill">Beyond social</span> 6 channels · Research-backed</div>
+      <h3>Wider Channels — Blogs, Email &amp; Press</h3>
+      <p>The wider estate: SEO blogs, email newsletters, landing pages, the launch press release for B&amp;FT / Pulse / MyJoyOnline, and the case-study template — all grounded in cited Ghana research.</p>
+      <span class="a-go">Open the wider channels →</span>
+    </a>
+  </div>
+  <div class="ibox"><span class="ibox-lbl">The system is complete</span>All four assets are live in this folder and every link resolves — the content system is self-contained and travels together as one upload. <b>Nothing to copy across.</b></div>
+</div>
+
+<!-- SHORT VIDEO SYSTEM -->
+<div class="sec" id="video">
+  <div class="sec-eye">03 <span class="stag">The Short-Video System</span></div>
+  <h2>Short video is <em>the whole game now.</em></h2>
+  <p class="sec-intro">85% of marketers name short-form the most effective format of 2026, and it carries the highest ROI of any social content. For Wima it's close to unfair: every job site is a film set, every install is a transformation, and Jamal is a character people will follow. Here's the system that turns that into reach.</p>
+
+  <h3 style="font-family:var(--serif);font-size:20px;margin-bottom:6px;">The hook library — tap a type</h3>
+  <p style="font-size:13px;color:var(--slate);margin-bottom:16px;max-width:70ch;">Nine hook patterns that work for building content, each with Wima-ready lines. Steal these verbatim; the first three seconds decide everything.</p>
+  <div class="hookwrap">
+    <div class="hooktabs" id="hooktabs"></div>
+    <div class="hookdetail" id="hookdetail" aria-live="polite"></div>
+  </div>
+
+  <h3 style="font-family:var(--serif);font-size:20px;margin:34px 0 6px;">The production pipeline — one shoot, ten assets</h3>
+  <p style="font-size:13px;color:var(--slate);margin-bottom:16px;max-width:70ch;">The single highest-leverage habit in modern content. Don't produce videos one at a time — film once on a live Jamal job and harvest the week from it. <b>One shoot a week, 2–3 clips published.</b> Run it 8–12 weeks and you stop guessing.</p>
+  <div class="pipe">
+    <div class="pstep"><div class="pn">Step 01</div><h4>Record raw</h4><p>15–30 minutes on a real site: the shell, the frame, the boards, the joint, the reveal, Jamal talking. Phone only. No script.</p></div>
+    <div class="pstep"><div class="pn">Step 02</div><h4>Cut 5–10 clips</h4><p>Each 15–30 seconds, one idea, vertical, captions burned in (most watch sound-off). Different hook on each.</p></div>
+    <div class="pstep"><div class="pn">Step 03</div><h4>Publish 2–3</h4><p>Post organically across TikTok / Reels / Shorts / Status. Different days, different hooks. Let the audience vote. <b>2–3 a week is the real target</b> — sustainable beats heroic.</p></div>
+    <div class="pstep"><div class="pn">Step 04</div><h4>Promote 1–2</h4><p>Take whichever earned real organic traction and put budget behind it as a click-to-WhatsApp ad. Never the flops.</p></div>
+    <div class="pstep"><div class="pn">Step 05</div><h4>Bank the winners</h4><p>Save every hook that worked into the library and re-run it next week on new footage. The system compounds.</p></div>
+  </div>
+  <div class="ibox"><span class="ibox-lbl">The craft rules that decide distribution</span><b>15–30 seconds</b> is the sweet spot — TikTok rewards completion rate above all, so shorter usually wins. <b>Vertical, always.</b> <b>Captions burned in</b> — assume sound is off. <b>Loop the ending into the beginning</b> where you can; re-watches lift retention. <b>Hook → value → one CTA</b>, nothing else. And every single one ends on WhatsApp.</div>
+</div>
+
+<!-- ORGANIC x PAID -->
+<div class="sec alt" id="amplify">
+  <div class="sec-eye">04 <span class="stag">Organic × Paid</span></div>
+  <h2>Organic is the lab. <em>Paid is the amplifier.</em></h2>
+  <p class="sec-intro">Most companies get this backwards — they invent an ad, then hope. World-class teams let the audience pick the winners for free, then pay to scale only what already proved itself. That discipline is worth more than a bigger budget.</p>
+  <div class="vs">
+    <div class="vscol">
+      <div class="vl">Non-paid · the lab</div>
+      <h3>What organic is for</h3>
+      <ul>
+        <li><b>Discovery &amp; testing.</b> Publish 3 clips a week with different hooks and let real people vote before a pesewa is spent.</li>
+        <li><b>Community &amp; trust.</b> Facebook groups, WhatsApp Status, comment replies — Gershon present, as a person, not a page.</li>
+        <li><b>Proof accumulation.</b> Every finished job becomes a before/after, a testimonial, a case study you own forever.</li>
+        <li><b>Free reach on relationships.</b> Platforms now favour the interest graph over the follower graph — engagement, not follower count, decides distribution.</li>
+        <li><b>The rule:</b> a post that earns shares and messages organically is a proven ad. One that doesn't, never will be.</li>
+      </ul>
+    </div>
+    <div class="vscol paid">
+      <div class="vl">Paid · the amplifier</div>
+      <h3>What paid is for</h3>
+      <ul>
+        <li><b>Click-to-WhatsApp is the money format.</b> Not traffic, not likes — the ad opens a conversation on the channel where Wima closes.</li>
+        <li><b>Two ad sets, always.</b> Local (Accra / Tema / Kumasi) and diaspora (UK / US / Canada / Germany) — different fears, different creative, never merged.</li>
+        <li><b>Beat ad fatigue with a 3×2×2 matrix:</b> 3 hooks × 2 edits × 2 CTAs = 12 variants from one shoot. Refresh before performance decays.</li>
+        <li><b>Retarget the warm.</b> People who watched 50%+ of a video or messaged and went quiet get the free-BOQ offer. Cheapest conversions you'll ever buy.</li>
+        <li><b>The metric that matters:</b> cost per WhatsApp message started — not CPM, not CTR. Kill fast, scale the winner.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ibox"><span class="ibox-lbl">The amplification ladder — how budget actually gets spent</span><b>1 · Warm first.</b> Run organic for ~a week before any spend — never advertise into a cold, empty page. <b>2 · Small tests.</b> Put a small daily budget behind 2–3 proven organic clips; run 3–5 days. <b>3 · Kill fast.</b> Anything with a poor cost-per-message-started dies without sentiment. <b>4 · Scale the winner</b> gradually, and refresh creative before fatigue sets in. <b>5 · Retarget</b> the warm audience with the free BOQ. Repeat every cycle.</div>
+</div>
+
+<!-- DEAL HUB LAUNCH -->
+<div class="sec" id="dealhub">
+  <div class="sec-eye">05 <span class="stag">Campaign · Deal Hub Launch</span></div>
+  <h2>Launching Deal Hub <em>without becoming Groupon.</em></h2>
+  <p class="sec-intro">The trap is real: a discount platform trains price-hunters who leave for the next discount. So Deal Hub doesn't launch as a discount — it launches as a <strong>collective</strong>. The story isn't "cheap cement," it's "builders who buy together stop being at the mercy of the market." Four phases; tap each.</p>
+  <div class="phwrap">
+    <div class="phtabs" id="phtabs"></div>
+    <div class="phdetail" id="phdetail" aria-live="polite"></div>
+  </div>
+  <div class="ibox"><span class="ibox-lbl">The one creative decision that protects the whole thing</span>Never lead with the discount. Lead with the <b>mechanic</b> — "alone you pay retail; together we buy at volume" — and with the <b>pool count rising</b>. The saving is the <em>result</em> of belonging, not a coupon you hand a stranger. That single framing is the difference between Infra.Market (~$2B on aggregation) and Groupon (−$1.14B on discounts).</div>
+</div>
+
+<!-- COMMUNITY -->
+<div class="sec alt" id="community">
+  <div class="sec-eye">06 <span class="stag">The Online Community</span></div>
+  <h2>The community <em>is the asset.</em></h2>
+  <p class="sec-intro">Everything else Wima builds sits on this. 76% of consumers are more likely to buy from brands with a strong community, active communities see 53% higher retention, and community-driven brands get roughly 5× the engagement through members' own content. For Deal Hub it's not a nice-to-have — a group-buy without a group is just a price list.</p>
+
+  <h3 style="font-family:var(--serif);font-size:20px;margin-bottom:6px;">The architecture</h3>
+  <div class="ibox" style="margin-top:0;margin-bottom:16px;background:#F0FDF4;border-left-color:var(--proof);color:#14532D;"><span class="ibox-lbl">Built for your actual capacity — 2–3 clips a week, best-effort replies</span>This blueprint is deliberately <b>phased, not full-fat</b>. Open <b>two rooms and two rituals</b> now; add the rest when Deal Hub launches and when demand genuinely shows. <b>A silent, unanswered group does more damage than no group at all</b> — it publicly proves the brand doesn't follow through, which is the exact opposite of what Wima is selling. Two rooms you run well beat four you run badly. Grow the architecture behind the demand, never ahead of it.</div>
+  <p style="font-size:13px;color:var(--slate);margin-bottom:14px;max-width:70ch;">WhatsApp Communities let you hold several focused groups under one umbrella with an announcement channel on top — order instead of chaos, which is exactly what a builders' community needs. Start with the two marked <b>Start now</b>.</p>
+  <div class="arch">
+    <div class="node" style="border-left-color:var(--proof)"><h4>📣 Announcements <span style="font-family:var(--mono);font-size:7.5px;background:var(--proof);color:white;padding:1px 5px;border-radius:2px;vertical-align:middle;">START NOW</span></h4><p>Broadcast-only, from Wima. Price updates, deal drops, clinic invites. Everyone's in. <b>Low effort, high signal</b> — one message a week keeps it alive. This is the rail that must never be abused.</p></div>
+    <div class="node" style="border-left-color:var(--proof)"><h4>🛠 Build Clinic <span style="font-family:var(--mono);font-size:7.5px;background:var(--proof);color:white;padding:1px 5px;border-radius:2px;vertical-align:middle;">START NOW</span></h4><p>Open Q&amp;A. Members ask, Wima and vetted pros answer, members chip in. The value that earns the right to sell anything — <b>and every answer is tomorrow's content.</b></p></div>
+    <div class="node" style="opacity:.72"><h4>🤝 Deal Hub Drops <span style="font-family:var(--mono);font-size:7.5px;background:var(--muted);color:white;padding:1px 5px;border-radius:2px;vertical-align:middle;">AT LAUNCH</span></h4><p>Where pools open and fill. Live count, countdown, "who's in." Open this room <b>when the first pool is real</b> — not before. An empty deal room reads as a dead business.</p></div>
+    <div class="node" style="opacity:.72"><h4>🌍 Diaspora Builders <span style="font-family:var(--mono);font-size:7.5px;background:var(--muted);color:white;padding:1px 5px;border-radius:2px;vertical-align:middle;">WHEN DEMAND SHOWS</span></h4><p>Separate room, different fear — verification, time zones, milestones. Split this out <b>only once diaspora questions are actually crowding the clinic.</b></p></div>
+  </div>
+
+  <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px;">The weekly rituals</h3>
+  <p style="font-size:13px;color:var(--slate);margin-bottom:14px;max-width:70ch;">Communities die from silence and from noise. Rituals fix both — members learn when to show up, and Wima earns a reason to appear.</p>
+  <div class="rituals">
+    <div class="rit" style="border-top:3px solid var(--proof)"><div class="day">Sunday · CORE</div><h4>The Price Update</h4><p>What cement, rods and boards actually cost this week. Pure utility, <b>15 minutes to write</b>. The habit anchor — people wait for it. If you only ever do one ritual, do this.</p></div>
+    <div class="rit" style="border-top:3px solid var(--proof)"><div class="day">Wednesday · CORE</div><h4>Build Clinic</h4><p>A <b>fixed one-hour window</b> — not all-day availability. Gershon + a pro answering anything. Contained, sustainable, and every answer is tomorrow's content.</p></div>
+    <div class="rit" style="opacity:.72"><div class="day">Friday · WHEN YOU HAVE ONE</div><h4>The Reveal</h4><p>A finished job — before/after, named craftsman, real numbers. <b>Only when a real job completes.</b> A manufactured reveal is worse than no reveal.</p></div>
+    <div class="rit" style="opacity:.72"><div class="day">Cycle · AT LAUNCH</div><h4>The Drop</h4><p>The pool opens. Community first, always. Starts when Deal Hub starts.</p></div>
+  </div>
+
+  <h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px;">The growth loop — why this compounds</h3>
+  <div class="flow">
+    <div class="fstep"><div class="fn">Loop 01</div><h4>Value pulls people in</h4><p>Free BOQ, price updates, clinic answers. No purchase required, ever. Content is the front door.</p></div>
+    <div class="fstep"><div class="fn">Loop 02</div><h4>Belonging keeps them</h4><p>Recognition by name, their build featured, their question answered. Members become regulars, regulars become advocates.</p></div>
+    <div class="fstep"><div class="fn">Loop 03</div><h4>Scale lowers the price</h4><p>A bigger pool = a better Deal Hub price for everyone. Members are <em>rewarded</em> for recruiting — the incentive is structural, not begged for.</p></div>
+    <div class="fstep"><div class="fn">Loop 04</div><h4>Savings prove the value</h4><p>Real cedis saved → testimonials → more members → an even bigger pool. The loop tightens with every cycle.</p></div>
+  </div>
+
+  <div class="ibox"><span class="ibox-lbl">The rules that keep it alive</span><b>Consent only</b> — nobody is added without asking; opt-out is one message and honoured instantly. <b>Gershon is present</b> — a founder in the room beats any community manager; people detect an absent brand. <b>Publish your real response window and beat it</b> — "we reply within a few hours, Mon–Sat" kept is worth ten times "instant" broken. Never promise a speed you can't hold on a busy site day. <b>Recognise the regulars</b> by name — recognition builds loyalty, loyalty builds momentum, and AkomaPoints will later make it formal. <b>No spam, no poaching, no fake materials</b> — one bad batch or one hustler destroys the moat you spent months building. <b>Never blast the announcement rail</b> for anything that isn't genuinely useful.</div>
+</div>
+
+<!-- SCOREBOARD -->
+<div class="sec" id="score">
+  <div class="sec-eye">07 <span class="stag">The Scoreboard</span></div>
+  <h2>What we count — <em>and what we ignore.</em></h2>
+  <p class="sec-intro">Most teams drown in dashboards that flatter them. Wima tracks a short list that maps to cedis and trust, reviewed every Sunday. Winners shape the next week; everything else is noise.</p>
+  <div class="score">
+    <div class="scard good">
+      <div class="sl">◆ Count these</div>
+      <ul>
+        <li><b>WhatsApp messages started</b> — the only true top-of-funnel conversion. Everything routes here.</li>
+        <li><b>Shares &amp; saves</b> — the honest signal of value. A share is someone staking their reputation on you.</li>
+        <li><b>3-second retention &amp; completion rate</b> — did the hook hold? This is the creative scoreboard.</li>
+        <li><b>Cost per message started</b> — the only paid metric that matters. Kill anything expensive, fast.</li>
+        <li><b>Community: active contributors</b> (not member count) and <b>pool participation rate</b>.</li>
+        <li><b>Free BOQs requested → quoted → won</b> — the funnel, end to end.</li>
+        <li><b>Repeat &amp; referral rate</b> — the truest measure of whether trust is real.</li>
+      </ul>
+    </div>
+    <div class="scard bad">
+      <div class="sl">✕ Ignore these</div>
+      <ul>
+        <li><b>Views &amp; impressions</b> — reach without a conversation is a rounding error.</li>
+        <li><b>Follower count</b> — platforms now distribute on interest and engagement, not on your follower number.</li>
+        <li><b>Likes</b> — the cheapest, least predictive signal there is.</li>
+        <li><b>Member count</b> — a silent group of 2,000 is worth less than 200 who talk and buy together.</li>
+        <li><b>CPM / CTR in isolation</b> — cheap clicks that never message are just cheap.</li>
+        <li><b>Posting streaks</b> — volume without learning is just noise with a calendar.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ibox"><span class="ibox-lbl">The Sunday review — 20 minutes, every week</span>Rank the week's posts by <b>shares</b> and <b>messages started</b>. Ask three questions: which hook won and why; which two clips deserve budget this week; and what did the community actually ask for? Then build next week around the answers. <b>Eight to twelve weeks of this loop and you'll stop guessing — you'll know.</b></div>
+</div>
+
+<!-- PILLARS + HONEST -->
+<div class="sec alt">
+  <div class="sec-eye">08 <span class="stag">The Backbone</span></div>
+  <h2>Six pillars. <em>Every post has a job.</em></h2>
+  <p class="sec-intro">Whatever you post, from whichever asset, it belongs to one of these — and each answers a documented client fear. Roughly three parts value to one part offer, always.</p>
+  <div class="pills">
+    <div class="pill p1"><h4>Educate</h4><p>Costs, build order, reading a BOQ. → Hidden costs &amp; bad data.</p></div>
+    <div class="pill p2"><h4>Inspire</h4><p>Before/after, reveals. → "Will it be worth it?"</p></div>
+    <div class="pill p3"><h4>People</h4><p>Jamal, the craftsmen. → "Who's on my site?"</p></div>
+    <div class="pill p4"><h4>Entertain</h4><p>Dream builds, wild reveals. → Reach offers can't buy.</p></div>
+    <div class="pill p5"><h4>Proof</h4><p>Real clients, voice notes. → The fear of betrayal.</p></div>
+    <div class="pill p6"><h4>Offer</h4><p>Free BOQ, Deal Hub drops. → The smallest pillar.</p></div>
+  </div>
+  <div class="ibox"><span class="ibox-lbl">Before you post — the two habits that protect everything</span><b>Verify every number.</b> Prices, timelines, temperature drops and [X] placeholders across all assets are illustrative — replace them with your real, current figures. A wrong price does more damage to Wima than a missed post. <b>Always get consent.</b> Never use a client's photo, name, area or voice note without an explicit yes, and never publish a savings or outcome claim you can't evidence from a real install. Wima's entire moat is being the one who doesn't exaggerate.</div>
+</div>
+
+</div>
+
+<div class="footer">
+  <span class="footer-brand">Wima — The Content Hub</span>
+  <span>Standards · Short-video system · Paid × organic · Deal Hub launch · Community blueprint · Scoreboard</span>
+  <span>Grounded in 2026 short-form &amp; community research · Applies: Houzz · Livspace · Zillow · Duolingo · Infra.Market</span>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- HOOK LIBRARY ---------- */
+var H=[
+ {t:"The Callout",why:"Names the exact person in the first second — they stop because it's about them.",
+  ex:["<b>\"If you're building in Accra and your quote isn't itemised — watch this.\"</b>","<b>\"Diaspora: this is how your building money disappears.\"</b>","<b>\"If your ECG bill is over GHS 400, your ceiling is the problem.\"</b>"],
+  note:"Strongest for paid — it self-selects the right audience in the first frame and cuts wasted spend."},
+ {t:"The Contradiction",why:"Breaks an assumption. The brain can't scroll past an open loop it wants closed.",
+  ex:["<b>\"This is drywall. In Ghana. And it cost less than blockwork.\"</b>","<b>\"Your aircon isn't the problem. Your ceiling is.\"</b>","<b>\"The cheapest quote is the most expensive one you'll get.\"</b>"],
+  note:"Follow immediately with the proof, or it reads as clickbait and burns trust."},
+ {t:"The Number",why:"Specificity signals substance. Vague claims get scrolled; exact ones get watched.",
+  ex:["<b>\"One room. One day. GHS [X].\"</b>","<b>\"30% of your build cost is missing from that quote.\"</b>","<b>\"[X] builders bought cement together this week. Here's what they paid.\"</b>"],
+  note:"Only ever use real numbers. A number you can't defend is worse than no number."},
+ {t:"The Transformation Tease",why:"Shows the destination first, then makes them stay for the journey. The home industry's oldest winner.",
+  ex:["<b>\"Watch this bare shell become a finished room.\"</b>","<b>\"Before you scroll — this was concrete this morning.\"</b>","<b>\"Same room. One working day. Watch.\"</b>"],
+  note:"Open on the AFTER for half a second, then cut to the before. Reversing it kills the hook."},
+ {t:"The Question",why:"Invites a mental answer — and comments. Comments are reach.",
+  ex:["<b>\"Do you know what's actually in your ceiling?\"</b>","<b>\"Rate this Accra ceiling 1–10.\"</b>","<b>\"Guess what this cost. You'll be wrong.\"</b>"],
+  note:"Best organic reach-driver. Reply to every comment in the first hour — that's when the algorithm is watching."},
+ {t:"The Warning",why:"Loss aversion beats gain. People will watch to avoid a mistake they're afraid they're making.",
+  ex:["<b>\"Don't pay that deposit until you've asked this one question.\"</b>","<b>\"Three ways contractors overcharge you — number two is invisible.\"</b>","<b>\"This is why half-built houses litter Accra.\"</b>"],
+  note:"Wima's most potent pattern, because the fear is real and documented. Never manufacture a fear — dramatise a true one."},
+ {t:"The POV / Story",why:"A human situation in one line. People stay for people, not products.",
+  ex:["<b>\"POV: you sent GHS 40,000 home and got excuses.\"</b>","<b>\"She built this from London and never worried once.\"</b>","<b>\"Jamal has done this 4,000 times. Watch his hands.\"</b>"],
+  note:"The bridge between entertainment and trust. This is where Jamal becomes a character people follow."},
+ {t:"The Satisfying Open",why:"No words needed — pure craft. Travels far beyond your target market and buys you reach for free.",
+  ex:["<b>[Board snapping clean on the score line — sound up]</b>","<b>[Joint compound smoothing to glass in one pass]</b>","<b>[Light flicking on under a finished ceiling]</b>"],
+  note:"Zero sell. Pure share-bait. One or two a week keeps the top of the funnel wide open."},
+ {t:"The Insider",why:"Confers status — you're being let in on something. Powerful for community and Deal Hub.",
+  ex:["<b>\"The community got this price yesterday. Here it is.\"</b>","<b>\"What builders who buy together actually pay for cement.\"</b>","<b>\"This is the number your supplier hopes you never see.\"</b>"],
+  note:"The Deal Hub workhorse — it sells the belonging, not the discount. Use it to grow the pool, never to hawk a coupon."}
+];
+var ht=document.getElementById("hooktabs"),hd=document.getElementById("hookdetail");
+ht.innerHTML=H.map(function(h,i){return '<button data-i="'+i+'"'+(i===0?' class="active"':'')+'><span class="hn">'+(i+1<10?'0':'')+(i+1)+'</span><span>'+h.t+'</span></button>';}).join("");
+function rh(i){var h=H[i];
+  hd.innerHTML='<h4>'+h.t+'</h4><div class="why">Why it works · '+h.why+'</div>'+h.ex.map(function(e){return '<div class="ex">'+e+'</div>';}).join("")+'<div class="note">▸ '+h.note+'</div>';
+  ht.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',+b.getAttribute('data-i')===i);});
+}
+ht.querySelectorAll('button').forEach(function(b){var i=+b.getAttribute('data-i');b.addEventListener('click',function(){rh(i);});b.addEventListener('mouseenter',function(){rh(i);});});
+rh(0);
+
+/* ---------- DEAL HUB PHASES ---------- */
+var P=[
+ {tag:"Phase 0 · Weeks 1–2",name:"Warm the ground",goal:"Earn the right to launch · organic only, zero spend",
+  vid:"Educational shorts on <b>why materials prices move</b> and how big contractors get prices small builders can't. No mention of Deal Hub yet — just make the unfairness visible and felt.",
+  paid:"<b>Nothing.</b> Never advertise into a cold page. This phase exists so the launch lands in a warm room instead of an empty one.",
+  com:"Open the WhatsApp Community. Start the <b>Sunday Price Update</b> immediately — pure utility, no ask. Let people join for the value alone and learn the ritual.",
+  met:"Community joins · Sunday update open rate · questions asked. If nobody's asking, the value isn't landing yet — fix that before spending."},
+ {tag:"Phase 1 · Weeks 3–4",name:"Reveal the mechanic",goal:"Sell the idea, not the deal · build the pool list",
+  vid:"The explainer that carries the whole campaign: <b>\"Alone you pay retail. Fifty builders together pay wholesale.\"</b> Animate one small order vs a pooled one. This is the single most important video Wima will make this quarter.",
+  paid:"First small click-to-WhatsApp test behind the <b>best-performing organic explainer only</b>. Two ad sets — local and diaspora. Objective: joins, not sales.",
+  com:"\"Reply DEALS to join the first pool.\" Publish the <b>rules of the collective</b> — vetted suppliers, genuine materials, no spam. Set the standard before the crowd arrives.",
+  met:"Cost per join · pool list size · which hook won. Bank the winning hook — you'll re-run it every cycle from here."},
+ {tag:"Phase 2 · Week 5",name:"Open the pool",goal:"Convert belonging into a transaction",
+  vid:"<b>Live count content:</b> \"[X] builders in — price drops at [Y].\" Short, urgent, updated daily. The rising number IS the creative; social proof does the persuading.",
+  paid:"Scale spend behind the proven hooks and <b>retarget everyone who watched 50%+ or messaged and went quiet</b>. Countdown creative in the final 48 hours. Watch cost-per-message-started hourly.",
+  com:"<b>Community gets the pool first — always.</b> Publish the running count, name who's in (with consent), and answer every question inside the hour. Insiders before the public feed.",
+  met:"Pool participation rate · cost per message started · conversion from list to order. This is the number the whole campaign is judged on."},
+ {tag:"Phase 3 · Week 6+",name:"Deliver &amp; prove",goal:"Turn one pool into a permanent habit",
+  vid:"Delivery day footage, and the <b>receipt</b>: what members paid vs retail. Then the member's own voice note — <b>\"I've never paid that price for cement in my life.\"</b> Real, transcribed, in their words.",
+  paid:"Retarget non-joiners with the proof (<b>\"[X] builders saved [Y]% last week — the next pool opens Monday\"</b>). Proof-based ads outperform promise-based ads every time.",
+  com:"Announce the next pool <b>before the excitement fades</b>. Recognise the members who joined first. Ask for the referral now — while they're feeling the win.",
+  met:"Verified savings delivered · testimonials captured · <b>repeat participation</b> — the only metric that proves this is a community and not a coupon."}
+];
+var pt=document.getElementById("phtabs"),pd=document.getElementById("phdetail");
+pt.innerHTML=P.map(function(p,i){return '<button data-i="'+i+'"'+(i===0?' class="active"':'')+'><div class="pt">'+p.tag+'</div><div class="pl">'+p.name+'</div></button>';}).join("");
+function rp(i){var p=P[i];
+  pd.innerHTML='<h4>'+p.name+'</h4><div class="goal">Goal · '+p.goal+'</div>'+
+   '<div class="prow"><div class="pk v">◆ Short video</div><div class="pv">'+p.vid+'</div></div>'+
+   '<div class="prow"><div class="pk p">◆ Paid</div><div class="pv">'+p.paid+'</div></div>'+
+   '<div class="prow"><div class="pk c">◆ Community</div><div class="pv">'+p.com+'</div></div>'+
+   '<div class="prow"><div class="pk m">◆ What we measure</div><div class="pv">'+p.met+'</div></div>';
+  pt.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',+b.getAttribute('data-i')===i);});
+}
+pt.querySelectorAll('button').forEach(function(b){var i=+b.getAttribute('data-i');b.addEventListener('click',function(){rp(i);});b.addEventListener('mouseenter',function(){rp(i);});});
+rp(0);
+
+/* ---------- SUBNAV ---------- */
+var links=document.querySelectorAll('.subnav a');
+var secs=document.querySelectorAll('.sec[id]');
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id);});}});},{rootMargin:'-15% 0px -75% 0px'});
+  secs.forEach(function(s){io.observe(s);});
+}
+})();
+</script>
+</body>
+</html>
