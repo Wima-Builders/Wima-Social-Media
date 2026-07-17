@@ -60,6 +60,40 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15p
 .plat.li .plat-lbl{color:var(--li);}.plat.li .plat-lbl::before{background:var(--li);}
 .plat-body{font-size:13.5px;color:var(--ink2);line-height:1.65;white-space:pre-line;}
 .plat-body strong{color:var(--ink);}
+/* --- interactive filters --- */
+.hero-eye{flex-wrap:wrap;gap:6px;}
+.chip{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.09em;border:1px solid var(--rule);background:white;color:var(--slate);padding:4px 10px;border-radius:100px;cursor:pointer;transition:all .12s;font-weight:600;}
+.chip:hover{border-color:var(--amber);color:var(--amber2);}
+.chip.on{background:var(--ink);color:white;border-color:var(--ink);}
+.chip.static{border:none;background:none;cursor:default;color:var(--faint);padding:4px 2px;}
+.chip.static:hover{color:var(--faint);}
+.chip.wa.on{background:var(--wa);border-color:var(--wa);}
+.chip.fb.on{background:var(--fb);border-color:var(--fb);}
+.chip.vid.on{background:var(--vid);border-color:var(--vid);}
+.chip.li.on{background:var(--li);border-color:var(--li);}
+.filterbar{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:12px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:8px;margin-bottom:18px;}
+.fb-grp{display:flex;gap:4px;align-items:center;flex-wrap:wrap;}
+.fb-lbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);margin-right:2px;}
+.fb-count{margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+.stream{display:flex;flex-direction:column;gap:10px;}
+.si{border:1px solid var(--rule);border-radius:10px;background:white;overflow:hidden;border-left:4px solid var(--amber);}
+.si.wa{border-left-color:var(--wa);}.si.fb{border-left-color:var(--fb);}
+.si.vid{border-left-color:var(--vid);}.si.li{border-left-color:var(--li);}
+.si-head{padding:9px 14px;background:var(--surface);border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.si-day{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink);}
+.si-mo{font-family:var(--mono);font-size:8px;color:var(--faint);text-transform:uppercase;letter-spacing:.08em;}
+.si-copy{margin-left:auto;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.08em;border:1px solid var(--rule);background:white;color:var(--muted);padding:3px 9px;border-radius:3px;cursor:pointer;transition:all .12s;}
+.si-copy:hover{border-color:var(--amber);color:var(--amber2);}
+.si-copy.done{background:var(--proof,#15803D);color:white;border-color:var(--proof,#15803D);}
+.si-body{padding:12px 16px;font-size:13.5px;color:var(--ink2);line-height:1.65;white-space:pre-line;}
+.paingrp{margin-bottom:22px;}
+.paingrp-h{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:3px;display:flex;align-items:center;gap:8px;}
+.paingrp-c{font-family:var(--mono);font-size:8px;background:#FEF2F2;color:#B91C1C;padding:2px 7px;border-radius:2px;letter-spacing:.06em;}
+.paingrp-d{font-size:12px;color:var(--muted);margin-bottom:8px;font-style:italic;}
+.paindays{display:flex;gap:4px;flex-wrap:wrap;}
+.painday{font-family:var(--mono);font-size:10px;font-weight:600;border:1px solid var(--rule);background:white;color:var(--slate);padding:4px 9px;border-radius:4px;cursor:pointer;transition:all .12s;}
+.painday:hover{background:var(--ink);color:white;border-color:var(--ink);}
+.hidden{display:none !important;}
 .ibox{padding:14px 18px;margin-top:28px;border-left:3px solid var(--amber);background:var(--amber-lt);font-size:13px;line-height:1.6;color:#5A3800;}
 .ibox-lbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.14em;display:block;margin-bottom:4px;opacity:.65;}
 .footer{background:var(--ink);color:rgba(255,255,255,.24);padding:18px 48px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.07em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
@@ -102,22 +136,45 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15p
 </nav>
 
 <div class="hero">
-  <div class="hero-eye">The Content Library · 60 days · 4 platform versions each · WhatsApp · Facebook · Video · LinkedIn · Pain-targeted</div>
+  <div class="hero-eye">
+    <span class="chip static">The Content Library</span>
+    <span class="chip static">· 60 days ·</span>
+    <button class="chip jump" data-p="all">4 platform versions each</button>
+    <button class="chip wa jump" data-p="wa">WhatsApp</button>
+    <button class="chip fb jump" data-p="fb">Facebook</button>
+    <button class="chip vid jump" data-p="vid">Video</button>
+    <button class="chip li jump" data-p="li">LinkedIn</button>
+    <button class="chip jump" data-p="pain">Pain-targeted</button>
+  </div>
   <h1>The Content Library —<br><em>60 days, four ways to say each one.</em></h1>
-  <p class="hero-sub">The same daily message, written native for four channels: a WhatsApp version (convert), a Facebook version (community), a Video script (discovery), and a LinkedIn version (B2B — suppliers &amp; banks). Month 1 launches Dry Wall with Jamal; Month 2 scales into Deal Hub and the diaspora. Pick a day — every version is tagged with its pillar and the documented client fear it answers.</p>
+  <p class="hero-sub">The same daily message, written native for four channels: a WhatsApp version (convert), a Facebook version (community), a Video script (discovery), and a LinkedIn version (B2B — suppliers &amp; banks). Month 1 launches Dry Wall with Jamal; Month 2 scales into Deal Hub and the diaspora. <strong>Everything above is a filter</strong> — tap <strong>Facebook</strong> to pull every Facebook post in one stream, tap a day for all four versions, or tap <strong>Pain-targeted</strong> to see which content answers which client fear.</p>
 </div>
 
 <div class="wrap" id="m1">
   <div class="monthtabs" id="monthtabs">
     <button data-m="1" class="active">Month 1 · Drywall Launch</button>
     <button data-m="2">Month 2 · Deal Hub &amp; Scale</button>
+    <button data-m="0">All 60 Days</button>
   </div>
   <div class="month-arc" id="montharc"></div>
-  <div class="grid">
+  <div class="filterbar" id="filterbar">
+    <div class="fb-grp">
+      <span class="fb-lbl">Show</span>
+      <button class="chip on" data-p="all">All 4 platforms</button>
+      <button class="chip wa" data-p="wa">WhatsApp</button>
+      <button class="chip fb" data-p="fb">Facebook</button>
+      <button class="chip vid" data-p="vid">Video</button>
+      <button class="chip li" data-p="li">LinkedIn</button>
+      <button class="chip" data-p="pain">By client pain</button>
+    </div>
+    <span class="fb-count" id="fbcount"></span>
+  </div>
+  <div class="grid" id="dayview">
     <div class="daylist" id="daylist"></div>
     <div class="detail" id="detail" aria-live="polite"></div>
   </div>
-  <div class="ibox"><span class="ibox-lbl">How to run it</span>Post the WhatsApp + Facebook versions daily, the Video 4–5×/week, and the LinkedIn version 2–3×/week (founder-led, from Gershon). Batch-film a week ahead. Keep the 3:1 value-to-offer ratio. Each Sunday, rank by <strong>shares and WhatsApp messages started</strong> — not views — and let winners shape the next week. Swap [number], [area], and prices for your real figures before posting.</div>
+  <div class="stream hidden" id="streamview" aria-live="polite"></div>
+  <div class="ibox"><span class="ibox-lbl">How to use the filters</span><strong>All 4 platforms</strong> — pick a day, get every version of that day's message. <strong>WhatsApp / Facebook / Video / LinkedIn</strong> — pull every post for one channel in a single stream, each with a <strong>Copy</strong> button, so you can load a whole month into one platform in a sitting. <strong>By client pain</strong> — see which days answer which documented fear (hidden costs, betrayal from abroad, "who's on my site?"), then click through to that day. <strong>All 60 Days</strong> widens any view across both months.<br><br><span class="ibox-lbl" style="margin-top:8px;">How to run it</span>At your real pace: one shoot a week on a live job, <strong>2–3 clips out</strong>, WhatsApp + Facebook steadily, LinkedIn when Gershon has something to say. Keep the 3:1 value-to-offer ratio. Each Sunday, rank by <strong>shares and WhatsApp messages started</strong> — not views. Swap [number], [area], and every price for your real figures before posting.</div>
 </div>
 
 <div class="footer">
@@ -130,6 +187,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15p
 "use strict";
 var DOT={Educate:'#1D4ED8',Inspire:'#0F766E',People:'#7C3AED',Entertain:'#DC2626',Proof:'#15803D',Offer:'#C47A0A'};
 var ARC={
+ 0:"All 60 days — the full arc: Month 1 earns trust and launches Dry Wall with Jamal; Month 2 opens Deal Hub, scales the Cool-Ceiling System, cladding and insulation, deepens the diaspora, and closes by teasing Kabinart.",
  1:"Month 1 — earn trust, then launch Dry Wall with Jamal. Weeks 1–2 establish Wima as the honest guide; week 3 brings in the diaspora; week 4 launches with the community already warm.",
  2:"Month 2 — the community is warm, so now monetise and broaden. Activate Deal Hub group-buys, deepen the diaspora relationship, widen into ceilings, insulation &amp; the Cool-Ceiling System, and tease Kabinart for Month 3."
 };
@@ -232,12 +290,27 @@ var M2=[
 {d:60,p:"People",pain:"Anticipation / next launch",wa:"Coming next: *Kabinart* 🍳 The same honest, one-partner approach — now for kitchens. Custom, fitted, fair-priced, no wahala. Want early access? Reply \"KITCHEN\" 👇",fb:"Here's what's coming next: Kabinart 🍳\nThe same Wima promise — honest pricing, real craftsmen, done properly — now for kitchens. Custom, fitted, fair-priced, no wahala.\nThe community gets first access (of course). Reply \"KITCHEN\" to be on the early list 👇\nDrywall built the trust. Now we build the home, room by room.",vid:"HOOK: \"You trusted us with your walls. Now, your kitchen.\"\nBEAT: tease Kabinart — sleek fitted kitchen reveal.\nCTA: \"Reply KITCHEN for early access.\"",li:"Sequencing the ecosystem — drywall, then kitchens (Kabinart), then more — lets each launch ride the trust of the last. The community you build on product one is the launch audience for product two. That's the whole compounding thesis. #Strategy #WimaBuilders"}
 ];
 var DATA={1:M1,2:M2};
-var cur=1;
+var ALL=M1.concat(M2);
+var PLATLBL={wa:"WhatsApp — the convert version",fb:"Facebook — the community version",vid:"Video script — TikTok / Reel / Shorts",li:"LinkedIn — founder-led, B2B"};
+var PLATSHORT={wa:"WhatsApp",fb:"Facebook",vid:"Video script",li:"LinkedIn"};
+var cur=1;          // 1 = month 1, 2 = month 2, 0 = all 60
+var plat="all";     // all | wa | fb | vid | li | pain
+
 var daylist=document.getElementById("daylist");
 var detail=document.getElementById("detail");
 var montharc=document.getElementById("montharc");
-function renderDay(m,idx){
-  var day=DATA[m][idx];
+var dayview=document.getElementById("dayview");
+var streamview=document.getElementById("streamview");
+var fbcount=document.getElementById("fbcount");
+
+function scope(){ return cur===0 ? ALL : DATA[cur]; }
+function monthOf(d){ return d.d<=30 ? "Month 1" : "Month 2"; }
+function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+/* ---------- day view (all 4 platforms) ---------- */
+function renderDay(idx){
+  var arr=scope(), day=arr[idx];
+  if(!day) return;
   detail.innerHTML=
     '<div class="detail-head"><div class="detail-day">Day '+day.d+'</div><div class="detail-tags"><span class="dt pillar">'+day.p+'</span><span class="dt pain">Pain: '+day.pain+'</span></div></div>'+
     '<div class="plat wa"><div class="plat-lbl">WhatsApp</div><div class="plat-body">'+day.wa+'</div></div>'+
@@ -246,18 +319,115 @@ function renderDay(m,idx){
     '<div class="plat li"><div class="plat-lbl">LinkedIn (founder-led, B2B)</div><div class="plat-body">'+day.li+'</div></div>';
   daylist.querySelectorAll('.daybtn').forEach(function(b,i){b.classList.toggle('active',i===idx);});
 }
-function renderMonth(m){
-  cur=m;
-  montharc.innerHTML=ARC[m];
-  daylist.innerHTML=DATA[m].map(function(day,i){
+function buildDayList(){
+  var arr=scope();
+  daylist.innerHTML=arr.map(function(day,i){
     return '<button class="daybtn'+(i===0?' active':'')+'" data-i="'+i+'" style="--dot:'+DOT[day.p]+'">'+day.d+'</button>';
   }).join("");
-  daylist.querySelectorAll('.daybtn').forEach(function(b){b.addEventListener('click',function(){renderDay(m,+b.getAttribute('data-i'));window.scrollTo({top:document.querySelector('.monthtabs').offsetTop-70,behavior:'smooth'});});});
-  document.querySelectorAll('#monthtabs button').forEach(function(b){b.classList.toggle('active',+b.getAttribute('data-m')===m);});
-  renderDay(m,0);
+  daylist.querySelectorAll('.daybtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      renderDay(+b.getAttribute('data-i'));
+      window.scrollTo({top:document.getElementById('monthtabs').offsetTop-70,behavior:'smooth'});
+    });
+  });
+  renderDay(0);
 }
-document.querySelectorAll('#monthtabs button').forEach(function(b){b.addEventListener('click',function(){renderMonth(+b.getAttribute('data-m'));});});
-renderMonth(1);
+
+/* ---------- stream view (one platform, every day) ---------- */
+function renderStream(){
+  var arr=scope();
+  streamview.innerHTML=arr.map(function(day){
+    return '<div class="si '+plat+'">'+
+      '<div class="si-head">'+
+        '<span class="si-day">Day '+day.d+'</span>'+
+        '<span class="si-mo">'+monthOf(day)+'</span>'+
+        '<span class="dt pillar">'+day.p+'</span>'+
+        '<span class="dt pain">'+day.pain+'</span>'+
+        '<button class="si-copy" data-copy="'+esc(day[plat]).replace(/"/g,'&quot;')+'">Copy</button>'+
+      '</div>'+
+      '<div class="si-body">'+day[plat]+'</div>'+
+    '</div>';
+  }).join("");
+  streamview.querySelectorAll('.si-copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var txt=b.getAttribute('data-copy');
+      var done=function(){b.textContent="Copied ✓";b.classList.add('done');setTimeout(function(){b.textContent="Copy";b.classList.remove('done');},1400);};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(function(){});}
+      else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){}document.body.removeChild(ta);}
+    });
+  });
+}
+
+/* ---------- pain view (grouped by client fear) ---------- */
+function renderPain(){
+  var arr=scope(), groups={}, order=[];
+  arr.forEach(function(day){
+    var k=day.pain;
+    if(!groups[k]){groups[k]=[];order.push(k);}
+    groups[k].push(day);
+  });
+  order.sort(function(a,b){return groups[b].length-groups[a].length;});
+  streamview.innerHTML=order.map(function(k){
+    var days=groups[k];
+    return '<div class="paingrp">'+
+      '<div class="paingrp-h">'+k+' <span class="paingrp-c">'+days.length+' day'+(days.length>1?'s':'')+'</span></div>'+
+      '<div class="paingrp-d">Answered by these days — click any to open all four platform versions.</div>'+
+      '<div class="paindays">'+days.map(function(d){
+        return '<button class="painday" data-d="'+d.d+'" style="border-left:3px solid '+DOT[d.p]+'">Day '+d.d+' · '+d.p+'</button>';
+      }).join("")+'</div>'+
+    '</div>';
+  }).join("");
+  streamview.querySelectorAll('.painday').forEach(function(b){
+    b.addEventListener('click',function(){
+      var dn=+b.getAttribute('data-d');
+      setPlat('all');
+      var arr2=scope(), idx=-1;
+      arr2.forEach(function(x,i){if(x.d===dn) idx=i;});
+      if(idx===-1){ setMonth(dn<=30?1:2); arr2=scope(); arr2.forEach(function(x,i){if(x.d===dn) idx=i;}); }
+      if(idx>-1) renderDay(idx);
+      window.scrollTo({top:document.getElementById('monthtabs').offsetTop-70,behavior:'smooth'});
+    });
+  });
+}
+
+/* ---------- controller ---------- */
+function paint(){
+  var arr=scope(), n=arr.length;
+  document.querySelectorAll('#filterbar .chip').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-p')===plat);});
+  document.querySelectorAll('.hero-eye .chip.jump').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-p')===plat);});
+  document.querySelectorAll('#monthtabs button').forEach(function(b){b.classList.toggle('active',+b.getAttribute('data-m')===cur);});
+  montharc.innerHTML=ARC[cur]||ARC[0];
+  if(plat==="all"){
+    dayview.classList.remove('hidden'); streamview.classList.add('hidden');
+    fbcount.textContent=n+" days · pick one for all 4 versions";
+    buildDayList();
+  } else if(plat==="pain"){
+    dayview.classList.add('hidden'); streamview.classList.remove('hidden');
+    var pains={}; arr.forEach(function(d){pains[d.pain]=1;});
+    fbcount.textContent=Object.keys(pains).length+" client fears across "+n+" days";
+    renderPain();
+  } else {
+    dayview.classList.add('hidden'); streamview.classList.remove('hidden');
+    fbcount.textContent=n+" "+PLATSHORT[plat]+" posts — every one, ready to copy";
+    renderStream();
+  }
+}
+function setPlat(p){ plat=p; paint(); }
+function setMonth(m){ cur=m; paint(); }
+
+document.querySelectorAll('#monthtabs button').forEach(function(b){
+  b.addEventListener('click',function(){ setMonth(+b.getAttribute('data-m')); });
+});
+document.querySelectorAll('#filterbar .chip').forEach(function(b){
+  b.addEventListener('click',function(){ setPlat(b.getAttribute('data-p')); });
+});
+document.querySelectorAll('.hero-eye .chip.jump').forEach(function(b){
+  b.addEventListener('click',function(){
+    setPlat(b.getAttribute('data-p'));
+    window.scrollTo({top:document.getElementById('monthtabs').offsetTop-70,behavior:'smooth'});
+  });
+});
+paint();
 })();
 </script>
 </body>
