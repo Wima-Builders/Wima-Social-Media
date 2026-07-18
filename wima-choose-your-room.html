@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — Choose Your Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&amp;family=DM+Sans:wght@0,300;0,400;0,500;0,600;0,700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--surface:#F4F1EA;--panel:#ECEAE0;--rule:#D8D3C4;
+  --ink:#1C1917;--ink2:#3C3830;--slate:#44403C;--muted:#78716C;--faint:#A8A29E;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;
+  --ceil:#1D4ED8;--dry:#0F766E;--pop:#7C3AED;--ins:#C47A0A;--clad:#B45309;--cool:#0891B2;
+  --wa:#25D366;--wa2:#128C7E;--go:#15803D;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.62;}
+a{color:inherit;}button{font-family:inherit;}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px;}
+.wb-topbar{position:sticky;top:0;z-index:900;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;font-family:var(--mono);}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;white-space:nowrap;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 12px;}
+.wb-topbar-links{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;border:1px solid transparent;transition:all .12s;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;border-color:rgba(196,122,10,.7);background:rgba(196,122,10,.22);}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.5);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;}
+
+.hero{padding:60px 40px 40px;border-bottom:2px solid var(--ink);background:radial-gradient(800px 360px at 88% -20%,rgba(196,122,10,.13),transparent 62%),var(--bg);text-align:center;}
+.hero-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--faint);margin-bottom:18px;}
+.hero h1{font-family:var(--serif);font-size:clamp(32px,5vw,54px);font-weight:900;line-height:1.03;letter-spacing:-.02em;margin-bottom:16px;}
+.hero h1 em{font-style:italic;color:var(--amber);}
+.hero-sub{font-size:16px;font-weight:300;color:var(--slate);max-width:560px;margin:0 auto;line-height:1.7;}
+.wrap{max-width:940px;margin:0 auto;padding:36px 40px 60px;}
+
+.step-lbl{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:var(--amber2);margin-bottom:14px;text-align:center;}
+.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px;}
+.room{background:white;border:1px solid var(--rule);border-radius:12px;padding:22px 16px;text-align:center;cursor:pointer;transition:all .15s;}
+.room:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(28,25,23,.1);border-color:var(--amber);}
+.room.on{background:var(--ink);border-color:var(--ink);}
+.room .ico{font-size:30px;display:block;margin-bottom:8px;}
+.room .rn{font-family:var(--serif);font-size:17px;font-weight:700;}
+.room.on .rn{color:white;}
+.room .rt{font-size:11px;color:var(--muted);margin-top:2px;}
+.room.on .rt{color:rgba(255,255,255,.5);}
+.room.feat{border-top:4px solid var(--amber);}
+
+.result{margin-top:28px;}
+.result-head{text-align:center;margin-bottom:20px;}
+.result-head .rh-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);margin-bottom:6px;}
+.result-head h2{font-family:var(--serif);font-size:28px;font-weight:800;line-height:1.1;}
+.result-head h2 em{font-style:italic;color:var(--amber);}
+.result-head p{font-size:13.5px;color:var(--slate);max-width:560px;margin:6px auto 0;line-height:1.6;}
+
+.matches{display:flex;flex-direction:column;gap:10px;}
+.match{background:white;border:1px solid var(--rule);border-radius:12px;padding:18px 20px;border-left:5px solid var(--ceil);display:flex;gap:16px;align-items:flex-start;animation:rise .35s ease both;}
+@keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.match .mrank{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:white;background:var(--amber);padding:3px 8px;border-radius:100px;flex:none;margin-top:3px;}
+.match .mrank.top{background:var(--go);}
+.match .mbody{flex:1;}
+.match h3{font-family:var(--serif);font-size:19px;font-weight:700;margin-bottom:3px;}
+.match .mcat{font-family:var(--mono);font-size:8.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px;}
+.match .madv{font-size:13.5px;color:var(--ink2);line-height:1.6;}
+.match .madv b{color:var(--ink);}
+.match .price{font-family:var(--mono);font-size:11px;color:var(--amber2);margin-top:7px;font-weight:600;}
+.match.c-ceil{border-left-color:var(--ceil);}
+.match.c-dry{border-left-color:var(--dry);}
+.match.c-pop{border-left-color:var(--pop);}
+.match.c-ins{border-left-color:var(--ins);}
+.match.c-clad{border-left-color:var(--clad);}
+.match.c-cool{border-left-color:var(--cool);}
+
+.cta{margin-top:24px;background:var(--ink);border-radius:14px;padding:26px 28px;text-align:center;}
+.cta h3{font-family:var(--serif);font-size:22px;font-weight:700;color:white;margin-bottom:6px;}
+.cta p{font-size:13.5px;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto 16px;line-height:1.6;}
+.cta .wa-btn{display:inline-flex;align-items:center;gap:9px;background:var(--wa);color:white;font-size:15px;font-weight:700;padding:14px 30px;border-radius:100px;text-decoration:none;transition:background .14s;}
+.cta .wa-btn:hover{background:var(--wa2);}
+.cta .fineprint{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.32);margin-top:12px;text-transform:uppercase;letter-spacing:.08em;}
+
+.allcats{margin-top:26px;padding-top:24px;border-top:1px solid var(--rule);}
+.allcats-h{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);text-align:center;margin-bottom:14px;}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.catchip{font-family:var(--mono);font-size:10px;font-weight:600;border:1px solid var(--rule);background:white;padding:6px 12px;border-radius:100px;color:var(--slate);}
+.catchip .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+
+.ibox{padding:14px 18px;border-left:3px solid var(--amber);background:var(--amber-lt);font-size:12.5px;line-height:1.6;color:#5A3800;margin-top:24px;border-radius:0 6px 6px 0;}
+.ibox-lbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.13em;display:block;margin-bottom:4px;opacity:.7;}
+.hint{text-align:center;font-size:13px;color:var(--muted);font-style:italic;margin-top:20px;}
+
+.footer{background:var(--ink);color:rgba(255,255,255,.26);padding:20px 40px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.07em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.footer-brand{font-family:var(--serif);font-size:14px;color:var(--amber);text-transform:none;letter-spacing:0;font-style:italic;}
+@media(max-width:720px){
+  .rooms{grid-template-columns:1fr 1fr;}
+  .hero,.wrap{padding-left:20px;padding-right:20px;}
+  .footer{padding:16px 20px;flex-direction:column;}
+  .wb-topbar{padding:0 12px;}.wb-topbar-name{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+    <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+    <a href="wima-content-hub.html">Content Hub<span class="wb-badge">Start</span></a>
+    <a href="wima-60-day-content-engine.html">Content Library</a>
+    <a href="wima-choose-your-room.html" class="wb-active">Choose Your Room<span class="wb-badge">New</span></a>
+    <a href="wima-signature-franchises.html">Franchises</a>
+    <a href="wima-content-library.html">Wider Channels</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eye">The Wima Room Matcher · Supply &amp; install · All 5 categories</div>
+  <h1>What's the <em>best fit</em><br>for your room?</h1>
+  <p class="hero-sub">Wima supplies and installs all five — so wherever you're building, we help you pick what shines in that space. Tap your room and see what works best, and why.</p>
+</div>
+
+<div class="wrap">
+  <div class="step-lbl">Step 1 — Tap your room</div>
+  <div class="rooms" id="rooms"></div>
+  <div class="hint" id="hint">👆 Choose a room to see the best-fit categories</div>
+  <div class="result" id="result" style="display:none;"></div>
+
+  <div class="allcats">
+    <div class="allcats-h">Everything Wima supplies &amp; installs</div>
+    <div class="chips">
+      <span class="catchip"><span class="dot" style="background:var(--ceil)"></span>Acoustic Ceilings</span>
+      <span class="catchip"><span class="dot" style="background:var(--dry)"></span>Drywall &amp; Partitions</span>
+      <span class="catchip"><span class="dot" style="background:var(--pop)"></span>POP Ceilings &amp; Cornices</span>
+      <span class="catchip"><span class="dot" style="background:var(--ins)"></span>Insulation</span>
+      <span class="catchip"><span class="dot" style="background:var(--clad)"></span>Exterior Cladding</span>
+      <span class="catchip"><span class="dot" style="background:var(--cool)"></span>Cool-Ceiling System</span>
+    </div>
+  </div>
+
+  <div class="ibox"><span class="ibox-lbl">One partner, the whole home</span>Most homes mix categories — an acoustic ceiling in the bedroom, POP cornices in the living room, insulation over the whole roof. Because Wima supplies and installs all five, you get <b>one itemised BOQ, one team, one point of contact</b> for the entire project. Prices shown are indicative — your free BOQ gives the exact figure for your space.</div>
+</div>
+
+<div class="footer">
+  <span class="footer-brand">Wima — Choose Your Room</span>
+  <span>Supply &amp; install · 5 categories · Free BOQ in 24 hours · Part of the Content Hub</span>
+  <span>Indicative prices — verify with your own BOQ before quoting</span>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// category master
+var CAT={
+  ceil:{name:"Acoustic Ceiling",cls:"c-ceil",price:"from GHS 85/m²"},
+  dry:{name:"Drywall &amp; Partition",cls:"c-dry",price:"from GHS 85/m²"},
+  pop:{name:"POP Ceilings &amp; Cornices",cls:"c-pop",price:"from GHS 45/m²"},
+  ins:{name:"Insulation",cls:"c-ins",price:"from GHS 95/m²"},
+  clad:{name:"Exterior Cladding",cls:"c-clad",price:"from GHS 120/m²"},
+  cool:{name:"Cool-Ceiling System",cls:"c-cool",price:"measured temp-drop"}
+};
+
+// rooms with best-fit matches (positive framing, each is a strength match)
+var ROOMS=[
+ {id:"living",ico:"🛋️",name:"Living Room",tag:"Where guests judge",feat:true,
+  intro:"The room everyone sees first — so it rewards a finish with character, comfort and calm.",
+  picks:[
+   {c:"pop",adv:"<b>The showpiece finish.</b> Seamless plaster ceilings with decorative cornices and coving give a living room that premium, custom look Ghanaian homeowners ask for by name — the detail that makes guests stop and look up."},
+   {c:"ceil",adv:"<b>Calm, quiet, refined.</b> An acoustic ceiling softens the echo of a big open living space and hides conduit and wiring cleanly — and any tile lifts out for easy access later."},
+   {c:"cool",adv:"<b>Comfortable all afternoon.</b> The living room takes the most sun and the most bodies — the Cool-Ceiling System keeps it noticeably cooler and eases the load on your aircon and your ECG bill."},
+   {c:"dry",adv:"<b>Shape the space.</b> A drywall feature wall or partition lets you define a lounge, a dining nook or a media zone — fast, clean, and easy to wire for lighting and TV."}
+  ]},
+ {id:"bedroom",ico:"🛏️",name:"Bedroom",tag:"Where you rest",feat:true,
+  intro:"The room that has to be quiet, cool and restful — comfort matters more than show here.",
+  picks:[
+   {c:"cool",adv:"<b>Better sleep, lower bill.</b> A bedroom you can actually sleep in without the aircon running all night — the Cool-Ceiling System delivers a guaranteed, measured temperature drop right where it matters most."},
+   {c:"ceil",adv:"<b>Peace and quiet.</b> An acoustic ceiling absorbs the noise a hard concrete slab reflects — traffic, generators, rain, the room above — for a genuinely calmer bedroom."},
+   {c:"pop",adv:"<b>A soft, finished feel.</b> POP ceilings and gentle cornices give the bedroom a clean, warm, complete look — and pair beautifully with recessed and mood lighting."},
+   {c:"ins",adv:"<b>Cool through the night.</b> Roof insulation stops the day's heat radiating down into the bedroom after dark — the reason so many Accra bedrooms stay warm long after sunset."}
+  ]},
+ {id:"kitchen",ico:"🍳",name:"Kitchen",tag:"Heat &amp; moisture",
+  intro:"A working room with heat, steam and grease — it rewards surfaces that stay clean and cope with moisture.",
+  picks:[
+   {c:"dry",adv:"<b>Practical and adaptable.</b> Moisture-resistant drywall partitions and ceilings handle a busy kitchen well and make it easy to run and access piping, extraction and wiring."},
+   {c:"ceil",adv:"<b>Wipe-clean and serviceable.</b> A grid ceiling gives quick access to the services above a kitchen and keeps the finish neat over cabinetry."},
+   {c:"pop",adv:"<b>A crisp, finished edge.</b> POP cornices tie the kitchen ceiling into the rest of the home's look for a seamless, high-end feel."},
+   {c:"ins",adv:"<b>Takes the edge off the heat.</b> Insulation above a kitchen helps manage the extra heat a cooking space generates through the day."}
+  ]},
+ {id:"bathroom",ico:"🚿",name:"Bathroom",tag:"Wet &amp; humid",
+  intro:"Constant moisture and humidity — this room rewards materials that shrug off damp.",
+  picks:[
+   {c:"dry",adv:"<b>Built for damp.</b> Moisture-resistant board is made for wet zones — a clean, durable ceiling and partition solution that stands up to bathroom humidity."},
+   {c:"clad",adv:"<b>Protected surfaces.</b> Cement board and cladding give bathrooms a tough, water-tolerant finish that lasts."},
+   {c:"ceil",adv:"<b>Access when you need it.</b> A grid ceiling lets you reach concealed plumbing above the bathroom without tearing anything down."},
+   {c:"pop",adv:"<b>A neat finishing touch.</b> In the dry areas of a larger bathroom, POP detailing adds a clean, considered finish."}
+  ]},
+ {id:"office",ico:"💼",name:"Office / Study",tag:"Focus &amp; calls",
+  intro:"A space for concentration and calls — it rewards quiet and flexibility.",
+  picks:[
+   {c:"ceil",adv:"<b>Quiet enough to think.</b> Acoustic ceilings cut echo and outside noise — essential for calls, focus and a professional feel."},
+   {c:"dry",adv:"<b>A private room, fast.</b> Drywall partitions turn open space into a proper office or study in a day — with sockets and data ports built into the wall."},
+   {c:"cool",adv:"<b>Comfortable through the workday.</b> The Cool-Ceiling System keeps a home office cool without the aircon fighting the roof all afternoon."},
+   {c:"pop",adv:"<b>A polished, credible finish.</b> POP ceilings give a home office the clean, finished look that matters when clients see it on a call."}
+  ]},
+ {id:"exterior",ico:"🏠",name:"Whole House / Exterior",tag:"Roof &amp; facade",
+  intro:"The building envelope — the roof and outer walls that decide how the whole home looks and feels.",
+  picks:[
+   {c:"ins",adv:"<b>The single biggest comfort upgrade.</b> Roof and wall insulation cuts the heat entering the whole home and can meaningfully lower your ECG bill — the change you feel in every room."},
+   {c:"clad",adv:"<b>The face of your home.</b> Exterior cladding transforms the facade, protects the structure from weather, and lifts the whole property's presence and value."},
+   {c:"cool",adv:"<b>Whole-home cooling.</b> Rolled out across the ceilings, the Cool-Ceiling System brings a measured temperature drop to the entire house."}
+  ]}
+];
+
+var roomsEl=document.getElementById("rooms");
+var resultEl=document.getElementById("result");
+var hintEl=document.getElementById("hint");
+
+roomsEl.innerHTML=ROOMS.map(function(r){
+  return '<button class="room'+(r.feat?' feat':'')+'" data-id="'+r.id+'">'+
+    '<span class="ico">'+r.ico+'</span>'+
+    '<span class="rn">'+r.name+'</span>'+
+    '<span class="rt">'+r.tag+'</span></button>';
+}).join("");
+
+function render(r){
+  var picks=r.picks.map(function(p,i){
+    var c=CAT[p.c];
+    return '<div class="match '+c.cls+'" style="animation-delay:'+(i*0.06)+'s">'+
+      '<span class="mrank'+(i===0?' top':'')+'">'+(i===0?'Best fit':'Also great')+'</span>'+
+      '<div class="mbody">'+
+        '<h3>'+c.name+'</h3>'+
+        '<div class="mcat">Supplied &amp; installed by Wima · '+c.price+'</div>'+
+        '<div class="madv">'+p.adv+'</div>'+
+      '</div>'+
+    '</div>';
+  }).join("");
+
+  resultEl.innerHTML=
+    '<div class="result-head">'+
+      '<div class="rh-eye">Best fit for your '+r.name.toLowerCase()+'</div>'+
+      '<h2>'+r.ico+' Your <em>'+r.name+'</em></h2>'+
+      '<p>'+r.intro+'</p>'+
+    '</div>'+
+    '<div class="matches">'+picks+'</div>'+
+    '<div class="cta">'+
+      '<h3>Get your free BOQ for this room</h3>'+
+      '<p>Tell us your '+r.name.toLowerCase()+' size and location on WhatsApp. We\'ll send an itemised quote for the option you like — or a combined one — within 24 hours. No site-visit fee.</p>'+
+      '<a class="wa-btn" href="#" onclick="return false;">💬 WhatsApp Wima — free BOQ</a>'+
+      '<div class="fineprint">Replace with your click-to-WhatsApp link before publishing</div>'+
+    '</div>';
+  resultEl.style.display="block";
+  hintEl.style.display="none";
+  roomsEl.querySelectorAll('.room').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-id')===r.id);});
+  resultEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+roomsEl.querySelectorAll('.room').forEach(function(b){
+  b.addEventListener('click',function(){
+    var r=ROOMS.filter(function(x){return x.id===b.getAttribute('data-id');})[0];
+    if(r) render(r);
+  });
+});
+})();
+</script>
+</body>
+</html>
