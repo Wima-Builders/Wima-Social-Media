@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — Cool Before AC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&amp;family=DM+Sans:wght@0,300;0,400;0,500;0,600;0,700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--surface:#F4F1EA;--panel:#ECEAE0;--rule:#D8D3C4;
+  --ink:#1C1917;--ink2:#3C3830;--slate:#44403C;--muted:#78716C;--faint:#A8A29E;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;--cool:#0891B2;--cool-lt:#ECFEFF;--go:#15803D;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;}
+a{color:inherit;}
+.wb-topbar{position:sticky;top:0;z-index:900;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;font-family:var(--mono);}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 12px;}
+.wb-topbar-links{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;background:rgba(196,122,10,.22);}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.5);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;}
+.bar{background:var(--cool);color:white;text-align:center;padding:8px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;}
+.bar button{background:white;color:#0E7490;border:none;font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:3px;cursor:pointer;margin-left:8px;}
+.sheet{max-width:800px;margin:0 auto;padding:44px 48px 40px;background:white;}
+.head{border-bottom:3px solid var(--ink);padding-bottom:18px;margin-bottom:20px;}
+.head .eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:#0E7490;margin-bottom:8px;}
+.head h1{font-family:var(--serif);font-size:37px;font-weight:900;line-height:1.03;letter-spacing:-.02em;margin-bottom:10px;}
+.head h1 em{font-style:italic;color:var(--cool);}
+.head p{font-size:14px;color:var(--slate);max-width:63ch;line-height:1.6;}
+.statbar{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin:22px 0;}
+.stat{background:var(--cool-lt);padding:14px 16px;}
+.stat .n{font-family:var(--serif);font-size:24px;font-weight:800;color:#0E7490;line-height:1;}
+.stat .l{font-size:11px;color:var(--slate);margin-top:5px;line-height:1.4;}
+h2{font-family:var(--serif);font-size:22px;font-weight:700;margin:30px 0 8px;}
+.lead-in{font-size:13.5px;color:var(--slate);margin-bottom:14px;line-height:1.6;font-style:italic;}
+p{margin:0 0 13px;color:var(--ink2);line-height:1.7;}
+p strong{color:var(--ink);}
+.principles{list-style:none;counter-reset:p;margin:8px 0 14px;}
+.principles li{position:relative;padding:14px 0 14px 48px;border-bottom:1px solid var(--panel);}
+.principles li::before{counter-increment:p;content:counter(p);position:absolute;left:0;top:13px;width:32px;height:32px;background:var(--cool);color:white;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:14px;font-weight:600;}
+.principles li b{color:var(--ink);display:block;margin-bottom:3px;font-size:15px;}
+.principles li span{color:var(--slate);font-size:13.5px;line-height:1.6;}
+.bridge{background:var(--cool-lt);border-left:4px solid var(--cool);border-radius:0 8px 8px 0;padding:18px 22px;margin:24px 0;}
+.bridge h3{font-family:var(--serif);font-size:17px;color:#0E7490;margin-bottom:8px;}
+.bridge p{font-size:13.5px;color:#134E4A;line-height:1.65;margin-bottom:0;}
+.bridge b{color:#0E7490;}
+.amberbox{background:var(--amber-lt);border-left:3px solid var(--amber);padding:14px 18px;margin:20px 0;font-size:12.5px;color:#5A3800;line-height:1.6;border-radius:0 6px 6px 0;}
+.amberbox b{color:#3D2500;}
+.cta{background:var(--ink);border-radius:12px;padding:24px 26px;margin-top:30px;text-align:center;}
+.cta h3{font-family:var(--serif);font-size:21px;color:white;margin-bottom:6px;}
+.cta p{font-size:13px;color:rgba(255,255,255,.6);max-width:54ch;margin:0 auto 14px;line-height:1.6;}
+.cta a{display:inline-block;background:var(--cool);color:white;font-weight:700;font-size:14px;padding:12px 26px;border-radius:100px;text-decoration:none;}
+.cta .fp{font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,.3);margin-top:10px;text-transform:uppercase;letter-spacing:.08em;}
+.foot{max-width:800px;margin:0 auto;padding:16px 48px 40px;font-family:var(--mono);font-size:9px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;line-height:1.8;}
+@media print{.wb-topbar,.bar,.cta .fp{display:none;}body{font-size:12px;}.sheet{padding:0;max-width:100%;}.cta,.bridge,.statbar,.amberbox,.principles li::before{-webkit-print-color-adjust:exact;print-color-adjust:exact;}h2{page-break-after:avoid;}.principles li,.bridge{page-break-inside:avoid;}}
+@media(max-width:680px){.sheet{padding:28px 20px 36px;}.foot{padding:16px 20px 36px;}.head h1{font-size:28px;}.statbar{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+    <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+    <a href="wima-resource-hub.html">Resource Hub</a>
+    <a href="wima-cool-before-ac.html" class="wb-active">Cool Before AC<span class="wb-badge">Free</span></a>
+    <a href="wima-choose-your-room.html">Room Matcher</a>
+    <a href="wima-cost-estimator.html">Cost Estimator</a>
+  </div>
+</div>
+<div class="bar">Free Wima resource — how to cool a Ghana home before you reach for the AC <button onclick="window.print()">⎙ Print / Save PDF</button></div>
+
+<div class="sheet">
+  <div class="head">
+    <div class="eye">A Free Wima Resource · Cool Before AC</div>
+    <h1>How old Accra homes stayed cool — <em>without AC</em></h1>
+    <p>Before air-conditioning, Ghana's builders kept homes comfortable with design alone — high ceilings, cross-ventilation, deep eaves, shade. Those ideas still work, and they cost you nothing to run. Here's what they knew, what the research says, and how to bring it into a modern home.</p>
+  </div>
+
+  <div class="statbar">
+    <div class="stat"><div class="n">3–5°C</div><div class="l">indoor temperature drop achievable with passive cooling strategies</div></div>
+    <div class="stat"><div class="n">20–60%</div><div class="l">lower cooling-energy demand — the load your AC and ECG bill carry</div></div>
+    <div class="stat"><div class="n">cross-vent<br>+ shade</div><div class="l">the strategies that perform best in hot-humid climates like Accra</div></div>
+  </div>
+
+  <p>Walk through an old bungalow in Cantonments, Ridge or Adabraka and you'll notice it feels cooler than a brand-new build down the road — even with no air-conditioning running. That isn't nostalgia. It's engineering. Those homes were designed for the climate, in an era when running cost mattered and AC wasn't an option. Modern builds often abandoned those features and bolted on air-conditioning instead — which is a large part of why the ECG bill hurts.</p>
+
+  <h2>What the old builders knew</h2>
+  <div class="lead-in">A 2026 systematic review of passive cooling in tropical climates found that combining these strategies consistently outperforms any single one — and that cross-ventilation and shading lead in hot-humid conditions like Accra's.</div>
+  <ol class="principles">
+    <li><b>High ceilings</b><span>Heat rises. Tall rooms let the hottest air collect well above where people sit and sleep, keeping the living zone cooler. It's why those old rooms feel airy the moment you step in.</span></li>
+    <li><b>Cross-ventilation</b><span>Windows and openings placed on opposite walls let a breeze pass right through the room and carry heat out with it — the single most effective passive strategy in a hot-humid climate. A closed, single-aspect room traps heat; a cross-ventilated one breathes.</span></li>
+    <li><b>Deep eaves &amp; verandas</b><span>Wide roof overhangs and shaded verandas stop direct sun from ever reaching the walls and windows — so the building never absorbs the heat in the first place. Shade is cheaper than cooling.</span></li>
+    <li><b>Elevated floors</b><span>Older homes were often raised off the ground, letting air move underneath and keeping damp and ground heat away from the living space.</span></li>
+    <li><b>Roof &amp; ceiling separation</b><span>A ventilated roof space and a proper ceiling put a buffer of air between the hot roof and the rooms below — the principle a modern insulated or Cool-Ceiling system takes further.</span></li>
+  </ol>
+
+  <div class="amberbox"><b>The honest part:</b> passive design does a lot, but it can't do everything in a modern Accra home — smaller plots, concrete roofs and glass-heavy facades all work against it, and you can't always add verandas or move windows to an existing building. That's where a modern ceiling system picks up where the old design left off.</div>
+
+  <div class="bridge">
+    <h3>Where Wima's Cool-Ceiling System comes in</h3>
+    <p>You can't always re-cut the windows or add a veranda to a house that's already built. But you <b>can</b> fix the biggest single source of heat: the concrete roof slab radiating warmth down into your rooms all afternoon and evening. The <b>Cool-Ceiling System</b> puts an engineered thermal barrier between that hot slab and your living space — carrying the old builders' roof-separation principle into a modern home, with a <b>measured temperature drop</b> you can see, not just feel. Cooler rooms, less AC, a lower ECG bill.</p>
+  </div>
+
+  <div class="cta">
+    <h3>Want your room measured?</h3>
+    <p>WhatsApp Wima your room and roof details. We'll estimate the temperature drop the Cool-Ceiling System can deliver for your space — and send a free, itemised BOQ within 24 hours.</p>
+    <a href="#" onclick="return false;">💬 WhatsApp Wima — free cooling estimate</a>
+    <div class="fp">Replace with your click-to-WhatsApp link before publishing</div>
+  </div>
+</div>
+
+<div class="foot">
+  Wima Builders · Cool Before AC · Part of the Cool Before AC series · Free — share it freely.<br>
+  General guidance, not engineering advice; every building is different. Passive-cooling figures from a 2026 systematic review of tropical passive cooling (lead author, Kumasi Technical University) and related tropical-architecture research; results vary by building, orientation and climate. Verify for your specific project.
+</div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — Room Cost Estimator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&amp;family=DM+Sans:wght@0,300;0,400;0,500;0,600;0,700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--surface:#F4F1EA;--panel:#ECEAE0;--rule:#D8D3C4;
+  --ink:#1C1917;--ink2:#3C3830;--slate:#44403C;--muted:#78716C;--faint:#A8A29E;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;--go:#15803D;
+  --ceil:#1D4ED8;--dry:#0F766E;--pop:#7C3AED;--ins:#C47A0A;--clad:#B45309;--cool:#0891B2;
+  --wa:#25D366;--wa2:#128C7E;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;}
+a{color:inherit;}button,input,select{font-family:inherit;}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:4px;}
+.wb-topbar{position:sticky;top:0;z-index:900;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;font-family:var(--mono);}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 12px;}
+.wb-topbar-links{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;background:rgba(196,122,10,.22);}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.5);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;}
+.hero{padding:52px 40px 34px;border-bottom:2px solid var(--ink);text-align:center;background:radial-gradient(700px 320px at 88% -20%,rgba(196,122,10,.13),transparent 62%),var(--bg);}
+.hero-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--faint);margin-bottom:14px;}
+.hero h1{font-family:var(--serif);font-size:clamp(30px,4.6vw,48px);font-weight:900;line-height:1.03;letter-spacing:-.02em;margin-bottom:14px;}
+.hero h1 em{font-style:italic;color:var(--amber);}
+.hero-sub{font-size:15px;font-weight:300;color:var(--slate);max-width:540px;margin:0 auto;line-height:1.7;}
+.wrap{max-width:720px;margin:0 auto;padding:34px 24px 60px;}
+.card{background:white;border:1px solid var(--rule);border-radius:14px;padding:26px 28px;}
+.lbl{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--amber2);margin-bottom:10px;}
+.cats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:22px;}
+.catbtn{border:1px solid var(--rule);background:var(--surface);border-radius:9px;padding:12px 8px;cursor:pointer;text-align:center;transition:all .13s;font-size:12.5px;font-weight:600;color:var(--slate);line-height:1.25;}
+.catbtn:hover{border-color:var(--amber);}
+.catbtn.on{background:var(--ink);color:white;border-color:var(--ink);}
+.catbtn .ci{display:block;width:9px;height:9px;border-radius:50%;margin:0 auto 6px;}
+.dims{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;}
+.field label{display:block;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px;}
+.field input,.field select{width:100%;border:1px solid var(--rule);border-radius:8px;padding:11px 12px;font-size:15px;background:var(--surface);color:var(--ink);}
+.field input:focus,.field select:focus{border-color:var(--amber);background:white;}
+.orm{text-align:center;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);margin:12px 0;}
+.result{margin-top:22px;border-top:1px solid var(--rule);padding-top:22px;display:none;}
+.result.show{display:block;animation:rise .3s ease both;}
+@keyframes rise{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.rest-lbl{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-align:center;margin-bottom:6px;}
+.rest-cat{text-align:center;font-size:13px;color:var(--slate);margin-bottom:10px;}
+.range{text-align:center;font-family:var(--serif);font-weight:800;color:var(--ink);font-size:clamp(30px,6vw,46px);line-height:1.05;letter-spacing:-.01em;}
+.range .cur{font-size:.5em;color:var(--amber2);vertical-align:middle;font-weight:600;}
+.rest-area{text-align:center;font-size:12.5px;color:var(--muted);margin-top:6px;}
+.rest-rate{text-align:center;font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:4px;}
+.disclaim{background:var(--amber-lt);border-left:3px solid var(--amber);padding:11px 15px;margin-top:18px;font-size:12px;color:#5A3800;line-height:1.55;border-radius:0 6px 6px 0;}
+.disclaim b{color:#3D2500;}
+.cta{background:var(--ink);border-radius:12px;padding:22px 24px;margin-top:18px;text-align:center;}
+.cta h3{font-family:var(--serif);font-size:19px;color:white;margin-bottom:5px;}
+.cta p{font-size:12.5px;color:rgba(255,255,255,.6);max-width:46ch;margin:0 auto 13px;line-height:1.55;}
+.cta a{display:inline-block;background:var(--wa);color:white;font-weight:700;font-size:14px;padding:12px 26px;border-radius:100px;text-decoration:none;}
+.cta a:hover{background:var(--wa2);}
+.cta .fp{font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.3);margin-top:9px;text-transform:uppercase;letter-spacing:.08em;}
+.hint{text-align:center;font-size:13px;color:var(--muted);font-style:italic;margin-top:16px;}
+.foot{max-width:720px;margin:0 auto;padding:0 24px 46px;font-family:var(--mono);font-size:9px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;line-height:1.7;text-align:center;}
+@media(max-width:620px){.cats{grid-template-columns:1fr 1fr;}.hero,.wrap{padding-left:18px;padding-right:18px;}.card{padding:22px 18px;}.wb-topbar{padding:0 12px;}.wb-topbar-name{display:none;}}
+</style>
+</head>
+<body>
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+    <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+    <a href="wima-resource-hub.html">Resource Hub</a>
+    <a href="wima-cool-before-ac.html">Cool Before AC</a>
+    <a href="wima-quote-autopsy.html">Quote Autopsy</a>
+    <a href="wima-cost-estimator.html" class="wb-active">Cost Estimator<span class="wb-badge">Free</span></a>
+    <a href="wima-choose-your-room.html">Room Matcher</a>
+    <a href="wima-honest-boq-checklist.html">BOQ Checklist</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eye">The Wima Room Cost Estimator · Indicative · Free</div>
+  <h1>Roughly what will<br>your room <em>cost?</em></h1>
+  <p class="hero-sub">Pick what you're installing, enter your room size, and get an indicative price range in seconds — so you can budget before anyone quotes you. For the exact figure, turn it into a free BOQ on WhatsApp.</p>
+</div>
+
+<div class="wrap">
+  <div class="card">
+    <div class="lbl">1 · What are you installing?</div>
+    <div class="cats" id="cats"></div>
+
+    <div class="lbl">2 · How big is the area?</div>
+    <div id="areamode"></div>
+    <div class="dims" id="dims">
+      <div class="field"><label>Length (metres)</label><input id="len" type="number" min="0" step="0.1" placeholder="e.g. 5" inputmode="decimal"></div>
+      <div class="field"><label>Width (metres)</label><input id="wid" type="number" min="0" step="0.1" placeholder="e.g. 4" inputmode="decimal"></div>
+    </div>
+    <div class="orm">— or enter area directly —</div>
+    <div class="field"><label>Area (m²)</label><input id="area" type="number" min="0" step="0.5" placeholder="e.g. 20" inputmode="decimal"></div>
+
+    <div class="hint" id="hint">👆 Pick a category and enter your room size</div>
+
+    <div class="result" id="result">
+      <div class="rest-lbl">Indicative estimate</div>
+      <div class="rest-cat" id="restcat"></div>
+      <div class="range" id="range"></div>
+      <div class="rest-area" id="restarea"></div>
+      <div class="rest-rate" id="restrate"></div>
+      <div class="disclaim"><b>This is a rough guide, not a quote.</b> Real prices depend on the exact product grade, ceiling height, access, substrate and design. Wima's free BOQ gives you the precise, itemised figure — and you can hold it against our <a href="wima-honest-boq-checklist.html" style="color:#3D2500;font-weight:700;">BOQ checklist</a>.</div>
+      <div class="cta">
+        <h3>Get the exact price — free BOQ</h3>
+        <p>Send this room's size and your location on WhatsApp. We'll send a fully itemised quote within 24 hours. No site-visit fee.</p>
+        <a href="#" onclick="return false;">💬 WhatsApp Wima — free BOQ</a>
+        <div class="fp">Replace with your click-to-WhatsApp link before publishing</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  Wima Room Cost Estimator · Indicative rates only, illustrative and subject to change · Verify with a free BOQ before budgeting · Part of the Resource Hub
+</div>
+
+<script>
+(function(){
+"use strict";
+// Illustrative rate ranges (GHS per m², supply & install). REPLACE with real figures before publishing.
+var CATS=[
+ {id:"ceil",name:"Acoustic Ceiling",color:"var(--ceil)",lo:85,hi:180,unit:"ceiling area"},
+ {id:"dry",name:"Drywall / Partition",color:"var(--dry)",lo:85,hi:155,unit:"wall area"},
+ {id:"pop",name:"POP Ceiling & Cornices",color:"var(--pop)",lo:45,hi:90,unit:"ceiling area"},
+ {id:"ins",name:"Insulation",color:"var(--ins)",lo:95,hi:180,unit:"roof / wall area"},
+ {id:"clad",name:"Exterior Cladding",color:"var(--clad)",lo:120,hi:385,unit:"facade area"},
+ {id:"cool",name:"Cool-Ceiling System",color:"var(--cool)",lo:120,hi:220,unit:"ceiling area"}
+];
+var sel=null;
+var catsEl=document.getElementById("cats");
+catsEl.innerHTML=CATS.map(function(c){
+  return '<button class="catbtn" data-id="'+c.id+'"><span class="ci" style="background:'+c.color+'"></span>'+c.name+'</button>';
+}).join("");
+
+var len=document.getElementById("len"),wid=document.getElementById("wid"),area=document.getElementById("area");
+var result=document.getElementById("result"),hint=document.getElementById("hint");
+
+function fmt(n){ return n.toLocaleString('en-GH',{maximumFractionDigits:0}); }
+
+function currentArea(){
+  var a=parseFloat(area.value);
+  if(a>0) return a;
+  var l=parseFloat(len.value),w=parseFloat(wid.value);
+  if(l>0&&w>0) return l*w;
+  return 0;
+}
+
+function calc(){
+  if(!sel){ return; }
+  var a=currentArea();
+  if(a<=0){ result.classList.remove('show'); hint.style.display='block'; return; }
+  var lo=Math.round(a*sel.lo), hi=Math.round(a*sel.hi);
+  document.getElementById("restcat").textContent=sel.name+" · supplied & installed by Wima";
+  document.getElementById("range").innerHTML='<span class="cur">GHS</span> '+fmt(lo)+' – '+fmt(hi);
+  document.getElementById("restarea").textContent='For about '+a.toLocaleString('en-GH',{maximumFractionDigits:1})+' m² of '+sel.unit+'.';
+  document.getElementById("restrate").textContent='Based on an indicative GHS '+sel.lo+'–'+sel.hi+'/m². Grade and complexity move the final figure.';
+  hint.style.display='none';
+  result.classList.add('show');
+}
+
+catsEl.querySelectorAll('.catbtn').forEach(function(b){
+  b.addEventListener('click',function(){
+    sel=CATS.filter(function(c){return c.id===b.getAttribute('data-id');})[0];
+    catsEl.querySelectorAll('.catbtn').forEach(function(x){x.classList.toggle('on',x===b);});
+    calc();
+  });
+});
+[len,wid].forEach(function(el){el.addEventListener('input',function(){ if(len.value||wid.value){area.value='';} calc(); });});
+area.addEventListener('input',function(){ if(area.value){len.value='';wid.value='';} calc(); });
+})();
+</script>
+</body>
+</html>

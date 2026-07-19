@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — The Quote Autopsy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&amp;family=DM+Sans:wght@0,300;0,400;0,500;0,600;0,700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--surface:#F4F1EA;--panel:#ECEAE0;--rule:#D8D3C4;
+  --ink:#1C1917;--ink2:#3C3830;--slate:#44403C;--muted:#78716C;--faint:#A8A29E;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;--go:#15803D;--go-lt:#F0FDF4;--warn:#B91C1C;--warn-lt:#FEF2F2;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;}
+a{color:inherit;}
+.wb-topbar{position:sticky;top:0;z-index:900;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;font-family:var(--mono);}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 12px;}
+.wb-topbar-links{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;background:rgba(196,122,10,.22);}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.5);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;}
+.bar{background:var(--amber);color:white;text-align:center;padding:8px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;}
+.bar button{background:white;color:var(--amber2);border:none;font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:3px;cursor:pointer;margin-left:8px;}
+.sheet{max-width:860px;margin:0 auto;padding:44px 48px 40px;background:white;}
+.head{border-bottom:3px solid var(--ink);padding-bottom:18px;margin-bottom:20px;}
+.head .eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--amber2);margin-bottom:8px;}
+.head h1{font-family:var(--serif);font-size:37px;font-weight:900;line-height:1.03;letter-spacing:-.02em;margin-bottom:10px;}
+.head h1 em{font-style:italic;color:var(--amber);}
+.head p{font-size:14px;color:var(--slate);max-width:64ch;line-height:1.6;}
+.note{background:var(--amber-lt);border:1px solid var(--amber);border-radius:8px;padding:12px 16px;margin-bottom:24px;font-size:12px;color:#5A3800;line-height:1.55;}
+.note b{color:#3D2500;}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 6px;}
+@media(max-width:720px){.compare{grid-template-columns:1fr;}}
+.qcard{border:1px solid var(--rule);border-radius:12px;overflow:hidden;}
+.qcard.bad{border-color:#FCA5A5;}
+.qcard.good{border-color:#86EFAC;}
+.qh{padding:12px 16px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;display:flex;align-items:center;gap:8px;}
+.qcard.bad .qh{background:var(--warn-lt);color:var(--warn);}
+.qcard.good .qh{background:var(--go-lt);color:var(--go);}
+.qbody{padding:14px 16px;font-size:13px;line-height:1.55;}
+.qline{padding:7px 0;border-bottom:1px solid var(--panel);display:flex;justify-content:space-between;gap:10px;}
+.qline:last-child{border-bottom:none;}
+.qline .d{color:var(--ink2);}
+.qline .d small{display:block;color:var(--muted);font-size:11px;}
+.qline .v{font-family:var(--mono);font-size:12px;color:var(--ink);white-space:nowrap;font-weight:500;}
+.qtot{padding:10px 16px;font-family:var(--mono);font-size:13px;font-weight:600;display:flex;justify-content:space-between;border-top:2px solid;}
+.qcard.bad .qtot{background:#FEF2F2;border-color:#FCA5A5;color:var(--warn);}
+.qcard.good .qtot{background:#F0FDF4;border-color:#86EFAC;color:var(--go);}
+.verdict{background:var(--surface);border-left:4px solid var(--amber);border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0;}
+.verdict .vl{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--amber2);margin-bottom:6px;}
+.verdict p{font-size:14px;color:var(--ink2);line-height:1.65;margin:0;}
+.verdict b{color:var(--ink);}
+h2{font-family:var(--serif);font-size:22px;font-weight:700;margin:30px 0 12px;}
+.autopsy{list-style:none;counter-reset:a;}
+.autopsy li{position:relative;padding:12px 0 12px 42px;border-bottom:1px solid var(--panel);font-size:13.5px;line-height:1.55;}
+.autopsy li::before{counter-increment:a;content:'🔍';position:absolute;left:0;top:11px;font-size:16px;}
+.autopsy li b{color:var(--ink);}
+.autopsy li .flag{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--warn);background:var(--warn-lt);padding:1px 7px;border-radius:3px;margin-left:6px;}
+.cta{background:var(--ink);border-radius:12px;padding:24px 26px;margin-top:30px;text-align:center;}
+.cta h3{font-family:var(--serif);font-size:21px;color:white;margin-bottom:6px;}
+.cta p{font-size:13px;color:rgba(255,255,255,.6);max-width:54ch;margin:0 auto 14px;line-height:1.6;}
+.cta a{display:inline-block;background:var(--amber);color:white;font-weight:700;font-size:14px;padding:12px 26px;border-radius:100px;text-decoration:none;}
+.cta .fp{font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,.3);margin-top:10px;text-transform:uppercase;letter-spacing:.08em;}
+.foot{max-width:860px;margin:0 auto;padding:16px 48px 40px;font-family:var(--mono);font-size:9px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;line-height:1.8;}
+@media print{.wb-topbar,.bar,.cta .fp{display:none;}body{font-size:12px;}.sheet{padding:0;max-width:100%;}.cta,.verdict,.note,.qcard .qh,.qtot,.autopsy li::before{-webkit-print-color-adjust:exact;print-color-adjust:exact;}.compare{grid-template-columns:1fr 1fr;}h2{page-break-after:avoid;}.qcard,.verdict{page-break-inside:avoid;}}
+@media(max-width:680px){.sheet{padding:28px 20px 36px;}.foot{padding:16px 20px 36px;}.head h1{font-size:28px;}}
+</style>
+</head>
+<body>
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+    <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+    <a href="wima-resource-hub.html">Resource Hub</a>
+    <a href="wima-cool-before-ac.html">Cool Before AC</a>
+    <a href="wima-quote-autopsy.html" class="wb-active">Quote Autopsy<span class="wb-badge">Free</span></a>
+    <a href="wima-honest-boq-checklist.html">BOQ Checklist</a>
+    <a href="wima-cost-estimator.html">Cost Estimator</a>
+  </div>
+</div>
+<div class="bar">Free Wima resource — learn to read a quote before you sign one <button onclick="window.print()">⎙ Print / Save PDF</button></div>
+
+<div class="sheet">
+  <div class="head">
+    <div class="eye">A Free Wima Resource · The Quote Autopsy</div>
+    <h1>The Quote Autopsy: <em>where the hidden 30% hides</em></h1>
+    <p>Two quotes for the exact same job — a 20m² acoustic ceiling. One is the kind you usually get: a single number, no detail. The other is a proper itemised BOQ. Same room, same work. Watch what the vague one is hiding.</p>
+  </div>
+
+  <div class="note"><b>About this example:</b> the figures below are an <b>illustrative reconstruction</b> of the pattern we see again and again — not a specific person's quote, and the numbers are indicative. The point isn't the exact cedis; it's learning to spot the <em>shape</em> of a quote that leaves room to overcharge. <b>Have a real quote you want read?</b> Send it to Wima (we'll anonymise it) and we'll autopsy it for free.</div>
+
+  <div class="compare">
+    <div class="qcard bad">
+      <div class="qh">⚠ The quote you usually get</div>
+      <div class="qbody">
+        <div class="qline"><div class="d">"Supply and fix ceiling for your room"<small>No area stated, no product named</small></div><div class="v">—</div></div>
+        <div class="qline"><div class="d">Materials<small>One lump figure, nothing itemised</small></div><div class="v">GHS 2,400</div></div>
+        <div class="qline"><div class="d">Labour<small>"Included" — not shown separately</small></div><div class="v">incl.</div></div>
+        <div class="qline"><div class="d">Transport &amp; "extras"<small>Undefined</small></div><div class="v">GHS 400</div></div>
+        <div class="qline"><div class="d">Timeline<small>"Small small, we'll finish"</small></div><div class="v">—</div></div>
+      </div>
+      <div class="qtot"><span>Total (verbal)</span><span>GHS 2,800</span></div>
+    </div>
+
+    <div class="qcard good">
+      <div class="qh">✓ A proper itemised BOQ</div>
+      <div class="qbody">
+        <div class="qline"><div class="d">Acoustic mineral fibre tiles, 600×600, mid-grade<small>20 m² + 8% wastage = 21.6 m²</small></div><div class="v">GHS 1,180</div></div>
+        <div class="qline"><div class="d">Galvanised suspension grid + hangers<small>Named, per m²</small></div><div class="v">GHS 430</div></div>
+        <div class="qline"><div class="d">Perimeter trim &amp; fixings<small>Listed</small></div><div class="v">GHS 190</div></div>
+        <div class="qline"><div class="d">Labour — install (per m²)<small>Shown separately</small></div><div class="v">GHS 500</div></div>
+        <div class="qline"><div class="d">Transport to site<small>Stated, not "extras"</small></div><div class="v">GHS 150</div></div>
+      </div>
+      <div class="qtot"><span>Total (written)</span><span>GHS 2,450</span></div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="vl">The verdict</div>
+    <p>Same room. The vague quote is <b>GHS 350 higher</b> — and that's before the day-of surprises the "extras" line exists to allow. But the money isn't even the main point. With the itemised BOQ you know the <b>grade of tile</b>, the <b>quantity</b>, and the <b>labour cost</b> — so you can compare it against any other quote and check it against reality. With the vague one, you're trusting a number with nothing behind it. <b>An honest quote has nothing to hide, so it hides nothing.</b></p>
+  </div>
+
+  <h2>What the autopsy reveals</h2>
+  <ul class="autopsy">
+    <li><b>No area, no product grade.</b> "Ceiling for your room" could be premium acoustic panels or the cheapest tile on the market — at the same price. The grade <em>is</em> the cost. <span class="flag">Substitution risk</span></li>
+    <li><b>Materials as one lump.</b> A single "materials: GHS 2,400" can't be checked against the market. Itemised, you'd see each price. <span class="flag">Padding hides here</span></li>
+    <li><b>Labour "included."</b> Merged with materials, you can't tell what either really costs — or whether labour is fair. <span class="flag">Un-checkable</span></li>
+    <li><b>"Extras" and transport undefined.</b> A vague buffer line is where the day-of surprises live. <span class="flag">Open-ended</span></li>
+    <li><b>No wastage stated.</b> The honest BOQ shows the 8% offcut allowance openly instead of burying it in an inflated quantity. <span class="flag">Opacity</span></li>
+    <li><b>No written timeline.</b> "Small small" is not a start and end date — and it's how a job stretches for weeks. <span class="flag">No accountability</span></li>
+  </ul>
+
+  <div class="cta">
+    <h3>Send us a quote — we'll autopsy it free</h3>
+    <p>WhatsApp Wima a quote you've received (we'll keep it anonymous) and we'll show you, line by line, what's missing — and send you a proper itemised BOQ for the same job so you can compare.</p>
+    <a href="#" onclick="return false;">💬 WhatsApp Wima — free quote autopsy</a>
+    <div class="fp">Replace with your click-to-WhatsApp link before publishing</div>
+  </div>
+</div>
+
+<div class="foot">
+  Wima Builders · The Quote Autopsy · A free resource · Share it freely.<br>
+  Example figures are illustrative reconstructions of a common pattern, not a specific quote; indicative only. General guidance, not legal or financial advice. Use alongside the <a href="wima-honest-boq-checklist.html" style="color:var(--amber2)">Honest BOQ Checklist</a>.
+</div>
+</body>
+</html>

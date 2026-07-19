@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — The Honest BOQ Checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&amp;family=DM+Sans:wght@0,300;0,400;0,500;0,600;0,700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--surface:#F4F1EA;--panel:#ECEAE0;--rule:#D8D3C4;
+  --ink:#1C1917;--ink2:#3C3830;--slate:#44403C;--muted:#78716C;--faint:#A8A29E;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;--go:#15803D;--warn:#B91C1C;--warn-lt:#FEF2F2;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;}
+a{color:inherit;}
+.wb-topbar{position:sticky;top:0;z-index:900;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;font-family:var(--mono);}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 12px;}
+.wb-topbar-links{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;background:rgba(196,122,10,.22);}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.5);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;}
+.bar{background:var(--amber);color:white;text-align:center;padding:8px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;}
+.bar button{background:white;color:var(--amber2);border:none;font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:3px;cursor:pointer;margin-left:8px;}
+.sheet{max-width:820px;margin:0 auto;padding:44px 48px 60px;background:white;}
+.head{border-bottom:3px solid var(--ink);padding-bottom:18px;margin-bottom:24px;}
+.head .eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--amber2);margin-bottom:8px;}
+.head h1{font-family:var(--serif);font-size:38px;font-weight:900;line-height:1.02;letter-spacing:-.02em;margin-bottom:10px;}
+.head h1 em{font-style:italic;color:var(--amber);}
+.head p{font-size:14px;color:var(--slate);max-width:60ch;line-height:1.6;}
+.intro{background:var(--amber-lt);border-left:3px solid var(--amber);padding:14px 18px;margin-bottom:26px;font-size:13.5px;color:#5A3800;line-height:1.65;}
+.intro b{color:#3D2500;}
+h2{font-family:var(--serif);font-size:20px;font-weight:700;margin:26px 0 4px;display:flex;align-items:center;gap:9px;}
+h2 .num{font-family:var(--mono);font-size:11px;background:var(--ink);color:white;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none;}
+.sub{font-size:12.5px;color:var(--muted);margin:0 0 12px 33px;font-style:italic;}
+.check{list-style:none;margin:0 0 8px 0;}
+.check li{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid var(--panel);font-size:14px;line-height:1.5;}
+.check li .box{width:18px;height:18px;border:2px solid var(--amber);border-radius:4px;flex:none;margin-top:2px;}
+.check li b{color:var(--ink);}
+.check li span.q{color:var(--slate);}
+.redflags{background:var(--warn-lt);border:1px solid #FECACA;border-radius:8px;padding:18px 22px;margin:26px 0;}
+.redflags h3{font-family:var(--serif);font-size:17px;color:var(--warn);margin-bottom:10px;}
+.redflags ul{list-style:none;}
+.redflags li{font-size:13.5px;color:#7F1D1D;padding:5px 0 5px 22px;position:relative;line-height:1.5;}
+.redflags li::before{content:'⚑';position:absolute;left:0;}
+.redflags li b{color:#5F1515;}
+.cta{background:var(--ink);border-radius:12px;padding:24px 26px;margin-top:30px;text-align:center;}
+.cta h3{font-family:var(--serif);font-size:21px;color:white;margin-bottom:6px;}
+.cta p{font-size:13px;color:rgba(255,255,255,.6);max-width:52ch;margin:0 auto 14px;line-height:1.6;}
+.cta a{display:inline-block;background:var(--amber);color:white;font-weight:700;font-size:14px;padding:12px 26px;border-radius:100px;text-decoration:none;}
+.cta .fp{font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,.3);margin-top:10px;text-transform:uppercase;letter-spacing:.08em;}
+.foot{max-width:820px;margin:0 auto;padding:16px 48px 40px;font-family:var(--mono);font-size:9px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;line-height:1.7;}
+@media print{
+  .wb-topbar,.bar,.cta .fp{display:none;}
+  body{background:white;font-size:12px;}
+  .sheet{padding:0;max-width:100%;}
+  .cta{background:var(--ink)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .intro,.redflags,h2 .num{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  h2{page-break-after:avoid;}
+  .check li,.redflags{page-break-inside:avoid;}
+}
+@media(max-width:680px){.sheet{padding:28px 20px 40px;}.foot{padding:16px 20px 40px;}.head h1{font-size:30px;}}
+</style>
+</head>
+<body>
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+    <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+    <a href="wima-resource-hub.html">Resource Hub</a>
+    <a href="wima-cool-before-ac.html">Cool Before AC</a>
+    <a href="wima-quote-autopsy.html">Quote Autopsy</a>
+    <a href="wima-honest-boq-checklist.html" class="wb-active">BOQ Checklist<span class="wb-badge">Free</span></a>
+    <a href="wima-choose-your-room.html">Room Matcher</a>
+    <a href="wima-content-hub.html">Content Hub</a>
+  </div>
+</div>
+<div class="bar">Free Wima resource — print it, save it, take it to any contractor <button onclick="window.print()">⎙ Print / Save PDF</button></div>
+
+<div class="sheet">
+  <div class="head">
+    <div class="eye">A Free Wima Resource · Take This To Any Contractor</div>
+    <h1>The Honest <em>BOQ Checklist</em></h1>
+    <p>A Bill of Quantities (BOQ) is the itemised list of every material and labour cost in your building project. This one page is how you check whether the quote in your hand is honest — before you pay a pesewa. Works for any contractor, any project. Not just Wima.</p>
+  </div>
+
+  <div class="intro"><b>Why this matters:</b> in Ghana, most quotes are given verbally, with no breakdown — which is exactly how the final bill ends up 20–30% higher than the number you agreed. An honest quote has nothing to hide, so it itemises everything. If a contractor won't put these lines in writing, that tells you what you need to know.</div>
+
+  <h2><span class="num">1</span> Materials — every item, named</h2>
+  <div class="sub">Each material listed by name, brand/grade, quantity and unit price — not one lumped "materials" figure.</div>
+  <ul class="check">
+    <li><span class="box"></span><span class="q"><b>Every material named individually</b> — e.g. "12mm plasterboard," not just "boards." Vague names hide cheap substitutions.</span></li>
+    <li><span class="box"></span><span class="q"><b>Brand or grade stated</b> for each item. "Acoustic tile" ranges from GHS 40 to GHS 220/m² — the grade is the price.</span></li>
+    <li><span class="box"></span><span class="q"><b>Quantity and unit</b> shown (m², bags, sheets, lengths) so you can check the maths yourself.</span></li>
+    <li><span class="box"></span><span class="q"><b>Unit price per item</b> — the cost of one, so you can compare against the market.</span></li>
+    <li><span class="box"></span><span class="q"><b>Wastage/offcuts</b> noted if added (usually 5–10%) — not hidden inside inflated quantities.</span></li>
+  </ul>
+
+  <h2><span class="num">2</span> Labour — separate from materials</h2>
+  <div class="sub">Labour costed on its own line. If materials and labour are merged, you can't tell what either really costs.</div>
+  <ul class="check">
+    <li><span class="box"></span><span class="q"><b>Labour shown separately</b> from materials — its own figure, ideally per m² or per stage.</span></li>
+    <li><span class="box"></span><span class="q"><b>What the labour covers</b> — installation only, or also delivery, prep, and clean-up?</span></li>
+    <li><span class="box"></span><span class="q"><b>Number of days / crew size</b> if the job is priced by time.</span></li>
+  </ul>
+
+  <h2><span class="num">3</span> Scope &amp; timeline — in writing</h2>
+  <div class="sub">What's included, what's not, and when it happens — so "that wasn't in the price" can't appear later.</div>
+  <ul class="check">
+    <li><span class="box"></span><span class="q"><b>Exact scope</b> — the rooms, the areas (m²), what's being done to each.</span></li>
+    <li><span class="box"></span><span class="q"><b>What's excluded</b> stated plainly — painting, electrical, making-good, disposal.</span></li>
+    <li><span class="box"></span><span class="q"><b>Start date and duration</b> in writing, with what causes a delay.</span></li>
+    <li><span class="box"></span><span class="q"><b>Who supplies what</b> — do you buy any materials, or does the contractor supply all?</span></li>
+  </ul>
+
+  <h2><span class="num">4</span> Payment &amp; protection</h2>
+  <div class="sub">How and when money moves — the single biggest place clients lose leverage.</div>
+  <ul class="check">
+    <li><span class="box"></span><span class="q"><b>Staged payments</b> tied to progress — never a large sum before work starts. A fair split is a deposit, a payment on delivery, and a balance on completion.</span></li>
+    <li><span class="box"></span><span class="q"><b>What each payment unlocks</b> — e.g. "50% on materials delivered to site."</span></li>
+    <li><span class="box"></span><span class="q"><b>A guarantee / after-care</b> period stated — what happens if something fails after install.</span></li>
+    <li><span class="box"></span><span class="q"><b>Total in figures and words</b>, dated, with the contractor's name and contact — a document, not a text message.</span></li>
+    <li><span class="box"></span><span class="q"><b>For diaspora:</b> dated photos promised at delivery, install start, and completion; and a clean payment method (Wise / bank transfer) with written receipt.</span></li>
+  </ul>
+
+  <div class="redflags">
+    <h3>⚑ Walk-away red flags</h3>
+    <ul>
+      <li><b>"I'll give you a price on site"</b> with nothing written down.</li>
+      <li><b>One lump "materials" figure</b> with no breakdown — the classic place the extra 30% hides.</li>
+      <li><b>Wants most of the money up front,</b> before materials are even on site.</li>
+      <li><b>Won't name brands or grades</b> — "don't worry, it's good quality" is not a specification.</li>
+      <li><b>No written timeline,</b> no start date, no end date.</li>
+      <li><b>The cheapest quote by far</b> — it usually means something's been left out that you'll pay for later.</li>
+    </ul>
+  </div>
+
+  <div class="cta">
+    <h3>Want a quote that already ticks every box?</h3>
+    <p>Wima sends a fully itemised BOQ for any project — ceilings, drywall, POP, insulation, cladding — within 24 hours of your WhatsApp message. Free. No site-visit fee. Then use this checklist to hold us to it.</p>
+    <a href="#" onclick="return false;">💬 WhatsApp Wima — free BOQ</a>
+    <div class="fp">Replace with your click-to-WhatsApp link before publishing</div>
+  </div>
+</div>
+
+<div class="foot">
+  Wima Builders · The Honest BOQ Checklist · A free resource · Share it freely — it's designed to help every Ghanaian builder, not just our clients · General guidance, not legal or financial advice · Prices and practices vary; verify against current market rates.
+</div>
+</body>
+</html>

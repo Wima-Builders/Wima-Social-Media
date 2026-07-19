@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — The Land Safety Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&amp;family=DM+Sans:wght@0,300;0,400;0,500;0,600;0,700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--surface:#F4F1EA;--panel:#ECEAE0;--rule:#D8D3C4;
+  --ink:#1C1917;--ink2:#3C3830;--slate:#44403C;--muted:#78716C;--faint:#A8A29E;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;--go:#15803D;--go-lt:#F0FDF4;--warn:#B91C1C;--warn-lt:#FEF2F2;--blue:#1D4ED8;--blue-lt:#EFF6FF;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.62;}
+a{color:inherit;}
+.wb-topbar{position:sticky;top:0;z-index:900;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;font-family:var(--mono);}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 12px;}
+.wb-topbar-links{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;background:rgba(196,122,10,.22);}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.5);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;}
+.bar{background:var(--amber);color:white;text-align:center;padding:8px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;}
+.bar button{background:white;color:var(--amber2);border:none;font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:3px;cursor:pointer;margin-left:8px;}
+.sheet{max-width:800px;margin:0 auto;padding:44px 48px 40px;background:white;}
+.head{border-bottom:3px solid var(--ink);padding-bottom:18px;margin-bottom:20px;}
+.head .eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--amber2);margin-bottom:8px;}
+.head h1{font-family:var(--serif);font-size:37px;font-weight:900;line-height:1.03;letter-spacing:-.02em;margin-bottom:10px;}
+.head h1 em{font-style:italic;color:var(--amber);}
+.head p{font-size:14px;color:var(--slate);max-width:62ch;line-height:1.6;}
+.legal{background:var(--warn-lt);border:1px solid #FECACA;border-radius:8px;padding:13px 18px;margin-bottom:24px;font-size:12.5px;color:#7F1D1D;line-height:1.6;}
+.legal b{color:#5F1515;}
+.golden{background:var(--go-lt);border-left:4px solid var(--go);border-radius:0 8px 8px 0;padding:16px 20px;margin-bottom:26px;}
+.golden .gl{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--go);margin-bottom:5px;}
+.golden p{font-size:14.5px;color:#14532D;line-height:1.6;margin:0;}
+.golden b{color:#052e16;}
+h2{font-family:var(--serif);font-size:22px;font-weight:700;margin:30px 0 6px;}
+.lead-in{font-size:13.5px;color:var(--slate);margin-bottom:14px;line-height:1.6;font-style:italic;}
+.keybox{background:var(--blue-lt);border:1px solid #BFDBFE;border-radius:8px;padding:16px 20px;margin:16px 0;}
+.keybox h3{font-family:var(--serif);font-size:16px;color:var(--blue);margin-bottom:8px;}
+.keybox p{font-size:13.5px;color:#1E3A8A;line-height:1.6;margin-bottom:8px;}
+.keybox p:last-child{margin-bottom:0;}
+.keybox b{color:#172554;}
+.steps{counter-reset:s;list-style:none;margin:8px 0 12px;}
+.steps li{position:relative;padding:12px 0 12px 46px;border-bottom:1px solid var(--panel);font-size:14px;line-height:1.55;}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:11px;width:30px;height:30px;background:var(--ink);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:600;}
+.steps li b{color:var(--ink);display:block;margin-bottom:2px;font-size:14.5px;}
+.steps li span{color:var(--slate);}
+.steps li .who{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--amber2);margin-top:3px;display:inline-block;}
+.redflags{background:var(--warn-lt);border:1px solid #FECACA;border-radius:8px;padding:18px 22px;margin:24px 0;}
+.redflags h3{font-family:var(--serif);font-size:17px;color:var(--warn);margin-bottom:10px;}
+.redflags ul{list-style:none;}
+.redflags li{font-size:13.5px;color:#7F1D1D;padding:5px 0 5px 22px;position:relative;line-height:1.5;}
+.redflags li::before{content:'⚑';position:absolute;left:0;}
+.redflags li b{color:#5F1515;}
+.costtable{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+.costtable th{background:var(--ink);color:rgba(255,255,255,.75);text-align:left;padding:9px 14px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.1em;font-weight:500;}
+.costtable td{padding:9px 14px;border-bottom:1px solid var(--panel);}
+.costtable tr:nth-child(even) td{background:var(--surface);}
+.costtable b{color:var(--ink);}
+.amberbox{background:var(--amber-lt);border-left:3px solid var(--amber);padding:14px 18px;margin:20px 0;font-size:13px;color:#5A3800;line-height:1.6;border-radius:0 6px 6px 0;}
+.amberbox b{color:#3D2500;}
+.cta{background:var(--ink);border-radius:12px;padding:24px 26px;margin-top:30px;text-align:center;}
+.cta h3{font-family:var(--serif);font-size:21px;color:white;margin-bottom:6px;}
+.cta p{font-size:13px;color:rgba(255,255,255,.6);max-width:54ch;margin:0 auto 14px;line-height:1.6;}
+.cta a{display:inline-block;background:var(--amber);color:white;font-weight:700;font-size:14px;padding:12px 26px;border-radius:100px;text-decoration:none;}
+.cta .fp{font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,.3);margin-top:10px;text-transform:uppercase;letter-spacing:.08em;}
+.foot{max-width:800px;margin:0 auto;padding:16px 48px 40px;font-family:var(--mono);font-size:9px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;line-height:1.8;}
+.foot a{color:var(--amber2);}
+@media print{.wb-topbar,.bar,.cta .fp{display:none;}body{font-size:12px;}.sheet{padding:0;max-width:100%;}.cta,.golden,.legal,.redflags,.keybox,.steps li::before,.costtable th{-webkit-print-color-adjust:exact;print-color-adjust:exact;}h2{page-break-after:avoid;}.steps li,.keybox,.redflags{page-break-inside:avoid;}}
+@media(max-width:680px){.sheet{padding:28px 20px 36px;}.foot{padding:16px 20px 36px;}.head h1{font-size:29px;}}
+</style>
+</head>
+<body>
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+    <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+    <a href="wima-resource-hub.html">Resource Hub</a>
+    <a href="wima-cool-before-ac.html">Cool Before AC</a>
+    <a href="wima-quote-autopsy.html">Quote Autopsy</a>
+    <a href="wima-land-safety-guide.html" class="wb-active">Land Safety<span class="wb-badge">Free</span></a>
+    <a href="wima-honest-boq-checklist.html">BOQ Checklist</a>
+    <a href="wima-choose-your-room.html">Room Matcher</a>
+  </div>
+</div>
+<div class="bar">Free Wima resource — print it, save it, share it before anyone buys land <button onclick="window.print()">⎙ Print / Save PDF</button></div>
+
+<div class="sheet">
+  <div class="head">
+    <div class="eye">A Free Wima Resource · The Cost Trail Series</div>
+    <h1>Buying Land in Ghana — <em>How Not to Lose Your Money</em></h1>
+    <p>Land disputes are among the most common cases in Ghana's courts, and the single biggest fear for anyone — especially the diaspora — building back home. This guide walks the verification and registration process in plain language, so you know what to check before you pay. It applies to any purchase, anywhere in Ghana.</p>
+  </div>
+
+  <div class="legal"><b>Read this first — this is guidance, not legal advice.</b> Land law is complex and changes, and every parcel is different. Nothing here replaces a licensed lawyer and a licensed surveyor. Always confirm current requirements directly with the <b>Lands Commission</b> and take independent legal counsel before paying for any land. Use this guide to ask better questions — not as your only source.</div>
+
+  <div class="golden">
+    <div class="gl">The one rule that prevents most disasters</div>
+    <p><b>Never pay in full before the searches are complete.</b> Most people who lose money on land in Ghana paid a large sum on the strength of an indenture alone — a document that proves someone <em>sold</em> you land, but not that they <em>owned</em> it. Verify first. Pay in stages. That single discipline avoids the most common trap.</p>
+  </div>
+
+  <div class="keybox">
+    <h3>The distinction that catches everyone: indenture vs title</h3>
+    <p><b>An indenture (or deed of assignment)</b> is a sale contract. It shows a transfer happened — but it does <b>not</b> prove the seller had the legal right to sell. Multiple people can hold indentures for the same plot. This is exactly how the same land gets "sold" several times.</p>
+    <p><b>A registered Land Title Certificate</b>, issued by the Lands Commission, is government-backed proof of legal ownership — the highest protection available, and what courts, banks and mortgage lenders recognise. Since September 2025, lenders require it for any property financing. <b>Convert an indenture to a registered title as soon as you can.</b></p>
+  </div>
+
+  <h2>The verification &amp; registration path</h2>
+  <div class="lead-in">Roughly nine steps, from checking the land to holding a registered title. Some order and detail varies by region and by whether it's a first registration or a transfer — your lawyer confirms the exact path.</div>
+  <ol class="steps">
+    <li><b>Do the search before anything else</b><span>Conduct an official land search at the Lands Commission using the site plan and indenture, to confirm current ownership and reveal any disputes, encumbrances or litigation on the land.</span><br><span class="who">You + your lawyer · before paying</span></li>
+    <li><b>Verify the seller and the root of title</b><span>Trace the land back to the original allodial (stool, skin, or family) owner. For stool land, that means the allocation note and stool documents; for family land, a signed family resolution from authorised representatives.</span><br><span class="who">Your lawyer</span></li>
+    <li><b>Commission an independent site survey</b><span>A licensed surveyor produces a certified, geo-referenced site plan with a Lands Commission barcode. Since September 2025 geo-referenced plans are required, and satellite verification is used to confirm boundaries.</span><br><span class="who">Licensed surveyor — mandatory</span></li>
+    <li><b>Execute the indenture / deed with your lawyer</b><span>The legal instrument conveying the interest is drawn up and properly witnessed. Use your <em>own</em> independent lawyer — never the seller's.</span><br><span class="who">Your lawyer</span></li>
+    <li><b>Pay stamp duty to the GRA</b><span>Stamp duty is paid to the Ghana Revenue Authority; the receipt must accompany the indenture. Registration is refused without it.</span><br><span class="who">You · GRA</span></li>
+    <li><b>Submit the registration application</b><span>Lodge the application at the Lands Commission (online via its portal or in person) with the full document set — ID/Ghana Card, TINs, root of title, stamped indenture, certified site plan.</span><br><span class="who">You + your lawyer · Lands Commission</span></li>
+    <li><b>Examination &amp; assessment</b><span>The Lands Commission examines the application and assesses it. Incomplete applications are the most common cause of rejection and delay — assemble everything before submitting.</span><br><span class="who">Lands Commission</span></li>
+    <li><b>Publication / notification period</b><span>On the first-registration pathway there is a public notification period, allowing any competing claim to surface before title is granted.</span><br><span class="who">Lands Commission</span></li>
+    <li><b>Pay fees &amp; receive your Title Certificate</b><span>Settle the Lands Commission fees and registration levy; once approved, the registered Land Title Certificate is issued — your government-backed proof of ownership.</span><br><span class="who">You · Lands Commission</span></li>
+  </ol>
+
+  <div class="amberbox"><b>How long &amp; roughly how much?</b> Timelines vary widely by region and completeness — commonly quoted at anywhere from about 1 to 6 months, longer where records are contested or documents incomplete. On professional fees, published guides suggest budgeting broadly in the region of GHS 1,500–5,000 for legal work and GHS 2,000–8,000 for survey work depending on land size and complexity, <b>plus</b> statutory stamp duty and Lands Commission fees that scale with the land's value. <b>Treat all figures as indicative — confirm current fees with the Lands Commission and quotes from your own professionals.</b></div>
+
+  <div class="redflags">
+    <h3>⚑ Walk-away warning signs</h3>
+    <ul>
+      <li><b>"Just pay, the indenture is enough."</b> It isn't. An unregistered indenture is a sale contract, not ownership.</li>
+      <li><b>Pressure to pay in full before searches finish.</b> The single most common way money is lost.</li>
+      <li><b>The seller offers you their lawyer.</b> Always get your own independent legal counsel.</li>
+      <li><b>No geo-referenced, barcoded site plan</b> from a licensed surveyor — or boundaries that don't match the ground.</li>
+      <li><b>Seller won't produce the root of title</b> (stool/family/state grant tracing back to the allodial owner).</li>
+      <li><b>Land guards involved.</b> Land-guard activity is a serious red flag — and their violent conduct is criminalised under the Land Act 2020.</li>
+      <li><b>A price far below the area's norm.</b> On land, cheap very often means contested, encumbered, or not the seller's to sell.</li>
+    </ul>
+  </div>
+
+  <div class="amberbox"><b>Diaspora — the extra layer.</b> Managing this from abroad multiplies the risk, because you can't stand in the office or on the plot. Appoint an <b>independent</b> lawyer (not introduced by the seller), insist on the official Lands Commission search before any transfer, ask for dated photos of the plot and the documents, and release money only in stages against verified milestones. The same discipline that protects a building project protects a land purchase: verify, document, pay in stages.</div>
+
+  <div class="cta">
+    <h3>Building once your land is secure?</h3>
+    <p>When the paperwork is sorted and you're ready to build, Wima supplies and installs ceilings, drywall, POP, insulation and cladding — with a free, fully itemised BOQ within 24 hours of your WhatsApp message. Get the land right first; we'll be here for the build.</p>
+    <a href="#" onclick="return false;">💬 WhatsApp Wima — free BOQ</a>
+    <div class="fp">Replace with your click-to-WhatsApp link before publishing</div>
+  </div>
+</div>
+
+<div class="foot">
+  Wima Builders · The Land Safety Guide · Part of the Cost Trail series · Free — share it freely.<br>
+  General guidance only, not legal advice. Confirm all current requirements, fees and timelines with the Lands Commission and a licensed lawyer and surveyor before any land transaction. Sources: Lands Commission process guides and Ghana property-law reporting (Africanvestor, Ownkey, Ghana Property Finder and others, 2025–2026); figures are indicative and change. Verify before relying on any number here.
+</div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — The Resource Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100d;--bg-2:#1b1611;--bg-3:#221c16;--line:#332a22;--line-2:#463a2e;
+    --ink:#f3ece2;--ink-2:#c6b8a6;--ink-3:#8a7b68;
+    --ochre:#e0a54e;--ochre-deep:#c07f2c;--blueprint:#6fb0c9;--clay:#c76b4a;--green:#7fa66a;--violet:#a98fd0;
+    --maxw:1080px;--serif:"Fraunces","Georgia",serif;--sans:"Inter","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:5px}
+  .topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:14px;padding:14px 26px;background:rgba(20,16,13,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logomark{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;background:linear-gradient(150deg,var(--ochre),var(--ochre-deep));color:#1a130a;font-family:var(--serif);font-weight:700;font-size:17px}
+  .brand{display:flex;flex-direction:column;line-height:1.1}
+  .brand b{font-size:15px}.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+  .topbar nav{margin-left:auto;display:flex;gap:15px;font-size:13px;color:var(--ink-2)}
+  .topbar nav a{text-decoration:none}.topbar nav a:hover{color:var(--ochre)}
+  @media(max-width:860px){.topbar{flex-wrap:wrap}.topbar nav{order:3;width:100%;margin-left:0;overflow-x:auto;gap:18px;padding:8px 2px 2px}.topbar nav a{flex:0 0 auto}.topbar nav::-webkit-scrollbar{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  section{padding:48px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ochre)}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.13;margin:0}
+  h2{font-size:clamp(23px,3.4vw,31px);margin-bottom:12px}
+  p{margin:0 0 14px;color:var(--ink-2)}p strong{color:var(--ink);font-weight:600}
+  .lead{font-size:17px;color:var(--ink);max-width:70ch}
+  .muted{color:var(--ink-3);font-size:12.5px}
+
+  .hero{padding:70px 0 46px;border-bottom:1px solid var(--line);background:radial-gradient(1000px 440px at 84% -12%,rgba(224,165,78,.16),transparent 60%)}
+  .hero .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:18px}
+  .hero h1{font-size:clamp(30px,5vw,50px);max-width:17ch;margin-bottom:20px}
+  .hero h1 em{font-style:normal;color:var(--ochre)}
+  .hero .sub{font-size:18px;color:var(--ink-2);max-width:62ch}
+
+  .stage-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px;display:flex;align-items:center;gap:10px}
+  .stage-lbl .step{width:22px;height:22px;border-radius:50%;background:var(--bg-3);border:1px solid var(--line-2);display:inline-flex;align-items:center;justify-content:center;color:var(--ochre);font-size:11px;flex:none}
+  .stage-h{font-family:var(--serif);font-size:22px;margin:0 0 4px}
+  .stage-d{font-size:13.5px;color:var(--ink-3);margin-bottom:18px;font-style:italic}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .r{display:block;border:1px solid var(--line);border-radius:13px;background:var(--bg-3);padding:20px 22px;text-decoration:none;transition:.16s;position:relative;border-left:4px solid var(--ochre)}
+  .r:hover{transform:translateY(-2px);border-color:var(--ochre);box-shadow:0 8px 26px rgba(0,0,0,.3)}
+  .r.blue{border-left-color:var(--blueprint)}.r.green{border-left-color:var(--green)}.r.violet{border-left-color:var(--violet)}.r.clay{border-left-color:var(--clay)}
+  .r .tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:7px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .r .pill{background:var(--ochre);color:#1a130a;padding:1px 7px;border-radius:20px;font-weight:600;font-size:8.5px}
+  .r .pill.soon{background:var(--bg-2);color:var(--ink-3);border:1px solid var(--line-2)}
+  .r h3{font-size:18px;margin-bottom:6px}
+  .r p{font-size:13px;margin:0 0 10px;color:var(--ink-2)}
+  .r .go{font-family:var(--mono);font-size:10.5px;color:var(--ochre);letter-spacing:.03em}
+  .r.soon{opacity:.62;border-left-style:dashed;cursor:default}
+  .r.soon:hover{transform:none;box-shadow:none;border-color:var(--line);border-left-color:var(--line-2)}
+  .r.soon .go{color:var(--ink-3)}
+
+  .callout{border:1px solid var(--line-2);border-radius:14px;padding:22px 24px;background:linear-gradient(150deg,rgba(224,165,78,.07),var(--bg-3))}
+  .callout .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:9px}
+  .callout p:last-child{margin-bottom:0}
+  footer{padding:34px 0 56px;color:var(--ink-3)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  .fdisc{font-size:12px;color:var(--ink-3);max-width:80ch;margin-top:10px;line-height:1.5}
+  ::selection{background:rgba(224,165,78,.3);color:#fff}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" title="Back to the hub" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit"><div class="logomark">WB</div>
+  <div class="brand"><b>Wima Builders</b><span>The Resource Hub</span></div></a>
+  <nav><a href="#plan">Before you build</a><a href="#choose">Choosing</a><a href="#price">Pricing</a><a href="#protect">Protect yourself</a><a href="wima-resource-hub-plan.html">Build plan ↗</a></nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">The Resource Hub · Free tools &amp; guides for anyone building in Ghana</div>
+    <h1>Everything you need to <em>build without getting cheated</em>.</h1>
+    <p class="sub">Free, practical resources organised along the journey — from your first land search to the finished ceiling. Use them with any contractor. They're built to help every Ghanaian builder, not only Wima's clients — because the people we most want to work with are the ones who did their homework.</p>
+  </div>
+</header>
+
+<!-- STAGE 1 -->
+<section id="plan">
+  <div class="wrap">
+    <div class="stage-lbl"><span class="step">1</span> Stage one</div>
+    <div class="stage-h">Before you build — land &amp; paperwork</div>
+    <div class="stage-d">Get this stage wrong and nothing else matters. Start here.</div>
+    <div class="grid">
+      <a class="r clay" href="wima-content-library.html#blog">
+        <div class="tag"><span class="pill">Guide</span> Diaspora · land safety</div>
+        <h3>Building from the UK or USA — how to protect yourself</h3>
+        <p>The five protections that stop a remote project going wrong: itemised BOQ, staged payments, photo milestones, registered business, clean payment methods.</p>
+        <span class="go">Read the guide →</span>
+      </a>
+      <a class="r clay" href="wima-land-safety-guide.html">
+        <div class="tag"><span class="pill">Free guide</span> ★ The Cost Trail · printable</div>
+        <h3>Buying land in Ghana — how not to lose your money</h3>
+        <p>The verification &amp; registration path in plain language: the search, indenture vs title, the nine steps, the walk-away red flags, and the diaspora extra layer. The one nobody else publishes clearly.</p>
+        <span class="go">Read the land guide →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STAGE 2 -->
+<section id="choose" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="stage-lbl"><span class="step">2</span> Stage two</div>
+    <div class="stage-h">Choosing what to build</div>
+    <div class="stage-d">Match the right finish to the right room — before you spend.</div>
+    <div class="grid">
+      <a class="r blue" href="wima-choose-your-room.html">
+        <div class="tag"><span class="pill">Interactive</span> Room matcher</div>
+        <h3>Choose Your Room</h3>
+        <p>Tap your room — living room, bedroom, kitchen, bathroom, office — and see which of Wima's five categories fit best there, and the advantage each brings.</p>
+        <span class="go">Open the tool →</span>
+      </a>
+      <a class="r blue" href="wima-content-library.html#blog">
+        <div class="tag"><span class="pill">Guide</span> Ceilings compared</div>
+        <h3>Acoustic vs suspended grid — which ceiling is right?</h3>
+        <p>The honest comparison with real 2026 Accra prices: what each system costs, where each shines, and how to decide for your space.</p>
+        <span class="go">Read the guide →</span>
+      </a>
+      <a class="r blue" href="wima-content-library.html#blog">
+        <div class="tag"><span class="pill">Guide</span> Insulation · ECG bill</div>
+        <h3>Why your ECG bill is high — and what insulation does</h3>
+        <p>The maths on how an uninsulated roof drives your electricity bill, and what roof and wall insulation actually saves in a Ghanaian home.</p>
+        <span class="go">Read the guide →</span>
+      </a>
+      <a class="r blue" href="wima-cool-before-ac.html">
+        <div class="tag"><span class="pill">Free guide</span> Cool Before AC · printable</div>
+        <h3>How old Accra homes stayed cool without AC</h3>
+        <p>The passive-cooling lessons behind Cantonments and Ridge — high ceilings, cross-ventilation, deep eaves — backed by 2026 research, landing on the Cool-Ceiling System.</p>
+        <span class="go">Read the guide →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STAGE 3 -->
+<section id="price">
+  <div class="wrap">
+    <div class="stage-lbl"><span class="step">3</span> Stage three</div>
+    <div class="stage-h">What it should cost</div>
+    <div class="stage-d">Real 2026 Accra prices, so you can budget before anyone quotes you.</div>
+    <div class="grid">
+      <a class="r green" href="wima-content-library.html#blog">
+        <div class="tag"><span class="pill">Price guide</span> Materials · 2026</div>
+        <h3>What drywall, cladding &amp; insulation actually cost in Accra</h3>
+        <p>Published, itemised supply-and-install prices for Wima's categories — with the 2026 cost context (PBCI at 2.7%, cement down 14.5% year-on-year).</p>
+        <span class="go">See the prices →</span>
+      </a>
+      <a class="r green" href="wima-cost-estimator.html">
+        <div class="tag"><span class="pill">Interactive</span> Cost estimator</div>
+        <h3>The room cost estimator</h3>
+        <p>Pick a category, enter your room size, get an indicative price range in seconds — then turn it into a free exact BOQ on WhatsApp.</p>
+        <span class="go">Open the estimator →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STAGE 4 -->
+<section id="protect" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="stage-lbl"><span class="step">4</span> Stage four</div>
+    <div class="stage-h">Protect yourself when you hire</div>
+    <div class="stage-d">The flagship resource — the one every client should carry.</div>
+    <div class="grid">
+      <a class="r" href="wima-honest-boq-checklist.html" style="border-left-color:var(--ochre)">
+        <div class="tag"><span class="pill">Free download</span> ★ Flagship · printable</div>
+        <h3>The Honest BOQ Checklist</h3>
+        <p>A one-page checklist you print and take to <em>any</em> contractor. Every line an honest quote must contain — plus the walk-away red flags. This single page is how you stop the bill ending up 30% over.</p>
+        <span class="go">Open &amp; print the checklist →</span>
+      </a>
+      <a class="r violet" href="wima-quote-autopsy.html">
+        <div class="tag"><span class="pill">Free guide</span> Printable · worked example</div>
+        <h3>The Quote Autopsy — see where the hidden 30% hides</h3>
+        <p>A vague quote beside a proper itemised BOQ for the same job, dissected line by line — so you learn to read any quote before you sign it. Send us yours and we'll autopsy it free.</p>
+        <span class="go">Open the autopsy →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="wrap">
+    <div class="callout">
+      <div class="lbl">The point of all this</div>
+      <p>Every resource here leads to the same place: a client who knows what a fair, honest project looks like — and can tell the difference. When you're ready, <strong>Wima sends a fully itemised BOQ for any project within 24 hours of your WhatsApp message</strong>, free and with no site-visit fee. Then use the checklist to hold us to every line. That's the whole idea.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--serif);color:var(--ink-2);font-size:15px">Wima Builders — The Resource Hub</div>
+      <div class="fdisc">Free resources for anyone building in Ghana. Guides marked "coming next" are in production — the strategy behind the full library is in the <a href="wima-resource-hub-plan.html" style="color:var(--ochre)">Resource Hub Build Plan</a>. Guidance only, not legal or financial advice; prices are indicative and change — verify against current market rates before committing.</div>
+    </div>
+    <div style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">Wima Ecosystem Hub</div>
+  </div>
+</footer>
+</body>
+</html>
