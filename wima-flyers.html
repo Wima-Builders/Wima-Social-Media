@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — Flyers (WhatsApp &amp; Facebook)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&amp;family=DM+Sans:wght@0,400;0,500;0,600;0,700;0,800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{
+  --bg:#FAFAF7;--ink:#1C1917;--slate:#44403C;--muted:#78716C;--rule:#D8D3C4;--panel:#ECEAE0;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;--gold:#E09020;
+  --charcoal:#181410;--charcoal2:#221c16;
+  --ceil:#4C86E8;--dry:#2AA198;--pop:#A98FD0;--ins:#E0A54E;--clad:#D08A4A;--cool:#38BDC9;
+  --wa:#25D366;--wa2:#128C7E;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;}
+a{color:inherit;}
+.wb-topbar{position:sticky;top:0;z-index:900;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;font-family:var(--mono);}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 12px;}
+.wb-topbar-links{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;background:rgba(196,122,10,.22);}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.5);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;}
+
+.hero{padding:44px 40px 26px;border-bottom:1px solid var(--rule);text-align:center;}
+.hero-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:12px;}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:10px;}
+.hero h1 em{font-style:italic;color:var(--amber);}
+.hero p{font-size:14px;color:var(--slate);max-width:56ch;margin:0 auto;line-height:1.6;}
+
+.howto{max-width:760px;margin:22px auto 0;background:var(--amber-lt);border-left:3px solid var(--amber);padding:12px 18px;border-radius:0 6px 6px 0;font-size:12.5px;color:#5A3800;line-height:1.6;text-align:left;}
+.howto b{color:#3D2500;}
+
+.stage{max-width:1180px;margin:0 auto;padding:36px 24px 70px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start;}
+@media(max-width:940px){.stage{grid-template-columns:1fr;}}
+.col{display:flex;flex-direction:column;align-items:center;}
+.col-h{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:4px;display:flex;align-items:center;gap:8px;}
+.col-h .dim{color:var(--muted);opacity:.7;}
+.dl-btn{margin:14px 0 0;background:var(--charcoal);color:white;border:none;font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:11px 22px;border-radius:100px;cursor:pointer;transition:background .14s;display:inline-flex;align-items:center;gap:8px;}
+.dl-btn:hover{background:var(--amber2);}
+.dl-btn.wa{background:var(--wa2);}
+.dl-btn.wa:hover{background:var(--wa);}
+
+/* ---------- shared flyer styling ---------- */
+.flyer{position:relative;overflow:hidden;background:var(--charcoal);color:#F3ECE2;box-shadow:0 18px 50px rgba(0,0,0,.28);}
+.flyer *{font-synthesis:none;}
+.flyer .glow{position:absolute;inset:0;background:radial-gradient(60% 40% at 82% 6%,rgba(224,144,32,.24),transparent 60%),radial-gradient(50% 30% at 6% 100%,rgba(196,122,10,.16),transparent 60%);pointer-events:none;}
+.flyer .brandrow{display:flex;align-items:center;gap:12px;}
+.flyer .logo{background:var(--amber);color:#1a130a;font-family:var(--serif);font-weight:800;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none;}
+.flyer .bn{font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+.flyer .bt{color:rgba(243,236,226,.55);letter-spacing:.06em;}
+.flyer h2{font-family:var(--serif);font-weight:900;line-height:1.0;letter-spacing:-.02em;}
+.flyer h2 em{font-style:italic;color:var(--gold);}
+.flyer .sub{color:rgba(243,236,226,.72);font-weight:300;}
+.cat{display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.09);}
+.cat:last-child{border-bottom:none;}
+.cat .dot{border-radius:50%;flex:none;}
+.cat .cn{font-weight:600;color:#F3ECE2;flex:1;}
+.cat .cp{font-family:var(--mono);color:var(--gold);font-weight:600;white-space:nowrap;}
+.flyer .hookbar{background:var(--amber);color:#1a130a;font-weight:800;text-align:center;letter-spacing:-.01em;}
+.flyer .waline{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--wa);color:#03340f;font-weight:800;}
+.flyer .foot{text-align:center;color:rgba(243,236,226,.4);letter-spacing:.05em;}
+
+/* WHATSAPP — tall 1080x1920 → scaled */
+#waFlyer{width:405px;height:720px;border-radius:20px;padding:38px 34px;display:flex;flex-direction:column;}
+#waFlyer .glow{border-radius:20px;}
+#waFlyer .brandrow{margin-bottom:26px;}
+#waFlyer .logo{width:46px;height:46px;font-size:20px;}
+#waFlyer .bn{font-size:16px;}#waFlyer .bt{font-size:10px;margin-top:2px;}
+#waFlyer h2{font-size:41px;margin-bottom:12px;}
+#waFlyer .sub{font-size:15px;line-height:1.5;margin-bottom:24px;}
+#waFlyer .cats{margin-bottom:22px;}
+#waFlyer .cat{padding:11px 0;}
+#waFlyer .cat .dot{width:12px;height:12px;}
+#waFlyer .cat .cn{font-size:16px;}
+#waFlyer .cat .cp{font-size:13px;}
+#waFlyer .hookbar{font-size:19px;padding:13px;border-radius:12px;margin-bottom:14px;}
+#waFlyer .waline{font-size:17px;padding:14px;border-radius:12px;margin-top:auto;}
+#waFlyer .foot{font-size:9.5px;margin-top:16px;}
+
+/* FACEBOOK — square 1080x1080 → scaled */
+#fbFlyer{width:460px;height:460px;border-radius:18px;padding:34px 36px;display:flex;flex-direction:column;}
+#fbFlyer .glow{border-radius:18px;}
+#fbFlyer .brandrow{margin-bottom:16px;}
+#fbFlyer .logo{width:40px;height:40px;font-size:17px;border-radius:10px;}
+#fbFlyer .bn{font-size:14px;}#fbFlyer .bt{font-size:9px;margin-top:1px;}
+#fbFlyer .top{display:flex;gap:22px;align-items:flex-start;}
+#fbFlyer .topL{flex:1;}
+#fbFlyer h2{font-size:32px;margin-bottom:8px;}
+#fbFlyer .sub{font-size:12.5px;line-height:1.45;}
+#fbFlyer .cats{flex:none;width:200px;}
+#fbFlyer .cat{padding:6.5px 0;}
+#fbFlyer .cat .dot{width:9px;height:9px;}
+#fbFlyer .cat .cn{font-size:12.5px;}
+#fbFlyer .cat .cp{font-size:10.5px;}
+#fbFlyer .hookbar{font-size:16px;padding:10px;border-radius:10px;margin:16px 0 10px;}
+#fbFlyer .waline{font-size:14px;padding:11px;border-radius:10px;}
+#fbFlyer .foot{font-size:9px;margin-top:12px;}
+
+.editnote{max-width:1180px;margin:0 auto;padding:0 24px 60px;}
+.editnote .box{background:white;border:1px solid var(--rule);border-radius:10px;padding:18px 22px;font-size:13px;color:var(--slate);line-height:1.65;}
+.editnote .box b{color:var(--ink);}
+.editnote .box code{font-family:var(--mono);font-size:12px;background:var(--panel);padding:1px 6px;border-radius:4px;color:var(--amber2);}
+</style>
+</head>
+<body>
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+    <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+    <a href="wima-content-hub.html">Content Hub</a>
+    <a href="wima-flyers.html" class="wb-active">Flyers<span class="wb-badge">New</span></a>
+    <a href="wima-60-day-content-engine.html">Content Library</a>
+    <a href="wima-resource-hub.html">Resource Hub</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eye">Content Hub · Ready-to-post flyers · All 5 categories</div>
+  <h1>Two flyers, <em>ready to post</em>.</h1>
+  <p>The same offer, sized native for each channel — a tall version for WhatsApp Status &amp; broadcast, and a square version for the Facebook feed. Download each as an image and post.</p>
+  <div class="howto"><b>How to use:</b> click <b>Download</b> under each flyer to save it as a PNG. Post the tall one to WhatsApp Status and send it on broadcast; post the square one to your Facebook page and groups. <b>Before you post:</b> the prices are illustrative and the number is a placeholder — swap in your real figures and WhatsApp number in the code (see the note at the bottom).</div>
+</div>
+
+<div class="stage">
+  <!-- WHATSAPP -->
+  <div class="col">
+    <div class="col-h">WhatsApp / Status <span class="dim">· 9:16 · saves at 1080×1920</span></div>
+    <div id="waFlyer" class="flyer">
+      <div class="glow"></div>
+      <div class="brandrow">
+        <div class="logo">WB</div>
+        <div><div class="bn">Wima Builders</div><div class="bt">Supply &amp; Install · Accra &amp; Kumasi</div></div>
+      </div>
+      <h2>Build it right.<br><em>One trusted partner.</em></h2>
+      <div class="sub">Five finishing categories — supplied and installed, with a free itemised quote in 24 hours.</div>
+      <div class="cats">
+        <div class="cat"><span class="dot" style="background:var(--ceil)"></span><span class="cn">Acoustic Ceilings</span><span class="cp">from GHS 85/m²</span></div>
+        <div class="cat"><span class="dot" style="background:var(--dry)"></span><span class="cn">Drywall &amp; Partitions</span><span class="cp">from GHS 85/m²</span></div>
+        <div class="cat"><span class="dot" style="background:var(--pop)"></span><span class="cn">POP Ceilings &amp; Cornices</span><span class="cp">from GHS 45/m²</span></div>
+        <div class="cat"><span class="dot" style="background:var(--ins)"></span><span class="cn">Insulation</span><span class="cp">from GHS 95/m²</span></div>
+        <div class="cat"><span class="dot" style="background:var(--clad)"></span><span class="cn">Exterior Cladding</span><span class="cp">from GHS 120/m²</span></div>
+      </div>
+      <div class="hookbar">FREE itemised BOQ · 24 hours · No site-visit fee</div>
+      <div class="waline"><span>💬</span> WhatsApp us: [your number]</div>
+      <div class="foot">Prices indicative · supply &amp; install · Greater Accra &amp; Kumasi</div>
+    </div>
+    <button class="dl-btn wa" onclick="dl('waFlyer','wima-flyer-whatsapp')">⬇ Download WhatsApp flyer</button>
+  </div>
+
+  <!-- FACEBOOK -->
+  <div class="col">
+    <div class="col-h">Facebook feed <span class="dim">· 1:1 · saves at 1080×1080</span></div>
+    <div id="fbFlyer" class="flyer">
+      <div class="glow"></div>
+      <div class="brandrow">
+        <div class="logo">WB</div>
+        <div><div class="bn">Wima Builders</div><div class="bt">Supply &amp; Install · Accra &amp; Kumasi</div></div>
+      </div>
+      <div class="top">
+        <div class="topL">
+          <h2>Build it right.<br><em>One partner.</em></h2>
+          <div class="sub">Five finishing categories, supplied and installed — with a free itemised quote in 24 hours.</div>
+        </div>
+        <div class="cats">
+          <div class="cat"><span class="dot" style="background:var(--ceil)"></span><span class="cn">Acoustic Ceilings</span></div>
+          <div class="cat"><span class="dot" style="background:var(--dry)"></span><span class="cn">Drywall &amp; Partitions</span></div>
+          <div class="cat"><span class="dot" style="background:var(--pop)"></span><span class="cn">POP &amp; Cornices</span></div>
+          <div class="cat"><span class="dot" style="background:var(--ins)"></span><span class="cn">Insulation</span></div>
+          <div class="cat"><span class="dot" style="background:var(--clad)"></span><span class="cn">Exterior Cladding</span></div>
+        </div>
+      </div>
+      <div class="hookbar">FREE itemised BOQ · 24 hours · No site-visit fee</div>
+      <div class="waline"><span>💬</span> WhatsApp us: [your number]</div>
+      <div class="foot">Prices indicative · supply &amp; install · Greater Accra &amp; Kumasi</div>
+    </div>
+    <button class="dl-btn" onclick="dl('fbFlyer','wima-flyer-facebook')">⬇ Download Facebook flyer</button>
+  </div>
+</div>
+
+<div class="editnote">
+  <div class="box">
+    <b>Before posting — two quick edits:</b> &nbsp;① Replace <code>[your number]</code> in both flyers with your real WhatsApp number. &nbsp;② The category prices are <b>illustrative</b> — update them to your real rates (including POP, which is an estimate). Both are simple text edits in this file. Once your real prices land, tell me and I'll swap them across every flyer and document in one pass. &nbsp;<b>Tip:</b> the download saves at 2× for crisp quality on phone screens. If a flyer looks cut off when posting, WhatsApp Status prefers the tall one and Facebook the square — use each where it belongs.
+  </div>
+</div>
+
+<script>
+function dl(id,name){
+  var el=document.getElementById(id);
+  var btn=event.currentTarget, old=btn.textContent;
+  btn.textContent='… rendering';
+  html2canvas(el,{scale:2,backgroundColor:null,useCORS:true,logging:false}).then(function(canvas){
+    var a=document.createElement('a');
+    a.download=name+'.png';
+    a.href=canvas.toDataURL('image/png');
+    a.click();
+    btn.textContent='✓ Saved';
+    setTimeout(function(){btn.textContent=old;},1600);
+  }).catch(function(e){
+    btn.textContent='Try again';
+    setTimeout(function(){btn.textContent=old;},1600);
+  });
+}
+</script>
+</body>
+</html>
