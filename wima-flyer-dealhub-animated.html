@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wima — Deal Hub Animated Teaser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800&amp;family=DM+Sans:wght@0,400;0,500;0,600;0,700;0,800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;--ink:#1C1917;--slate:#44403C;--muted:#78716C;--rule:#D8D3C4;--panel:#ECEAE0;
+  --amber:#C47A0A;--amber2:#A86508;--amber-lt:#FEF3DC;--gold:#E09020;
+  --charcoal:#141010;
+  --wa:#25D366;--wa2:#128C7E;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;}
+a{color:inherit;}
+.wb-topbar{position:sticky;top:0;z-index:900;height:52px;background:#181410;border-bottom:2px solid rgba(196,122,10,.5);display:flex;align-items:center;padding:0 20px;font-family:var(--mono);}
+.wb-topbar-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:6px;}
+.wb-topbar-logo{width:28px;height:28px;background:#C47A0A;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border-radius:3px;}
+.wb-topbar-name{font-size:12px;font-weight:700;color:#E09020;text-transform:uppercase;letter-spacing:.12em;}
+.wb-topbar-div{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 12px;}
+.wb-topbar-links{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.wb-topbar-links::-webkit-scrollbar{display:none;}
+.wb-topbar-links a{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);padding:5px 12px;text-decoration:none;white-space:nowrap;border-radius:3px;}
+.wb-topbar-links a:hover{color:#FFD060;background:rgba(196,122,10,.2);}
+.wb-topbar-links a.wb-active{color:#FFD060;background:rgba(196,122,10,.22);}
+.wb-topbar-links a.wb-home{color:rgba(255,255,255,.5);}
+.wb-badge{font-size:7px;background:#D4880C;color:white;font-weight:700;padding:1px 5px;border-radius:2px;margin-left:4px;}
+
+.hero{padding:40px 40px 22px;border-bottom:1px solid var(--rule);text-align:center;}
+.hero-eye{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:12px;}
+.hero h1{font-family:var(--serif);font-size:clamp(24px,3.6vw,36px);font-weight:900;line-height:1.06;letter-spacing:-.02em;margin-bottom:10px;}
+.hero h1 em{font-style:italic;color:var(--amber);}
+.hero p{font-size:14px;color:var(--slate);max-width:58ch;margin:0 auto;line-height:1.6;}
+
+.stage{max-width:900px;margin:0 auto;padding:34px 24px 20px;display:flex;flex-direction:column;align-items:center;}
+.controls{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;justify-content:center;}
+.btn{background:var(--charcoal);color:white;border:none;font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:11px 22px;border-radius:100px;cursor:pointer;transition:background .14s;display:inline-flex;align-items:center;gap:8px;}
+.btn:hover{background:var(--amber2);}
+.btn.ghost{background:transparent;color:var(--slate);border:1px solid var(--rule);}
+.btn.ghost:hover{border-color:var(--amber);color:var(--amber2);background:transparent;}
+
+/* ===== THE ANIMATED FLYER (9:16, screen-record this) ===== */
+#flyer{
+  --W:360px; width:var(--W); height:calc(var(--W)*16/9);
+  position:relative;overflow:hidden;border-radius:22px;
+  background:var(--charcoal);color:#F3ECE2;
+  box-shadow:0 22px 60px rgba(0,0,0,.34);
+  display:flex;flex-direction:column;padding:42px 34px;
+}
+#flyer .tex{position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(70% 42% at 84% 3%,rgba(224,144,32,.28),transparent 60%),
+    radial-gradient(62% 40% at 4% 103%,rgba(196,122,10,.2),transparent 60%);}
+/* drifting sheen */
+#flyer .sheen{position:absolute;top:0;left:-60%;width:45%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,240,210,.10),transparent);
+  transform:skewX(-14deg);pointer-events:none;}
+#flyer.run .sheen{animation:sheen 6.5s ease-in-out 1.2s infinite;}
+@keyframes sheen{0%{left:-60%}45%{left:130%}100%{left:130%}}
+#flyer .frame{position:absolute;inset:15px;border:1px solid rgba(224,144,32,.3);border-radius:13px;pointer-events:none;
+  opacity:0;transform:scale(1.02);}
+#flyer.run .frame{animation:fadeScale .9s ease .2s forwards;}
+
+#flyer .brandrow{display:flex;align-items:center;gap:11px;position:relative;opacity:0;transform:translateY(-8px);}
+#flyer.run .brandrow{animation:dropIn .7s cubic-bezier(.2,.8,.2,1) .15s forwards;}
+#flyer .logo{width:44px;height:44px;background:var(--amber);color:#1a130a;font-family:var(--serif);font-weight:800;font-size:19px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none;}
+#flyer .bn{font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-size:14px;}
+#flyer .bt{color:rgba(243,236,226,.5);letter-spacing:.06em;font-size:9px;margin-top:2px;}
+
+#flyer .proverb{font-family:var(--serif);font-weight:700;font-style:italic;line-height:1.24;color:#F6EEE1;font-size:30px;position:relative;margin-top:44px;}
+#flyer .proverb .l{display:block;opacity:0;transform:translateY(14px);}
+#flyer .proverb .mark{color:var(--gold);font-style:normal;}
+#flyer.run .proverb .l1{animation:lineIn .8s cubic-bezier(.2,.8,.2,1) .9s forwards;}
+#flyer.run .proverb .l2{animation:lineIn .8s cubic-bezier(.2,.8,.2,1) 1.5s forwards;}
+
+#flyer .rule{height:1px;background:linear-gradient(90deg,var(--gold),transparent);position:relative;margin:28px 0;transform:scaleX(0);transform-origin:left;}
+#flyer.run .rule{animation:wipe .7s ease 2.3s forwards;}
+
+#flyer .promise{display:flex;align-items:center;position:relative;}
+#flyer .pcell{flex:1;text-align:center;opacity:0;transform:translateY(10px);}
+#flyer .pcell .pk{font-family:var(--serif);font-weight:900;color:var(--gold);line-height:1;font-size:26px;margin-bottom:7px;}
+#flyer .pcell .pl{font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;color:rgba(243,236,226,.62);font-size:9.5px;}
+#flyer .pdiv{width:1px;background:rgba(255,255,255,.14);align-self:stretch;opacity:0;}
+#flyer.run .p1{animation:popIn .6s cubic-bezier(.2,1.2,.3,1) 2.7s forwards;}
+#flyer.run .pdiv{animation:fadeIn .5s ease 2.9s forwards;}
+#flyer.run .p2{animation:popIn .6s cubic-bezier(.2,1.2,.3,1) 3.1s forwards;}
+
+#flyer .brandbig{font-family:var(--serif);font-weight:900;letter-spacing:-.01em;color:#F6EEE1;text-align:center;font-size:31px;line-height:1.05;margin-top:auto;margin-bottom:16px;opacity:0;transform:translateY(12px);}
+#flyer .brandbig em{font-style:normal;color:var(--gold);}
+#flyer.run .brandbig{animation:lineIn .8s cubic-bezier(.2,.8,.2,1) 3.6s forwards;}
+
+#flyer .soon{text-align:center;background:var(--amber);color:#1a130a;font-weight:800;text-transform:uppercase;font-size:14px;letter-spacing:.14em;padding:12px;border-radius:100px;position:relative;margin-bottom:18px;opacity:0;transform:scale(.9);}
+#flyer.run .soon{animation:popIn .6s cubic-bezier(.2,1.2,.3,1) 4.2s forwards, pulse 1.8s ease-in-out 5s infinite;}
+
+#flyer .foot{text-align:center;color:rgba(243,236,226,.42);letter-spacing:.06em;font-size:10px;position:relative;opacity:0;}
+#flyer.run .foot{animation:fadeIn .8s ease 4.6s forwards;}
+
+@keyframes dropIn{to{opacity:1;transform:translateY(0)}}
+@keyframes lineIn{to{opacity:1;transform:translateY(0)}}
+@keyframes popIn{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes fadeScale{to{opacity:1;transform:scale(1)}}
+@keyframes wipe{to{transform:scaleX(1)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+
+.sizehint{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:14px;}
+
+.guide{max-width:760px;margin:8px auto 60px;padding:0 24px;}
+.guide .box{background:white;border:1px solid var(--rule);border-radius:12px;padding:20px 24px;}
+.guide h3{font-family:var(--serif);font-size:18px;margin-bottom:12px;}
+.guide ol{margin:0 0 4px 18px;font-size:13.5px;color:var(--slate);line-height:1.7;}
+.guide li{margin-bottom:7px;}
+.guide li b{color:var(--ink);}
+.guide .tip{background:var(--amber-lt);border-left:3px solid var(--amber);padding:11px 15px;border-radius:0 6px 6px 0;font-size:12.5px;color:#5A3800;line-height:1.6;margin-top:12px;}
+.guide .tip b{color:#3D2500;}
+</style>
+</head>
+<body>
+<div class="wb-topbar">
+  <a href="index.html" class="wb-topbar-brand"><div class="wb-topbar-logo">WB</div><div class="wb-topbar-name">Wima Builders</div></a>
+  <div class="wb-topbar-div"></div>
+  <div class="wb-topbar-links">
+    <a href="index.html" class="wb-home">⌂ Ecosystem Hub</a>
+    <a href="wima-content-hub.html">Content Hub</a>
+    <a href="wima-flyers.html">Flyers</a>
+    <a href="wima-flyer-dealhub-teaser.html">Deal Hub Teaser</a>
+    <a href="wima-flyer-dealhub-animated.html" class="wb-active">Animated<span class="wb-badge">New</span></a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eye">Content Hub · Deal Hub · Animated teaser · Screen-record to post</div>
+  <h1>The animated <em>Deal Hub</em> teaser.</h1>
+  <p>A short looping animation of your proverb and the coming-soon promise. Play it, screen-record it on your phone or computer, and post the video to WhatsApp Status and Facebook. The full sequence runs about 5 seconds, then loops.</p>
+</div>
+
+<div class="stage">
+  <div class="controls">
+    <button class="btn" onclick="play()">▶ Play / Replay</button>
+    <button class="btn ghost" onclick="bigger()">⤢ Bigger</button>
+    <button class="btn ghost" onclick="smaller()">⤡ Smaller</button>
+  </div>
+  <div id="flyer" class="run">
+    <div class="tex"></div>
+    <div class="sheen"></div>
+    <div class="frame"></div>
+    <div class="brandrow">
+      <div class="logo">WB</div>
+      <div><div class="bn">Wima Deal Hub</div><div class="bt">By Wima Builders</div></div>
+    </div>
+    <div class="proverb">
+      <span class="l l1"><span class="mark">“</span>A wise builder does not only build well.</span>
+      <span class="l l2">He buys wisely.<span class="mark">”</span></span>
+    </div>
+    <div class="rule"></div>
+    <div class="promise">
+      <div class="pcell p1"><div class="pk">More</div><div class="pl">Buyers</div></div>
+      <div class="pdiv"></div>
+      <div class="pcell p2"><div class="pk">Lower</div><div class="pl">Prices</div></div>
+    </div>
+    <div class="brandbig">Wima <em>Deal Hub</em><br>Platform</div>
+    <div class="soon">Coming Soon</div>
+    <div class="foot">Build smart · Buy together · Accra &amp; beyond</div>
+  </div>
+  <div class="sizehint">9:16 · adjust size to fit your screen before recording</div>
+</div>
+
+<div class="guide">
+  <div class="box">
+    <h3>How to turn this into a video for WhatsApp &amp; Facebook</h3>
+    <ol>
+      <li><b>On a phone:</b> open this page, tap <b>Bigger</b> until the flyer fills the width, then use your phone's <b>screen recording</b> (iPhone: Control Centre ⏺ · Android: Quick Settings → Screen record). Hit record, then tap <b>Play / Replay</b>, and let it run one full loop (about 6 seconds). Stop, and trim to the clean loop in your gallery.</li>
+      <li><b>On a computer:</b> use the built-in recorder (Mac: <b>Shift-Cmd-5</b> · Windows: <b>Win-G</b> Game Bar) and record just the flyer area while it plays.</li>
+      <li><b>Post it:</b> the video goes straight to WhatsApp Status and the Facebook feed. The tall 9:16 shape is made for Status — no cropping.</li>
+    </ol>
+    <div class="tip"><b>Make it work harder:</b> pair the post with a caption that captures interest — <em>"Comment INTERESTED and we'll message you the day it opens."</em> A teaser that builds a launch list beats one people just watch. And keep it spaced apart from your Dry Wall with Jamal launch posts, so the two don't compete for attention.</div>
+  </div>
+</div>
+
+<script>
+function play(){
+  var f=document.getElementById('flyer');
+  f.classList.remove('run');
+  void f.offsetWidth;        /* reflow to restart animations */
+  f.classList.add('run');
+}
+function bigger(){ resize(40); }
+function smaller(){ resize(-40); }
+function resize(delta){
+  var f=document.getElementById('flyer');
+  var cur=parseInt(getComputedStyle(f).getPropertyValue('--W'))||360;
+  var next=Math.max(240,Math.min(520,cur+delta));
+  f.style.setProperty('--W',next+'px');
+}
+</script>
+</body>
+</html>
